@@ -1,0 +1,16 @@
+name: Flash
+version: @version@
+main: me.flash.flash.Flash
+commands:
+  feed:
+    description: feed an ugly player
+  pro:
+    description: you pwo
+  kkick:
+    description: Kick ugly players
+  inventory:
+    description: Sapling :D
+  khub:
+    description: Go to hub, kotin edition
+  KLoopKill:
+    description: Loop Kill a noob such as S0EE
