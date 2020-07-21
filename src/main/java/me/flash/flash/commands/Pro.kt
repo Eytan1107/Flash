@@ -8,17 +8,17 @@ import org.bukkit.command.CommandSender
 
 class Pro : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>): Boolean {
-        if (args.size == 0) {
-            sender.sendMessage(ChatColor.RED.toString() + "Me Pwo")
+        if (args.isEmpty()) {
+            sender.sendMessage("${ChatColor.RED}Me Pwo")
         } else {
             val player = Bukkit.getPlayer(args[0])
             if (player == null) {
-                sender.sendMessage(ChatColor.RED.toString() + "PLAYER NOT ONLINE U NOT PWO")
+                sender.sendMessage("${ChatColor.RED}PLAYER NOT ONLINE U NOT org.bukkit.ChatColor")
             } else {
-                player.sendMessage(ChatColor.RED.toString() + "You Pwo by " + ChatColor.DARK_RED + sender.name)
-                sender.sendMessage(ChatColor.RED.toString() + "Sent a Pwo to " + ChatColor.DARK_RED + player.name)
+                player.sendMessage("${ChatColor.RED}You Pwo by ${ChatColor.DARK_RED}${sender.name}")
+                sender.sendMessage("${ChatColor.RED}Sent a Pwo to ${ChatColor.DARK_RED}${player.name}")
             }
-        } //wanna do skribbl?
+        }
         return true
     }
 }

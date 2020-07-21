@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
 
-class KLoopKill : CommandExecutor {
+class Loopkill : CommandExecutor {
     companion object {
         var tagged = ArrayList<Player>()
         val runnable = Runnable {

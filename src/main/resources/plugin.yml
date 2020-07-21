@@ -2,7 +2,7 @@ name: Flash
 version: @version@
 main: me.flash.flash.Flash
 commands:
-  feed:
+  kfeed:
     description: feed an ugly player
   pro:
     description: you pwo
@@ -12,5 +12,21 @@ commands:
     description: Sapling :D
   khub:
     description: Go to hub, kotin edition
-  KLoopKill:
+  kloopkill:
     description: Loop Kill a noob such as S0EE
+  kbroadcast:
+    description: Broadcast, Kotlin edition
+  kclear:
+    description: Clear, Kotlin edition
+  kclearchat:
+    description: Clear the chat, Kotlin edition
+  kcheck:
+    descrpition: Check, Kotlin edition
+  kcraft:
+    description: Craft, Kotlin edition
+  kf:
+    description: F, Kotlin edition
+  kdiscord:
+    description: See the discord, Kotlin edition
+  ktpall:
+    description: TpAll, Kotlin edition
