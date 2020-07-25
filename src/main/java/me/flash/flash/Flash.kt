@@ -8,7 +8,6 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class Flash : JavaPlugin() {
     override fun onEnable() {
-        instance = this
         getCommand("kfeed").executor = Feed()
         getCommand("pro").executor = Pro()
         getCommand("kkick").executor = Kick()
@@ -31,8 +30,6 @@ class Flash : JavaPlugin() {
     }
 
     companion object {
-        var instance: Flash? = null
-
         var noPermission = "&cYou don't have permission to do that.".prefix()
         var notPlayer = "&cYou must be a player to do this.".prefix()
         var targetOffline = "&cThe target player was not found, please check for any typos and try again.".prefix()

@@ -21,7 +21,7 @@ class Loopkill : CommandExecutor {
     }
 
     fun start() {
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(Flash.instance, runnable, 20L, 20L)
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Flash::class.java), runnable, 20L, 20L)
     }
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
