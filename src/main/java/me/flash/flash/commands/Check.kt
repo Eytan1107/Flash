@@ -1,6 +1,7 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
+import me.flash.flash.Flash.Companion.colour
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -11,7 +12,7 @@ class Check : CommandExecutor {
         if (!sender.hasPermission("core.check")) {
             sender.sendMessage(Flash.noPermission)
         } else if (args.isEmpty()) {
-            sender.sendMessage(Flash.formatMessage("&cPlease specify a player."))
+            sender.sendMessage("&cPlease specify a player.".colour())
         } else {
             val player = Bukkit.getPlayer(args.first())
             if (player == null) {
@@ -27,7 +28,7 @@ class Check : CommandExecutor {
                 "tntrun" -> "TnTRun"
                 else -> "a non registered world"
             }
-            sender.sendMessage(Flash.formatMessage("${player.name} is in $name"))
+            sender.sendMessage("${player.name} is in $name")
         }
         return true
     }

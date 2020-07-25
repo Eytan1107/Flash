@@ -1,6 +1,7 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
+import me.flash.flash.Flash.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -11,12 +12,12 @@ class Feed : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>): Boolean {
         if (args.isEmpty()) {
             if (sender !is Player) {
-                sender.sendMessage(Flash.formatMessage("&cYou must be a player to feed yourself."))
+                sender.sendMessage("&cYou must be a player to feed yourself.".prefix())
             } else if (!sender.hasPermission("core.feed.self")){
                 sender.sendMessage(Flash.noPermission)
             } else {
                 sender.foodLevel = Int.MAX_VALUE
-                sender.sendMessage(Flash.formatMessage("You have been fed"))
+                sender.sendMessage("You have been fed".prefix())
             }
         } else {
             val player = Bukkit.getPlayer(args.first())
@@ -24,8 +25,8 @@ class Feed : CommandExecutor {
                 sender.sendMessage(Flash.targetOffline)
             } else {
                 player.foodLevel = Int.MAX_VALUE
-                player.sendMessage(Flash.formatMessage("You were fed by ${sender.name}"))
-                sender.sendMessage(Flash.formatMessage("You have fed ${player.name}"))
+                player.sendMessage("You were fed by ${sender.name}".prefix())
+                sender.sendMessage("You have fed ${player.name}".prefix())
             }
         }
         return true

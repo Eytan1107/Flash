@@ -1,6 +1,7 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
+import me.flash.flash.Flash.Companion.colour
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
@@ -26,23 +27,23 @@ class Loopkill : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender.hasPermission("kick.noob")) {
             if (args.isEmpty()) {
-                sender.sendMessage("${ChatColor.RED}Please specify a player")
+                sender.sendMessage("&cPlease specify a player".colour())
             } else {
                 val player = Bukkit.getPlayer(args.first())
                 if (player == null) {
-                    sender.sendMessage("${ChatColor.RED}Player ${args.first()} was not found, please check for any spelling errors and try again.")
+                    sender.sendMessage("&cPlayer ${args.first()} was not found, please check for any spelling errors and try again.".colour())
                 } else {
                     if (tagged.contains(player)) {
-                        sender.sendMessage("${ChatColor.AQUA}No longer loopkilling ${player.name}")
+                        sender.sendMessage("&aNo longer loopkilling ${player.name}".colour())
                         tagged.remove(player)
                     } else {
-                        sender.sendMessage("${ChatColor.AQUA}Loopkilling ${player.name}")
+                        sender.sendMessage("&aLoopkilling ${player.name}".colour())
                         tagged.add(player)
                     }
                 }
             }
         } else {
-            sender.sendMessage("${ChatColor.RED}You do not have permission to use this command!")
+            sender.sendMessage("&cYou do not have permission to use this command!".colour())
         }
         return true
     }

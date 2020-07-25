@@ -1,6 +1,7 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
+import me.flash.flash.Flash.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -20,19 +21,19 @@ class TpAll : CommandExecutor {
         if (args.isEmpty()) {
             val players = sender.world.players
             if (players.size < 2) {
-                sender.sendMessage(Flash.formatMessage("&cThere are no other players in your world to teleport to you."))
+                sender.sendMessage("&cThere are no other players in your world to teleport to you.".prefix())
             } else {
                 players.forEach { player->
                     player.teleport(sender)
                 }
-                sender.sendMessage(Flash.formatMessage("Ok, ${players.size} players were teleported to you."))
+                sender.sendMessage("Ok, ${players.size} players were teleported to you.".prefix())
             }
         } else if (args.first() == "all") {
             val onlinePlayers = Bukkit.getOnlinePlayers()
             onlinePlayers.forEach { it.teleport(sender) }
-            sender.sendMessage(Flash.formatMessage("Ok, ${onlinePlayers.size} players were teleported to you."))
+            sender.sendMessage("Ok, ${onlinePlayers.size} players were teleported to you.".prefix())
         } else {
-            sender.sendMessage(Flash.formatMessage("Unrecognized argument. (${args.first()})"))
+            sender.sendMessage("Unrecognized argument. (${args.first()})".prefix())
         }
         return true
     }

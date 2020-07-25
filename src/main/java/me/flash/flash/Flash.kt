@@ -28,11 +28,11 @@ class Flash : JavaPlugin() {
     companion object {
         var instance : Flash? = null
 
-        var noPermission = formatMessage("${ChatColor.RED}You don't have permission to do that.")
-        var notPlayer = formatMessage("${ChatColor.RED}You must be a player to do this.")
-        var targetOffline = formatMessage("${ChatColor.RED}The target player was not found, please check for any typos and try again.")
+        var noPermission = "${ChatColor.RED}You don't have permission to do that.".prefix()
+        var notPlayer = "${ChatColor.RED}You must be a player to do this.".prefix()
+        var targetOffline = "${ChatColor.RED}The target player was not found, please check for any typos and try again.".prefix()
 
-        fun formatMessage(text: String): String = colour("[&6Flash's server&r] &6$text")
-        fun colour(text: String): String = ChatColor.translateAlternateColorCodes('&', text)
+        fun String.prefix(): String = ("[&6Flash's server&r] &6$this").colour()
+        fun String.colour(): String = ChatColor.translateAlternateColorCodes('&', this)
     }
 }
