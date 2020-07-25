@@ -30,3 +30,16 @@ commands:
     description: See the discord, Kotlin edition
   ktpall:
     description: TpAll, Kotlin edition
+  kclearall:
+    description: Clear the inventory of veryone in your world, Kotlin edition.
+  kteleport:
+    description: Teleport players, Kotlin edition
+    aliases: ktp
+  ksilentteleport:
+    description: Silently teleport players, Kotlin edition
+    aliases: kstp, ksilenttp
+  kenderchest:
+    description: Open an enderchest, Kotlin edition
+    aliases: kec, kenderchest
+  kkill:
+    description: Kill a player, Kotlin edition
