@@ -18,7 +18,7 @@ class F : CommandExecutor {
             }
         } else {
             Bukkit.getOnlinePlayers().forEach { player->
-                player.chat(args.joinToString { " " })
+                player.chat(args.joinToString(" "))
             }
         }
         return true
