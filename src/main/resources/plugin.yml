@@ -16,6 +16,7 @@ commands:
     description: Loop Kill a noob such as S0EE
   kbroadcast:
     description: Broadcast, Kotlin edition
+    aliases: kbc
   kclear:
     description: Clear, Kotlin edition
   kclearchat:
