@@ -37,7 +37,7 @@ class Flash : JavaPlugin() {
         fun String.prefix(): String = ("[&6Flash's server&r] &6$this").colour()
         fun String.colour(): String = ChatColor.translateAlternateColorCodes('&', this)
         fun staffMessage(staff:String, action:String) {
-            Bukkit.broadcastMessage("&7&o[$staff: &7$action&7&o]".colour())
+            Bukkit.broadcast("&7&o[$staff: &7$action&7&o]".colour(), "skript.staff")
         }
     }
 }
