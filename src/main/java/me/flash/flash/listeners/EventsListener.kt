@@ -18,8 +18,11 @@ class EventsListener : Listener {
 
     @EventHandler
     fun world(event: PlayerChangedWorldEvent) {
-        event.player.world.players.forEach { player->
+        event.from.players.forEach { player->
             player.sendMessage("&6[&3-&6] ${event.player.displayName}".colour())
+        }
+        event.player.world.players.forEach { player->
+            player.sendMessage("&6[&3+&6] ${event.player.displayName}".colour())
         }
     }
 
