@@ -24,6 +24,7 @@ class Flash : JavaPlugin() {
         getCommand("kloopkill").executor = Loopkill().apply { this.start() }
         getCommand("kclearall").executor = ClearAll()
         getCommand("kteleport").executor = Teleport()
+        getCommand("ksilentteleport").executor = Teleport()
         getCommand("kenderchest").executor = EnderChest()
         getCommand("kkill").executor = Kill()
         server.pluginManager.registerEvents(EventsListener(), this)
