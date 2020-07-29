@@ -11,7 +11,7 @@ class EventsListener : Listener {
     @EventHandler
     fun leave(event: PlayerQuitEvent) {
         event.player.world.players.forEach { player->
-            player.sendMessage("&6[&3-&6] ${player.displayName}".colour())
+            player.sendMessage("&6[&3-&6] ${event.player.displayName}".colour())
         }
         event.quitMessage = null // Take away the default (player) left the game
     }
@@ -19,14 +19,14 @@ class EventsListener : Listener {
     @EventHandler
     fun world(event: PlayerChangedWorldEvent) {
         event.player.world.players.forEach { player->
-            player.sendMessage("&6[&3-&6] ${player.displayName}".colour())
+            player.sendMessage("&6[&3-&6] ${event.player.displayName}".colour())
         }
     }
 
     @EventHandler
     fun join(event: PlayerJoinEvent) {
         event.player.world.players.forEach {player->
-            player.sendMessage("&6[&3+&6] ${player.displayName}".colour())
+            player.sendMessage("&6[&3+&6] ${event.player.displayName}".colour())
         }
         event.joinMessage = null
     }
