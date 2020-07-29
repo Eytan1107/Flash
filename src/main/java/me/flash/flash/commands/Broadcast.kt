@@ -15,9 +15,9 @@ class Broadcast : CommandExecutor {
             return true
         }
         if (args.isEmpty()){
-            sender.sendMessage("&cError: /broadcast <text>".colour())
+            sender.sendMessage("&cError: /kbroadcast <text>".colour())
         } else {
-            Bukkit.broadcastMessage(args.joinToString { " " }.prefix())
+            Bukkit.broadcastMessage(args.joinToString(" ").prefix())
         }
         return true
     }
