@@ -15,8 +15,8 @@ class Pro : CommandExecutor {
             if (player == null) {
                 sender.sendMessage("PLAYER NOT ONLINE U NOT PWO".colour())
             } else {
-                player.sendMessage("&cYou Pwo by $4${sender.name}".colour())
-                sender.sendMessage("&cSent a Pwo to $4${player.name}".colour())
+                player.sendMessage("&cYou Pwo by &4${sender.name}".colour())
+                sender.sendMessage("&cSent a Pwo to &4${player.name}".colour())
             }
         }
         return true

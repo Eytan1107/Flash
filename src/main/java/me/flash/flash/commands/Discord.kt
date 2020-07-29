@@ -18,6 +18,7 @@ class Discord : CommandExecutor {
                 clickEvent = ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.gg/3RHYQNd")
             })
             message.addExtra(TextComponent.fromLegacyText(" &6to join the discord server!".colour()).first())
+            sender.spigot().sendMessage(message)
         } else {
             sender.sendMessage(Flash.notPlayer)
         }

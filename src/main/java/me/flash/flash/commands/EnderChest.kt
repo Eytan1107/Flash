@@ -47,7 +47,7 @@ class EnderChest : CommandExecutor{
                 return true
             }
             sender.openInventory(player.enderChest)
-            sender.sendMessage("You have opened ${player.enderChest}'s enderchest.")
+            sender.sendMessage("You have opened ${player.enderChest}'s enderchest.".prefix())
         }
         return true
     }
