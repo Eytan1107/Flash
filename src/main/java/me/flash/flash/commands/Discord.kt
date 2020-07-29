@@ -13,11 +13,15 @@ import org.bukkit.entity.Player
 class Discord : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender is Player) {
-            val message = TextComponent.fromLegacyText("Click ".prefix()).first()
-            message.addExtra(TextComponent.fromLegacyText("&bhere".colour()).first().apply {
-                clickEvent = ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.gg/3RHYQNd")
-            })
-            message.addExtra(TextComponent.fromLegacyText(" &6to join the discord server!".colour()).first())
+            val message = TextComponent()
+            TextComponent.fromLegacyText("Click ".prefix()).forEach { a->message.addExtra(a) }
+            TextComponent.fromLegacyText("&bhere".colour()).forEach { a->
+                a.clickEvent = ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.gg/3RHYQNd")
+                message.addExtra(a)
+            }
+            TextComponent.fromLegacyText(" &6to join the discord server").forEach { a->
+                message.addExtra(a)
+            }
             sender.spigot().sendMessage(message)
         } else {
             sender.sendMessage(Flash.notPlayer)
