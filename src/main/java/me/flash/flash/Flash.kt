@@ -13,6 +13,8 @@ class Flash : JavaPlugin() {
         getCommand("pro").executor = Pro()
         getCommand("kkick").executor = Kick()
         getCommand("khub").executor = Hub()
+       // todo getCommand("suggest").executor = Suggest()
+       // todo getCommand("suggestions").executor = Suggestions()
         getCommand("kbroadcast").executor = Broadcast()
         getCommand("kclear").executor = Clear()
         getCommand("kclearchat").executor = Clearchat()
@@ -29,11 +31,11 @@ class Flash : JavaPlugin() {
         getCommand("kenderchest").executor = EnderChest()
         getCommand("kkill").executor = Kill()
         //server.pluginManager.registerEvents(EventsListener(), this)
-        Suggest.suggestions = TODO() // a file that we saved somewhere
+        //TODO suggestion file reading
     }
 
     override fun onDisable() {
-        // Save it to the file again
+        // todo Suggestion file saving
     }
 
     companion object {

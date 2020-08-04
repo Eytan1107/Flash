@@ -48,3 +48,5 @@ commands:
     description: See all the colors of the rainbow, Kotlin edition
   suggest:
     description: Suggest better things for the best minecraft server that exists.
+  suggestions:
+    description: Read suggestions
