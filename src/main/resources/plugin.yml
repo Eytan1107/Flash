@@ -2,7 +2,7 @@ name: Flash
 version: @version@
 main: me.flash.flash.Flash
 commands:
-  kfeed:
+  feed:
     description: feed an ugly player
   pro:
     description: you pwo
@@ -46,3 +46,5 @@ commands:
     description: Kill a player, Kotlin edition
   kcolorlist:
     description: See all the colors of the rainbow, Kotlin edition
+  suggest:
+    description: Suggest better things for the best minecraft server that exists.
