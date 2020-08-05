@@ -46,3 +46,5 @@ commands:
     description: Kill a player, Kotlin edition
   kcolorlist:
     description: See all the colors of the rainbow, Kotlin edition
+  kback
+    description: Go back, Kotlin edition
