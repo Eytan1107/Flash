@@ -50,3 +50,5 @@ commands:
     description: Suggest better things for the best minecraft server that exists.
   suggestions:
     description: Read suggestions
+  kback:
+    description: Go back

@@ -30,6 +30,7 @@ class Flash : JavaPlugin() {
         getCommand("ksilentteleport").executor = Teleport()
         getCommand("kenderchest").executor = EnderChest()
         getCommand("kkill").executor = Kill()
+        getCommand("kback").executor = Back()
         //server.pluginManager.registerEvents(EventsListener(), this)
         //TODO suggestion file reading
     }
