@@ -2,16 +2,19 @@ package me.flash.flash
 
 import me.flash.flash.commands.*
 import me.flash.flash.listeners.EventsListener
+import me.flash.flash.variables.Suggestion
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.plugin.java.JavaPlugin
 
 class Flash : JavaPlugin() {
     override fun onEnable() {
-        getCommand("kfeed").executor = Feed()
+        getCommand("feed").executor = Feed()
         getCommand("pro").executor = Pro()
         getCommand("kkick").executor = Kick()
         getCommand("khub").executor = Hub()
+       // todo getCommand("suggest").executor = Suggest()
+       // todo getCommand("suggestions").executor = Suggestions()
         getCommand("kbroadcast").executor = Broadcast()
         getCommand("kclear").executor = Clear()
         getCommand("kclearchat").executor = Clearchat()
@@ -27,8 +30,12 @@ class Flash : JavaPlugin() {
         getCommand("ksilentteleport").executor = Teleport()
         getCommand("kenderchest").executor = EnderChest()
         getCommand("kkill").executor = Kill()
-        getCommand("kback").executor = Back()
-        server.pluginManager.registerEvents(EventsListener(), this)
+        //server.pluginManager.registerEvents(EventsListener(), this)
+        //TODO suggestion file reading
+    }
+
+    override fun onDisable() {
+        // todo Suggestion file saving
     }
 
     companion object {
