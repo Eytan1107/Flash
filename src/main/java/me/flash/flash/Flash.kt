@@ -31,6 +31,7 @@ class Flash : JavaPlugin() {
         getCommand("kenderchest").executor = EnderChest()
         getCommand("kkill").executor = Kill()
         getCommand("kback").executor = Back()
+        server.pluginManager.registerEvents(Back(), this)
         //server.pluginManager.registerEvents(EventsListener(), this)
         //TODO suggestion file reading
     }
