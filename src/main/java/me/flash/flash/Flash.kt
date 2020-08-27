@@ -1,8 +1,6 @@
 package me.flash.flash
 
 import me.flash.flash.commands.*
-import me.flash.flash.listeners.EventsListener
-import me.flash.flash.variables.Suggestion
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.plugin.java.JavaPlugin
@@ -31,6 +29,8 @@ class Flash : JavaPlugin() {
         getCommand("kenderchest").executor = EnderChest()
         getCommand("kkill").executor = Kill()
         getCommand("kback").executor = Back()
+        getCommand("ksudo").executor = Sudo()
+        getCommand("kmutechat").executor = Mutechat()
         server.pluginManager.registerEvents(Back(), this)
         //server.pluginManager.registerEvents(EventsListener(), this)
         //TODO suggestion file reading
@@ -41,6 +41,7 @@ class Flash : JavaPlugin() {
     }
 
     companion object {
+        var chatMuted = false
         var noPermission = "&cYou don't have permission to do that.".prefix()
         var notPlayer = "&cYou must be a player to do this.".prefix()
         var targetOffline = "&cThe target player was not found, please check for any typos and try again.".prefix()

@@ -8,47 +8,49 @@ commands:
     description: you pwo
   kkick:
     description: Kick ugly players
-  inventory:
-    description: Sapling :D
   khub:
-    description: Go to hub, kotin edition
+    description: Go to hub
   kloopkill:
     description: Loop Kill a noob such as S0EE
   kbroadcast:
-    description: Broadcast, Kotlin edition
+    description: Broadcast
     aliases: kbc
   kclear:
-    description: Clear, Kotlin edition
+    description: Clear
   kclearchat:
-    description: Clear the chat, Kotlin edition
+    description: Clear the chat
   kcheck:
-    descrpition: Check, Kotlin edition
+    descrpition: Check
   kcraft:
-    description: Craft, Kotlin edition
+    description: Craft
   kf:
-    description: F, Kotlin edition
+    description: F
   kdiscord:
-    description: See the discord, Kotlin edition
+    description: See the discord
   ktpall:
-    description: TpAll, Kotlin edition
+    description: TpAll
   kclearall:
-    description: Clear the inventory of veryone in your world, Kotlin edition.
+    description: Clear the inventory of everyone in your world.
   kteleport:
-    description: Teleport players, Kotlin edition
+    description: Teleport players
     aliases: ktp
   ksilentteleport:
-    description: Silently teleport players, Kotlin edition
+    description: Silently teleport players
     aliases: kstp, ksilenttp
   kenderchest:
-    description: Open an enderchest, Kotlin edition
+    description: Open an enderchest
     aliases: kec, kenderchest
   kkill:
-    description: Kill a player, Kotlin edition
+    description: Kill a player
   kcolorlist:
-    description: See all the colors of the rainbow, Kotlin edition
+    description: See all the colors of the rainbow
   suggest:
     description: Suggest better things for the best minecraft server that exists.
   suggestions:
     description: Read suggestions
   kback:
     description: Go back
+  kmutechat:
+    description: Mute or unmute the chat globally.
+  ksudo:
+    description: Make another player say something

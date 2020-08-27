@@ -1,8 +1,11 @@
 package me.flash.flash.listeners
 
+import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.colour
+import me.flash.flash.Flash.Companion.prefix
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.player.AsyncPlayerChatEvent
 import org.bukkit.event.player.PlayerChangedWorldEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
@@ -14,6 +17,14 @@ class EventsListener : Listener {
             player.sendMessage("&6[&3-&6] ${event.player.displayName}".colour())
         }
         event.quitMessage = null // Take away the default (player) left the game
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    fun chat(event: AsyncPlayerChatEvent) {
+        if (Flash.chatMuted) {
+            event.isCancelled = true
+            event.player.sendMessage("&cThe chat is currently muted.".prefix())
+        }
     }
 
     @EventHandler
