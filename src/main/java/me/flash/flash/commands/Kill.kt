@@ -19,7 +19,7 @@ class Kill : CommandExecutor{
             return true
         }
         val player = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(targetOffline).let { return true }
-        player.health = 0.00
+        player.setHealth(0.0D);
         sender.sendMessage("Killed ${player.name}")
         return true
     }
