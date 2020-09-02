@@ -24,6 +24,8 @@ class Flash : JavaPlugin() {
         getCommand("clearall").executor = ClearAll()
         getCommand("teleport").executor = Teleport()
         getCommand("silentteleport").executor = Teleport()
+        getCommand("tphere").executor = TpHere()
+        getCommand("silenttphere").executor = TpHere()
         getCommand("kill").executor = Kill()
         getCommand("back").executor = Back()
         getCommand("sudo").executor = Sudo()
@@ -42,10 +44,10 @@ class Flash : JavaPlugin() {
         var notPlayer = "&cYou must be a player to do this.".prefix()
         var targetOffline = "&cThe target player was not found, please check for any typos and try again.".prefix()
 
-        fun String.prefix(): String = ("[&6Flash's server&r] &6$this").colour()
+        fun String.prefix(): String = ("[&6Flash's Server&r] &6$this").colour()
         fun String.colour(): String = ChatColor.translateAlternateColorCodes('&', this)
         fun staffMessage(staff:String, action:String) {
-            Bukkit.broadcast("&7&o[$staff: &7$action&7&o]".colour(), "skript.staff")
+            Bukkit.broadcast("&7&o[$staff: &7$action&7&o]".colour(), "flash.staff")
         }
     }
 }

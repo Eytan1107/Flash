@@ -2,6 +2,7 @@ package me.flash.flash.commands
 
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.colour
+import me.flash.flash.Flash.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -28,7 +29,8 @@ class Check : CommandExecutor {
                 "tntrun" -> "TnTRun"
                 else -> "a non registered world"
             }
-            sender.sendMessage("${player.name} is in $name")
+            sender.sendMessage("${player.name} is in $name".prefix())
+            sender.sendMessage("${player.name} has ${player.health} health".prefix())
         }
         return true
     }

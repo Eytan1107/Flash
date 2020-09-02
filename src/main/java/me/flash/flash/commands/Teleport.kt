@@ -33,11 +33,11 @@ class Teleport : CommandExecutor {
             if (!sender.hasPermission("core.tp.others")) sender.sendMessage(noPermission).let { return true }
             val from = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(targetOffline).let { return true }
             val to = Bukkit.getPlayer(args[1]) ?: sender.sendMessage(targetOffline).let { return true }
-            if (from == to) sender.sendMessage("You cannot teleport the same player to themself".prefix())
+            if (from == to) sender.sendMessage("You cannot teleport the same player to themself".prefix()).let { return true }
             from.teleport(to)
-            if (command.name != "ksilentteleport") from.sendMessage("You were teleported to ${to.name} by ${sender.name}".prefix())
-            if (command.name != "ksilentteleport") to.sendMessage("${from.name} was teleported to you by ${sender.name}".prefix())
-            if (command.name != "ksilentteleport") Flash.staffMessage(sender.name, "teleported ${from.name} to ${to.name}")
+            if (command.name != "silentteleport") from.sendMessage("You were teleported to ${to.name} by ${sender.name}".prefix())
+            if (command.name != "silentteleport") to.sendMessage("${from.name} was teleported to you by ${sender.name}".prefix())
+            if (command.name != "silentteleport") Flash.staffMessage(sender.name, "teleported ${from.name} to ${to.name}")
         }
         return true
     }

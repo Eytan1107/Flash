@@ -1,5 +1,5 @@
 package me.flash.flash.commands
-
+// https://discord.gg/3RHYQNd
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.colour
 import me.flash.flash.Flash.Companion.prefix
@@ -9,18 +9,22 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import java.awt.Component
 
 class Discord : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender is Player) {
             val message = TextComponent()
-            TextComponent.fromLegacyText("Click ".prefix()).forEach { a->message.addExtra(a) }
-            TextComponent.fromLegacyText("&bhere".colour()).forEach { a->
-                a.clickEvent = ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.gg/3RHYQNd")
-                message.addExtra(a)
-            }
-            TextComponent.fromLegacyText(" &6to join the discord server").forEach { a->
-                message.addExtra(a)
+            message.apply {
+                TextComponent.fromLegacyText("Click ".prefix()).forEach {
+                    this.addExtra(it)
+                }
+                TextComponent.fromLegacyText("&bhere".colour()).forEach {
+                    this.addExtra(it)
+                }
+                TextComponent.fromLegacyText("&6 to join the discord.".colour()).forEach {
+                    this.addExtra(it)
+                }
             }
             sender.spigot().sendMessage(message)
         } else {
