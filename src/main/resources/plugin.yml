@@ -3,54 +3,63 @@ version: @version@
 main: me.flash.flash.Flash
 commands:
   feed:
-    description: feed an ugly player
+    description: Feed a player
   pro:
-    description: you pwo
-  kkick:
-    description: Kick ugly players
-  khub:
-    description: Go to hub
-  kloopkill:
-    description: Loop Kill a noob such as S0EE
-  kbroadcast:
+    description: Send "Pwo" to a player
+  hub:
+    description: Go back to hub
+  loopkill:
+    description: Loop Kill a player
+  broadcast:
     description: Broadcast
-    aliases: kbc
-  kclear:
+    aliases: bc
+  clear:
     description: Clear
-  kclearchat:
-    description: Clear the chat
-  kcheck:
+    aliases:
+      - ci
+      - clearinventory
+      - cl
+  check:
     descrpition: Check
-  kcraft:
+  craft:
     description: Craft
-  kf:
+  bcf:
     description: F
-  kdiscord:
+    aliases:
+      - broadcastf
+      - sudof
+  discord:
     description: See the discord
-  ktpall:
-    description: TpAll
-  kclearall:
+  tpall:
+    description: Teleport all players in your server to you
+  clearall:
     description: Clear the inventory of everyone in your world.
-  kteleport:
+    aliases:
+      - ciall
+      - clearinventoryall
+  teleport:
     description: Teleport players
-    aliases: ktp
-  ksilentteleport:
+    aliases:
+      - tp
+      - tpto
+      - teleportto
+  silentteleport:
     description: Silently teleport players
-    aliases: kstp, ksilenttp
-  kenderchest:
-    description: Open an enderchest
-    aliases: kec, kenderchest
-  kkill:
+    aliases:
+      - silenttp
+      - silenttpto
+      - silentteleportto
+  kill:
     description: Kill a player
-  kcolorlist:
+  colorlist:
     description: See all the colors of the rainbow
+    aliases:
+      - cll
   suggest:
     description: Suggest better things for the best minecraft server that exists.
   suggestions:
     description: Read suggestions
-  kback:
+  back:
     description: Go back
-  kmutechat:
-    description: Mute or unmute the chat globally.
-  ksudo:
+  sudo:
     description: Make another player say something

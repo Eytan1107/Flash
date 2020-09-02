@@ -13,13 +13,14 @@ class F : CommandExecutor {
             return true
         }
         if (args.isEmpty()){
-            Bukkit.getOnlinePlayers().forEach { player->
+            Bukkit.getOnlinePlayers().filter { p->Vanish.vanishedPlayers.contains(p) }.forEach { player->
                 player.chat("F")
             }
         } else {
             Bukkit.getOnlinePlayers().forEach { player->
                 player.chat(args.joinToString(" "))
-            }
+            } // I will change the command (so like /f will be /friends) /f -> "/allf"
+            // /allf = make everyone say /f except vanished people, the sender J can you make a place to add TODO messages?
         }
         return true
     }
