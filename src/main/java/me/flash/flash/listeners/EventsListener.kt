@@ -33,6 +33,7 @@ class EventsListener : Listener {
             player.sendMessage("&6[&3-&6] ${event.player.displayName}".colour())
             if (player.hasPermission("Flash.fly")) {
                 player.allowFlight = true
+                player.isFlying = true
             }
         }
         event.player.world.players.forEach { player ->
@@ -46,6 +47,7 @@ class EventsListener : Listener {
             player.sendMessage("&6[&3+&6] ${event.player.displayName}".colour())
             if (player.hasPermission("Flash.fly")) {
                 player.allowFlight = true
+                player.isFlying = true
             }
             event.joinMessage = null
         }
