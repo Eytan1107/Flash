@@ -31,8 +31,8 @@ class Clear : CommandExecutor {
                 } else {
                     player.inventory.clear()
                     player.inventory.armorContents = emptyArray()
-                    player.sendMessage("Your inventory was cleared by ${sender.name}".prefix())
-                    sender.sendMessage("You have cleared the inventory of ${player.name}".prefix())
+                    player.sendMessage("Your inventory was cleared by &l${sender.name}&r".prefix())
+                    sender.sendMessage("You have cleared the inventory of &l${player.name}&r".prefix())
                 }
             }
         }
