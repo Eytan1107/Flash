@@ -7,21 +7,23 @@ import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.AsyncPlayerChatEvent
 
 class StaffChat : CommandExecutor, Listener{
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
+        if(sender !is Player) sender.sendMessage(Flash.notPlayer).let { return true }
         if (!sender.hasPermission("flash.staff")) sender.sendMessage(Flash.noPermission).let { return true }
         if (args.isEmpty()) {
             if (Flash.scEnabled.contains(sender)) {
                 sender.sendMessage("You have &cdisabled &6staffchat.".prefix())
-                Flash.scEnabled.minus(sender)
+                Flash.scEnabled.remove(sender)
             }
             else {
                 sender.sendMessage("You have &aenabled &6staffchat.".prefix())
-                Flash.scEnabled.plus(sender)
+                Flash.scEnabled.add(sender)
             }
         }
         return true
