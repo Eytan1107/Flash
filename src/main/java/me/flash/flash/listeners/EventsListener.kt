@@ -3,6 +3,7 @@ package me.flash.flash.listeners
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.colour
 import me.flash.flash.Flash.Companion.prefix
+import org.bukkit.ChatColor
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.AsyncPlayerChatEvent
@@ -43,6 +44,12 @@ class EventsListener : Listener {
                 player.isFlying = true
             }
             event.joinMessage = null
+        }
+    }
+    @EventHandler
+    fun colors(event: AsyncPlayerChatEvent) {
+        if (event.player.hasPermission("flash.colors")) {
+            event.message = event.message.colour()
         }
     }
 
