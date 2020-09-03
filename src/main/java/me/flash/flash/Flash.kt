@@ -28,6 +28,7 @@ class Flash : JavaPlugin() {
         getCommand("back").executor = Back()
         getCommand("sudo").executor = Sudo()
         getCommand("fly").executor = Fly()
+        getCommand("tphere").executor = Tphere()
         server.pluginManager.registerEvents(Back(), this)
         //server.pluginManager.registerEvents(EventsListener(), this)
         //TODO suggestion file reading
