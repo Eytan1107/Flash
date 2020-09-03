@@ -1,9 +1,6 @@
 package me.flash.flash.listeners
 
-import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.colour
-import me.flash.flash.Flash.Companion.prefix
-import org.bukkit.ChatColor
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.AsyncPlayerChatEvent
@@ -51,7 +48,7 @@ class EventsListener : Listener {
         if (event.player.hasPermission("flash.colors")) {
             event.message = event.message.colour()
         }
-        event.format = event.player.displayName + "&7".colour() + ": &f".colour() + event.message
+        event.format = "%s" + "&7".colour() + ": &f".colour() + "%s"
     }
 
     @EventHandler
