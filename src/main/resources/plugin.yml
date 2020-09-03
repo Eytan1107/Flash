@@ -79,3 +79,4 @@ commands:
       - s
   staffchat:
     description: Toggle staffchat
+    aliases: sc
