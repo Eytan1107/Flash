@@ -14,7 +14,7 @@ class Fly : CommandExecutor{
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (args.isEmpty()) {
             if (sender.hasPermission("flash.fly")) {
-                val player = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(targetOffline).let { return true }
+                val player = Bukkit.getPlayer(sender.name) ?: sender.sendMessage(targetOffline).let { return true }
                 if (player.isFlying) {
                     player.isFlying = false
                     sender.sendMessage("Flying turned off".prefix())
