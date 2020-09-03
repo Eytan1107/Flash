@@ -63,3 +63,5 @@ commands:
     description: Go back
   sudo:
     description: Make another player say something
+  fly:
+    description: fly
