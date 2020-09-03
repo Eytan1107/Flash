@@ -16,11 +16,11 @@ class Fly : CommandExecutor{
             if (sender.hasPermission("flash.fly")) {
                 val player = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(targetOffline).let { return true }
                 if (player.isFlying) {
-                    player.setFlying(false)
+                    player.isFlying = false
                     sender.sendMessage("Flying turned off".prefix())
                     Flash.staffMessage("flying turned off for", player.name)
                 } else {
-                    player.setFlying(true)
+                    player.isFlying = true
                     sender.sendMessage("Flying is now turned on".prefix())
                     Flash.staffMessage("Flying turned on for", player.name)
                 }
