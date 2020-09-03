@@ -1,6 +1,7 @@
 package me.flash.flash
 
 import me.flash.flash.commands.*
+import me.flash.flash.listeners.EventsListener
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.plugin.java.JavaPlugin
@@ -32,7 +33,7 @@ class Flash : JavaPlugin() {
         getCommand("fly").executor = Fly()
         getCommand("tphere").executor = TpHere()
         server.pluginManager.registerEvents(Back(), this)
-        //server.pluginManager.registerEvents(EventsListener(), this)
+        server.pluginManager.registerEvents(EventsListener(), this)
         //TODO suggestion file reading
     }
 
@@ -47,6 +48,7 @@ class Flash : JavaPlugin() {
 
         fun String.prefix(): String = ("[&6Flash's Server&r] &6$this").colour()
         fun String.colour(): String = ChatColor.translateAlternateColorCodes('&', this)
+        fun String.error(): String = "&c"+this.prefix()
         fun staffMessage(staff:String, action:String) {
             Bukkit.broadcast("&7&o[$staff: &7$action&7&o]".colour(), "flash.staff")
         }

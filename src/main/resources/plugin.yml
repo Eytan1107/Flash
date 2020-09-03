@@ -65,9 +65,15 @@ commands:
     description: Make another player say something
   fly:
     description: fly
+  silenttphere:
+      description: ~BB
+      aliases:
+        - stph
+        - silenttph
+        - stphere
+        - ss
   tphere:
     description: teleports the player to you
     aliases:
-      - stp
       - tph
       - s
