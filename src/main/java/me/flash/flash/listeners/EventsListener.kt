@@ -13,7 +13,7 @@ import org.bukkit.event.player.PlayerQuitEvent
 class EventsListener : Listener {
     @EventHandler
     fun leave(event: PlayerQuitEvent) {
-        event.player.world.players.forEach { player->
+        event.player.world.players.forEach { player ->
             player.sendMessage("&6[&3-&6] ${event.player.displayName}".colour())
         }
         event.quitMessage = null // Take away the default (player) left the game
@@ -29,19 +29,25 @@ class EventsListener : Listener {
 
     @EventHandler
     fun world(event: PlayerChangedWorldEvent) {
-        event.from.players.forEach { player->
+        event.from.players.forEach { player ->
             player.sendMessage("&6[&3-&6] ${event.player.displayName}".colour())
+            if (player.hasPermission("Flash.fly")) {
+                player.allowFlight = true
+            }
         }
-        event.player.world.players.forEach { player->
+        event.player.world.players.forEach { player ->
             player.sendMessage("&6[&3+&6] ${event.player.displayName}".colour())
         }
     }
 
     @EventHandler
     fun join(event: PlayerJoinEvent) {
-        event.player.world.players.forEach {player->
+        event.player.world.players.forEach { player ->
             player.sendMessage("&6[&3+&6] ${event.player.displayName}".colour())
+            if (player.hasPermission("Flash.fly")) {
+                player.allowFlight = true
+            }
+            event.joinMessage = null
         }
-        event.joinMessage = null
     }
 }
