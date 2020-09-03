@@ -17,11 +17,11 @@ class Fly : CommandExecutor{
                 val player = Bukkit.getPlayer(sender.name) ?: sender.sendMessage(targetOffline).let { return true }
                 if (player.isFlying) {
                     player.isFlying = false
-                    sender.sendMessage("You turned &coff &6flying".prefix())
+                    sender.sendMessage("You turned &noff &r&6flying".prefix())
                     Flash.staffMessage("flying turned off for ", player.name)
                 } else {
                     player.isFlying = true
-                    sender.sendMessage("You turned &2on &6flying".prefix())
+                    sender.sendMessage("You turned &non &r&6flying".prefix())
                     Flash.staffMessage("Flying turned on for ", player.name)
                 }
 
@@ -32,11 +32,11 @@ class Fly : CommandExecutor{
                 val player = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(targetOffline).let { return true }
                 if (player.isFlying) {
                     player.isFlying = false
-                    sender.sendMessage("You turned flying &coff &6for &b${player.name}".prefix())
+                    sender.sendMessage("You turned flying &noff &r&6for &l${player.name}".prefix())
                     Flash.staffMessage("flying turned off for ", player.name)
                 } else {
                     player.isFlying = true
-                    sender.sendMessage("You turned flying &2on &6for &b${player.name}".prefix())
+                    sender.sendMessage("You turned flying &non &r&6for &l${player.name}".prefix())
                     Flash.staffMessage("Flying turned on for ", player.name)
                 }
 
