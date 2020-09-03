@@ -30,7 +30,7 @@ class Flash : JavaPlugin() {
         getCommand("back").executor = Back()
         getCommand("sudo").executor = Sudo()
         getCommand("fly").executor = Fly()
-        getCommand("tphere").executor = Tphere()
+        getCommand("tphere").executor = TpHere()
         server.pluginManager.registerEvents(Back(), this)
         //server.pluginManager.registerEvents(EventsListener(), this)
         //TODO suggestion file reading
@@ -41,7 +41,6 @@ class Flash : JavaPlugin() {
     }
 
     companion object {
-        var chatMuted = false
         var noPermission = "&cYou don't have permission to do that.".prefix()
         var notPlayer = "&cYou must be a player to do this.".prefix()
         var targetOffline = "&cThe target player was not found, please check for any typos and try again.".prefix()

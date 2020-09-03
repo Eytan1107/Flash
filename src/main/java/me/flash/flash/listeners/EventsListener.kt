@@ -9,6 +9,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent
 import org.bukkit.event.player.PlayerChangedWorldEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
+import org.bukkit.event.server.ServerListPingEvent
 
 class EventsListener : Listener {
     @EventHandler
@@ -17,14 +18,6 @@ class EventsListener : Listener {
             player.sendMessage("&6[&3-&6] ${event.player.displayName}".colour())
         }
         event.quitMessage = null // Take away the default (player) left the game
-    }
-
-    @EventHandler(ignoreCancelled = true)
-    fun chat(event: AsyncPlayerChatEvent) {
-        if (Flash.chatMuted) {
-            event.isCancelled = true
-            event.player.sendMessage("&cThe chat is currently muted.".prefix())
-        }
     }
 
     @EventHandler
@@ -51,5 +44,10 @@ class EventsListener : Listener {
             }
             event.joinMessage = null
         }
+    }
+
+    @EventHandler
+    fun motd(event: ServerListPingEvent) {
+        event.motd = "         \u00A76\u00A7lFlash's Server \u00A7c◀ 1.8 - 1.16 ▶\u00A7r\n               \u00A7a\u00A7lKitPvP ◊ SkyBlock"
     }
 }
