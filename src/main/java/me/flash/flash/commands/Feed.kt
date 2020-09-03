@@ -25,8 +25,8 @@ class Feed : CommandExecutor {
                 sender.sendMessage(Flash.targetOffline)
             } else {
                 player.foodLevel = Int.MAX_VALUE
-                player.sendMessage("You were fed by ${sender.name}".prefix())
-                sender.sendMessage("You have fed ${player.name}".prefix())
+                player.sendMessage("You were fed by &l${sender.name}&r".prefix())
+                sender.sendMessage("You have fed &l${player.name}&r".prefix())
             }
         }
         return true

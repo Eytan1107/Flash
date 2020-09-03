@@ -20,7 +20,7 @@ class ClearAll : CommandExecutor{
         sender.world.players.forEach { player->
             player.inventory.clear()
             player.inventory.armorContents = emptyArray()
-            player.sendMessage("Your inventory was cleared by ${sender.name}".prefix())
+            player.sendMessage("Your inventory was cleared by &l${sender.name}&r".prefix())
         }
         sender.sendMessage("You have cleared the inventory of ${sender.world.players.size} players.")
         return true
