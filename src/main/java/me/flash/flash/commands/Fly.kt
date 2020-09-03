@@ -34,12 +34,12 @@ class Fly : CommandExecutor{
                     player.allowFlight = false
                     sender.sendMessage("You turned flight &loff&r &6for &l${player.name}".prefix())
                     Flash.staffMessage("flight turned off for ", player.name)
-                    player.sendMessage("${sender.name} Turned &loff&r &6your flight".prefix())
+                    player.sendMessage("&l${sender.name}&r &6Turned &loff&r &6your flight".prefix())
                 } else {
                     player.allowFlight = true
                     sender.sendMessage("You turned flight &lon&r &6for &l${player.name}".prefix())
                     Flash.staffMessage("Flight turned on for ", player.name)
-                    player.sendMessage("${sender.name} Turned &lon&r &6your flight".prefix())
+                    player.sendMessage("%l${sender.name}&r &6Turned &lon&r &6your flight".prefix())
                 }
 
             } else sender.sendMessage(noPermission).let { return true }
