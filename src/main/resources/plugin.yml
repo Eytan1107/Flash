@@ -77,3 +77,5 @@ commands:
     aliases:
       - tph
       - s
+  staffchat:
+    description: Toggle staffchat

@@ -4,6 +4,7 @@ import me.flash.flash.commands.*
 import me.flash.flash.listeners.EventsListener
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
+import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
 
 class Flash : JavaPlugin() {
@@ -31,9 +32,11 @@ class Flash : JavaPlugin() {
         getCommand("back").executor = Back()
         getCommand("sudo").executor = Sudo()
         getCommand("fly").executor = Fly()
+        getCommand("staffchat").executor = StaffChat()
         getCommand("tphere").executor = TpHere()
         server.pluginManager.registerEvents(Back(), this)
         server.pluginManager.registerEvents(EventsListener(), this)
+        server.pluginManager.registerEvents(StaffChat(), this)
         //TODO suggestion file reading
     }
 
@@ -42,6 +45,7 @@ class Flash : JavaPlugin() {
     }
 
     companion object {
+        var scEnabled = mutableListOf<Player>()
         var noPermission = "&cYou don't have permission to do that.".prefix()
         var notPlayer = "&cYou must be a player to do this.".prefix()
         var targetOffline = "&cThe target player was not found, please check for any typos and try again.".prefix()
