@@ -17,12 +17,27 @@ class Fly : CommandExecutor{
                 val player = Bukkit.getPlayer(sender.name) ?: sender.sendMessage(targetOffline).let { return true }
                 if (player.isFlying) {
                     player.isFlying = false
-                    sender.sendMessage("Flying turned off".prefix())
-                    Flash.staffMessage("flying turned off for", player.name)
+                    sender.sendMessage("You turned off flying".prefix())
+                    Flash.staffMessage("flying turned off for ", player.name)
                 } else {
                     player.isFlying = true
-                    sender.sendMessage("Flying is now turned on".prefix())
-                    Flash.staffMessage("Flying turned on for", player.name)
+                    sender.sendMessage("You turned on flying".prefix())
+                    Flash.staffMessage("Flying turned on for ", player.name)
+                }
+
+            } else sender.sendMessage(noPermission).let { return true }
+        }
+        if (args.size == 1) {
+            if (sender.hasPermission("flash.fly.others")) {
+                val player = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(targetOffline).let { return true }
+                if (player.isFlying) {
+                    player.isFlying = false
+                    sender.sendMessage("You turned flying off for ${player.name}".prefix())
+                    Flash.staffMessage("flying turned off for ", player.name)
+                } else {
+                    player.isFlying = true
+                    sender.sendMessage("You turned flying on for ${player.name}".prefix())
+                    Flash.staffMessage("Flying turned on for ", player.name)
                 }
 
             } else sender.sendMessage(noPermission).let { return true }
