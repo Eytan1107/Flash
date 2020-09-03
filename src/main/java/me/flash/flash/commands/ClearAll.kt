@@ -2,6 +2,9 @@ package me.flash.flash.commands
 
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.prefix
+import net.md_5.bungee.api.ChatColor
+import net.md_5.bungee.api.chat.ClickEvent
+import net.md_5.bungee.api.chat.TextComponent
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -9,13 +12,16 @@ import org.bukkit.entity.Player
 
 class ClearAll : CommandExecutor{
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if (!sender.hasPermission("flash.owner")) {
-            sender.sendMessage(Flash.noPermission)
-            return true
-        }
-        if (sender !is Player) {
-            sender.sendMessage(Flash.notPlayer)
-            return true
+        if (!sender.hasPermission("flash.owner")) sender.sendMessage(Flash.noPermission).let { return true }
+        if (sender !is Player) sender.sendMessage(Flash.notPlayer).let { return true }
+        args.firstOrNull() ?: "".let {arg->
+            if (arg != "confirm") {
+                sender.spigot().sendMessage(TextComponent("Click here to continue").apply {
+                    color = ChatColor.AQUA
+                    clickEvent = ClickEvent(ClickEvent.Action.RUN_COMMAND, "/clearall confirm")
+                })
+                return true
+            }
         }
         sender.world.players.forEach { player->
             player.inventory.clear()

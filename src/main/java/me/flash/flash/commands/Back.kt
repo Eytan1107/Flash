@@ -1,6 +1,7 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
+import me.flash.flash.Flash.Companion.error
 import me.flash.flash.Flash.Companion.prefix
 import org.bukkit.Location
 import org.bukkit.command.Command
@@ -28,7 +29,7 @@ class Back : CommandExecutor, Listener {
                     sender.teleport(this)
                     sender.sendMessage("You were teleported to your last known location".prefix())
                 } else {
-                    sender.sendMessage("You do not have a last known location".prefix())
+                    sender.sendMessage("You do not have a last known location".error())
                 }
             }
         } else {

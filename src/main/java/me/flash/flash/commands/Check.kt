@@ -27,7 +27,7 @@ class Check : CommandExecutor {
                 "island_normal_world" -> "SkyBlock"
                 "event" -> "Event"
                 "tntrun" -> "TnTRun"
-                else -> "a non registered world"
+                else -> player.world.name
             }
             sender.sendMessage("${player.name} is in $name".prefix())
             sender.sendMessage("${player.name} has ${player.health} health".prefix())

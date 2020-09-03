@@ -15,7 +15,7 @@ class Clear : CommandExecutor {
                 sender.sendMessage(Flash.notPlayer)
                 return true
             }
-            if (!sender.hasPermission("flash.clear.self")) {
+            if (!sender.hasPermission("flash.clear")) {
                 sender.sendMessage("&cYou do not have permission to use this command!".prefix())
                 return true
             }

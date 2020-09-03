@@ -2,6 +2,7 @@ package me.flash.flash.commands
 
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.colour
+import me.flash.flash.Flash.Companion.error
 import me.flash.flash.Flash.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
@@ -15,7 +16,7 @@ class Broadcast : CommandExecutor {
             return true
         }
         if (args.isEmpty()){
-            sender.sendMessage("&cError: /broadcast <text>".prefix())
+            sender.sendMessage("/broadcast <text>".error())
         } else {
             Bukkit.broadcastMessage(("&c" + args.joinToString(" ")).prefix())
         }
