@@ -13,7 +13,7 @@ class Feed : CommandExecutor {
         if (args.isEmpty()) {
             if (sender !is Player) {
                 sender.sendMessage("&cYou must be a player to feed yourself.".prefix())
-            } else if (!sender.hasPermission("core.feed.self")){
+            } else if (!sender.hasPermission("flash.feed.self")){
                 sender.sendMessage(Flash.noPermission)
             } else {
                 sender.foodLevel = Int.MAX_VALUE
@@ -25,8 +25,8 @@ class Feed : CommandExecutor {
                 sender.sendMessage(Flash.targetOffline)
             } else {
                 player.foodLevel = Int.MAX_VALUE
-                player.sendMessage("You were fed by ${sender.name}".prefix())
-                sender.sendMessage("You have fed ${player.name}".prefix())
+                player.sendMessage("You were fed by &l${sender.name}&r".prefix())
+                sender.sendMessage("You have fed &l${player.name}&r".prefix())
             }
         }
         return true

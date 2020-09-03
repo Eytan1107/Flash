@@ -10,7 +10,7 @@ import org.bukkit.command.CommandSender
 
 class Check : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if (!sender.hasPermission("core.check")) {
+        if (!sender.hasPermission("flash.check")) {
             sender.sendMessage(Flash.noPermission)
         } else if (args.isEmpty()) {
             sender.sendMessage("&cPlease specify a player.".colour())

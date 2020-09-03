@@ -10,7 +10,7 @@ import org.bukkit.entity.Player
 
 class TpAll : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if (!sender.hasPermission("core.tpall")) {
+        if (!sender.hasPermission("flash.tpall")) {
             sender.sendMessage(Flash.noPermission)
             return true
         }

@@ -25,13 +25,13 @@ class Loopkill : CommandExecutor {
     }
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if (sender.hasPermission("kick.noob")) {
+        if (sender.hasPermission("flash.loopkill")) {
             if (args.isEmpty()) {
                 sender.sendMessage("&cPlease specify a player".colour())
             } else {
                 val player = Bukkit.getPlayer(args.first())
                 if (player == null) {
-                    sender.sendMessage("&cPlayer ${args.first()} was not found, please check for any spelling errors and try again.".colour())
+                    sender.sendMessage("&cPlayer &l${args.first()}&r &cwas not found, please check for any spelling errors and try again.".colour())
                 } else {
                     if (tagged.contains(player)) {
                         sender.sendMessage("&aNo longer loopkilling ${player.name}".colour())

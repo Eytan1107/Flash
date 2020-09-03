@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender
 
 class Colorlist : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if (!sender.hasPermission("core.colorslist")) {
+        if (!sender.hasPermission("flash.colorslist")) {
             sender.sendMessage(Flash.noPermission)
             return true
         }

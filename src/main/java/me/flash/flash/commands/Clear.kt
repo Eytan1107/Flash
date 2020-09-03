@@ -15,7 +15,7 @@ class Clear : CommandExecutor {
                 sender.sendMessage(Flash.notPlayer)
                 return true
             }
-            if (!sender.hasPermission("core.clear.self")) {
+            if (!sender.hasPermission("flash.clear.self")) {
                 sender.sendMessage("&cYou do not have permission to use this command!".prefix())
                 return true
             }
@@ -23,7 +23,7 @@ class Clear : CommandExecutor {
             sender.inventory.armorContents = emptyArray()
             sender.sendMessage("You have cleared your inventory!".prefix())
         } else {
-            if (!sender.hasPermission("core.clear.others")) {
+            if (!sender.hasPermission("flash.clear.others")) {
                 sender.sendMessage(Flash.noPermission)
             } else {
                 val player = Bukkit.getPlayer(args.first())
@@ -32,8 +32,8 @@ class Clear : CommandExecutor {
                 } else {
                     player.inventory.clear()
                     player.inventory.armorContents = emptyArray()
-                    player.sendMessage("Your inventory was cleared by ${sender.name}".prefix())
-                    sender.sendMessage("You have cleared the inventory of ${player.name}".prefix())
+                    player.sendMessage("Your inventory was cleared by &l${sender.name}&r".prefix())
+                    sender.sendMessage("You have cleared the inventory of &l${player.name}&r".prefix())
                 }
             }
         }
