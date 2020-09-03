@@ -8,7 +8,7 @@ import org.bukkit.entity.Player
 
 class Suggestions : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if (sender.hasPermission("skript.suggestions")) {
+        if (sender.hasPermission("flash.suggestions")) {
             Suggest.suggestions.forEachIndexed { index, suggestion ->
                 sender.sendMessage("${index + 1} - ${suggestion.sender}: ${suggestion.suggestion}")
             }

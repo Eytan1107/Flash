@@ -13,7 +13,7 @@ class Craft : CommandExecutor {
             sender.sendMessage(Flash.notPlayer)
             return true
         }
-        if (!sender.hasPermission("core.craft")) {
+        if (!sender.hasPermission("flash.craft")) {
             sender.sendMessage(Flash.noPermission)
             return true
         }
@@ -22,7 +22,7 @@ class Craft : CommandExecutor {
                 sender.openWorkbench(null, true)
             }
             else ->{
-                if (sender.hasPermission("core.craft.all")) {
+                if (sender.hasPermission("flash.craft.all")) {
                     sender.openWorkbench(null, true)
                 } else {
                     sender.sendMessage("&cYou must be in KitPvP or SkyBlock to do that.".prefix())

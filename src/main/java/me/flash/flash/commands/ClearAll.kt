@@ -9,7 +9,7 @@ import org.bukkit.entity.Player
 
 class ClearAll : CommandExecutor{
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if (!sender.hasPermission("core.clear.others")) {
+        if (!sender.hasPermission("flash.owner")) {
             sender.sendMessage(Flash.noPermission)
             return true
         }

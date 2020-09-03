@@ -15,7 +15,7 @@ class Vanish : CommandExecutor {
         if (sender !is Player) {
             sender.sendMessage(Flash.notPlayer)
         } else {
-            if (!sender.hasPermission("k.vanish")) {
+            if (!sender.hasPermission("flash.vanish")) {
                 sender.sendMessage(Flash.noPermission)
                 return true
             }
@@ -26,7 +26,7 @@ class Vanish : CommandExecutor {
                     }
                 } else {
                     Bukkit.getOnlinePlayers().forEach { player->
-                        if (!player.hasPermission("k.vanish.see")) {
+                        if (!player.hasPermission("flash.vanish.see")) {
                             player.hidePlayer(sender)
                         }
                     }

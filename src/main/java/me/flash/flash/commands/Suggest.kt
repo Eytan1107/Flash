@@ -18,7 +18,7 @@ class Suggest : CommandExecutor {
             if (args.isEmpty()) {
                 sender.sendMessage("&cYou're not very helpful are you".prefix())
             } else {
-                if (sender.hasPermission("skript.staffteam")) {
+                if (sender.hasPermission("flash.staffteam")) {
                     suggestions.add(Suggestion(sender.name, args.joinToString(" "), true))
                 } else {
                     suggestions.add(Suggestion(sender.name, args.joinToString(" "), false))

@@ -19,7 +19,7 @@ class Back : CommandExecutor, Listener {
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender is Player) {
-            if (!sender.hasPermission("skript.back")) {
+            if (!sender.hasPermission("flash.back")) {
                 sender.sendMessage(Flash.noPermission)
                 return true
             }

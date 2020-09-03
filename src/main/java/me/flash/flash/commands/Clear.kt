@@ -15,14 +15,14 @@ class Clear : CommandExecutor {
                 sender.sendMessage(Flash.notPlayer)
                 return true
             }
-            if (!sender.hasPermission("core.clear.self")) {
+            if (!sender.hasPermission("flash.clear.self")) {
                 sender.sendMessage("&cYou do not have permission to use this command!".prefix())
                 return true
             }
             sender.inventory.clear()
             sender.inventory.armorContents = emptyArray()
         } else {
-            if (!sender.hasPermission("core.clear.others")) {
+            if (!sender.hasPermission("flash.clear.others")) {
                 sender.sendMessage(Flash.noPermission)
             } else {
                 val player = Bukkit.getPlayer(args.first())

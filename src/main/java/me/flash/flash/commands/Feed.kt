@@ -13,7 +13,7 @@ class Feed : CommandExecutor {
         if (args.isEmpty()) {
             if (sender !is Player) {
                 sender.sendMessage("&cYou must be a player to feed yourself.".prefix())
-            } else if (!sender.hasPermission("core.feed.self")){
+            } else if (!sender.hasPermission("flash.feed.self")){
                 sender.sendMessage(Flash.noPermission)
             } else {
                 sender.foodLevel = Int.MAX_VALUE
