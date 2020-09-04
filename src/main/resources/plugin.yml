@@ -80,3 +80,5 @@ commands:
   staffchat:
     description: Toggle staffchat
     aliases: sc
+  flyspeed:
+    description: set your speed 1-10

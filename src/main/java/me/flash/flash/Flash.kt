@@ -34,6 +34,7 @@ class Flash : JavaPlugin() {
         getCommand("fly").executor = Fly()
         getCommand("staffchat").executor = StaffChat()
         getCommand("tphere").executor = TpHere()
+        getCommand("flyspeed").executor = Flyspeed()
         server.pluginManager.registerEvents(Back(), this)
         server.pluginManager.registerEvents(EventsListener(), this)
         server.pluginManager.registerEvents(StaffChat(), this)
