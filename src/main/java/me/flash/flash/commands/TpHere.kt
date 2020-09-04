@@ -17,8 +17,8 @@ class TpHere : CommandExecutor{
         if (player == sender) sender.sendMessage("You cannot teleport yourself to yourself...".error()).let { return true }
         val target = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(Flash.targetOffline).let { return true }
         target.teleport(sender)
-        target.sendMessage("${sender.name} teleported you to them".prefix())
-        sender.sendMessage("You teleported ${target.name} to you".prefix())
+        target.sendMessage("&l${sender.name}&r &6teleported you to them".prefix())
+        sender.sendMessage("You teleported &l${target.name}&r &6to you".prefix())
         return true
     }
 }
