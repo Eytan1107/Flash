@@ -28,7 +28,7 @@ class Teleport : CommandExecutor {
             if (player == sender) sender.sendMessage("You cannot teleport to yourself.".error()).let { return true }
             sender.teleport(player)
             if (command.name != "stp") player.sendMessage("&l${sender.name}&r &6teleported to you.".prefix())
-            sender.sendMessage("You teleported to ${player.name}".prefix())
+            sender.sendMessage("You teleported to &l${player.name}".prefix())
             Flash.staffMessage(sender.name, "teleported to ${player.name}")
         } else {
             if (!sender.hasPermission("flash.tp.others")) sender.sendMessage(noPermission).let { return true }
