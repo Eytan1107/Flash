@@ -27,12 +27,12 @@ class TpAll : CommandExecutor {
                 players.forEach { player->
                     player.teleport(sender)
                 }
-                sender.sendMessage("Ok, ${players.size} players were teleported to you.".prefix())
+                sender.sendMessage("Ok, &l${players.size}&r &6players were teleported to you.".prefix())
             }
         } else if (args.first() == "all") {
             val onlinePlayers = Bukkit.getOnlinePlayers()
             onlinePlayers.forEach { it.teleport(sender) }
-            sender.sendMessage("Ok, ${onlinePlayers.size} players were teleported to you.".prefix())
+            sender.sendMessage("Ok, &l${onlinePlayers.size}&r &6players were teleported to you.".prefix())
         } else {
             sender.sendMessage("Unrecognized argument. (${args.first()})".error())
         }
