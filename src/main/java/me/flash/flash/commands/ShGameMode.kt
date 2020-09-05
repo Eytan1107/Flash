@@ -18,7 +18,7 @@ class ShGameMode : CommandExecutor {
         } else if (args.size == 1) {
             if (sender !is Player) sender.sendMessage("&cUsage: /gamemode [gamemode] [player]".prefix()).run { return true }
             else {
-                val gameMode = parseGamemode(args.first())
+                val gameMode = parseGamemode(command.name)
                         ?: sender.sendMessage("The command you ran is not a valid gamemode command.".error()).run { return true }
                 sender.gameMode = gameMode
                 sender.sendMessage(("You set your gamemode to ${gameMode.name.toLowerCase()} mode.").prefix())
@@ -26,7 +26,7 @@ class ShGameMode : CommandExecutor {
             }
         } else {
             val player = Bukkit.getPlayer(args[1]) ?: sender.sendMessage(Flash.targetOffline).run { return true }
-            val gameMode = parseGamemode(args.first())
+            val gameMode = parseGamemode(command.name)
                     ?: sender.sendMessage("The command you ran is not a valid gamemode command.".error()).run { return true }
             player.gameMode = gameMode
             sender.sendMessage("You set ${player.name}'s gamemode to ${gameMode.name.toLowerCase()} mode.")
