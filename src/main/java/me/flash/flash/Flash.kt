@@ -63,24 +63,16 @@ class Flash : JavaPlugin() {
         fun String.prefix(): String = ("[&6Flash's Server&r] &6$this").colour()
         fun String.colour(): String = ChatColor.translateAlternateColorCodes('&', this)
         fun String.error(): String = ("[&6Flash's Server&r] &cError: $this").colour()
-        /***
-         * @deprecated - Use staffMessage(sender, action, target) instead.
-        */
-        fun staffMessage(staff:String, action:String) {
-            Bukkit.broadcast("&d[A] &5$staff: &d$action".colour(), "flash.staff")
-        }
 
-        fun staffMessage(sender:CommandSender, action: String, @Nullable target: Player) {
+        fun staffMessage(sender:CommandSender, action: String, vararg ignored: Player) {
             val senders = mutableListOf<CommandSender>()
             senders.addAll(Bukkit.getOnlinePlayers().filter { p -> p.hasPermission("flash.staff") })
             senders.add(Bukkit.getConsoleSender())
-            val message = "&d[A] &5${sender.name}: &d${action.format(target.name).colour()}"
             senders.remove(sender)
-            senders.remove(target)
+            senders.removeAll(ignored)
             senders.forEach {
-                it.sendMessage(message)
+                it.sendMessage("&d[S] &5${sender.name}: &d$action")
             }
-
         }
     }
 }

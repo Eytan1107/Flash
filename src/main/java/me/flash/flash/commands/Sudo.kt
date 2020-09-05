@@ -23,6 +23,7 @@ class Sudo : CommandExecutor {
             return true
         }
         player.chat(args.toMutableList().minus(0).joinToString(" "))
+        Flash.staffMessage(player, "Ran the sudo command")
         return true
     }
 }

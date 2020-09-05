@@ -31,7 +31,7 @@ class Give : CommandExecutor {
                 val count = args.getOrElse(2) { "1" }.toIntOrNull() ?: 1
 
                 player.inventory.addItem(ItemStack(material, count))
-                Flash.staffMessage(sender.name, "Gave $count of ${material.name.toLowerCase().replace("_"," ")} to ${player.name}")
+                Flash.staffMessage(sender, "Gave $count of ${material.name.toLowerCase().replace("_"," ")} to ${player.name}")
             }
         }
         return true

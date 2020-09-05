@@ -19,6 +19,7 @@ class Broadcast : CommandExecutor {
             sender.sendMessage("/broadcast <text>".error())
         } else {
             Bukkit.broadcastMessage(("&c" + args.joinToString(" ")).prefix())
+            Flash.staffMessage(sender, "Broadcasted")
         }
         return true
     }
