@@ -36,10 +36,10 @@ class ShGameMode : CommandExecutor {
 
     private fun parseGamemode(arg: String): GameMode? {
         return when (arg) {
-            "gmsp" -> GameMode.SPECTATOR
-            "gmc" -> GameMode.CREATIVE
-            "gms" -> GameMode.SURVIVAL
-            "gma" -> GameMode.ADVENTURE
+            "gmsp", "gm3", "gmspectator" -> GameMode.SPECTATOR
+            "gmc", "gm1", "gmcreative" -> GameMode.CREATIVE
+            "gms", "gm0", "gmsurvival" -> GameMode.SURVIVAL
+            "gma", "gm2", "gmadventure" -> GameMode.ADVENTURE
             else -> null
         }
     }

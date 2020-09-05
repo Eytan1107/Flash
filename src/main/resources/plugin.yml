@@ -86,18 +86,30 @@ commands:
   walkspeed:
     description: Set your flight speed 1 - 10
     aliases: ws
-  mutechat:
-    description: Toggle the chat globally.
   gamemode:
     description: Set your gamemode
-    aliases: gm
+    aliases:
+      - gmode
+      - gm
   gmsp:
     description: Change your gamemode to spectator mode
+    aliases:
+      - gmspectator
+      - gm3
   gmc:
     description: Change your gamemode to creative mode
+    aliases:
+      - gmcreative
+      - gm1
   gms:
     description: Change your gamemode to survival mode
+    aliases:
+      - gm0
+      - gmsurvival
   gma:
     description: Change your gamemode to adventure mode
+    aliases:
+      - gm2
+      - gmadventure
   give:
     description: Give items to players.

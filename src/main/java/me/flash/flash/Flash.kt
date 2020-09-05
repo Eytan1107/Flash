@@ -36,7 +36,6 @@ class Flash : JavaPlugin() {
         getCommand("tphere").executor = TpHere()
         getCommand("flyspeed").executor = Flyspeed()
         getCommand("walkspeed").executor = WalkSpeed()
-        getCommand("mutechat").executor = MuteChat()
         getCommand("gamemode").executor = GameMode()
         getCommand("gmsp").executor = ShGameMode()
         getCommand("gma").executor = ShGameMode()
@@ -54,7 +53,6 @@ class Flash : JavaPlugin() {
     }
 
     companion object {
-        var chatMuted: Boolean = false
         var scEnabled = mutableListOf<Player>()
         var noPermission = "You don't have permission to do that.".error()
         var notPlayer = "You must be a player to do this.".error()
