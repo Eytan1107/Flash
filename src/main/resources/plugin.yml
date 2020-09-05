@@ -88,3 +88,14 @@ commands:
     aliases: ws
   mutechat:
     description: Toggle the chat globally.
+  gamemode:
+    description: Set your gamemode
+    aliases: gm
+  gmsp:
+    description: Change your gamemode to spectator mode
+  gmc:
+    description: Change your gamemode to creative mode
+  gms:
+    description: Change your gamemode to survival mode
+  gma:
+    description: Change your gamemode to adventure mode
