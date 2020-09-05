@@ -71,7 +71,7 @@ class Flash : JavaPlugin() {
             senders.remove(sender)
             senders.removeAll(ignored)
             senders.forEach {
-                it.sendMessage("&d[S] &5${sender.name}: &d$action")
+                it.sendMessage("&d[S] &5${sender.name}: &d$action".colour())
             }
         }
     }
