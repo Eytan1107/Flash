@@ -23,7 +23,7 @@ class ShGameMode : CommandExecutor {
                 Flash.staffMessage(sender.name, "Set their gamemode to ${gameMode.name.toLowerCase()} mode")
             }
         } else {
-            val player = Bukkit.getPlayer(args[1]) ?: sender.sendMessage(Flash.targetOffline).run { return true }
+            val player = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(Flash.targetOffline).run { return true }
             val gameMode = parseGamemode(command.name)
                     ?: sender.sendMessage("The command you ran is not a valid gamemode command.".error()).run { return true }
             player.gameMode = gameMode
