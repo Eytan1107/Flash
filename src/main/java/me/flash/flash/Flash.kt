@@ -4,8 +4,10 @@ import me.flash.flash.commands.*
 import me.flash.flash.listeners.EventsListener
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
+import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
+import org.jetbrains.annotations.Nullable
 
 class Flash : JavaPlugin() {
     override fun onEnable() {
@@ -61,8 +63,24 @@ class Flash : JavaPlugin() {
         fun String.prefix(): String = ("[&6Flash's Server&r] &6$this").colour()
         fun String.colour(): String = ChatColor.translateAlternateColorCodes('&', this)
         fun String.error(): String = ("[&6Flash's Server&r] &cError: $this").colour()
+        /***
+         * @deprecated - Use staffMessage(sender, action, target) instead.
+        */
         fun staffMessage(staff:String, action:String) {
             Bukkit.broadcast("&d[A] &5$staff: &d$action".colour(), "flash.staff")
+        }
+
+        fun staffMessage(sender:CommandSender, action: String, @Nullable target: Player) {
+            val senders = mutableListOf<CommandSender>()
+            senders.addAll(Bukkit.getOnlinePlayers().filter { p -> p.hasPermission("flash.staff") })
+            senders.add(Bukkit.getConsoleSender())
+            val message = "&d[A] &5${sender.name}: &d${action.format(target.name).colour()}"
+            senders.remove(sender)
+            senders.remove(target)
+            senders.forEach {
+                it.sendMessage(message)
+            }
+
         }
     }
 }
