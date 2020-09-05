@@ -27,8 +27,8 @@ class ShGameMode : CommandExecutor {
             val gameMode = parseGamemode(command.name)
                     ?: sender.sendMessage("The command you ran is not a valid gamemode command.".error()).run { return true }
             player.gameMode = gameMode
-            sender.sendMessage("You set ${player.name}'s gamemode to ${gameMode.name.toLowerCase()} mode.")
-            player.sendMessage("${sender.name} set your gamemode to ${gameMode.name.toLowerCase()} mode.")
+            sender.sendMessage("You set ${player.name}'s gamemode to ${gameMode.name.toLowerCase()} mode.".prefix())
+            player.sendMessage("${sender.name} set your gamemode to ${gameMode.name.toLowerCase()} mode.".prefix())
             Flash.staffMessage(sender.name, "Set ${player.name}'s gamemode to ${gameMode.name.toLowerCase()} mode")
         }
         return true
