@@ -15,7 +15,7 @@ import org.bukkit.event.player.PlayerTeleportEvent
 
 class Back : CommandExecutor, Listener {
     companion object {
-        var table = emptyMap<Player, Location>()
+        var table = mutableMapOf<Player, Location>()
     }
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
@@ -38,16 +38,16 @@ class Back : CommandExecutor, Listener {
         return true
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     fun teleport(event: PlayerTeleportEvent) {
-        table.plus(Pair(event.player, event.from))
+        table[event.player] = event.from
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     fun death(event: EntityDamageEvent) {
-        val entity = event.entity
-        if (entity is Player && entity.health - event.damage < 1) {
-            table.plus(Pair(event.entity, event.entity.location))
+        val player = if (event.entity is Player) event.entity as Player else return
+        if ((player.health - event.damage) <= 0) {
+            table[player] = player.location
         }
     }
 }
