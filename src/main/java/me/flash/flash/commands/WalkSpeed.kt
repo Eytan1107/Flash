@@ -11,15 +11,15 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
-class Flyspeed : CommandExecutor {
+class WalkSpeed : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender !is Player) sender.sendMessage(notPlayer).run { return true }
-        if (!sender.hasPermission("flash.flyspeed")) sender.sendMessage(noPermission).run { return true }
-        val speed = args.firstOrNull()?.toIntOrNull() ?: sender.sendMessage("&cUsage: /flyspeed <speed>".prefix()).run { return true }
+        if (!sender.hasPermission("flash.walkspeed")) sender.sendMessage(noPermission).run { return true }
+        val speed = args.firstOrNull()?.toIntOrNull() ?: sender.sendMessage("&cUsage: /walkspeed <speed>".prefix()).run { return true }
         if (!IntRange(1, 10).contains(speed)) sender.sendMessage("Please specify a whole number 1 and 10.".error()).run { return true }
-        sender.flySpeed = speed.toFloat()/10
-        sender.sendMessage("Set flight speed for &l${sender.name} &6to $speed".prefix())
-        Flash.staffMessage(sender.name, "Set their flight speed to $speed")
+        sender.walkSpeed = speed.toFloat()/10
+        sender.sendMessage("Set walk speed for &l${sender.name} &6to $speed".prefix())
+        Flash.staffMessage(sender.name, "Set their walk speed to $speed")
         return true
     }
 }
