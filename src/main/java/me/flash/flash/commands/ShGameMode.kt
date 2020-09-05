@@ -14,8 +14,6 @@ class ShGameMode : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (!sender.hasPermission("flash.gamemode")) sender.sendMessage(Flash.noPermission).run { return true }
         if (args.isEmpty()) {
-            sender.sendMessage("&cUsage: /gamemode [gamemode] <player>".prefix())
-        } else if (args.size == 1) {
             if (sender !is Player) sender.sendMessage("&cUsage: /gamemode [gamemode] [player]".prefix()).run { return true }
             else {
                 val gameMode = parseGamemode(command.name)
