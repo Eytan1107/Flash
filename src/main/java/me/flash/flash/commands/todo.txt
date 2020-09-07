@@ -1,0 +1,32 @@
+KITS and KITPVP
+
+if player is not in kitpvp -> error
+/kit PvP - 10 secs
+/kit Fast - 1h - flash.kit.fast -> 10k kill points
+/kit Speedster - 3h - flash.kit.speedster -> 25k kill points
+/kit Godspeed - 12h - flash.kit.godspeed -> 50k kill points
+/kit SpeedForce - 24h - flash.kit.speedforce -> 100k kill points
+Owner / Dev / Admins / Manager = flash.kit.admin = /kit KIT Player no cooldown (if they do it to themselves, cooldown applies)
+they have to manually buy them in the shop ++ must have the previous kit to buy the next
+
+
+Every Kill =
+
+Flash / Owner / Dev / Mod / Lead Mod / Youtuber / Streamer / Manager rank: 200kp
+Savitar / Helper / Lead Builder rank: 175kp
+ReverseFlash / Builder rank: 150kp
+KidFlash rank: 125kp
+Zoom / Trial Mod / Friend rank: 100kp
+GodSpeed / Trial Builder / Tester rank: 75kp
+Member rank: 50kp
+
+kits available in /shop
+npc at spawn - /shop
+
+/shop -> inventory
+1 Speed Effects: speed 2 = 2k kp | speed 3 = 5k kp | speed 4 = 10k kp | speed 5 = 20k kp (they get a nether star with the name of the effect and on right click, they get speed with no particles. on death, the effects disappear)
+2 Potions: Instant Health 1 = 400 kp | Instant Health 2 = 600 kp | Regen 1 - 33secs = 1k kp | Regen 1 - 1m30 = 2k kp | Regen 2 - 16secs = 2k kp | Slowness - 1m07 = 300 kp | Slowness - 3m = 600 kp | Instant Damage 1 = 500 kp | Instant Damage 2 = 1k kp
+3 Kits: (like the ones above)
+4 Combat: Boots + Leggings = Iron = 300kp and Chain = 500kp | Chestplates + Helmets = Iron and Diamond | Swords = Iron and Diamond | Bows | everything non enchanted
+5 Enchanted Books: Prot 1 = | Prot 2 = | Sharp 1 = | Sharp 2 = | Sharp 3 = | Sharp 4 = | Knockback 1 = | Knockback 2 = | Unbreaking 3 = | Power 1 = | Power 2 = | Power 3 = | Power 4 = | Punch 1 = | Punch 2 = | you get an enchanted book and if you right click with it on a non enchanted item (that can be enchantable)
+6 Abilities:
