@@ -1,0 +1,8 @@
+kitpvpWorld: ["kitpvp"]
+hub: ["world"]
+skyblock:
+  - "skyblock_spawn"
+  - "island_normal_world"
+tntrun: ["tntrun"]
+builds: ["builds"]
+event: ["event"]

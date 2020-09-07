@@ -44,6 +44,8 @@ class Flash : JavaPlugin() {
         getCommand("gms").executor = ShGameMode()
         getCommand("gmc").executor = ShGameMode()
         getCommand("give").executor = Give()
+        getCommand("kit").executor = Kit()
+        getCommand("kits").executor = Kits()
         server.pluginManager.registerEvents(Back(), this)
         server.pluginManager.registerEvents(EventsListener(), this)
         server.pluginManager.registerEvents(StaffChat(), this)

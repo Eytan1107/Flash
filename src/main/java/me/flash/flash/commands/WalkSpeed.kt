@@ -13,8 +13,8 @@ import org.bukkit.entity.Player
 
 class WalkSpeed : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if (sender !is Player) sender.sendMessage(notPlayer).run { return true }
         if (!sender.hasPermission("flash.walkspeed")) sender.sendMessage(noPermission).run { return true }
+        if (sender !is Player) sender.sendMessage(notPlayer).run { return true }
         val speed = args.firstOrNull()?.toIntOrNull() ?: sender.sendMessage("&cUsage: /walkspeed <speed>".prefix()).run { return true }
         if (!IntRange(1, 10).contains(speed)) sender.sendMessage("Please specify a whole number 1 and 10.".error()).run { return true }
         sender.walkSpeed = speed.toFloat()/10

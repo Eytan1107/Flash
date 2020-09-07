@@ -113,3 +113,7 @@ commands:
       - gmadventure
   give:
     description: Give items to players.
+  kits:
+    description: Show kits
+  kit:
+    description: Get a kit
