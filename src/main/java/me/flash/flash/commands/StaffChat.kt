@@ -15,7 +15,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent
 class StaffChat : CommandExecutor, Listener{
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(sender !is Player) sender.sendMessage(Flash.notPlayer).let { return true }
-        if (!sender.hasPermission("flash.staff")) sender.sendMessage(Flash.noPermission).let { return true }
+        if (!sender.hasPermission("flash.staffchat")) sender.sendMessage(Flash.noPermission).let { return true }
         if (args.isEmpty()) {
             if (Flash.scEnabled.contains(sender)) {
                 sender.sendMessage("You have &ldisabled&r &6staffchat.".prefix())
@@ -31,13 +31,13 @@ class StaffChat : CommandExecutor, Listener{
 
     @EventHandler(ignoreCancelled = true)
     fun chat(event: AsyncPlayerChatEvent) {
-        if (!event.player.hasPermission("flash.staff")) return
+        if (!event.player.hasPermission("flash.staffchat")) return
         var message = event.message
         val ov = message.startsWith("# ")
         if (Flash.scEnabled.contains(event.player) || ov) {
             if (ov) message = message.replaceFirst("# ", "")
             event.isCancelled = true
-            Bukkit.getOnlinePlayers().filter { player -> player.hasPermission("flash.staff") }.forEach {
+            Bukkit.getOnlinePlayers().filter { player -> player.hasPermission("flash.staffchat") }.forEach {
                 it.sendMessage("&b[S] &3${event.player.name}: &b$message".colour())
             }
         }
