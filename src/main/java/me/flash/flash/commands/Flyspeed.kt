@@ -19,7 +19,7 @@ class Flyspeed : CommandExecutor {
         if (!IntRange(1, 10).contains(speed)) sender.sendMessage("Please specify a whole number 1 and 10.".error()).run { return true }
         sender.flySpeed = speed.toFloat()/10
         sender.sendMessage("Set flight speed for &l${sender.name} &6to $speed".prefix())
-        Flash.staffMessage(sender.name, "Set their flight speed to $speed")
+        Flash.staffMessage(sender, "Set their flight speed to $speed")
         return true
     }
 }

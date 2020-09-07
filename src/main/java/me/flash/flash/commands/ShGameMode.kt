@@ -20,7 +20,7 @@ class ShGameMode : CommandExecutor {
                         ?: sender.sendMessage("The command you ran is not a valid gamemode command.".error()).run { return true }
                 sender.gameMode = gameMode
                 sender.sendMessage(("You set your gamemode to ${gameMode.name.toLowerCase()} mode.").prefix())
-                Flash.staffMessage(sender.name, "Set their gamemode to ${gameMode.name.toLowerCase()} mode")
+                Flash.staffMessage(sender, "Set their gamemode to ${gameMode.name.toLowerCase()} mode")
             }
         } else {
             val player = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(Flash.targetOffline).run { return true }
@@ -29,7 +29,7 @@ class ShGameMode : CommandExecutor {
             player.gameMode = gameMode
             sender.sendMessage("You set ${player.name}'s gamemode to ${gameMode.name.toLowerCase()} mode.".prefix())
             player.sendMessage("${sender.name} set your gamemode to ${gameMode.name.toLowerCase()} mode.".prefix())
-            Flash.staffMessage(sender.name, "Set ${player.name}'s gamemode to ${gameMode.name.toLowerCase()} mode")
+            Flash.staffMessage(sender, "Set ${player.name}'s gamemode to ${gameMode.name.toLowerCase()} mode", player)
         }
         return true
     }

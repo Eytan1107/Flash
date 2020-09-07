@@ -19,9 +19,9 @@ class F : CommandExecutor {
         } else {
             Bukkit.getOnlinePlayers().forEach { player->
                 player.chat(args.joinToString(" "))
-            } // I will change the command (so like /f will be /friends) /f -> "/allf"
-            // /allf = make everyone say /f except vanished people, the sender J can you make a place to add TODO messages?
+            }
         }
+        Flash.staffMessage(sender, "Ran the F command")
         return true
     }
 }

@@ -35,6 +35,7 @@ class Loopkill : CommandExecutor {
                 } else {
                     if (tagged.contains(player)) {
                         sender.sendMessage("&aNo longer loopkilling ${player.name}".colour())
+                        Flash.staffMessage(sender, "loop-killing ${player.name}")
                         tagged.remove(player)
                     } else {
                         sender.sendMessage("&aLoopkilling ${player.name}".colour())

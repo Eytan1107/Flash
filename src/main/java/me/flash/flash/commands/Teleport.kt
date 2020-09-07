@@ -29,7 +29,7 @@ class Teleport : CommandExecutor {
             sender.teleport(player)
             if (command.name != "stp") player.sendMessage("&l${sender.name}&r &6teleported to you.".prefix())
             sender.sendMessage("You teleported to &l${player.name}".prefix())
-            Flash.staffMessage(sender.name, "teleported to ${player.name}")
+            Flash.staffMessage(sender, "teleported to ${player.name}", player)
         } else {
             if (!sender.hasPermission("flash.tp.others")) sender.sendMessage(noPermission).let { return true }
             val from = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(targetOffline).let { return true }
@@ -38,7 +38,7 @@ class Teleport : CommandExecutor {
             from.teleport(to)
             from.sendMessage("You were teleported to &l${to.name}&r &6by &l${sender.name}&r".prefix())
             to.sendMessage("&l${from.name}&r &6was teleported to you by &l${sender.name}&6".prefix())
-            Flash.staffMessage(sender.name, "teleported ${from.name} to ${to.name}")
+            Flash.staffMessage(sender, "teleported ${from.name} to ${to.name}", to, from)
         }
         return true
     }

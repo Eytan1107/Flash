@@ -19,7 +19,7 @@ class WalkSpeed : CommandExecutor {
         if (!IntRange(1, 10).contains(speed)) sender.sendMessage("Please specify a whole number 1 and 10.".error()).run { return true }
         sender.walkSpeed = speed.toFloat()/10
         sender.sendMessage("Set walk speed for &l${sender.name} &6to $speed".prefix())
-        Flash.staffMessage(sender.name, "Set their walk speed to $speed")
+        Flash.staffMessage(sender, "Set their walk speed to $speed")
         return true
     }
 }

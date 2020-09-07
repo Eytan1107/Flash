@@ -19,6 +19,7 @@ class Feed : CommandExecutor {
                 sender.foodLevel = Int.MAX_VALUE
                 sender.sendMessage("You have been fed".prefix())
             }
+            Flash.staffMessage(sender, "Fed themself.")
         } else {
             val player = Bukkit.getPlayer(args.first())
             if (player == null) {
@@ -28,6 +29,7 @@ class Feed : CommandExecutor {
                 player.sendMessage("You were fed by &l${sender.name}&r".prefix())
                 sender.sendMessage("You have fed &l${player.name}&r".prefix())
             }
+            Flash.staffMessage(sender, "fed ${player.name}")
         }
         return true
     }
