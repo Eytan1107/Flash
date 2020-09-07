@@ -19,7 +19,7 @@ class Flyspeed : CommandExecutor {
         val speed = args.firstOrNull()?.toIntOrNull() ?: sender.sendMessage("&cUsage: /flyspeed <speed>".prefix()).run { return true }
         if (!IntRange(1, 10).contains(speed)) sender.sendMessage("Please specify a whole number 1 and 10.".error()).run { return true }
         sender.flySpeed = speed.toFloat()/10
-        sender.sendMessage("Set flight speed for &l${sender.name} &6to $speed".prefix())
+        sender.sendMessage("Set flight speed for &c${sender.name} &6to $speed".prefix())
         Flash.staffMessage(sender, "Set their flight speed to $speed".colour())
         return true
     }
