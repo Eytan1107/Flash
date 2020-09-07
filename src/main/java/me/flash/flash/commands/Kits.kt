@@ -8,6 +8,7 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
+import java.time.Instant
 import java.util.*
 
 class Kits : CommandExecutor {
@@ -27,5 +28,7 @@ class Kits : CommandExecutor {
         }
         return true
     }
-
+    companion object {
+        val kitpvpCooldowns = mapOf<Player, Instant>()
+    }
 }
