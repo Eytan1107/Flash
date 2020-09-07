@@ -11,6 +11,7 @@ import org.jetbrains.annotations.Nullable
 
 class Flash : JavaPlugin() {
     override fun onEnable() {
+        saveDefaultConfig()
         getCommand("feed").executor = Feed()
         getCommand("pro").executor = Pro()
         getCommand("hub").executor = Hub()
