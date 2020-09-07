@@ -13,7 +13,7 @@ import java.util.*
 class Kits : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         val player = if (sender is Player) sender else sender.sendMessage(Flash.notPlayer).run { return true }
-        if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("kitpvpWorld").contains("player.world.name")) {
+        if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("kitpvpworld").contains(player.world.name)) {
             if (args.isNotEmpty()) sender.sendMessage("Flash told me to not let you use arguments, sorry.".error()).run { return true }
             sender.sendMessage("&2&nKits&r".colour())
             sender.sendMessage("")
