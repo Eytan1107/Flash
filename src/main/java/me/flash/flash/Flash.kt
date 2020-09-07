@@ -48,7 +48,7 @@ class Flash : JavaPlugin() {
         server.pluginManager.registerEvents(EventsListener(), this)
         server.pluginManager.registerEvents(StaffChat(), this)
         //TODO suggestion file reading
-    }
+  }
 
     override fun onDisable() {
         // todo Suggestion file saving
@@ -78,7 +78,7 @@ class Flash : JavaPlugin() {
             senders.remove(sender)
             senders.remove(target)
             senders.forEach {
-                it.sendMessage(message)
+                it.sendMessage(message) // btw what did you do with the suggestions.yaml ? where would we place it?
             }
 
         }
