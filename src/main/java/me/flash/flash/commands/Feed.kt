@@ -1,6 +1,7 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
+import me.flash.flash.Flash.Companion.notPlayer
 import me.flash.flash.Flash.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
@@ -12,8 +13,8 @@ class Feed : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>): Boolean {
         if (args.isEmpty()) {
             if (sender !is Player) {
-                sender.sendMessage("&cYou must be a player to feed yourself.".prefix())
-            } else if (!sender.hasPermission("flash.feed.self")){
+                sender.sendMessage(notPlayer)
+            } else if (!sender.hasPermission("flash.feed")){
                 sender.sendMessage(Flash.noPermission)
             } else {
                 sender.foodLevel = Int.MAX_VALUE
@@ -26,8 +27,8 @@ class Feed : CommandExecutor {
                 sender.sendMessage(Flash.targetOffline)
             } else {
                 player.foodLevel = Int.MAX_VALUE
-                player.sendMessage("You were fed by &l${sender.name}&r".prefix())
-                sender.sendMessage("You have fed &l${player.name}&r".prefix())
+                player.sendMessage("You were fed by &c${sender.name}&r".prefix())
+                sender.sendMessage("You have fed &c${player.name}&r".prefix())
             }
             Flash.staffMessage(sender, "fed ${player.name}")
         }
