@@ -21,8 +21,8 @@ class Flyspeed : CommandExecutor {
         val speed = args.firstOrNull()?.toIntOrNull() ?: sender.sendMessage("&cUsage: /flyspeed <speed> [player]".prefix()).run { return true }
         if (!IntRange(1, 10).contains(speed)) sender.sendMessage("Please specify a whole number 1 and 10.".error()).run { return true }
         if (args.size > 2) sender.sendMessage("&cUsage: /flyspeed <speed> [player]".prefix()).run { return true }
-        val player = Bukkit.getPlayer(args.last()) ?: sender.sendMessage(Flash.targetOffline).run { return true }
         if (args.size == 2) {
+            val player = Bukkit.getPlayer(args.last()) ?: sender.sendMessage(Flash.targetOffline).run { return true }
             player.flySpeed = speed.toFloat()/10
             Flash.staffMessage(sender, "Set &l$player&r&d's flight speed to &l$speed".colour())
             if (player == sender) {
