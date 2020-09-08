@@ -25,11 +25,11 @@ class Flyspeed : CommandExecutor {
             val player = Bukkit.getPlayer(args.last()) ?: sender.sendMessage(Flash.targetOffline).run { return true }
             player.flySpeed = speed.toFloat()/10
             Flash.staffMessage(sender, "Set &l$player&r&d's flight speed to &l$speed".colour())
-            if (player == sender) {
+            if (player !== sender) {
                 player.sendMessage("&c${sender.name} set your flight speed to &c$speed".prefix())
-                sender.sendMessage("Set flight speed for &l${player.name}&r &6to &l$speed".prefix())
+                sender.sendMessage("Set flight speed for &c${player.name}&r &6to &l$speed".prefix())
             } else {
-                sender.sendMessage("Set flight speed for &l${sender.name}&r &6to &l$speed".prefix())
+                sender.sendMessage("Set flight speed for &c${sender.name}&r &6to &l$speed".prefix())
             }
             return true
         }
