@@ -21,8 +21,6 @@ class Menu : CommandExecutor, Listener {
         var dirtMeta = dirt.itemMeta
         dirtMeta.displayName = "&6test"
         dirt.itemMeta = dirtMeta
-
-
         inventory.setItem(0, dirt)
         val player = Bukkit.getPlayer(sender.name)
         player.openInventory(inventory)
