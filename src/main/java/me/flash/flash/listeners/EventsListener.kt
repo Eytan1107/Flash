@@ -56,8 +56,5 @@ class EventsListener : Listener {
     fun motd(event: ServerListPingEvent) {
         event.motd = "         \u00A76\u00A7lFlash's Server \u00A7c◀ 1.8 - 1.16 ▶\u00A7r\n                  \u00A7a\u00A7lKitPvP ◊ SkyBlock"
     }
-    @EventHandler
-    fun onInventoryClick(event: InventoryClickEvent) {
-        event.isCancelled = true
-    }
+
 }
