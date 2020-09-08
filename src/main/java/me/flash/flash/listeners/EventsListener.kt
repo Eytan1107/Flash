@@ -3,6 +3,7 @@ package me.flash.flash.listeners
 import me.flash.flash.Flash.Companion.colour
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.player.AsyncPlayerChatEvent
 import org.bukkit.event.player.PlayerChangedWorldEvent
 import org.bukkit.event.player.PlayerJoinEvent
@@ -54,5 +55,9 @@ class EventsListener : Listener {
     @EventHandler
     fun motd(event: ServerListPingEvent) {
         event.motd = "         \u00A76\u00A7lFlash's Server \u00A7c◀ 1.8 - 1.16 ▶\u00A7r\n                  \u00A7a\u00A7lKitPvP ◊ SkyBlock"
+    }
+    @EventHandler
+    fun onInventoryClick(event: InventoryClickEvent) {
+        if (event.isCancelled) event.isCancelled = true
     }
 }
