@@ -19,11 +19,15 @@ import org.bukkit.plugin.java.JavaPlugin
 class Menu : CommandExecutor, Listener {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         val inventory = Bukkit.createInventory(null, 27, "server selector")
-        val dirt = ItemStack(Material.DIRT, 1)
-        var dirtMeta = dirt.itemMeta
-        dirtMeta.displayName = "&6Test".colour()
-        dirt.itemMeta = dirtMeta
-        inventory.setItem(0, dirt)
+        val a = ItemStack(Material.DIRT, 1)
+        val b = ItemStack(Material.STAINED_GLASS_PANE,1, 0, 14)
+
+
+
+        var bMeta = b.itemMeta
+        bMeta.displayName = "&6Test".colour()
+        b.itemMeta = bMeta
+        inventory.setItem(0, b)
         val player = Bukkit.getPlayer(sender.name)
         player.openInventory(inventory)
 
