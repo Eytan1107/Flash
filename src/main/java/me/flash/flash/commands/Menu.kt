@@ -14,6 +14,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.*
+import org.bukkit.plugin.java.JavaPlugin
 
 
 class Menu : CommandExecutor, Listener {
@@ -26,12 +27,25 @@ class Menu : CommandExecutor, Listener {
         inventory.setItem(0, dirt)
         val player = Bukkit.getPlayer(sender.name)
         player.openInventory(inventory)
+
+        @EventHandler
+        fun onInventoryClick(event: InventoryClickEvent) {
+            val player = event.whoClicked
+            if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("hub").contains(player.world.name)) {
+                if (event.viewers.contains(player))
+                    event.isCancelled = true
+            }
+        }
         return true
     }
-
-
-
 }
+
+
+
+
+
+
+
 
 
 

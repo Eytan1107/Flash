@@ -59,12 +59,6 @@ class EventsListener : Listener {
         //val motd = JavaPlugin.getPlugin(Flash::class.java).config.getStringList("motd")
         event.motd = "         \u00A76\u00A7lFlash's Server \u00A7c◀ 1.8 - 1.16 ▶\u00A7r\n                  \u00A7a\u00A7lKitPvP ◊ SkyBlock"
     }
-    @EventHandler
-    fun onInventoryClick(event:InventoryClickEvent) {
-        val player = event.whoClicked
-        if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("hub").contains(player.world.name))  {
-            if (event.viewers.contains(player))
-            event.isCancelled = true
-        }
+
     }
-}
+
