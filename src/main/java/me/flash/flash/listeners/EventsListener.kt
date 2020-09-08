@@ -58,6 +58,6 @@ class EventsListener : Listener {
     }
     @EventHandler
     fun onInventoryClick(event: InventoryClickEvent) {
-        if (event.isCancelled) event.isCancelled = true
+        event.isCancelled = true
     }
 }
