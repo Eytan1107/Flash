@@ -1,7 +1,7 @@
 package me.flash.flash.commands
 // https://discord.gg/3RHYQNd
 import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.colour
+import me.flash.flash.Flash.Companion.color
 import me.flash.flash.Flash.Companion.prefix
 import net.md_5.bungee.api.ChatColor
 import net.md_5.bungee.api.chat.ClickEvent

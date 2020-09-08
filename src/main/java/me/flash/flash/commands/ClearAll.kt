@@ -1,7 +1,7 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.colour
+import me.flash.flash.Flash.Companion.color
 import me.flash.flash.Flash.Companion.error
 import me.flash.flash.Flash.Companion.prefix
 import net.md_5.bungee.api.ChatColor
@@ -20,7 +20,7 @@ class ClearAll : CommandExecutor {
         (args.firstOrNull() ?: "").let { arg ->
             if (arg != "confirm") {
                 val textComponent = TextComponent()
-                TextComponent.fromLegacyText("[&6Flash's Server&r] &6Click to clear everyone's inventory".colour()).forEach { tc ->
+                TextComponent.fromLegacyText("[&6Flash's Server&r] &6Click to clear everyone's inventory".color()).forEach { tc ->
                     tc.apply {
                         clickEvent = ClickEvent(ClickEvent.Action.RUN_COMMAND, "/clearall confirm")
                         textComponent.addExtra(this)

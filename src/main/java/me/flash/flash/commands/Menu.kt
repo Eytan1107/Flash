@@ -2,12 +2,13 @@ package me.flash.flash.commands
 
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.color
+import me.flash.flash.Flash.Companion.error
+import me.flash.flash.Flash.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
-import org.bukkit.entity.Item
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -16,6 +17,8 @@ import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.java.JavaPlugin
+import kotlin.system.exitProcess
+
 class Menu : CommandExecutor, Listener {
     @EventHandler
     fun onInventoryClick(event: InventoryClickEvent) {
@@ -26,7 +29,6 @@ class Menu : CommandExecutor, Listener {
             }
         }
     }
-
     @EventHandler
     fun close(event: InventoryCloseEvent) {
         if (tagged.contains(event.inventory)) tagged.remove(event.inventory)
@@ -46,8 +48,6 @@ class Menu : CommandExecutor, Listener {
         for (i in 0..26) {
             inventory.setItem(i, empty)
         }
-
-
         val skyblock = ItemStack(Material.GRASS, 1).apply {
             itemMeta = itemMeta.apply {
                 displayName = "&a&lSkyBlock".color()
@@ -87,15 +87,47 @@ class Menu : CommandExecutor, Listener {
             itemMeta = itemMeta.apply {
                 displayName = "&a&lEvent".color()
                 lore = listOf("&7Click to teleport to &a&lEvent".color())
+                //addEnchantment(Enchantment.DURABILITY, 1)
             }
             inventory.setItem(26, this)
         }
         sender.openInventory(inventory)
         return true
-
     }
     companion object {
         val tagged = mutableListOf<Inventory>()
+    }
+    @EventHandler
+    public fun click(Event: InventoryClickEvent): Boolean {
+        val player = Event.whoClicked
+        if (Event.slot == 0) {
+            player.sendMessage("Sending you to SkyBlock".prefix())
+            // teleport the player
+            return true
+        } else if (Event.slot == 8) {
+            player.sendMessage("Sending you to TnTRun".prefix())
+            // teleport the player
+            return true
+        } else if (Event.slot == 13) {
+            player.sendMessage("Sending you to KitPvP".prefix())
+            // teleport the player
+            return true
+        } else if (Event.slot == 18) {
+            player.sendMessage("Sending you to the Parkour".prefix())
+            // teleport the player
+            return true
+        } else if (Event.slot == 22) {
+            if (player.hasPermission("flash.staff")) {
+                player.sendMessage("Sending you to Builds".prefix())
+                // teleport the player
+                return true
+            } else player.sendMessage(Flash.noPermission).run {return true}
+        } else if (Event.slot == 26) {
+            player.sendMessage("Sending you to Event".prefix())
+            // teleport the player
+            return true
+        }
+        return true
     }
 }
 
