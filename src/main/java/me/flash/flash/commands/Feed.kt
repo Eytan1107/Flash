@@ -26,6 +26,9 @@ class Feed : CommandExecutor {
             if (sender.hasPermission("flash.feed.others")) {
                 if (player == null) {
                     sender.sendMessage(Flash.targetOffline)
+                } else if (player == sender) {
+                    player.foodLevel = Int.MAX_VALUE
+                    sender.sendMessage("You have been fed".prefix())
                 } else {
                     player.foodLevel = Int.MAX_VALUE
                     player.sendMessage("You were fed by &c${sender.name}&r".prefix())
