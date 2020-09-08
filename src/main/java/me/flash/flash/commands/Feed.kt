@@ -23,14 +23,18 @@ class Feed : CommandExecutor {
             Flash.staffMessage(sender, "Fed themself.")
         } else {
             val player = Bukkit.getPlayer(args.first())
-            if (player == null) {
-                sender.sendMessage(Flash.targetOffline)
+            if (sender.hasPermission("flash.feed.others")) {
+                if (player == null) {
+                    sender.sendMessage(Flash.targetOffline)
+                } else {
+                    player.foodLevel = Int.MAX_VALUE
+                    player.sendMessage("You were fed by &c${sender.name}&r".prefix())
+                    sender.sendMessage("You have fed &c${player.name}&r".prefix())
+                }
+                Flash.staffMessage(sender, "fed ${player.name}")
             } else {
-                player.foodLevel = Int.MAX_VALUE
-                player.sendMessage("You were fed by &c${sender.name}&r".prefix())
-                sender.sendMessage("You have fed &c${player.name}&r".prefix())
+                sender.sendMessage(Flash.noPermission)
             }
-            Flash.staffMessage(sender, "fed ${player.name}")
         }
         return true
     }
