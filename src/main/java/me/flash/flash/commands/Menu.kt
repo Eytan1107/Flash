@@ -19,23 +19,26 @@ class Menu : CommandExecutor, Listener {
         val inventory = Bukkit.createInventory(null, 27, "server selector")
         val dirt = ItemStack(Material.DIRT, 1)
         var dirtMeta = dirt.itemMeta
-        dirtMeta.displayName = "test"
+        dirtMeta.displayName = "&6test"
         dirt.itemMeta = dirtMeta
 
-
+        @EventHandler
+        fun onInventoryClick(event:InventoryClickEvent) {
+            event.isCancelled = true
+        }
         inventory.setItem(0, dirt)
         val player = Bukkit.getPlayer(sender.name)
         player.openInventory(inventory)
-        @EventHandler
-        fun onInventoryClick(event: InventoryClickEvent) {
-            event.isCancelled = true
-        }
-
         return true
     }
 
 
+
 }
+
+
+
+
 
 
 
