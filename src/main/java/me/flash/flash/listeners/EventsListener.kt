@@ -1,7 +1,7 @@
 package me.flash.flash.listeners
 
 import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.colour
+import me.flash.flash.Flash.Companion.color
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
@@ -16,7 +16,7 @@ class EventsListener : Listener {
     @EventHandler
     fun leave(event: PlayerQuitEvent) {
         event.player.world.players.forEach { player ->
-            player.sendMessage("&6[&3-&6] ${event.player.displayName}".colour())
+            player.sendMessage("&6[&3-&6] ${event.player.displayName}".color())
         }
         event.quitMessage = null // Take away the default (player) left the game
     }
@@ -24,21 +24,21 @@ class EventsListener : Listener {
     @EventHandler
     fun world(event: PlayerChangedWorldEvent) {
         event.from.players.forEach { player ->
-            player.sendMessage("&6[&3-&6] ${event.player.displayName}".colour())
+            player.sendMessage("&6[&3-&6] ${event.player.displayName}".color())
             if (player.hasPermission("Flash.fly")) {
                 player.allowFlight = true
                 player.isFlying = true
             }
         }
         event.player.world.players.forEach { player ->
-            player.sendMessage("&6[&3+&6] ${event.player.displayName}".colour())
+            player.sendMessage("&6[&3+&6] ${event.player.displayName}".color())
         }
     }
 
     @EventHandler
     fun join(event: PlayerJoinEvent) {
         event.player.world.players.forEach { player ->
-            player.sendMessage("&6[&3+&6] ${event.player.displayName}".colour())
+            player.sendMessage("&6[&3+&6] ${event.player.displayName}".color())
             if (player.hasPermission("Flash.fly")) {
                 player.allowFlight = true
                 player.isFlying = true
@@ -49,9 +49,9 @@ class EventsListener : Listener {
     @EventHandler
     fun colors(event: AsyncPlayerChatEvent) {
         if (event.player.hasPermission("flash.colors")) {
-            event.message = event.message.colour()
+            event.message = event.message.color()
         }
-        event.format = "%s" + "&7".colour() + ": &f".colour() + "%s"
+        event.format = "%s" + "&7".color() + ": &f".color() + "%s"
     }
 
     @EventHandler

@@ -7,10 +7,10 @@ import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
-import org.jetbrains.annotations.Nullable
 
 class Flash : JavaPlugin() {
     override fun onEnable() {
+        instance = this
         saveDefaultConfig()
         getCommand("feed").executor = Feed()
         getCommand("pro").executor = Pro()
@@ -60,14 +60,15 @@ class Flash : JavaPlugin() {
     }
 
     companion object {
+        lateinit var instance : Flash
         var scEnabled = mutableListOf<Player>()
         var noPermission = "You don't have permission to do that.".error()
         var notPlayer = "You must be a player to do this.".error()
         var targetOffline = "The target player was not found, please check for any typos and try again.".error()
 
-        fun String.prefix(): String = ("[&6Flash's Server&r] &6$this").colour()
-        fun String.colour(): String = ChatColor.translateAlternateColorCodes('&', this)
-        fun String.error(): String = ("[&6Flash's Server&r] &cError: $this").colour()
+        fun String.prefix(): String = ("[&6Flash's Server&r] &6$this").color()
+        fun String.color(): String = ChatColor.translateAlternateColorCodes('&', this)
+        fun String.error(): String = ("[&6Flash's Server&r] &cError: $this").color()
 
         fun staffMessage(sender:CommandSender, action: String, vararg ignored: Player) {
             val senders = mutableListOf<CommandSender>()
@@ -76,7 +77,7 @@ class Flash : JavaPlugin() {
             senders.remove(sender)
             senders.removeAll(ignored)
             senders.forEach {
-                it.sendMessage("&d[S] &5${sender.name}: &d$action".colour())
+                it.sendMessage("&d[S] &5${sender.name}: &d$action".color())
             }
         }
     }

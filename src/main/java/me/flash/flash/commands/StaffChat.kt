@@ -1,7 +1,7 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.colour
+import me.flash.flash.Flash.Companion.color
 import me.flash.flash.Flash.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
@@ -38,7 +38,7 @@ class StaffChat : CommandExecutor, Listener{
             if (ov) message = message.replaceFirst("# ", "")
             event.isCancelled = true
             Bukkit.getOnlinePlayers().filter { player -> player.hasPermission("flash.staffchat") }.forEach {
-                it.sendMessage("&b[S] &3${event.player.name}: &b$message".colour())
+                it.sendMessage("&b[S] &3${event.player.name}: &b$message".color())
             }
         }
     }

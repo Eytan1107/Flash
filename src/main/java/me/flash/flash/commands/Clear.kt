@@ -1,8 +1,6 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.colour
-import me.flash.flash.Flash.Companion.error
 import me.flash.flash.Flash.Companion.noPermission
 import me.flash.flash.Flash.Companion.prefix
 import org.bukkit.Bukkit

@@ -2,7 +2,7 @@ package me.flash.flash.commands
 
 
 import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.colour
+import me.flash.flash.Flash.Companion.color
 import me.flash.flash.Flash.Companion.error
 import me.flash.flash.Flash.Companion.noPermission
 import me.flash.flash.Flash.Companion.notPlayer
@@ -12,7 +12,6 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
-import org.bukkit.ChatColor
 
 class Flyspeed : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
@@ -24,7 +23,7 @@ class Flyspeed : CommandExecutor {
         if (args.size == 2) {
             val player = Bukkit.getPlayer(args.last()) ?: sender.sendMessage(Flash.targetOffline).run { return true }
             player.flySpeed = speed.toFloat()/10
-            Flash.staffMessage(sender, "Set &l$player&r&d's flight speed to &l$speed".colour())
+            Flash.staffMessage(sender, "Set &l$player&r&d's flight speed to &l$speed".color())
             if (player !== sender) {
                 player.sendMessage("&c${sender.name} set your flight speed to &c$speed".prefix())
                 sender.sendMessage("Set flight speed for &c${player.name}&r &6to &c$speed".prefix())
@@ -35,7 +34,7 @@ class Flyspeed : CommandExecutor {
         }
         sender.flySpeed = speed.toFloat()/10
         sender.sendMessage("Set flight speed for &c${sender.name}&r &6to &c$speed".prefix())
-        Flash.staffMessage(sender, "Set their flight speed to $speed".colour())
+        Flash.staffMessage(sender, "Set their flight speed to $speed".color())
         return true
     }
 }

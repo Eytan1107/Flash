@@ -1,9 +1,8 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.colour
+import me.flash.flash.Flash.Companion.color
 import org.bukkit.Bukkit
-import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -27,24 +26,24 @@ class Loopkill : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender.hasPermission("flash.loopkill")) {
             if (args.isEmpty()) {
-                sender.sendMessage("&cPlease specify a player".colour())
+                sender.sendMessage("&cPlease specify a player".color())
             } else {
                 val player = Bukkit.getPlayer(args.first())
                 if (player == null) {
-                    sender.sendMessage("&cPlayer &l${args.first()}&r &cwas not found, please check for any spelling errors and try again.".colour())
+                    sender.sendMessage("&cPlayer &l${args.first()}&r &cwas not found, please check for any spelling errors and try again.".color())
                 } else {
                     if (tagged.contains(player)) {
-                        sender.sendMessage("&aNo longer loopkilling ${player.name}".colour())
+                        sender.sendMessage("&aNo longer loopkilling ${player.name}".color())
                         Flash.staffMessage(sender, "loop-killing ${player.name}")
                         tagged.remove(player)
                     } else {
-                        sender.sendMessage("&aLoopkilling ${player.name}".colour())
+                        sender.sendMessage("&aLoopkilling ${player.name}".color())
                         tagged.add(player)
                     }
                 }
             }
         } else {
-            sender.sendMessage("&cYou do not have permission to use this command!".colour())
+            sender.sendMessage("&cYou do not have permission to use this command!".color())
         }
         return true
     }
