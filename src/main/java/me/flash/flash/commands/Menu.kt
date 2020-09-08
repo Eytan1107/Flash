@@ -19,9 +19,9 @@ class Menu : CommandExecutor {
         player.openInventory(inventory)
         return true
         }
-    @EventHandler
-    fun onInventoryClick(event: InventoryClickEvent) {
-        if (event.isCancelled) event.isCancelled = true
+@EventHandler
+fun onInventoryClick(event: InventoryClickEvent) {
+    if (event.isCancelled) event.isCancelled = true
     }
     }
 
