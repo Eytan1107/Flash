@@ -18,7 +18,7 @@ class Craft : CommandExecutor {
             return true
         }
         when (sender.world.name) {
-            "kitpvp", "island_normal_world" -> {
+            "kitpvp", "island_normal_world", "skyblock_spawn" -> {
                 sender.openWorkbench(null, true)
             }
             else ->{

@@ -24,7 +24,7 @@ class Kits : CommandExecutor {
             player.sendMessage(if (player.hasPermission("flash.kit.godspeed")) "&aGodSpeed &7- &8/kit godspeed &7(Every 12 hours)".colour() else "&7&mGodSpeed".colour())
             player.sendMessage(if (player.hasPermission("flash.kit.speedforce")) "&aSpeedForce &7- &8/kit speedforce &7(Every 24 hours)".colour() else "&7&mSpeedForce".colour())
         } else {
-            sender.sendMessage("Use it in the kitpvp world.".error())
+            sender.sendMessage("You need to be in KitPvP".error())
         }
         return true
     }

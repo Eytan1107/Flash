@@ -17,12 +17,12 @@ class Fly : CommandExecutor{
                 val player = Bukkit.getPlayer(sender.name) ?: sender.sendMessage(targetOffline).let { return true }
                 if (player.allowFlight) {
                     player.allowFlight = false
-                    sender.sendMessage("You turned &loff&r &6flight".prefix())
-                    Flash.staffMessage(sender, "enabled flight for ${player.name}")
+                    sender.sendMessage("You turned &coff&r &6flight".prefix())
+                    Flash.staffMessage(sender, "disabled flight for &c${player.name}")
                 } else {
                     player.allowFlight = true
-                    sender.sendMessage("You turned &lon&r &6flight".prefix())
-                    Flash.staffMessage(sender, "disabled flight for ${player.name}")
+                    sender.sendMessage("You turned &con&r &6flight".prefix())
+                    Flash.staffMessage(sender, "enabled flight for &c${player.name}")
                 }
 
             } else sender.sendMessage(noPermission).let { return true }
@@ -32,14 +32,14 @@ class Fly : CommandExecutor{
                 val player = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(targetOffline).let { return true }
                 if (player.allowFlight) {
                     player.allowFlight = false
-                    sender.sendMessage("You turned flight &loff&r &6for &l${player.name}".prefix())
-                    Flash.staffMessage(sender, "disabled flight for ${player.name}")
-                    player.sendMessage("&l${sender.name}&r &6Turned &loff&r &6your flight".prefix())
+                    sender.sendMessage("You turned flight &coff&r &6for &c${player.name}".prefix())
+                    Flash.staffMessage(sender, "disabled flight for &c${player.name}")
+                    player.sendMessage("&l${sender.name}&r &6Turned &coff&r &6your flight".prefix())
                 } else {
                     player.allowFlight = true
-                    sender.sendMessage("You turned &lon&r &6flight".prefix())
-                    Flash.staffMessage(sender, "enabled flight for ${player.name}")
-                    player.sendMessage("%l${sender.name}&r &6Turned &lon&r &6your flight".prefix())
+                    sender.sendMessage("You turned &con&r &6flight".prefix())
+                    Flash.staffMessage(sender, "enabled flight for &c${player.name}")
+                    player.sendMessage("%l${sender.name}&r &6Turned &con&r &6your flight".prefix())
                 }
 
             } else sender.sendMessage(noPermission).let { return true }

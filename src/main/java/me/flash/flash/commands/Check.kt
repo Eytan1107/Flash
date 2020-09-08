@@ -2,6 +2,7 @@ package me.flash.flash.commands
 
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.colour
+import me.flash.flash.Flash.Companion.error
 import me.flash.flash.Flash.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
@@ -13,7 +14,7 @@ class Check : CommandExecutor {
         if (!sender.hasPermission("flash.check")) {
             sender.sendMessage(Flash.noPermission)
         } else if (args.isEmpty()) {
-            sender.sendMessage("&cPlease specify a player.".colour())
+            sender.sendMessage("Please specify a player.".error())
         } else {
             val player = Bukkit.getPlayer(args.first())
             if (player == null) {
@@ -25,12 +26,13 @@ class Check : CommandExecutor {
                 "world" -> "Hub"
                 "kitpvp" -> "KitPvP"
                 "island_normal_world" -> "SkyBlock"
+                "skyblock_spawn" -> "SkyBlock"
                 "event" -> "Event"
                 "tntrun" -> "TnTRun"
                 else -> player.world.name
             }
-            sender.sendMessage("${player.name} is in $name".prefix())
-            sender.sendMessage("${player.name} has ${player.health} health".prefix())
+            sender.sendMessage("${player.name} is in &c$name".prefix())
+            sender.sendMessage("${player.name} has &c${player.health} &6health".prefix())
         }
         return true
     }

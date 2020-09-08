@@ -12,7 +12,7 @@ import org.bukkit.entity.Player
 
 class ClearAll : CommandExecutor{
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if (!sender.hasPermission("flash.owner")) sender.sendMessage(Flash.noPermission).let { return true }
+        if (!sender.hasPermission("flash.clearall")) sender.sendMessage(Flash.noPermission).let { return true }
         if (sender !is Player) sender.sendMessage(Flash.notPlayer).let { return true }
         args.firstOrNull() ?: "".let {arg->
             if (arg != "confirm") {
@@ -26,9 +26,9 @@ class ClearAll : CommandExecutor{
         sender.world.players.forEach { player->
             player.inventory.clear()
             player.inventory.armorContents = emptyArray()
-            player.sendMessage("Your inventory was cleared by &l${sender.name}&r".prefix())
+            player.sendMessage("Your inventory was cleared by &c${sender.name}&r".prefix())
         }
-        sender.sendMessage("You have cleared the inventory of ${sender.world.players.size} players.")
+        sender.sendMessage("You have cleared the inventory of &c${sender.world.players.size} &6players.".prefix())
         Flash.staffMessage(sender, "Cleared everyones inventory")
         return true
     }

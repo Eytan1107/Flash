@@ -3,6 +3,7 @@ package me.flash.flash.commands
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.colour
 import me.flash.flash.Flash.Companion.prefix
+import net.md_5.bungee.api.ChatColor
 import net.md_5.bungee.api.chat.ClickEvent
 import net.md_5.bungee.api.chat.TextComponent
 import org.bukkit.command.Command
@@ -14,19 +15,10 @@ import java.awt.Component
 class Discord : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender is Player) {
-            val message = TextComponent()
-            message.apply {
-                TextComponent.fromLegacyText("Click ".prefix()).forEach {
-                    this.addExtra(it)
-                }
-                TextComponent.fromLegacyText("&bhere".colour()).forEach {
-                    this.addExtra(it)
-                }
-                TextComponent.fromLegacyText("&6 to join the discord.".colour()).forEach {
-                    this.addExtra(it)
-                }
-            }
-            sender.spigot().sendMessage(message)
+            sender.spigot().sendMessage(TextComponent("Click here to join our Discord server !").apply {
+                color = ChatColor.DARK_AQUA
+                clickEvent = ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.gg/3RHYQNd")
+            })
         } else {
             sender.sendMessage(Flash.notPlayer)
         }

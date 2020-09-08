@@ -1,6 +1,9 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
+import me.flash.flash.Flash.Companion.colour
+import me.flash.flash.Flash.Companion.error
+import me.flash.flash.Flash.Companion.noPermission
 import me.flash.flash.Flash.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
@@ -16,7 +19,7 @@ class Clear : CommandExecutor {
                 return true
             }
             if (!sender.hasPermission("flash.clear")) {
-                sender.sendMessage("&cYou do not have permission to use this command!".prefix())
+                sender.sendMessage(noPermission)
                 return true
             }
             sender.inventory.clear()
@@ -33,9 +36,9 @@ class Clear : CommandExecutor {
                 } else {
                     player.inventory.clear()
                     player.inventory.armorContents = emptyArray()
-                    player.sendMessage("Your inventory was cleared by &l${sender.name}&r".prefix())
-                    sender.sendMessage("You have cleared the inventory of &l${player.name}&r".prefix())
-                    Flash.staffMessage(sender, "cleared the inventory of ${player.name}")
+                    player.sendMessage("Your inventory was cleared by &c${sender.name}&r".prefix())
+                    sender.sendMessage("You have cleared the inventory of &c${player.name}&r".prefix())
+                    Flash.staffMessage(sender, "cleared the inventory of &c${player.name}")
                 }
             }
         }
