@@ -10,8 +10,10 @@ import org.bukkit.inventory.*
 import org.bukkit.inventory.Inventory
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryType
+import org.bukkit.event.Listener
 
-class Menu : CommandExecutor {
+
+class Menu : CommandExecutor, Listener {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         val inventory = Bukkit.createInventory(null, 27, "server selector")
         inventory.setItem(0, ItemStack(Material.GOLD_BLOCK, 1))
