@@ -29,9 +29,8 @@ class Menu : CommandExecutor, Listener {
 
         @EventHandler
         fun onInventoryClick(event: InventoryClickEvent) {
-            val player = event.whoClicked
+            val player = Bukkit.getPlayer(sender.name)
             if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("hub").contains(player.world.name)) {
-                if (event.viewers.contains(player))
                     event.isCancelled = true
             }
         }
