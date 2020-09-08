@@ -1,5 +1,7 @@
 package me.flash.flash.commands
 
+import me.flash.flash.Flash.Companion.colour
+import me.flash.flash.Flash
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 //import org.bukkit.ChatColor
@@ -19,7 +21,7 @@ class Menu : CommandExecutor, Listener {
         val inventory = Bukkit.createInventory(null, 27, "server selector")
         val dirt = ItemStack(Material.DIRT, 1)
         var dirtMeta = dirt.itemMeta
-        dirtMeta.displayName = "&6test"
+        dirtMeta.setDisplayName("Test".colour())
         dirt.itemMeta = dirtMeta
         inventory.setItem(0, dirt)
         val player = Bukkit.getPlayer(sender.name)
