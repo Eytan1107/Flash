@@ -1,5 +1,5 @@
 if player is not in kitpvp -> error
-/kit PvP - 10 secs
+/kit PvP - 10 secs - DONE
 /kit Fast - 1h - flash.kit.fast -> 10k kill points
 /kit Speedster - 3h - flash.kit.speedster -> 25k kill points
 /kit Godspeed - 12h - flash.kit.godspeed -> 50k kill points
