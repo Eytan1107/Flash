@@ -62,7 +62,8 @@ class EventsListener : Listener {
     @EventHandler
     fun onInventoryClick(event:InventoryClickEvent) {
         val player = event.whoClicked
-        if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("hub").contains(player.world.name)) {
+        if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("hub").contains(player.world.name))  {
+            if (event.viewers.contains(player))
             event.isCancelled = true
         }
     }
