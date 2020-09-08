@@ -26,14 +26,15 @@ class Menu : CommandExecutor, Listener {
         inventory.setItem(0, dirt)
         val player = Bukkit.getPlayer(sender.name)
         player.openInventory(inventory)
+        @EventHandler
+        fun onInventoryClick(event: InventoryClickEvent) {
+            event.isCancelled = true
+        }
 
         return true
     }
 
-    @EventHandler
-    fun onInventoryClick(event: InventoryClickEvent) {
-        event.isCancelled = true
-    }
+
 }
 
 
