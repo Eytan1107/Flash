@@ -117,3 +117,5 @@ commands:
     description: Show kits
   kit:
     description: Get a kit
+  menu:
+    description: open the server selector
