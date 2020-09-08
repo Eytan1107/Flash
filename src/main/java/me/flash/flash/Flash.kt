@@ -51,7 +51,6 @@ class Flash : JavaPlugin() {
         server.pluginManager.registerEvents(Back(), this)
         server.pluginManager.registerEvents(EventsListener(), this)
         server.pluginManager.registerEvents(StaffChat(), this)
-        server.pluginManager.registerEvents(Menu(), this)
         //TODO suggestion file reading
     }
 
