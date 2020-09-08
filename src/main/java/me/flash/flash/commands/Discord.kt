@@ -10,6 +10,7 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import org.w3c.dom.Text
 import java.awt.Component
 
 class Discord : CommandExecutor {
@@ -18,6 +19,7 @@ class Discord : CommandExecutor {
             sender.spigot().sendMessage(TextComponent("Click here to join our Discord server !").apply {
                 color = ChatColor.DARK_AQUA
                 clickEvent = ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.gg/3RHYQNd")
+                hoverEvent = hoverEvent()
             })
         } else {
             sender.sendMessage(Flash.notPlayer)
