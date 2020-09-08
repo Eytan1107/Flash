@@ -1,5 +1,6 @@
 package me.flash.flash.listeners
 
+import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.colour
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -9,6 +10,7 @@ import org.bukkit.event.player.PlayerChangedWorldEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.event.server.ServerListPingEvent
+import org.bukkit.plugin.java.JavaPlugin
 
 class EventsListener : Listener {
     @EventHandler
@@ -56,5 +58,11 @@ class EventsListener : Listener {
     fun motd(event: ServerListPingEvent) {
         event.motd = "         \u00A76\u00A7lFlash's Server \u00A7c◀ 1.8 - 1.16 ▶\u00A7r\n                  \u00A7a\u00A7lKitPvP ◊ SkyBlock"
     }
-
+    @EventHandler
+    fun onInventoryClick(event:InventoryClickEvent) {
+        val player = event.whoClicked
+        if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("kitpvpworld").contains(player.world.name)) {
+            event.isCancelled = true
+        }
+    }
 }

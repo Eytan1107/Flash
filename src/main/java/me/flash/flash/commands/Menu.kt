@@ -22,10 +22,7 @@ class Menu : CommandExecutor, Listener {
         dirtMeta.displayName = "&6test"
         dirt.itemMeta = dirtMeta
 
-        @EventHandler
-        fun onInventoryClick(event:InventoryClickEvent) {
-            event.isCancelled = true
-        }
+
         inventory.setItem(0, dirt)
         val player = Bukkit.getPlayer(sender.name)
         player.openInventory(inventory)
