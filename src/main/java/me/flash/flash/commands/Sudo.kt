@@ -18,12 +18,14 @@ class Sudo : CommandExecutor {
             return true
         }
         val player = Bukkit.getPlayer(args[0])
-        if (player==null) {
+        if (player == null) {
             sender.sendMessage(Flash.targetOffline)
             return true
         }
-        player.chat(args.toMutableList().minus(0).joinToString(" "))
-        Flash.staffMessage(player, "Ran the sudo command")
+        player.chat(args.toMutableList().apply {
+            removeAt(0)
+        }.joinToString (" "))
+        Flash.staffMessage(sender, "Sudo'd &l${player.name}")
         return true
     }
 }

@@ -54,6 +54,7 @@ class Menu : CommandExecutor, Listener {
             itemMeta = itemMeta.apply {
                 displayName = "&a&lSkyBlock".color()
                 lore = listOf("&7Click to teleport to SkyBlock".color(), "&7Players online: $sbPlayers".color())
+
             }
             inventory.setItem(0, this)
         }
