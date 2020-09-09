@@ -37,7 +37,7 @@ class Flash : JavaPlugin() {
         getCommand("fly").executor = Fly()
         getCommand("staffchat").executor = StaffChat()
         getCommand("tphere").executor = TpHere()
-        getCommand("flyspeed").executor = Flyspeed()
+        getCommand("flyspeed").executor = FlySpeed()
         getCommand("walkspeed").executor = WalkSpeed()
         getCommand("gamemode").executor = GameMode()
         getCommand("gmsp").executor = ShGameMode()
@@ -48,12 +48,15 @@ class Flash : JavaPlugin() {
         getCommand("kit").executor = Kit()
         getCommand("kits").executor = Kits()
         getCommand("menu").executor = Menu()
-        getCommand("test").executor = Test()
-        getCommand("server").executor = Server()
+        getCommand("server").apply {
+            executor = Server()
+            tabCompleter = Server()
+        }.executor = Server()
         server.pluginManager.registerEvents(Back(), this)
         server.pluginManager.registerEvents(EventsListener(), this)
         server.pluginManager.registerEvents(StaffChat(), this)
         server.pluginManager.registerEvents(Menu(), this)
+        server.pluginManager.registerEvents(Compass(), this)
         //TODO suggestion file reading
     }
 

@@ -2,13 +2,13 @@ package me.flash.flash.listeners
 
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.color
+import org.bukkit.Bukkit
+import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.block.Action
 import org.bukkit.event.inventory.InventoryClickEvent
-import org.bukkit.event.player.AsyncPlayerChatEvent
-import org.bukkit.event.player.PlayerChangedWorldEvent
-import org.bukkit.event.player.PlayerJoinEvent
-import org.bukkit.event.player.PlayerQuitEvent
+import org.bukkit.event.player.*
 import org.bukkit.event.server.ServerListPingEvent
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -46,6 +46,7 @@ class EventsListener : Listener {
             event.joinMessage = null
         }
     }
+
     @EventHandler
     fun colors(event: AsyncPlayerChatEvent) {
         if (event.player.hasPermission("flash.colors")) {
@@ -59,12 +60,16 @@ class EventsListener : Listener {
         //val motd = JavaPlugin.getPlugin(Flash::class.java).config.getStringList("motd")
         event.motd = "         \u00A76\u00A7lFlash's Server \u00A7c◀ 1.8 - 1.16 ▶\u00A7r\n                  \u00A7a\u00A7lKitPvP ◊ SkyBlock"
     }
+
     @EventHandler
-    fun onInventoryClick(event:InventoryClickEvent) {
+    fun onInventoryClick(event: InventoryClickEvent) {
         val player = event.whoClicked
-        if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("hub").contains(player.world.name))  {
-            if (event.viewers.contains(player))
-            event.isCancelled = true
+        if (Flash.instance.config.getStringList("hub").contains(player.world.name)) {
+            if (event.viewers.contains(player)) event.isCancelled = true
         }
     }
 }
+
+
+
+
