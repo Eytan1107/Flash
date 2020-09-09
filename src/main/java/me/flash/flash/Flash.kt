@@ -48,6 +48,7 @@ class Flash : JavaPlugin() {
         getCommand("kit").executor = Kit()
         getCommand("kits").executor = Kits()
         getCommand("menu").executor = Menu()
+        getCommand("test").executor = Test()
         server.pluginManager.registerEvents(Back(), this)
         server.pluginManager.registerEvents(EventsListener(), this)
         server.pluginManager.registerEvents(StaffChat(), this)

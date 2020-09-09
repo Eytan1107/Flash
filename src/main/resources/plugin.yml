@@ -119,3 +119,5 @@ commands:
     description: Get a kit
   menu:
     description: open the server selector
+  test:
+    description: test

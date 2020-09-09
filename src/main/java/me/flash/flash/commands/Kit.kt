@@ -26,27 +26,27 @@ class Kit : CommandExecutor {
                     "pvp" -> {
                         val timeout = Kits.kitpvpCooldowns.getOrDefault(sender, Instant.now()).plusSeconds(10)
                         if (timeout.isAfter(Instant.now())) {
-                            sender.sendMessage("You must wait " + Duration.between(timeout, Instant.now()).seconds + " more seconds before you can use this kit again".error())
-                        } else {
+                            sender.sendMessage("You must wait ".error() + Duration.between(timeout, Instant.now()).seconds + " more seconds before you can use this kit again".error())
+                        }
                             sender.inventory.addItem(ItemStack(Material.STONE_SWORD).apply {
                                 addEnchantment(Enchantment.DAMAGE_ALL, 1)
                                 addEnchantment(Enchantment.DURABILITY, 3)
                             })
                             sender.inventory.addItem(ItemStack(Material.GOLDEN_APPLE, 5))
-                            sender.inventory.addItem(ItemStack(Material.CHAINMAIL_HELMET).apply {
+                            sender.inventory.helmet = ItemStack(Material.CHAINMAIL_HELMET).apply {
                                 addEnchantment(Enchantment.DURABILITY, 3)
-                            })
-                            sender.inventory.addItem(ItemStack(Material.CHAINMAIL_CHESTPLATE).apply {
+                            }
+                            sender.inventory.chestplate = ItemStack(Material.CHAINMAIL_CHESTPLATE).apply {
                                 addEnchantment(Enchantment.DURABILITY, 3)
-                            })
-                            sender.inventory.addItem(ItemStack(Material.CHAINMAIL_LEGGINGS).apply {
+                            }
+                            sender.inventory.leggings = ItemStack(Material.CHAINMAIL_LEGGINGS).apply {
                                 addEnchantment(Enchantment.DURABILITY, 3)
-                            })
-                            sender.inventory.addItem(ItemStack(Material.CHAINMAIL_BOOTS).apply {
+                            }
+                            sender.inventory.boots = ItemStack(Material.CHAINMAIL_BOOTS).apply {
                                 addEnchantment(Enchantment.DURABILITY, 3)
-                            })
-                        }
+                            }
                     }
+
                     "fast" -> {
                         val timeout = Kits.kitpvpCooldowns.getOrDefault(sender, Instant.now()).plusSeconds(3600)
                         if (timeout.isAfter(Instant.now())) {
