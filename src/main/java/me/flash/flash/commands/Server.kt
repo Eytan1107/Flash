@@ -13,8 +13,8 @@ import org.bukkit.Bukkit
 class Server : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (args.isEmpty()) {
-            sender.sendMessage("/server <servername> [Player]".prefix())
-            sender.sendMessage("servers: kitpvp, skyblock, hub, event, builds".prefix())
+            sender.sendMessage("/server <ServerName> [Player]".prefix())
+            sender.sendMessage("Servers: kitpvp, skyblock, hub, event, builds".prefix())
             return true
         }
         val player = Bukkit.getPlayer(sender.name)
@@ -40,12 +40,11 @@ class Server : CommandExecutor {
                     return true
                 }
                 args.contains("builds") -> {
-                    if (sender.hasPermission("flash.staff")) {
-                        sender.sendMessage("Teleporting you to &lBuilds".prefix())
-                        player.teleport(Bukkit.getWorld("builds").spawnLocation)
-                        //player.teleport(Bukkit.getServer("builds").spawnLocation)
-                        return true
-                    }
+                    if (!sender.hasPermission("flash.staff")) sender.sendMessage(noPermission).run { return true }
+                    sender.sendMessage("Teleporting you to &lBuilds".prefix())
+                    player.teleport(Bukkit.getWorld("builds").spawnLocation)
+                    //player.teleport(Bukkit.getServer("builds").spawnLocation)
+                    return true
                 }
                 args.contains("tntrun") -> {
                     sender.sendMessage("Teleporting you to &lTnTRun".prefix())
@@ -61,59 +60,55 @@ class Server : CommandExecutor {
                 }
             }
         } else if (args.size == 2) {
-            if (player !== target) {
-                if (sender.hasPermission("flash.staff")) {
-                    when {
-                        args.contains("hub") -> {
-                            sender.sendMessage("You Teleported &l${target.name} &r &6to &lHub".prefix())
-                            target.teleport(Bukkit.getWorld("world").spawnLocation)
-                            target.sendMessage("You have been teleported to &lHub&r &6by &l$sender".prefix())
-                            //player.teleport(Bukkit.getServer("hub").spawnLocation)
-                            return true
-                        }
-                        args.contains("kitpvp") -> {
-                            sender.sendMessage("You Teleported &l${target.name}&r &6to &lKitPvP".prefix())
-                            target.teleport(Bukkit.getWorld("kitpvp").spawnLocation)
-                            target.sendMessage("You have been teleported to &lKitPvP&r &6by &l$sender".prefix())
-                            //player.teleport(Bukkit.getServer("kitpvp").spawnLocation)
-                            return true
-                        }
-                        args.contains("skyblock") -> {
-                            sender.sendMessage("You Teleported &l${target.name}&r &6to &lSkyBlock".prefix())
-                            target.teleport(Bukkit.getWorld("skyblock_spawn").spawnLocation)
-                            target.sendMessage("You have been teleported to &lSkyBlock&r &6by &l$sender".prefix())
-                            //player.teleport(Bukkit.getServer("skyblock").spawnLocation)
-                            return true
-                        }
-                        args.contains("builds") -> {
-                            if (sender.hasPermission("flash.staff")) {
-                                if (target.hasPermission("flash.staff")) {
-                                    sender.sendMessage("You Teleported &l${target.name}&r &6to &lBuilds".prefix())
-                                    target.teleport(Bukkit.getWorld("builds").spawnLocation)
-                                    target.sendMessage("You have been teleported to &lBuilds&r &6by &l$sender".prefix())
-                                    //player.teleport(Bukkit.getServer("builds").spawnLocation)
-                                    return true
-                                } else sender.sendMessage(noPermission)
-                            } else sender.sendMessage(noPermission)
-                        }
-                        args.contains("tntrun") -> {
-                            sender.sendMessage("You Teleported &l${target.name}&r &6to &lTnTRun".prefix())
-                            target.teleport(Bukkit.getWorld("tntrun").spawnLocation)
-                            target.sendMessage("You have been teleported to &lTnTRun&r &6by &l$sender".prefix())
-                            //player.teleport(Bukkit.getServer("tntrun").spawnLocation)
-                            return true
-                        }
-                        args.contains("event") -> {
-                            sender.sendMessage("You Teleported &l${target.name}&r &6to &lEvent".prefix())
-                            target.teleport(Bukkit.getWorld("event").spawnLocation)
-                            target.sendMessage("You have been teleported to &lEvent&r &6by &l$sender".prefix())
-                            //player.teleport(Bukkit.getServer("event").spawnLocation)
-                            return true
-                    }
-                }
-                }
-            } else player.sendMessage("Sorry that not how it works.".error())
+            if (player == target) player.sendMessage("Sorry, that's not how it works".error()).run { return true }
+            if (!sender.hasPermission("flash.staff")) sender.sendMessage(noPermission).run { return true }
+             when {
+                 args.contains("hub") -> {
+                     sender.sendMessage("You Teleported &l${target.name} &r &6to &lHub".prefix())
+                     target.teleport(Bukkit.getWorld("world").spawnLocation)
+                     target.sendMessage("You have been teleported to &lHub&r &6by &l${sender.name}".prefix())
+                     //player.teleport(Bukkit.getServer("hub").spawnLocation)
+                     return true
+                 }
+                 args.contains("kitpvp") -> {
+                     sender.sendMessage("You Teleported &l${target.name}&r &6to &lKitPvP".prefix())
+                     target.teleport(Bukkit.getWorld("kitpvp").spawnLocation)
+                     target.sendMessage("You have been teleported to &lKitPvP&r &6by &l${sender.name}".prefix())
+                     //player.teleport(Bukkit.getServer("kitpvp").spawnLocation)
+                     return true
+                 }
+                 args.contains("skyblock") -> {
+                     sender.sendMessage("You Teleported &l${target.name}&r &6to &lSkyBlock".prefix())
+                     target.teleport(Bukkit.getWorld("skyblock_spawn").spawnLocation)
+                     target.sendMessage("You have been teleported to &lSkyBlock&r &6by &l${sender.name}".prefix())
+                     //player.teleport(Bukkit.getServer("skyblock").spawnLocation)
+                     return true
+                 }
+                 args.contains("builds") -> {
+                     if (!sender.hasPermission("flash.staff")) sender.sendMessage(noPermission).run { return true }
+                     if (!target.hasPermission("flash.staff")) target.sendMessage(noPermission).run { return true }
+                     sender.sendMessage("You Teleported &l${target.name}&r &6to &lBuilds".prefix())
+                     target.teleport(Bukkit.getWorld("builds").spawnLocation)
+                     target.sendMessage("You have been teleported to &lBuilds&r &6by &l${sender.name}".prefix())
+                     //player.teleport(Bukkit.getServer("builds").spawnLocation)
+                     return true
+                 }
+                 args.contains("tntrun") -> {
+                     sender.sendMessage("You Teleported &l${target.name}&r &6to &lTnTRun".prefix())
+                     target.teleport(Bukkit.getWorld("tntrun").spawnLocation)
+                     target.sendMessage("You have been teleported to &lTnTRun&r &6by &l${sender.name}".prefix())
+                     //player.teleport(Bukkit.getServer("tntrun").spawnLocation)
+                     return true
+                 }
+                 args.contains("event") -> {
+                     sender.sendMessage("You Teleported &l${target.name}&r &6to &lEvent".prefix())
+                     target.teleport(Bukkit.getWorld("event").spawnLocation)
+                     target.sendMessage("You have been teleported to &lEvent&r &6by &l${sender.name}".prefix())
+                     //player.teleport(Bukkit.getServer("event").spawnLocation)
+                     return true
+                 }
+             }
         }
-            return true
+        return true
     }
 }

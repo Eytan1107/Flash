@@ -123,3 +123,5 @@ commands:
     description: test
   server:
     description: do /server to tp to a server.
+  tab:
+    description: tab
