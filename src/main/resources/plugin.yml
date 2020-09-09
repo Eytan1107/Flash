@@ -121,3 +121,5 @@ commands:
     description: open the server selector
   test:
     description: test
+  server:
+    description: do /server to tp to a server.
