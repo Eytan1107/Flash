@@ -32,7 +32,7 @@ class Test : CommandExecutor {
             }
         })
         // make it so the menu opens when the player right clicks and only in hub
-        // and make it so the compass always be set to the middel and only one's
+        // and make it so the compass always be set to the middle and only one's
             return true
         }
     }
