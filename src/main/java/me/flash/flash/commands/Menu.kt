@@ -10,6 +10,7 @@ import org.bukkit.Material
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
+import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -43,7 +44,7 @@ class Menu : CommandExecutor, Listener {
         val inventory = Bukkit.createInventory(null, 27, "Server selector".color())
         val empty = ItemStack(Material.STAINED_GLASS_PANE, 1, 14).apply {
             itemMeta = itemMeta.apply {
-                displayName = "&8[&7Flash's server&8]&r".color()
+                displayName = "&8[&6Flash's server&8]&r".color()
             }
         }
         for (i in 0..26) {
@@ -88,7 +89,6 @@ class Menu : CommandExecutor, Listener {
             itemMeta = itemMeta.apply {
                 displayName = "&a&lEvent".color()
                 lore = listOf("&7Click to teleport to &a&lEvent".color())
-                //addEnchantment(Enchantment.DURABILITY, 1)
             }
             inventory.setItem(26, this)
         }
@@ -127,8 +127,7 @@ class Menu : CommandExecutor, Listener {
             player.sendMessage("Sending you to Event".prefix())
             player.teleport(Bukkit.getWorld("event").spawnLocation)
             return true
-        }
-        return true
+        } else return true
     }
 }
 
