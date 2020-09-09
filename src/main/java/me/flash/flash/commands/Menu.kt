@@ -1,5 +1,6 @@
 package me.flash.flash.commands
 
+import com.avaje.ebeaninternal.server.transaction.BulkEventListenerMap
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.color
 import me.flash.flash.Flash.Companion.error
@@ -102,29 +103,29 @@ class Menu : CommandExecutor, Listener {
         val player = Event.whoClicked
         if (Event.slot == 0) {
             player.sendMessage("Sending you to SkyBlock".prefix())
-            // teleport the player
+            player.teleport(Bukkit.getWorld("skyblock_spawn").spawnLocation)
             return true
         } else if (Event.slot == 8) {
             player.sendMessage("Sending you to TnTRun".prefix())
-            // teleport the player
+            player.teleport(Bukkit.getWorld("tntrun").spawnLocation)
             return true
         } else if (Event.slot == 13) {
             player.sendMessage("Sending you to KitPvP".prefix())
-            // teleport the player
+            player.teleport(Bukkit.getWorld("kitpvp").spawnLocation)
             return true
         } else if (Event.slot == 18) {
             player.sendMessage("Sending you to the Parkour".prefix())
-            // teleport the player
+            Bukkit.dispatchCommand(player, "/startparkour")
             return true
         } else if (Event.slot == 22) {
             if (player.hasPermission("flash.staff")) {
                 player.sendMessage("Sending you to Builds".prefix())
-                // teleport the player
+                player.teleport(Bukkit.getWorld("builds").spawnLocation)
                 return true
             } else player.sendMessage(Flash.noPermission).run {return true}
         } else if (Event.slot == 26) {
             player.sendMessage("Sending you to Event".prefix())
-            // teleport the player
+            player.teleport(Bukkit.getWorld("event").spawnLocation)
             return true
         }
         return true
