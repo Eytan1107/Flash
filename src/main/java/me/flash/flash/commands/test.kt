@@ -1,6 +1,5 @@
 package me.flash.flash.commands
 
-import jdk.nashorn.internal.objects.NativeFunction.apply
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.color
 import me.flash.flash.Flash.Companion.error

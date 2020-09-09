@@ -17,6 +17,11 @@ class Server : CommandExecutor {
     val player = Bukkit.getPlayer(sender.name) ?: sender.sendMessage(targetOffline).run { return true }
     val target1 = args.last()
     val target = Bukkit.getPlayer(target1) ?: sender.sendMessage(targetOffline).run { return true }
+        if (args.isEmpty()) {
+            player.sendMessage("do /server <servername> [player]".prefix())
+            player.sendMessage("Servers: Hub, KitPvP, SkyBlock, Event".prefix())
+            return true
+        }
     if (args.size == 1) {
         when {
             args.equals("hub") -> {
