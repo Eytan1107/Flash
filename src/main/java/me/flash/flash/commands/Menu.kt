@@ -92,42 +92,51 @@ class Menu : CommandExecutor, Listener {
             }
             inventory.setItem(26, this)
         }
-        sender.openInventory(inventory)
+        if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("hub").contains(sender.world.name)) sender.openInventory(inventory) else sender.sendMessage("Sorry but you can only use this in HUB".error())
         return true
     }
     companion object {
         val tagged = mutableListOf<Inventory>()
     }
     @EventHandler
-    public fun click(Event: InventoryClickEvent): Boolean {
-        val player = Event.whoClicked
-        if (Event.slot == 0) {
-            player.sendMessage("Sending you to SkyBlock".prefix())
-            player.teleport(Bukkit.getWorld("skyblock_spawn").spawnLocation)
-            return true
-        } else if (Event.slot == 8) {
-            player.sendMessage("Sending you to TnTRun".prefix())
-            player.teleport(Bukkit.getWorld("tntrun").spawnLocation)
-            return true
-        } else if (Event.slot == 13) {
-            player.sendMessage("Sending you to KitPvP".prefix())
-            player.teleport(Bukkit.getWorld("kitpvp").spawnLocation)
-            return true
-        } else if (Event.slot == 18) {
-            player.sendMessage("Sending you to the Parkour".prefix())
-            Bukkit.dispatchCommand(player, "/startparkour")
-            return true
-        } else if (Event.slot == 22) {
-            if (player.hasPermission("flash.staff")) {
-                player.sendMessage("Sending you to Builds".prefix())
-                player.teleport(Bukkit.getWorld("builds").spawnLocation)
+    public fun click(event: InventoryClickEvent): Boolean {
+        val player = event.whoClicked
+        if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("hub").contains(player.world.name)) {
+            if (event.slot == 0) {
+                player.sendMessage("Sending you to SkyBlock".prefix())
+                player.teleport(Bukkit.getWorld("skyblock_spawn").spawnLocation)
+                tagged.remove(event.inventory)
                 return true
-            } else player.sendMessage(Flash.noPermission).run {return true}
-        } else if (Event.slot == 26) {
-            player.sendMessage("Sending you to Event".prefix())
-            player.teleport(Bukkit.getWorld("event").spawnLocation)
-            return true
-        } else return true
+            } else if (event.slot == 8) {
+                player.sendMessage("Sending you to TnTRun".prefix())
+                player.teleport(Bukkit.getWorld("tntrun").spawnLocation)
+                tagged.remove(event.inventory)
+                return true
+            } else if (event.slot == 13) {
+                player.sendMessage("Sending you to KitPvP".prefix())
+                player.teleport(Bukkit.getWorld("kitpvp").spawnLocation)
+                tagged.remove(event.inventory)
+                return true
+            } else if (event.slot == 18) {
+                player.sendMessage("Sending you to the Parkour".prefix())
+                Bukkit.dispatchCommand(player, "/startparkour")
+                tagged.remove(event.inventory)
+                return true
+            } else if (event.slot == 22) {
+                if (player.hasPermission("flash.staff")) {
+                    player.sendMessage("Sending you to Builds".prefix())
+                    player.teleport(Bukkit.getWorld("builds").spawnLocation)
+                    tagged.remove(event.inventory)
+                    return true
+                } else player.sendMessage(Flash.noPermission).run { return true }
+            } else if (event.slot == 26) {
+                player.sendMessage("Sending you to Event".prefix())
+                player.teleport(Bukkit.getWorld("event").spawnLocation)
+                tagged.remove(event.inventory)
+                return true
+            } else return true
+        }
+        return true
     }
 }
 
