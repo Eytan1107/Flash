@@ -2,21 +2,16 @@ package me.flash.flash.commands
 
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.error
-import me.flash.flash.Flash.Companion.prefix
-import org.apache.commons.lang.time.DateUtils
 import org.bukkit.Material
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.enchantments.Enchantment
-import org.bukkit.entity.Item
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.java.JavaPlugin
-import java.text.DateFormat
 import java.time.Duration
 import java.time.Instant
-import java.time.temporal.TemporalUnit
 
 class Kit : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
@@ -25,11 +20,11 @@ class Kit : CommandExecutor {
             if (args.size == 1) {
                 when (args.first()) {
                     "pvp" -> {
-                        val timeout = Kits.kitpvpCooldowns[sender] ?: Instant.now().minusSeconds(1)
+                        val timeout = Kits.pvpCooldown[sender] ?: Instant.now().minusSeconds(1)
                         if (timeout.isAfter(Instant.now())) {
                             sender.sendMessage("You must wait ".error() + Duration.between(Instant.now(), timeout).seconds + " more seconds before you can use this kit again")
                             return true
-                        } else Kits.kitpvpCooldowns[sender] = Instant.now().plusSeconds(10)
+                        } else Kits.pvpCooldown[sender] = Instant.now().plusSeconds(10)
                         sender.inventory.addItem(ItemStack(Material.STONE_SWORD).apply {
                             addEnchantment(Enchantment.DAMAGE_ALL, 1)
                             addEnchantment(Enchantment.DURABILITY, 1)
@@ -49,11 +44,11 @@ class Kit : CommandExecutor {
                         }
                     }
                     "fast" -> {
-                        val timeout1 = Kits.kitpvpCooldowns[sender] ?: Instant.now().minusSeconds(1)
+                        val timeout1 = Kits.fastCooldown[sender] ?: Instant.now().minusSeconds(1)
                         if (timeout1.isAfter(Instant.now())) {
                             sender.sendMessage("You must wait ".error() + Duration.between(Instant.now(), timeout1).seconds + " more seconds before you can use this kit again")
                             return true
-                        } else Kits.kitpvpCooldowns[sender] = Instant.now().plusSeconds(3600)
+                        } else Kits.fastCooldown[sender] = Instant.now().plusSeconds(3600)
                         sender.inventory.addItem(ItemStack(Material.IRON_SWORD).apply {
                             addEnchantment(Enchantment.DAMAGE_ALL, 1)
                             addEnchantment(Enchantment.DURABILITY, 1)
@@ -73,11 +68,11 @@ class Kit : CommandExecutor {
                         }
                     }
                     "speedster" -> {
-                        val timeout2 = Kits.kitpvpCooldowns[sender] ?: Instant.now().minusSeconds(1)
+                        val timeout2 = Kits.speedsterCooldown[sender] ?: Instant.now().minusSeconds(1)
                         if (timeout2.isAfter(Instant.now())) {
                             sender.sendMessage("You must wait ".error() + Duration.between(Instant.now(), timeout2).seconds + " more seconds before you can use this kit again")
                             return true
-                        } else Kits.kitpvpCooldowns[sender] = Instant.now().plusSeconds(10800)
+                        } else Kits.speedsterCooldown[sender] = Instant.now().plusSeconds(10800)
                         sender.inventory.addItem(ItemStack(Material.STONE_SWORD).apply {
                             addEnchantment(Enchantment.DAMAGE_ALL, 2)
                             addEnchantment(Enchantment.DURABILITY, 1)
@@ -103,11 +98,11 @@ class Kit : CommandExecutor {
                         }
                     }
                     "godspeed" -> {
-                        val timeout3 = Kits.kitpvpCooldowns[sender] ?: Instant.now().minusSeconds(1)
+                        val timeout3 = Kits.godSpeedCooldown[sender] ?: Instant.now().minusSeconds(1)
                         if (timeout3.isAfter(Instant.now())) {
                             sender.sendMessage("You must wait ".error() + Duration.between(Instant.now(), timeout3).seconds + " more seconds before you can use this kit again")
                             return true
-                        } else Kits.kitpvpCooldowns[sender] = Instant.now().plusSeconds(43200)
+                        } else Kits.godSpeedCooldown[sender] = Instant.now().plusSeconds(43200)
                         sender.inventory.addItem(ItemStack(Material.DIAMOND_SWORD).apply {
                             addEnchantment(Enchantment.DAMAGE_ALL, 1)
                             addEnchantment(Enchantment.DURABILITY, 1)
@@ -133,11 +128,11 @@ class Kit : CommandExecutor {
                         }
                     }
                     "speedforce" -> {
-                        val timeout4 = Kits.kitpvpCooldowns[sender] ?: Instant.now().minusSeconds(1)
+                        val timeout4 = Kits.speedForce[sender] ?: Instant.now().minusSeconds(1)
                         if (timeout4.isAfter(Instant.now())) {
                             sender.sendMessage("You must wait ".error() + Duration.between(Instant.now(), timeout4).seconds + " more seconds before you can use this kit again")
                             return true
-                        } else Kits.kitpvpCooldowns[sender] = Instant.now().plusSeconds(86400)
+                        } else Kits.speedForce[sender] = Instant.now().plusSeconds(86400)
                         sender.inventory.addItem(ItemStack(Material.DIAMOND_SWORD).apply {
                             addEnchantment(Enchantment.DAMAGE_ALL, 3)
                             addEnchantment(Enchantment.DURABILITY, 1)

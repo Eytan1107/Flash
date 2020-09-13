@@ -28,6 +28,10 @@ class Kits : CommandExecutor {
         return true
     }
     companion object {
-        val kitpvpCooldowns = mutableMapOf<Player, Instant>()
+        val pvpCooldown = mutableMapOf<Player, Instant>()
+        val fastCooldown = mutableMapOf<Player, Instant>()
+        val speedsterCooldown = mutableMapOf<Player, Instant>()
+        val godSpeedCooldown = mutableMapOf<Player, Instant>()
+        val speedForce = mutableMapOf<Player, Instant>()
     }
 }

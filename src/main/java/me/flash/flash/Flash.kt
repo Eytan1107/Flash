@@ -74,6 +74,7 @@ class Flash : JavaPlugin() {
         fun String.prefix(): String = ("[&6Flash's Server&r] &6$this").color()
         fun String.color(): String = ChatColor.translateAlternateColorCodes('&', this)
         fun String.error(): String = ("[&6Flash's Server&r] &cError: $this").color()
+        fun String.usage(): String = ("[&6Flash's Server&r] &cUsage: /$this").color()
 
         fun staffMessage(sender:CommandSender, action: String, vararg ignored: Player) {
             val senders = mutableListOf<CommandSender>()
