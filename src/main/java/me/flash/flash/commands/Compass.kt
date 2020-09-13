@@ -13,11 +13,12 @@ import org.bukkit.event.player.PlayerChangedWorldEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.inventory.ItemStack
+import org.bukkit.plugin.java.JavaPlugin
 
 class Compass : Listener {
     @EventHandler
     fun world(event: PlayerChangedWorldEvent) {
-        if (Flash.instance.config.getStringList("hub").contains(event.player.world.name)) {
+        if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("kitpvpworld").contains(event.player.world.name)) {
             event.player.inventory.clear()
             event.player.inventory.armorContents = emptyArray()
             event.player.inventory.setItem(4, ItemStack(Material.COMPASS).apply {
