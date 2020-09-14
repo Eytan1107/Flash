@@ -4,6 +4,7 @@ import me.flash.flash.commands.*
 import me.flash.flash.listeners.EventsListener
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
+import org.bukkit.World
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
@@ -85,6 +86,14 @@ class Flash : JavaPlugin() {
             senders.forEach {
                 it.sendMessage("&d[S] &5${sender.name}: &d$action".color())
             }
+        }
+
+        fun playersInWorlds(server: String): MutableList<World> {
+            val worlds = mutableListOf<World>()
+            for (s in instance.config.getStringList("server")) {
+                worlds.add(Bukkit.getWorld(s) ?: continue)
+            }
+            return worlds
         }
     }
 }
