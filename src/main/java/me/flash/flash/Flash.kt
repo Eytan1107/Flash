@@ -88,12 +88,12 @@ class Flash : JavaPlugin() {
             }
         }
 
-        fun playersInWorlds(server: String): MutableList<World> {
-            val worlds = mutableListOf<World>()
+        fun playersInWorlds(server: String): MutableList<Player> {
+            val players = mutableListOf<Player>()
             for (s in instance.config.getStringList("server")) {
-                worlds.add(Bukkit.getWorld(s) ?: continue)
+                (Bukkit.getWorld(s) ?: continue).players.forEach { players += it }
             }
-            return worlds
+            return players
         }
     }
 }

@@ -52,7 +52,6 @@ class EventsListener : Listener {
         if (event.player.hasPermission("flash.colors")) {
             event.message = event.message.color()
         }
-        event.format = "%s" + "&7".color() + ": &f".color() + "%s"
     }
 
     @EventHandler
