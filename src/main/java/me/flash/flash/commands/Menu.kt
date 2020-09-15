@@ -1,5 +1,6 @@
 package me.flash.flash.commands
 
+import com.avaje.ebeaninternal.server.jmx.MAdminAutofetch
 import com.avaje.ebeaninternal.server.transaction.BulkEventListenerMap
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.color
@@ -21,6 +22,8 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.java.JavaPlugin
 import kotlin.system.exitProcess
 
+
+@Suppress("INCOMPATIBLE_ENUM_COMPARISON")
 class Menu : CommandExecutor, Listener {
     @EventHandler
     fun onInventoryClick(event: InventoryClickEvent) {
@@ -99,34 +102,34 @@ class Menu : CommandExecutor, Listener {
     public fun click(event: InventoryClickEvent): Boolean {
         val player = event.whoClicked
         if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("hub").contains(player.world.name)) {
-            if (event.slot == 0) {
+            if (event.currentItem == Material.GRASS) {
                 player.sendMessage("Sending you to SkyBlock".prefix())
                 player.teleport(Bukkit.getWorld("skyblock_spawn").spawnLocation)
                 tagged.remove(event.inventory)
                 return true
-            } else if (event.slot == 8) {
+            } else if (event.currentItem == Material.TNT) {
                 player.sendMessage("Sending you to TnTRun".prefix())
                 player.teleport(Bukkit.getWorld("tntrun").spawnLocation)
                 tagged.remove(event.inventory)
                 return true
-            } else if (event.slot == 13) {
+            } else if (event.currentItem == Material.DIAMOND_SWORD) {
                 player.sendMessage("Sending you to KitPvP".prefix())
                 player.teleport(Bukkit.getWorld("kitpvp").spawnLocation)
                 tagged.remove(event.inventory)
                 return true
-            } else if (event.slot == 18) {
+            } else if (event.currentItem == Material.GOLD_BOOTS) {
                 player.sendMessage("Sending you to the Parkour".prefix())
                 Bukkit.dispatchCommand(player, "/startparkour")
                 tagged.remove(event.inventory)
                 return true
-            } else if (event.slot == 22) {
+            } else if (event.currentItem == Material.BRICK) {
                 if (player.hasPermission("flash.staff")) {
                     player.sendMessage("Sending you to Builds".prefix())
                     player.teleport(Bukkit.getWorld("builds").spawnLocation)
                     tagged.remove(event.inventory)
                     return true
                 } else player.sendMessage(Flash.noPermission).run { return true }
-            } else if (event.slot == 26) {
+            } else if (event.currentItem == Material.REDSTONE) {
                 player.sendMessage("Sending you to Event".prefix())
                 player.teleport(Bukkit.getWorld("event").spawnLocation)
                 tagged.remove(event.inventory)

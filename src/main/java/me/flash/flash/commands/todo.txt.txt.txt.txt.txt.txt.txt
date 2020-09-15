@@ -1,7 +1,12 @@
 IDEA:
 /nick
 changes luckperms meta prefix, changes tabprefix and tagprefix to member, and can set a diffrent tag and tab name, and chat name, tabcomplete name
-
+/tab:tab player ${player.name} tabprefix // for changing the prefix to normal
+/tab:tab player ${player.name} tabprefix ${newprefix} // setting the tabprefix to the discusied one
+/tab:tab player ${player.name} tagprefix // clearing it
+/tab:tab player ${player.name} tagprefix ${newprefix} // setting it to the new one
+/lp user ${player.name} meta setprefix ${newprefix} // setting the new prefix
+/lp user ${player.name} meta clear // clearing it
 
 
 
