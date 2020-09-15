@@ -1,7 +1,5 @@
 package me.flash.flash.commands
 
-import com.avaje.ebeaninternal.server.jmx.MAdminAutofetch
-import com.avaje.ebeaninternal.server.transaction.BulkEventListenerMap
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.color
 import me.flash.flash.Flash.Companion.error
@@ -11,7 +9,6 @@ import org.bukkit.Material
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
-import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -20,7 +17,6 @@ import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.java.JavaPlugin
-import kotlin.system.exitProcess
 
 
 @Suppress("INCOMPATIBLE_ENUM_COMPARISON")
@@ -102,43 +98,72 @@ class Menu : CommandExecutor, Listener {
     public fun click(event: InventoryClickEvent): Boolean {
         val player = event.whoClicked
         if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("hub").contains(player.world.name)) {
-            if (event.currentItem == Material.GRASS) {
+            if (event.currentItem.isSimilar(ItemStack(Material.GRASS).apply {
+                        itemMeta = itemMeta.apply {
+                            displayName = "&a&lSkyBlock".color()
+                            lore = listOf("&7Click to teleport to SkyBlock".color(), "&7Players online: ${Flash.playersInWorlds("skyblock").size}".color())
+                        }
+                    })) {
                 player.sendMessage("Sending you to SkyBlock".prefix())
                 player.teleport(Bukkit.getWorld("skyblock_spawn").spawnLocation)
                 tagged.remove(event.inventory)
                 return true
-            } else if (event.currentItem == Material.TNT) {
+            } else if (event.currentItem.isSimilar(ItemStack(Material.TNT).apply {
+                        itemMeta = itemMeta.apply {
+                            displayName = "&4&lTnT Run".color()
+                            lore = listOf("&7Click to teleport to &4&lTnT Run".color(), "&7Players online: ".color() + Flash.playersInWorlds("tntrun").size)
+                        }
+                    })) {
                 player.sendMessage("Sending you to TnTRun".prefix())
                 player.teleport(Bukkit.getWorld("tntrun").spawnLocation)
                 tagged.remove(event.inventory)
                 return true
-            } else if (event.currentItem == Material.DIAMOND_SWORD) {
+            } else if (event.currentItem.isSimilar(ItemStack(Material.DIAMOND_SWORD).apply {
+                        itemMeta = itemMeta.apply {
+                            displayName = "&6&lKitPvP".color()
+                            lore = listOf("&7Click to teleport to &9&lKitpvp".color(), "&7Players online: ".color() + Flash.playersInWorlds("kitpvp").size)
+                        }
+                    })) {
                 player.sendMessage("Sending you to KitPvP".prefix())
                 player.teleport(Bukkit.getWorld("kitpvp").spawnLocation)
                 tagged.remove(event.inventory)
                 return true
-            } else if (event.currentItem == Material.GOLD_BOOTS) {
+            } else if (event.currentItem.isSimilar(ItemStack(Material.GOLD_BOOTS).apply {
+                        itemMeta = itemMeta.apply {
+                            displayName = "&6&lParkour".color()
+                            lore = listOf("&7Click to teleport to &6&lParkour".color())
+                        }
+                    })) {
                 player.sendMessage("Sending you to the Parkour".prefix())
                 Bukkit.dispatchCommand(player, "/startparkour")
                 tagged.remove(event.inventory)
                 return true
-            } else if (event.currentItem == Material.BRICK) {
+            } else if (event.currentItem.isSimilar(ItemStack(Material.BRICK).apply {
+                        itemMeta = itemMeta.apply {
+                            displayName = "&b&lBuilds".color()
+                            lore = listOf("&7Click to teleport to builds".color(), "&7Players online: ".color() + Flash.playersInWorlds("builds").size)
+                        }
+                    })) {
                 if (player.hasPermission("flash.staff")) {
                     player.sendMessage("Sending you to Builds".prefix())
                     player.teleport(Bukkit.getWorld("builds").spawnLocation)
                     tagged.remove(event.inventory)
                     return true
                 } else player.sendMessage(Flash.noPermission).run { return true }
-            } else if (event.currentItem == Material.REDSTONE) {
+            } else if (event.currentItem.isSimilar(ItemStack(Material.REDSTONE).apply {
+                        itemMeta = itemMeta.apply {
+                            displayName = "&a&lEvent".color()
+                            lore = listOf("&7Click to teleport to &a&lEvent".color(), "&7Players online: ".color() + Flash.playersInWorlds("event").size)
+                        }
+                    }))
                 player.sendMessage("Sending you to Event".prefix())
                 player.teleport(Bukkit.getWorld("event").spawnLocation)
                 tagged.remove(event.inventory)
                 return true
             } else return true
         }
-        return true
     }
-}
+
 
 
 
