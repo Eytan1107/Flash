@@ -1,3 +1,10 @@
+IDEA:
+/nick
+changes luckperms meta prefix, changes tabprefix and tagprefix to member, and can set a diffrent tag and tab name, and chat name, tabcomplete name
+
+
+
+
 if player is not in kitpvp -> error
 /kit PvP - 10 secs - DONE
 /kit Fast - 1h - flash.kit.fast -> 10k kill points

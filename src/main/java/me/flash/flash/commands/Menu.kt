@@ -37,10 +37,6 @@ class Menu : CommandExecutor, Listener {
     }
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender !is Player) sender.sendMessage("Noob").run { return true }
-        var sbPlayers = 0
-        Flash.instance.config.getStringList("skyblock").forEach {
-            sbPlayers += Bukkit.getWorld(it)?.players?.size ?: 0
-        }
         val inventory = Bukkit.createInventory(null, 27, "Server selector".color())
         val empty = ItemStack(Material.STAINED_GLASS_PANE, 1, 14).apply {
             itemMeta = itemMeta.apply {
@@ -53,7 +49,7 @@ class Menu : CommandExecutor, Listener {
         val skyblock = ItemStack(Material.GRASS, 1).apply {
             itemMeta = itemMeta.apply {
                 displayName = "&a&lSkyBlock".color()
-                lore = listOf("&7Click to teleport to SkyBlock".color(), "&7Players online: $sbPlayers".color())
+                lore = listOf("&7Click to teleport to SkyBlock".color(), "&7Players online: ${Flash.playersInWorlds("skyblock").size}".color())
 
             }
             inventory.setItem(0, this)
@@ -61,7 +57,7 @@ class Menu : CommandExecutor, Listener {
         val tntrun = ItemStack(Material.TNT, 1).apply {
             itemMeta = itemMeta.apply {
                 displayName = "&4&lTnT Run".color()
-                lore = listOf("&7Click to teleport to &4&lTnT Run".color())
+                lore = listOf("&7Click to teleport to &4&lTnT Run".color(), "&7Players online: ".color() + Flash.playersInWorlds("tntrun").size)
             }
             inventory.setItem(8, this)
         }
@@ -75,21 +71,21 @@ class Menu : CommandExecutor, Listener {
         val kitpvp = ItemStack(Material.DIAMOND_SWORD, 1).apply {
             itemMeta = itemMeta.apply {
                 displayName = "&6&lKitPvP".color()
-                lore = listOf("&7Click to teleport to &9&lKitpvp".color())
+                lore = listOf("&7Click to teleport to &9&lKitpvp".color(), "&7Players online: ".color() + Flash.playersInWorlds("kitpvp").size)
             }
             inventory.setItem(13, this)
         }
         val builds = ItemStack(Material.BRICK, 1).apply {
             itemMeta = itemMeta.apply {
                 displayName = "&b&lBuilds".color()
-                lore = listOf("&7Click to teleport to builds".color())
+                lore = listOf("&7Click to teleport to builds".color(), "&7Players online: ".color() + Flash.playersInWorlds("builds").size)
             }
             inventory.setItem(22, this)
         }
         val event = ItemStack(Material.REDSTONE, 1).apply {
             itemMeta = itemMeta.apply {
                 displayName = "&a&lEvent".color()
-                lore = listOf("&7Click to teleport to &a&lEvent".color())
+                lore = listOf("&7Click to teleport to &a&lEvent".color(), "&7Players online: ".color() + Flash.playersInWorlds("event").size)
             }
             inventory.setItem(26, this)
         }
