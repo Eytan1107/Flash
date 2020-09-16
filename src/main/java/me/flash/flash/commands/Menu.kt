@@ -19,7 +19,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.java.JavaPlugin
 
 
-@Suppress("INCOMPATIBLE_ENUM_COMPARISON")
+
 class Menu : CommandExecutor, Listener {
     @EventHandler
     fun onInventoryClick(event: InventoryClickEvent) {
@@ -42,6 +42,7 @@ class Menu : CommandExecutor, Listener {
                 displayName = "&8[&6Flash's server&8]&r".color()
             }
         }
+
         for (i in 0..26) {
             inventory.setItem(i, empty)
         }
@@ -88,7 +89,9 @@ class Menu : CommandExecutor, Listener {
             }
             inventory.setItem(26, this)
         }
-        if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("hub").contains(sender.world.name)) sender.openInventory(inventory) else sender.sendMessage("Sorry but you can only use this in HUB".error())
+        if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("hub").contains(sender.world.name)) {
+            sender.openInventory(inventory)
+        } else sender.sendMessage("Sorry but you can only use this in HUB".error())
         return true
     }
     companion object {
@@ -155,12 +158,15 @@ class Menu : CommandExecutor, Listener {
                             displayName = "&a&lEvent".color()
                             lore = listOf("&7Click to teleport to &a&lEvent".color(), "&7Players online: ".color() + Flash.playersInWorlds("event").size)
                         }
-                    }))
+                    })) {
                 player.sendMessage("Sending you to Event".prefix())
                 player.teleport(Bukkit.getWorld("event").spawnLocation)
                 tagged.remove(event.inventory)
                 return true
+            }
             } else return true
+        tagged.add(event.inventory)
+        return true
         }
     }
 

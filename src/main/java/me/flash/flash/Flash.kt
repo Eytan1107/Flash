@@ -49,6 +49,7 @@ class Flash : JavaPlugin() {
         getCommand("kit").executor = Kit()
         getCommand("kits").executor = Kits()
         getCommand("menu").executor = Menu()
+        getCommand("vanish").executor = Vanish()
         getCommand("server").apply {
             executor = Server()
             tabCompleter = Server()

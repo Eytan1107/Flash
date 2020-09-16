@@ -123,3 +123,5 @@ commands:
     description: do /server to tp to a server.
   tab:
     description: tab
+  vanish:
+    description: vanish

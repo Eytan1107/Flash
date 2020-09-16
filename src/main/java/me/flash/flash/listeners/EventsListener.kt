@@ -16,36 +16,57 @@ import org.bukkit.plugin.java.JavaPlugin
 class EventsListener : Listener {
     @EventHandler
     fun leave(event: PlayerQuitEvent) {
-        event.player.world.players.forEach { player ->
-            player.sendMessage("&6[&3-&6] ${event.player.displayName}".color())
+        event.player.world.players.forEach { players ->
+            val name = event.player.name
+            name.replace(
+                    regex = Regex("Member"),
+                    replacement = ""
+            )
+            players.sendMessage("&6[&3-&6] $name".color())
         }
         event.quitMessage = null // Take away the default (player) left the game
     }
 
     @EventHandler
     fun world(event: PlayerChangedWorldEvent) {
-        event.from.players.forEach { player ->
-            player.sendMessage("&6[&3-&6] ${event.player.displayName}".color())
-            if (player.hasPermission("Flash.fly")) {
-                player.allowFlight = true
-                player.isFlying = true
+        val player = Bukkit.getPlayer(event.player.name)
+        val name = player.name
+        name.replace(
+                regex = Regex("Member"),
+                replacement = ""
+        )
+        event.from.players.forEach { players ->
+            //player.sendMessage("test")
+            player.sendMessage("&6[&3-&6] $name".color())
+            if (players.hasPermission("Flash.fly")) {
+                players.allowFlight = true
+                players.isFlying = true
             }
         }
         event.player.world.players.forEach { player ->
-            player.sendMessage("&6[&3+&6] ${event.player.displayName}".color())
+            player.sendMessage("&6[&3+&6] ${event.player.name}".color())
         }
     }
 
     @EventHandler
     fun join(event: PlayerJoinEvent) {
-        event.player.world.players.forEach { player ->
-            player.sendMessage("&6[&3+&6] ${event.player.displayName}".color())
-            if (player.hasPermission("Flash.fly")) {
-                player.allowFlight = true
-                player.isFlying = true
+        val playerer = Bukkit.getPlayer(event.player.name)
+        playerer.teleport(Bukkit.getWorld("world").spawnLocation)
+        event.player.world.players.forEach { players ->
+            if (players.hasPermission("Flash.fly")) {
+                players.allowFlight = true
+                players.isFlying = true
+                val player = Bukkit.getPlayer(event.player.name)
+                val name = player.name
+                name.replace(
+                        regex = Regex("Member"),
+                        replacement = ""
+                )
+                }
+                event.joinMessage = null
             }
-            event.joinMessage = null
-        }
+            }
+
     }
 
     @EventHandler
@@ -68,6 +89,6 @@ class EventsListener : Listener {
             if (event.viewers.contains(player)) event.isCancelled = true
         }
     }
-}
+
 
 

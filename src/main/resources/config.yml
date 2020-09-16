@@ -12,6 +12,8 @@ builds:
    - "builds"
 event: 
    - "event"
+name:
+  - "%eazynick_display_name%"
 
 #motd
 motd:
