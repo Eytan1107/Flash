@@ -129,3 +129,5 @@ commands:
     description: enderchest
     aliases:
       - ec
+  help:
+    description: help

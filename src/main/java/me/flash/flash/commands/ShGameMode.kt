@@ -2,6 +2,7 @@ package me.flash.flash.commands
 
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.error
+import me.flash.flash.Flash.Companion.noPermission
 import me.flash.flash.Flash.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
@@ -26,6 +27,7 @@ class ShGameMode : CommandExecutor {
             val player = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(Flash.targetOffline).run { return true }
             val gameMode = parseGamemode(command.name)
                     ?: sender.sendMessage("The command you ran is not a valid gamemode command.".error()).run { return true }
+            if (!sender.hasPermission("flash.gamemode.others")) sender.sendMessage(noPermission).run { return true }
             player.gameMode = gameMode
             sender.sendMessage("You set ${player.name}'s gamemode to ${gameMode.name.toLowerCase()} mode.".prefix())
             player.sendMessage("${sender.name} set your gamemode to ${gameMode.name.toLowerCase()} mode.".prefix())
