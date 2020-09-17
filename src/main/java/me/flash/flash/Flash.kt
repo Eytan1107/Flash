@@ -54,6 +54,7 @@ class Flash : JavaPlugin() {
             executor = Server()
             tabCompleter = Server()
         }.executor = Server()
+        getCommand("enderchest").executor = Enderchest()
         server.pluginManager.registerEvents(Back(), this)
         server.pluginManager.registerEvents(EventsListener(), this)
         server.pluginManager.registerEvents(StaffChat(), this)

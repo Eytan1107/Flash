@@ -125,3 +125,7 @@ commands:
     description: tab
   vanish:
     description: vanish
+  enderchest:
+    description: enderchest
+    aliases:
+      - ec
