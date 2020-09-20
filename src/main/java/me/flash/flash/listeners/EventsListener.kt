@@ -102,7 +102,8 @@ fun onPlayerDeath(event: PlayerDeathEvent) { // nope
     if (result) {
         Flash.h2.createStatement().execute("CREATE TABLE if not exists data (\"uuid\" varchar(48), \"kills\" int, \"deaths\" int)")
     } else {
-        Flash.sql.createStatement().execute("INSERT INTO data (uuid, deaths, kills) VALUES ('$uuid', 0, 0);")
+        Flash.h2.createStatement().execute("INSERT INTO data values ('$uuid', deaths + 1, kills)")
+        event.entity.player.sendMessage(Flash.h2.createStatement().execute("SELECT uuid from data").toString())
     }
 
 
