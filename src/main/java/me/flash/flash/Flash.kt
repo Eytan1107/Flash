@@ -14,9 +14,7 @@ import java.sql.DriverManager
 
 class Flash : JavaPlugin() {
     override fun onEnable() {
-        sql = DriverManager.getConnection("jdbc:sqlite:" + File(dataFolder, "playerdata.db").absolutePath)
-        sql.autoCommit = true
-        sql.createStatement().execute("create table if not exists `data` (`uuid` varchar(36) not null, `deaths` int default(0), `kills` int default(0), primary key (`uuid`));")
+        h2 = DriverManager.getConnection("jdbc:h2:" + File(dataFolder, "playerdata.h2").absolutePath)
         instance = this
         saveDefaultConfig()
         getCommand("feed").executor = Feed()
@@ -75,7 +73,7 @@ class Flash : JavaPlugin() {
     }
 
     companion object {
-        lateinit var sql: Connection
+        lateinit var h2: Connection
         lateinit var instance : Flash
         var scEnabled = mutableListOf<Player>()
         var noPermission = "You don't have permission to do that.".error()

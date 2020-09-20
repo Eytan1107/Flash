@@ -1,5 +1,6 @@
 package me.flash.flash.listeners
 
+
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.color
 import org.bukkit.Bukkit
@@ -70,7 +71,7 @@ class EventsListener : Listener {
         }
     }
 
-}
+
 
 @EventHandler
 fun colors(event: AsyncPlayerChatEvent) {
@@ -95,19 +96,26 @@ fun onInventoryClick(event: InventoryClickEvent) {
 
 @EventHandler
 fun onPlayerDeath(event: PlayerDeathEvent) { // nope
-    if (event.entity.killer !is Player) return
-    event.entity.player.uniqueId.let { uuid ->
-        Flash.sql.createStatement().execute("update data set deaths = deaths + 1 where uuid = '$uuid'")
-        Flash.sql.commit()
+    //if (event.entity.killer !is Player) return
+    val uuid = event.entity.player.uniqueId
+    val result = Flash.h2.createStatement().execute("SELECT * FROM data WHERE uuid = '$uuid'")
+    if (result) {
+        Flash.h2.createStatement().execute("CREATE TABLE if not exists data (\"uuid\" varchar(48), \"kills\" int, \"deaths\" int)")
+    } else {
+        Flash.sql.createStatement().execute("INSERT INTO data (uuid, deaths, kills) VALUES ('$uuid', 0, 0);")
     }
-    event.entity.killer.uniqueId.let { uuid ->
-        Flash.sql.createStatement().execute("update data set kills = kills + 1 where uuid = '$uuid'")
-        Flash.sql.commit()
-        // add the kill points
-    }
+
+
+    //event.entity.killer.uniqueId.let { uuid ->
+    //        if (!Flash.sql.createStatement().executeQuery("SELECT uuid FROM main.data").equals("$uuid")) {
+    //            Flash.sql.createStatement().execute("INSERT INTO main.data (uuid, deaths, kills) VALUES ('$uuid', 0, 0)")
+    //        } else {
+    //            Flash.sql.createStatement().execute("update data set kills = kills + 1 where uuid = '$uuid'")
+    //        }
+    //    }
 }
 // to get
 //Flash.sql.createStatement().executeQuery("select kills from data where uuid = '${event.entity.killer.uniqueId}'")
 
-
+}
 
