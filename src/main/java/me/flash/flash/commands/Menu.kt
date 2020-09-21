@@ -117,7 +117,7 @@ class Menu : CommandExecutor, Listener {
                         }
                     })) {
                 player.sendMessage("Sending you to TnTRun".prefix()) // ChatMessage
-                player.teleport(Bukkit.getWorld("tntrun").spawnLocation) // Teleports the player tp TnTRun
+                player.teleport(Bukkit.getWorld("tntrun").spawnLocation) // Teleports the player tp TnTRunw
                 tagged.remove(event.inventory) // Unlocks the inventory
                 return true
             } else if (event.currentItem.isSimilar(ItemStack(Material.DIAMOND_SWORD).apply { // Checks if the players clicks ONLY on the Diamond_Sword
