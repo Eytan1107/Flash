@@ -22,16 +22,16 @@ class GameMode : CommandExecutor {
             else {
                 val gameMode = parseGamemode(args.first()) ?: sender.sendMessage("That is not a valid gamemode!".error()).run { return true }
                 sender.gameMode = gameMode
-                Flash.staffMessage(sender, "Set their gamemode to ${gameMode.name.toLowerCase()} mode.")
+                Flash.staffMessage(sender, "Set their gamemode to &l${gameMode.name.toLowerCase()}&r&d.")
             }
         } else {
             val gameMode = parseGamemode(args.first()) ?: sender.sendMessage("That is not a valid gamemode!".error()).run { return true }
             val player = Bukkit.getPlayer(args[1]) ?: sender.sendMessage(Flash.targetOffline).run { return true }
             if (!sender.hasPermission("flash.gamemode.others")) sender.sendMessage(noPermission).run { return true }
             player.gameMode = gameMode
-            Flash.staffMessage(sender, "Set ${player.name}'s gamemode to ${gameMode.name.toLowerCase()} mode.", player)
-            player.sendMessage("Your gamemode was set to ${gameMode.name.toLowerCase()} mode by ${sender.name}")
-            sender.sendMessage("You set ${player.name}'s gamemode to ${gameMode.name.toLowerCase()}")
+            Flash.staffMessage(sender, "Set &l${player.name}&r&d's gamemode to &l${gameMode.name.toLowerCase()}&r.", player)
+            player.sendMessage("Your gamemode was set to &c${gameMode.name.toLowerCase()} &6by &c${sender.name}.")
+            sender.sendMessage("You set &c${player.name}&6's gamemode to &c${gameMode.name.toLowerCase()}.")
         }
         return true
     }

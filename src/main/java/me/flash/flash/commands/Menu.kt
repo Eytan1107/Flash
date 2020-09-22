@@ -137,7 +137,7 @@ class Menu : CommandExecutor, Listener {
                         }
                     })) {
                 player.sendMessage("Sending you to the Parkour".prefix()) // ChatMessage
-                Bukkit.dispatchCommand(player, "/startparkour") // Executes the command /startparkour as the player to tp to the parkour
+                Bukkit.dispatchCommand(player, "startparkour") // Executes the command /startparkour as the player to tp to the parkour
                 tagged.remove(event.inventory) // Unlocks the inventory
                 return true
             } else if (event.currentItem.isSimilar(ItemStack(Material.BRICK).apply { // Checks if the players clicks ONLY on the Brick Block
