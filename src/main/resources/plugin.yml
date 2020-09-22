@@ -131,3 +131,5 @@ commands:
       - ec
   help:
     description: help
+  stats:
+    description: test

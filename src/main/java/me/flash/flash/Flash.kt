@@ -4,7 +4,6 @@ import me.flash.flash.commands.*
 import me.flash.flash.listeners.EventsListener
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
-import org.bukkit.World
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
@@ -14,8 +13,10 @@ import java.sql.DriverManager
 
 class Flash : JavaPlugin() {
     override fun onEnable() {
-        h2 = DriverManager.getConnection("jdbc:h2:" + File(dataFolder, "playerdata.h2").absolutePath)
+        sql = DriverManager.getConnection("jdbc:sqlite:" + File(dataFolder, "playerdata.db").absolutePath)
         instance = this
+        sql.createStatement().execute("CREATE TABLE if not exists data(uuid varchar(48), kills int default(0), deaths int default(0))")
+        sql.autoCommit = false
         saveDefaultConfig()
         getCommand("feed").executor = Feed()
         getCommand("pro").executor = Pro()
@@ -60,6 +61,7 @@ class Flash : JavaPlugin() {
         }.executor = Server()
         getCommand("enderchest").executor = Enderchest()
         getCommand("help").executor = Help()
+        getCommand("stats").executor = stats()
         server.pluginManager.registerEvents(Back(), this)
         server.pluginManager.registerEvents(EventsListener(), this)
         server.pluginManager.registerEvents(StaffChat(), this)
@@ -73,7 +75,7 @@ class Flash : JavaPlugin() {
     }
 
     companion object {
-        lateinit var h2: Connection
+        lateinit var sql: Connection
         lateinit var instance : Flash
         var scEnabled = mutableListOf<Player>()
         var noPermission = "You don't have permission to do that.".error()

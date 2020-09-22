@@ -96,13 +96,16 @@ fun onInventoryClick(event: InventoryClickEvent) {
 @EventHandler
 fun onPlayerDeath(event: PlayerDeathEvent) { // nope
     //if (event.entity.killer !is Player) return
-    val uuid = event.entity.player.uniqueId
-    val result = Flash.h2.createStatement().execute("SELECT * FROM data WHERE uuid = '$uuid'")
-    if (result) {
-        Flash.h2.createStatement().execute("CREATE TABLE if not exists data (\"uuid\" varchar(48), \"kills\" int, \"deaths\" int)")
+    val uuid = event.entity.player.uniqueId.toString()
+    val result = Flash.sql.createStatement().execute("SELECT * FROM data WHERE uuid = '$uuid'")
+    if (!result) {
+        Flash.sql.createStatement().execute("insert into data VALUES ('$uuid', 1, 0)")
     } else {
-        Flash.h2.createStatement().execute("INSERT INTO data values ('$uuid', deaths + 1, kills)")
-        event.entity.player.sendMessage(Flash.h2.createStatement().execute("SELECT uuid from data").toString())
+        event.entity.player.sendMessage("works")
+        Flash.sql.createStatement().execute("update data set deaths = deaths + 1 where uuid = '$uuid';")
+        val result2 = Flash.sql.createStatement().executeLargeUpdate("select deaths from data where uuid = '$uuid'").toString()
+        event.entity.player.sendMessage("$result2")
+        Flash.sql.commit()
     }
 
 
