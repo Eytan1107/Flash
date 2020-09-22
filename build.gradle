@@ -11,6 +11,7 @@ targetCompatibility = '1.8'
 
 repositories {
     mavenCentral()
+    maven {url = "https://jitpack.io"}
     maven {
         name = 'spigotmc-repo'
         url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
@@ -24,6 +25,7 @@ repositories {
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation 'com.github.MilkBowl:VaultAPI:1.7'
 }
 
 processResources {

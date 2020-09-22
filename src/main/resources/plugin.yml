@@ -4,8 +4,6 @@ main: me.flash.flash.Flash
 commands:
   feed:
     description: Feed a player
-  pro:
-    description: Send "Pwo" to a player
   hub:
     description: Go back to hub
   loopkill:
@@ -51,6 +49,8 @@ commands:
       - silentteleportto
   kill:
     description: Kill a player
+    aliases:
+      - slay
   colorlist:
     description: See all the colors of the rainbow
     aliases:
@@ -125,6 +125,8 @@ commands:
     description: tab
   vanish:
     description: vanish
+    aliases:
+      - v
   enderchest:
     description: enderchest
     aliases:
@@ -133,3 +135,10 @@ commands:
     description: help
   stats:
     description: test
+  msg:
+    description: send a message
+    aliases:
+      - message
+      - send
+      - tell
+      - m

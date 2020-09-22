@@ -2,6 +2,7 @@ package me.flash.flash
 
 import me.flash.flash.commands.*
 import me.flash.flash.listeners.EventsListener
+import net.milkbowl.vault.chat.Chat
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
@@ -18,8 +19,14 @@ class Flash : JavaPlugin() {
         sql.createStatement().execute("CREATE TABLE if not exists data(uuid varchar(48), kills int default(0), deaths int default(0))")
         sql.autoCommit = false
         saveDefaultConfig()
+        try {
+            vaultChat = server.servicesManager.getRegistration(Chat::class.java).provider
+        } catch (e: Exception) {
+            println("Vault isn't installed! The plugin cannot enable.")
+            server.pluginManager.disablePlugin(this)
+            return //im done lol
+        }
         getCommand("feed").executor = Feed()
-        getCommand("pro").executor = Pro()
         getCommand("hub").executor = Hub()
        // todo getCommand("suggest").executor = Suggest()
        // todo getCommand("suggestions").executor = Suggestions()
@@ -62,6 +69,7 @@ class Flash : JavaPlugin() {
         getCommand("enderchest").executor = Enderchest()
         getCommand("help").executor = Help()
         getCommand("stats").executor = stats()
+        getCommand("msg").executor = Msg()
         server.pluginManager.registerEvents(Back(), this)
         server.pluginManager.registerEvents(EventsListener(), this)
         server.pluginManager.registerEvents(StaffChat(), this)
@@ -77,6 +85,7 @@ class Flash : JavaPlugin() {
     companion object {
         lateinit var sql: Connection
         lateinit var instance : Flash
+        lateinit var vaultChat : Chat
         var scEnabled = mutableListOf<Player>()
         var noPermission = "You don't have permission to do that.".error()
         var notPlayer = "You must be a player to do this.".error()

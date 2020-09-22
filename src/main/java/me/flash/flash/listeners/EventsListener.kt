@@ -95,7 +95,7 @@ fun motd(event: ServerListPingEvent) {
 @EventHandler
 fun onInventoryClick(event: InventoryClickEvent) {
     val player = event.whoClicked
-    if (Flash.instance.config.getStringList("hub").contains(player.world.name)) {
+    if (Flash.instance.config.getStringList("hub").contains(player.world.name) && !event.whoClicked.hasPermission("flash.gamemode.in.hub")) {
         if (event.viewers.contains(player)) event.isCancelled = true
     }
 }

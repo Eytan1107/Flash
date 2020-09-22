@@ -67,7 +67,7 @@ class Menu : CommandExecutor, Listener {
             }
             inventory.setItem(18, this) // Sets the item to the right slot
         }
-        val kitpvp = ItemStack(Material.DIAMOND_SWORD, 1).apply { // Creates the kitpvp inventory item
+        val kitpvp = ItemStack(Material.DIAMOND_CHESTPLATE, 1).apply { // Creates the kitpvp inventory item
             itemMeta = itemMeta.apply {
                 displayName = "&6&lKitPvP".color()
                 lore = listOf("&7Click to teleport to &9&lKitpvp".color(), "&7Players online: ".color() + Flash.playersInWorlds("kitpvp").size)
