@@ -1,4 +1,0 @@
-                sender.sendMessage("Teleporting you to Hub".prefix())
-                player.teleport(Bukkit1.getWorld("world").spawnLocation)
-                //player.teleport(Bukkit.getServer("hub").spawnLocation)
-                return true

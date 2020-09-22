@@ -117,10 +117,10 @@ class Menu : CommandExecutor, Listener {
                         }
                     })) {
                 player.sendMessage("Sending you to TnTRun".prefix()) // ChatMessage
-                player.teleport(Bukkit.getWorld("tntrun").spawnLocation) // Teleports the player tp TnTRunw
+                player.teleport(Bukkit.getWorld("tntrun").spawnLocation) // Teleports the player tp TnTRun
                 tagged.remove(event.inventory) // Unlocks the inventory
                 return true
-            } else if (event.currentItem.isSimilar(ItemStack(Material.DIAMOND_SWORD).apply { // Checks if the players clicks ONLY on the Diamond_Sword
+            } else if (event.currentItem.isSimilar(ItemStack(Material.DIAMOND_CHESTPLATE).apply { // Checks if the players clicks ONLY on the Diamond_Sword
                         itemMeta = itemMeta.apply {
                             displayName = "&6&lKitPvP".color()
                             lore = listOf("&7Click to teleport to &9&lKitpvp".color(), "&7Players online: ".color() + Flash.playersInWorlds("kitpvp").size)
