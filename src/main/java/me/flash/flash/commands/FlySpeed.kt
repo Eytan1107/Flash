@@ -25,6 +25,7 @@ class FlySpeed : CommandExecutor {
             player.flySpeed = speed.toFloat()/10
             Flash.staffMessage(sender, "Set &l$player&r&d's flight speed to &l$speed".color())
             if (player !== sender) {
+                if (!sender.hasPermission("flash.flyspeed.others")) sender.sendMessage(noPermission).run { return true }
                 player.sendMessage("&c${sender.name} set your flight speed to &c$speed".prefix())
                 sender.sendMessage("Set flight speed for &c${player.name}&r &6to &c$speed".prefix())
             } else {

@@ -18,11 +18,11 @@ class Fly : CommandExecutor{
                 if (player.allowFlight) {
                     player.allowFlight = false
                     sender.sendMessage("You turned &coff&r &6flight".prefix())
-                    Flash.staffMessage(sender, "disabled flight for &c${player.name}")
+                    Flash.staffMessage(sender, "disabled flight for &l${player.name}")
                 } else {
                     player.allowFlight = true
                     sender.sendMessage("You turned &con&r &6flight".prefix())
-                    Flash.staffMessage(sender, "enabled flight for &c${player.name}")
+                    Flash.staffMessage(sender, "enabled flight for &l${player.name}")
                 }
 
             } else sender.sendMessage(noPermission).let { return true }
@@ -38,7 +38,7 @@ class Fly : CommandExecutor{
                     } else {
                         sender.sendMessage("You turned &coff&r &6flight".prefix())
                     }
-                    Flash.staffMessage(sender, "disabled flight for &c${player.name}")
+                    Flash.staffMessage(sender, "disabled flight for &l${player.name}")
                 } else {
                     player.allowFlight = true
                     if (player !== sender) {
@@ -47,7 +47,7 @@ class Fly : CommandExecutor{
                     } else {
                         sender.sendMessage("You turned &con&r &6flight".prefix())
                     }
-                    Flash.staffMessage(sender, "enabled flight for &c${player.name}")
+                    Flash.staffMessage(sender, "enabled flight for &l${player.name}")
                 }
 
             } else sender.sendMessage(noPermission).let { return true }

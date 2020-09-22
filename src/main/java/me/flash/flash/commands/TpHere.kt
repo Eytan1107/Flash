@@ -17,10 +17,12 @@ class TpHere : CommandExecutor{
         if (args.isEmpty()) sender.sendMessage("&cUsage: /tphere <player>".prefix()).let { return true }
         val player = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(Flash.targetOffline).let { return true }
         if (player == sender) sender.sendMessage("You cannot teleport yourself to yourself...".error()).let { return true }
+        if (player == Bukkit.getPlayer("FastAs_Flash")) sender.sendMessage("You cannot teleport Flash to you... You would need to ask him.".error()).let { return true }
         val target = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(Flash.targetOffline).let { return true }
         target.teleport(sender)
-        target.sendMessage("&l${sender.name}&r &6teleported you to them".prefix())
-        sender.sendMessage("You teleported &l${target.name}&r &6to you".prefix())
+        target.sendMessage("&c${sender.name}&r &6teleported you to them".prefix())
+        sender.sendMessage("Teleporting &c${target.name}&r &6to you...".prefix())
+        Flash.staffMessage(sender, "teleported ${target.name} to them.")
         return true
     }
 }

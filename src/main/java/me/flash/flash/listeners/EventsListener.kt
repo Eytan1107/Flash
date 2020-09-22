@@ -40,21 +40,28 @@ class EventsListener : Listener {
                 replacement = ""
         )
         event.from.players.forEach { players ->
-            //player.sendMessage("test")
             player.sendMessage("&6[&3-&6] $name".color())
             if (players.hasPermission("Flash.fly")) {
                 players.allowFlight = true
                 players.isFlying = true
             }
         }
-        event.player.world.players.forEach { player ->
-            player.sendMessage("&6[&3+&6] ${event.player.name}".color())
+        event.player.world.players.forEach { players ->
+            players.sendMessage("&6[&3+&6] ${event.player.name}".color())
         }
     }
 
     @EventHandler
     fun join(event: PlayerJoinEvent) {
         val playerer = Bukkit.getPlayer(event.player.name)
+        if (playerer.hasPermission("flash.walkspeed")) {
+            val speed = 2
+            playerer.walkSpeed = speed.toFloat() / 10
+        }
+        if (playerer.hasPermission("flash.flyspeed")) {
+            val speedfly = 1
+            playerer.flySpeed = speedfly.toFloat() / 10
+        }
         playerer.teleport(Bukkit.getWorld("world").spawnLocation)
         event.player.world.players.forEach { players ->
             if (players.hasPermission("Flash.fly")) {
