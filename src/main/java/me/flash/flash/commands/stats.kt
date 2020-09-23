@@ -15,7 +15,8 @@ class stats : CommandExecutor {
         val result = Flash.sql.createStatement().executeQuery("SELECT * FROM data WHERE uuid = '$uuid'")
         while (result.next()) {
             val next = result.next()
-            player.sendMessage("Debug: $next")
+            player.sendMessage("Kills: " + result.getString("kills"))
+            player.sendMessage("Deaths: " + result.getString("deaths"))
         }
         return true
     }
