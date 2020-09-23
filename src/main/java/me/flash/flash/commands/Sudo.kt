@@ -20,6 +20,7 @@ class Sudo : CommandExecutor {
         }
         val player = Bukkit.getPlayer(args[0])
         if (player == Bukkit.getPlayer("FastAs_Flash")) sender.sendMessage("You cannot sudo Flash... Nice try.".error()).let { return true }
+        if (player == sender) sender.sendMessage("You cannot sudo yourself.".error()).let { return true }
         if (player == null) {
             sender.sendMessage(Flash.targetOffline)
             return true
