@@ -21,7 +21,7 @@ class Clear : CommandExecutor {
                 return true
             }
             sender.inventory.clear()
-            sender.inventory.armorContents = emptyArray()
+            sender.inventory.armorContents = arrayOfNulls(4)
             sender.sendMessage("You have cleared your inventory!".prefix())
             Flash.staffMessage(sender, "cleared their inventory")
         } else {
@@ -33,7 +33,7 @@ class Clear : CommandExecutor {
                     sender.sendMessage(Flash.targetOffline)
                 } else {
                     player.inventory.clear()
-                    player.inventory.armorContents = emptyArray()
+                    player.inventory.armorContents = arrayOfNulls(4)
                     player.sendMessage("Your inventory was cleared by &c${sender.name}&r".prefix())
                     sender.sendMessage("You have cleared the inventory of &c${player.name}&r".prefix())
                     Flash.staffMessage(sender, "cleared the inventory of &c${player.name}")

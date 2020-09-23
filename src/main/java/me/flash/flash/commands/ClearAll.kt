@@ -19,23 +19,21 @@ class ClearAll : CommandExecutor {
         if (sender !is Player) sender.sendMessage(Flash.notPlayer).let { return true }
         (args.firstOrNull() ?: "").let { arg ->
             if (arg != "confirm") {
-                val textComponent = TextComponent()
-                TextComponent.fromLegacyText("[&6Flash's Server&r] &6Click to clear everyone's inventory".color()).forEach { tc ->
-                    tc.apply {
-                        clickEvent = ClickEvent(ClickEvent.Action.RUN_COMMAND, "/clearall confirm")
-                        textComponent.addExtra(this)
-                    }
-                }
+                sender.spigot().sendMessage(TextComponent("Are you sure you want to clear everyone's inventories? This is not a reversible action.").apply {
+                    color = ChatColor.RED
+                    isBold = true
+                    clickEvent = ClickEvent(ClickEvent.Action.RUN_COMMAND, "/clearall confirm")
+                })
                 return true
             }
+            sender.world.players.forEach { player ->
+                player.inventory.clear()
+                player.inventory.armorContents = arrayOfNulls(4)
+                if (player != sender) player.sendMessage("Your inventory was cleared by &c${sender.name}&r".prefix())
+            }
+            sender.sendMessage("You have cleared the inventory of &c${sender.world.players.size} &6players.".prefix())
+            Flash.staffMessage(sender, "Cleared every player's inventory")
+            return true
         }
-        sender.world.players.forEach { player ->
-            player.inventory.clear()
-            player.inventory.armorContents = emptyArray()
-            player.sendMessage("Your inventory was cleared by &c${sender.name}&r".prefix())
-        }
-        sender.sendMessage("You have cleared the inventory of &c${sender.world.players.size} &6players.".prefix())
-        Flash.staffMessage(sender, "Cleared every player's inventory")
-        return true
     }
 }
