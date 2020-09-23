@@ -19,7 +19,7 @@ class Flash : JavaPlugin() {
         DriverManager.registerDriver(JDBC())
         sql = DriverManager.getConnection("jdbc:sqlite:" + File(dataFolder, "playerdata.db").absolutePath)
         instance = this
-        sql.createStatement().executeUpdate("create table if not exists data(uuid varchar(48), kills int default(0), deaths int default(0), primary key(uuid));")
+        sql.prepareStatement("create table if not exists data(uuid varchar(48), kills int default(0), deaths int default(0), primary key(uuid));").executeUpdate()
         sql.autoCommit = true
         saveDefaultConfig()
         try {

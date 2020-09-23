@@ -3,6 +3,7 @@ package me.flash.flash.listeners
 
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.color
+import me.flash.flash.Flash.Companion.sql
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.Statistic
@@ -53,6 +54,10 @@ class EventsListener : Listener {
 
     @EventHandler
     fun join(event: PlayerJoinEvent) {
+        sql.prepareStatement("insert into data(uuid) values (?)").apply {
+            setString(1, event.player.uniqueId.toString())
+            executeUpdate()
+        }
         val playerer = Bukkit.getPlayer(event.player.name)
         if (playerer.hasPermission("flash.walkspeed")) {
             val speed = 2
@@ -102,14 +107,14 @@ class EventsListener : Listener {
     @EventHandler
     fun onPlayerDeath(event: PlayerDeathEvent) { // nope
         if (event.entity.killer !is Player) return
-        event.entity.player.uniqueId.let { uuid ->
-            event.entity.killer.uniqueId.let { kuuid ->
-                Flash.sql.createStatement().executeUpdate("update data set deaths = deaths + 1 where uuid = '$uuid';")
-                Flash.sql.createStatement().executeUpdate("update data set kills = kills +1 where uuid = '$kuuid';").toString()
-            }
+        sql.prepareStatement("update data set deaths=deaths+1 where uuid=?").apply {
+            setString(1, event.entity.uniqueId.toString())
+            executeUpdate()
         }
-
-
+        sql.prepareStatement("update data set kills=kills+1 where uuid=?").apply {
+            setString(1, event.entity.uniqueId.toString())
+            executeUpdate()
+        }
         //event.entity.killer.uniqueId.let { uuid ->
         //        if (!Flash.sql.createStatement().executeQuery("SELECT uuid FROM main.data").equals("$uuid")) {
         //            Flash.sql.createStatement().execute("INSERT INTO main.data (uuid, deaths, kills) VALUES ('$uuid', 0, 0)")
