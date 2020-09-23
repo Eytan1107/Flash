@@ -112,7 +112,7 @@ class EventsListener : Listener {
             executeUpdate()
         }
         sql.prepareStatement("update data set kills=kills+1 where uuid=?").apply {
-            setString(1, event.entity.uniqueId.toString())
+            setString(1, event.entity.killer.uniqueId.toString())
             executeUpdate()
         }
         //event.entity.killer.uniqueId.let { uuid ->
