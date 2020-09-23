@@ -28,16 +28,16 @@ class FlySpeed : CommandExecutor {
                 if (!sender.hasPermission("flash.flyspeed.others")) sender.sendMessage(noPermission).run { return true }
                 player.sendMessage("&c${sender.name} set your flight speed to &c$speed".prefix())
                 sender.sendMessage("Set flight speed for &c${player.name}&r &6to &c$speed".prefix())
-                Flash.staffMessage(sender, "Set &l${player.name}&r&d's flight speed to $speed".color())
+                Flash.staffMessage(sender, "Set &l${player.name}&r&d's flight speed to &l$speed".color())
             } else {
                 sender.sendMessage("Set flight speed for &c${sender.name}&r &6to &c$speed".prefix())
-                Flash.staffMessage(sender, "Set their flight speed to $speed".color())
+                Flash.staffMessage(sender, "Set their flight speed to &l$speed".color())
             }
             return true
         }
         sender.flySpeed = speed.toFloat()/10
         sender.sendMessage("Set flight speed for &c${sender.name}&r &6to &c$speed".prefix())
-        Flash.staffMessage(sender, "Set their flight speed to $speed".color())
+        Flash.staffMessage(sender, "Set their flight speed to &l$speed".color())
         return true
     }
 }

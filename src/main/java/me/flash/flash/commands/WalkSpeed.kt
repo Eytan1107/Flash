@@ -31,13 +31,13 @@ class WalkSpeed : CommandExecutor {
             } else {
                 sender.walkSpeed = speed.toFloat().plus(2) / 17
                 sender.sendMessage("Set walk speed for &c${sender.name} &6to &c$speed".prefix())
-                Flash.staffMessage(sender, "Set their walk speed to $speed")
+                Flash.staffMessage(sender, "Set their walk speed to &l$speed")
                 return true
             }
         } else {
             sender.walkSpeed = speed.toFloat().plus(2) / 17
             sender.sendMessage("Set walk speed for &c${sender.name} &6to &c$speed".prefix())
-            Flash.staffMessage(sender, "Set their walk speed to $speed")
+            Flash.staffMessage(sender, "Set their walk speed to &l$speed")
             return true
         }
     }

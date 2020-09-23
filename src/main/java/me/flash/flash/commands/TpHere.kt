@@ -22,7 +22,7 @@ class TpHere : CommandExecutor{
         target.teleport(sender)
         target.sendMessage("&c${sender.name}&r &6teleported you to them".prefix())
         sender.sendMessage("Teleporting &c${target.name}&r &6to you...".prefix())
-        Flash.staffMessage(sender, "teleported ${target.name} to them.")
+        Flash.staffMessage(sender, "teleported &l${target.name} &dto them.")
         return true
     }
 }
