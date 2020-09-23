@@ -79,51 +79,45 @@ class EventsListener : Listener {
     }
 
 
-
-@EventHandler
-fun colors(event: AsyncPlayerChatEvent) {
-    if (event.player.hasPermission("flash.colors")) {
-        event.message = event.message.color()
-    }
-}
-
-@EventHandler
-fun motd(event: ServerListPingEvent) {
-    event.motd = "         \u00A76\u00A7lFlash's Server \u00A7c◀ 1.8 - 1.16 ▶\u00A7r\n                  \u00A7a\u00A7lKitPvP ◊ SkyBlock"
-}
-
-@EventHandler
-fun onInventoryClick(event: InventoryClickEvent) {
-    val player = event.whoClicked
-    if (Flash.instance.config.getStringList("hub").contains(player.world.name)) {
-        if (event.viewers.contains(player)) event.isCancelled = true
-    }
-}
-
-@EventHandler
-fun onPlayerDeath(event: PlayerDeathEvent) { // nope
-    //if (event.entity.killer !is Player) return
-    val uuid = event.entity.player.uniqueId.toString()
-    val result = Flash.sql.createStatement().execute("SELECT * FROM data WHERE uuid = '$uuid'")
-    if (!result) {
-        Flash.sql.createStatement().execute("insert into data VALUES ('$uuid', 1, 0)")
-    } else {
-        event.entity.player.sendMessage("works")
-        Flash.sql.createStatement().execute("update data set deaths = deaths + 1 where uuid = '$uuid';")
-        val result2 = Flash.sql.createStatement().executeLargeUpdate("select deaths from data where uuid = '$uuid'").toString()
-        event.entity.player.sendMessage("$result2")
-        Flash.sql.commit()
+    @EventHandler
+    fun colors(event: AsyncPlayerChatEvent) {
+        if (event.player.hasPermission("flash.colors")) {
+            event.message = event.message.color()
+        }
     }
 
+    @EventHandler
+    fun motd(event: ServerListPingEvent) {
+        event.motd = "         \u00A76\u00A7lFlash's Server \u00A7c◀ 1.8 - 1.16 ▶\u00A7r\n                  \u00A7a\u00A7lKitPvP ◊ SkyBlock"
+    }
 
-    //event.entity.killer.uniqueId.let { uuid ->
-    //        if (!Flash.sql.createStatement().executeQuery("SELECT uuid FROM main.data").equals("$uuid")) {
-    //            Flash.sql.createStatement().execute("INSERT INTO main.data (uuid, deaths, kills) VALUES ('$uuid', 0, 0)")
-    //        } else {
-    //            Flash.sql.createStatement().execute("update data set kills = kills + 1 where uuid = '$uuid'")
-    //        }
-    //    }
-}
+    @EventHandler
+    fun onInventoryClick(event: InventoryClickEvent) {
+        val player = event.whoClicked
+        if (Flash.instance.config.getStringList("hub").contains(player.world.name)) {
+            if (event.viewers.contains(player)) event.isCancelled = true
+        }
+    }
+
+    @EventHandler
+    fun onPlayerDeath(event: PlayerDeathEvent) { // nope
+        if (event.entity.killer !is Player) return
+        event.entity.player.uniqueId.let { uuid ->
+            event.entity.killer.uniqueId.let { kuuid ->
+                Flash.sql.createStatement().executeUpdate("update data set deaths = deaths + 1 where uuid = '$uuid';")
+                Flash.sql.createStatement().executeUpdate("update data set kills = kills +1 where uuid = '$kuuid';").toString()
+            }
+        }
+
+
+        //event.entity.killer.uniqueId.let { uuid ->
+        //        if (!Flash.sql.createStatement().executeQuery("SELECT uuid FROM main.data").equals("$uuid")) {
+        //            Flash.sql.createStatement().execute("INSERT INTO main.data (uuid, deaths, kills) VALUES ('$uuid', 0, 0)")
+        //        } else {
+        //            Flash.sql.createStatement().execute("update data set kills = kills + 1 where uuid = '$uuid'")
+        //        }
+        //    }
+    }
 // to get
 //Flash.sql.createStatement().executeQuery("select kills from data where uuid = '${event.entity.killer.uniqueId}'")
 

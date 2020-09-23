@@ -8,16 +8,19 @@ import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
+import org.sqlite.JDBC
 import java.io.File
 import java.sql.Connection
 import java.sql.DriverManager
 
 class Flash : JavaPlugin() {
     override fun onEnable() {
+        Class.forName("org.sqlite.JDBC")
+        DriverManager.registerDriver(JDBC())
         sql = DriverManager.getConnection("jdbc:sqlite:" + File(dataFolder, "playerdata.db").absolutePath)
         instance = this
-        sql.createStatement().execute("CREATE TABLE if not exists data(uuid varchar(48), kills int default(0), deaths int default(0))")
-        sql.autoCommit = false
+        sql.createStatement().executeUpdate("create table if not exists data(uuid varchar(48), kills int default(0), deaths int default(0), primary key(uuid));")
+        sql.autoCommit = true
         saveDefaultConfig()
         try {
             vaultChat = server.servicesManager.getRegistration(Chat::class.java).provider
@@ -96,7 +99,7 @@ class Flash : JavaPlugin() {
         fun String.error(): String = ("[&6Flash's Server&r] &cError: $this").color()
         fun String.usage(): String = ("[&6Flash's Server&r] &cUsage: /$this").color()
 
-        fun staffMessage(sender:CommandSender, action: String, vararg ignored: Player) {
+        fun staffMessage(sender: CommandSender, action: String, vararg ignored: Player) {
             val senders = mutableListOf<CommandSender>()
             senders.addAll(Bukkit.getOnlinePlayers().filter { p -> p.hasPermission("flash.staff") })
             senders.add(Bukkit.getConsoleSender())
@@ -109,7 +112,7 @@ class Flash : JavaPlugin() {
 
         fun playersInWorlds(server: String): MutableList<Player> {
             val players = mutableListOf<Player>()
-            for (s in instance.config.getStringList("server")) {
+            for (s in instance.config.getStringList(server)) {
                 players.addAll((Bukkit.getWorld(s) ?: continue).players)
             }
             return players
