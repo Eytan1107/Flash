@@ -2,6 +2,7 @@ package me.flash.flash.commands
 
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.color
+import me.flash.flash.Flash.Companion.error
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -29,15 +30,17 @@ class Loopkill : CommandExecutor {
                 sender.sendMessage("&cPlease specify a player".color())
             } else {
                 val player = Bukkit.getPlayer(args.first())
+                if (player == sender) sender.sendMessage("You can't loopkill Flash... Nice try.".error()).let { return true }
                 if (player == null) {
                     sender.sendMessage("&cPlayer &l${args.first()}&r &cwas not found, please check for any spelling errors and try again.".color())
                 } else {
                     if (tagged.contains(player)) {
                         sender.sendMessage("&aNo longer loopkilling ${player.name}".color())
-                        Flash.staffMessage(sender, "loop-killing ${player.name}")
+                        Flash.staffMessage(sender, "loop-killing &l${player.name}")
                         tagged.remove(player)
                     } else {
                         sender.sendMessage("&aLoopkilling ${player.name}".color())
+                        Flash.staffMessage(sender, "stopped loop-killing &l${player.name}")
                         tagged.add(player)
                     }
                 }

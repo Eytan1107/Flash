@@ -15,13 +15,14 @@ class F : CommandExecutor {
         if (args.isEmpty()){
             Bukkit.getOnlinePlayers().filter { p->Vanish.vanishedPlayers.contains(p) }.forEach { player->
                 player.chat("F")
+                Flash.staffMessage(sender, "Ran the F command")
             }
         } else {
             Bukkit.getOnlinePlayers().forEach { player->
                 player.chat(args.joinToString(" "))
+                Flash.staffMessage(sender, "Ran the sudo command on all players")
             }
         }
-        Flash.staffMessage(sender, "Ran the F command")
         return true
     }
 }

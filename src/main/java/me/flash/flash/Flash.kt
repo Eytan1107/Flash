@@ -36,6 +36,7 @@ class Flash : JavaPlugin() {
         getCommand("broadcast").executor = Broadcast()
         getCommand("clear").executor = Clear()
         getCommand("check").executor = Check()
+        getCommand("Reply").executor = Reply()
         getCommand("colorlist").executor = Colorlist()
         getCommand("craft").executor = Craft()
         getCommand("discord").executor = Discord()

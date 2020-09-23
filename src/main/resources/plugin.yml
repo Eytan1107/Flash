@@ -144,3 +144,8 @@ commands:
       - send
       - tell
       - m
+  reply:
+    description: reply to someone
+    aliases:
+      - r
+      - respond

@@ -35,7 +35,7 @@ class ClearAll : CommandExecutor {
             player.sendMessage("Your inventory was cleared by &c${sender.name}&r".prefix())
         }
         sender.sendMessage("You have cleared the inventory of &c${sender.world.players.size} &6players.".prefix())
-        Flash.staffMessage(sender, "Cleared everyones inventory")
+        Flash.staffMessage(sender, "Cleared every player's inventory")
         return true
     }
 }

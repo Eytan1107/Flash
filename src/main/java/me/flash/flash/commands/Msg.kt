@@ -20,6 +20,11 @@ class Msg : CommandExecutor {
         val prefix = vaultChat.getPlayerPrefix(player)
         sender.sendMessage("&7(&aTo $prefix${player.name}&7)&a ".color() + args.toMutableList().apply { removeAt(0) }.joinToString (" "))
         player.sendMessage("&7(&aFrom &4$senderprefix${sender.name}&7)&a ".color() + args.toMutableList().apply { removeAt(0) }.joinToString (" "))
+        lastMessaged[sender] = player
+        lastMessaged[player] = sender
         return true
+    }
+    companion object{
+        val lastMessaged = mutableMapOf<CommandSender, CommandSender>()
     }
 }
