@@ -15,7 +15,7 @@ class Reply : CommandExecutor {
             if (it is ConsoleCommandSender) sender.sendMessage("You cannot reply to the console".error()).run { return true }
             else if (it !is Player) sender.sendMessage("Pretty interesting that you got a message from an animal, can't reply to it though :)".error()).run { return true }
             else it
-        } ?: sender.sendMessage("Nobody to reply to".error()).run { return true }
+        } ?: sender.sendMessage("You have no one to reply to.".error()).run { return true }
         val senderPrefix = if (sender is Player) Flash.vaultChat.getPlayerPrefix(sender) else "&4".color()
         val playerPrefix = Flash.vaultChat.getPlayerPrefix(player)
         sender.sendMessage("&7(&aTo $playerPrefix${player.name}&7)&a ".color() + args.toMutableList().joinToString (" "))
