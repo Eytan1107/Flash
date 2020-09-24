@@ -20,8 +20,8 @@ class Reply : CommandExecutor {
         val playerPrefix = Flash.vaultChat.getPlayerPrefix(player)
         val suffix = Flash.vaultChat.getPlayerSuffix(player)
         val sendersuffix = if (sender is Player) Flash.vaultChat.getPlayerSuffix(sender) else ""
-        if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("&a(To $playerPrefix${player.name}&a) ".color() + args.toMutableList().joinToString (" ")) else sender.sendMessage("&bTo $playerPrefix${player.name}&8:$suffix ".color() + args.toMutableList().joinToString (" "))
-        if (!player.hasPermission("flash.msg.nice")) player.sendMessage("&a(From $senderPrefix${sender.name}&a) ".color() + args.toMutableList().joinToString (" ")) else player.sendMessage("&bFrom $senderPrefix${sender.name}&8:$sendersuffix ".color() + args.toMutableList().joinToString (" "))
+        if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("&a(To $playerPrefix${player.name}&a) ".color() + args.toMutableList().joinToString (" ").color()) else sender.sendMessage("&bTo $playerPrefix${player.name}&8:$suffix ".color() + args.toMutableList().joinToString (" ").color())
+        if (!player.hasPermission("flash.msg.nice")) player.sendMessage("&a(From $senderPrefix${sender.name}&a) ".color() + args.toMutableList().joinToString (" ").color()) else player.sendMessage("&bFrom $senderPrefix${sender.name}&8:$sendersuffix ".color() + args.toMutableList().joinToString (" ").color())
         return true
     }
 }
