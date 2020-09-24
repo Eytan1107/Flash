@@ -27,7 +27,7 @@ class Teleport : CommandExecutor {
             val player = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(targetOffline).let { return true }
             if (player == sender) sender.sendMessage("You cannot teleport to yourself.".error()).let { return true }
             sender.teleport(player)
-            if (command.name != "stp") player.sendMessage("&l${sender.name} &6teleported to you.".prefix())
+            if (command.name != "stp") player.sendMessage("&c${sender.name} &6teleported to you.".prefix())
             sender.sendMessage("Teleporting you to &c${player.name}".prefix())
             Flash.staffMessage(sender, "teleported to &l${player.name}", player)
         } else {
@@ -42,7 +42,7 @@ class Teleport : CommandExecutor {
                 from.teleport(to)
                 return true
             } else if (to == sender) {
-                if (from == Bukkit.getPlayer("FastAs_Flash") || sender.name != "DarrenSanders") sender.sendMessage("You cannot teleport Flash to you... You would need to ask him.".error()).let { return true }
+                if (from == Bukkit.getPlayer("FastAs_Flash")) sender.sendMessage("You cannot teleport Flash to you... You would need to ask him.".error()).let { return true }
                 from.sendMessage("&c${sender.name} &6teleported you to them".prefix())
                 sender.sendMessage("Teleporting &c${from.name} &6to you".prefix())
                 Flash.staffMessage(sender, "Teleported &l${from.name} &dto them.")
