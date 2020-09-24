@@ -29,7 +29,7 @@ class Wake : CommandExecutor{
             }
             Flash.async.execute{
                 for (i in 1..5) {
-                    player.playSound(player.location, Sound.NOTE_PIANO, 100f, 1f)
+                    player.playSound(player.location, Sound.NOTE_PLING, 100f, 1f)
                     Thread.sleep(200)
                 }
             }
