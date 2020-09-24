@@ -42,7 +42,7 @@ class Fly : CommandExecutor{
                 } else {
                     player.allowFlight = true
                     if (player !== sender) {
-                        sender.sendMessage("You turned &con&r &6flight".prefix())
+                        sender.sendMessage("You turned &con&r &6flight &6for &c${player.name}".prefix())
                         player.sendMessage("&c${sender.name}&r &6Turned &con&r &6your flight".prefix())
                     } else {
                         sender.sendMessage("You turned &con&r &6flight".prefix())
