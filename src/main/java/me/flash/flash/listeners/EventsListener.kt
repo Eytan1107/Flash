@@ -17,10 +17,12 @@ import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.player.*
 import org.bukkit.event.server.ServerListPingEvent
 import org.bukkit.plugin.java.JavaPlugin
+import kotlin.concurrent.timer
 
 class EventsListener : Listener {
     @EventHandler
     fun leave(event: PlayerQuitEvent) {
+        val time =  System.currentTimeMillis()
         event.player.world.players.forEach { players ->
             val name = event.player.name
             name.replace(
