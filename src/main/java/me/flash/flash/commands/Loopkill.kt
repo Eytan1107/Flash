@@ -37,11 +37,12 @@ class Loopkill : CommandExecutor {
                     sender.sendMessage("&cPlayer &l${args.first()}&r &cwas not found, please check for any spelling errors and try again.".color())
                 } else {
                     if (tagged.contains(player)) {
-                        sender.sendMessage("&aNo longer loopkilling &l${player.name}".color())
+                        if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("&aNo longer loopkilling &c${player.name}".prefix()) else sender.sendMessage("&aNo longer loopkilling &l${player.name}".prefix())
                         Flash.staffMessage(sender, "loop-killing &l${player.name}")
                         tagged.remove(player)
                     } else {
-                        sender.sendMessage("&aLoopkilling &l${player.name}".color())
+                        if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("&aLoopkilling &l${player.name}".prefix()) else sender.sendMessage("&aLoopkilling &l${player.name}".prefix())
+                        sender.sendMessage("".color())
                         Flash.staffMessage(sender, "stopped loop-killing &l${player.name}")
                         tagged.add(player)
                     }

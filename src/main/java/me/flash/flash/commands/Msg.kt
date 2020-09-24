@@ -3,6 +3,7 @@ package me.flash.flash.commands
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.color
 import me.flash.flash.Flash.Companion.error
+import me.flash.flash.Flash.Companion.prefix
 import me.flash.flash.Flash.Companion.vaultChat
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
@@ -20,8 +21,8 @@ class Msg : CommandExecutor {
         if (args.size == 1) sender.sendMessage("You need to enter a message!".error()).let { return true }
         val prefix = vaultChat.getPlayerPrefix(player)
         val suffix = vaultChat.getPlayerSuffix(player)
-        sender.sendMessage("&bTo $prefix${player.name}&8:$suffix ".color() + args.toMutableList().apply { removeAt(0) }.joinToString (" "))
-        player.sendMessage("&bFrom $senderprefix${sender.name}&8:$sendersuffix ".color() + args.toMutableList().apply { removeAt(0) }.joinToString (" "))
+        if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("") else sender.sendMessage("&bTo $prefix${player.name}&8:$suffix ".color() + args.toMutableList().apply { removeAt(0) }.joinToString (" "))
+        if (!player.hasPermission("flash.msg.nice")) player.sendMessage("") else player.sendMessage("&bFrom $senderprefix${sender.name}&8:$sendersuffix ".color() + args.toMutableList().apply { removeAt(0) }.joinToString (" "))
         lastMessaged[sender] = player
         lastMessaged[player] = sender
         return true

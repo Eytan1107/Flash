@@ -30,7 +30,7 @@ class Check : CommandExecutor {
                 "tntrun" -> "TnTRun"
                 else -> player.world.name
             }
-            sender.sendMessage("${player.name} is in &c$name".prefix())
+            if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("${player.name} is in &c$name".prefix()) else sender.sendMessage("${player.name} is in &l$name")
             sender.sendMessage("${player.name} has &c${player.health} &6health".prefix())
         }
         return true

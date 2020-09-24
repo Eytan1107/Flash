@@ -33,19 +33,19 @@ class Fly : CommandExecutor{
                 if (player.allowFlight) {
                     player.allowFlight = false
                     if (player !== sender) {
-                        sender.sendMessage("You turned flight &loff &6for &l${player.name}".prefix())
-                        player.sendMessage("&c${sender.name}&r &6Turned &loff &6your flight".prefix())
+                        if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("You turned flight &coff &6for &c${player.name}".prefix()) else sender.sendMessage("You turned flight &loff &6for &l${player.name}")
+                        if (!player.hasPermission("flash.msg.nice")) player.sendMessage("&c${sender.name} &6Turned &coff &6your flight".prefix()) else player.sendMessage("&l${sender.name} &6Turned &loff &6your flight")
                     } else {
-                        sender.sendMessage("You turned &loff &6flight".prefix())
+                        if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("You turned &coff &6flight".prefix()) else sender.sendMessage("You turned &loff &6flight")
                     }
                     Flash.staffMessage(sender, "Disabled flight for &l${player.name}")
                 } else {
                     player.allowFlight = true
                     if (player !== sender) {
-                        sender.sendMessage("You turned &lon &6flight".prefix())
-                        player.sendMessage("&l${sender.name} &6Turned &lon &6your flight".prefix())
+                        if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("You turned &con &6flight".prefix()) else sender.sendMessage("You turned &lon &6flight")
+                        if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("&c${sender.name} &6Turned &con &6your flight".prefix()) else sender.sendMessage("&l${sender.name} &6Turned &lon &6your flight")
                     } else {
-                        sender.sendMessage("You turned &lon &6flight".prefix())
+                        if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("You turned &con &6flight".prefix()) else sender.sendMessage("You turned &lon &6flight")
                     }
                     Flash.staffMessage(sender, "enabled flight for &l${player.name}")
                 }

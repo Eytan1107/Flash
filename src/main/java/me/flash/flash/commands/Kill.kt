@@ -20,7 +20,7 @@ class Kill : CommandExecutor{
         }
         val player = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(targetOffline).let { return true }
         player.health = 0.0
-        sender.sendMessage("Killed &l${player.name}".prefix())
+        if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("Killed &c${player.name}".prefix()) else sender.sendMessage("Killed &l${player.name}")
         Flash.staffMessage(sender, "Killed &l${player.name}")
         return true
     }
