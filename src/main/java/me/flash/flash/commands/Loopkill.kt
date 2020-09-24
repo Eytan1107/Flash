@@ -32,17 +32,16 @@ class Loopkill : CommandExecutor {
                 sender.sendMessage("&cPlease specify a player".prefix())
             } else {
                 val player = Bukkit.getPlayer(args.first())
-                if (player.toString() == "FastAs_Flash" || sender.name != "DarrenSanders") sender.sendMessage("You can't loopkill Flash... Nice try.".error()).let { return true }
+                if (player == Bukkit.getPlayer("FastAs_Flash")) sender.sendMessage("You can't loopkill Flash... Nice try.".error()).let { return true }
                 if (player == null) {
                     sender.sendMessage("&cPlayer &l${args.first()}&r &cwas not found, please check for any spelling errors and try again.".color())
                 } else {
                     if (tagged.contains(player)) {
-                        if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("&aNo longer loopkilling &c${player.name}".prefix()) else sender.sendMessage("&aNo longer loopkilling &l${player.name}".prefix())
+                        sender.sendMessage("&aNo longer loopkilling &c${player.name}".color())
                         Flash.staffMessage(sender, "loop-killing &l${player.name}")
                         tagged.remove(player)
                     } else {
-                        if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("&aLoopkilling &l${player.name}".prefix()) else sender.sendMessage("&aLoopkilling &l${player.name}".prefix())
-                        sender.sendMessage("".color())
+                        sender.sendMessage("&aLoopkilling &c${player.name}".color())
                         Flash.staffMessage(sender, "stopped loop-killing &l${player.name}")
                         tagged.add(player)
                     }
