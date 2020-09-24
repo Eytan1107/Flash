@@ -1,4 +1,4 @@
-#worlds
+# Here are all the worlds
 kitpvpworld:
   - "kitpvp"
 hub: 
@@ -12,10 +12,12 @@ builds:
    - "builds"
 event: 
    - "event"
+
+# DO NOT TOUCH
 name:
   - "%eazynick_display_name%"
 
-#motd
+# Here is the MOTD
 motd:
   - "         \u00A76\u00A7lFlash's Server \u00A7c◀ 1.8 - 1.16 ▶\u00A7r\n                  \u00A7a\u00A7lKitPvP ◊ SkyBlock"
 
