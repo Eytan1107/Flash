@@ -149,3 +149,5 @@ commands:
     aliases:
       - r
       - respond
+  speed:
+    description: change speed

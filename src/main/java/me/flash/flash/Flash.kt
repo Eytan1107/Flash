@@ -1,7 +1,9 @@
 package me.flash.flash
 
+import com.avaje.ebeaninternal.server.lib.thread.ThreadPoolManager
 import me.flash.flash.commands.*
 import me.flash.flash.listeners.EventsListener
+import me.flash.flash.variables.ParsedArgsSilent
 import net.milkbowl.vault.chat.Chat
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
@@ -12,27 +14,31 @@ import org.sqlite.JDBC
 import java.io.File
 import java.sql.Connection
 import java.sql.DriverManager
+import java.util.concurrent.Executors
 
 class Flash : JavaPlugin() {
     override fun onEnable() {
+        saveDefaultConfig()
         Class.forName("org.sqlite.JDBC")
         DriverManager.registerDriver(JDBC())
-        sql = DriverManager.getConnection("jdbc:sqlite:" + File(dataFolder, "playerdata.db").absolutePath)
+        playerdata = DriverManager.getConnection("jdbc:sqlite:" + File(dataFolder, "playerdata.db").absolutePath)
+        suggestionsdb = DriverManager.getConnection("jdbc:sqlite:" + File(dataFolder, "suggestions.db").absolutePath)
         instance = this
-        sql.prepareStatement("create table if not exists data(uuid varchar(48), kills int default(0), deaths int default(0), primary key(uuid));").executeUpdate()
-        sql.autoCommit = true
-        saveDefaultConfig()
+        playerdata.prepareStatement("create table if not exists data(uuid varchar(48), kills int default(0), deaths int default(0), time int default(0), primary key(uuid));").executeUpdate()
+        playerdata.autoCommit = true
+        suggestionsdb.prepareStatement("create table if not exists suggestion(uuid varchar(48), text varchar(256));").executeUpdate()
+        suggestionsdb.autoCommit = true
         try {
             vaultChat = server.servicesManager.getRegistration(Chat::class.java).provider
         } catch (e: Exception) {
             println("Vault isn't installed! The plugin cannot enable.")
             server.pluginManager.disablePlugin(this)
-            return //im done lol
+            return
         }
         getCommand("feed").executor = Feed()
         getCommand("hub").executor = Hub()
-       // todo getCommand("suggest").executor = Suggest()
-       // todo getCommand("suggestions").executor = Suggestions()
+        getCommand("suggest").executor = Suggest()
+        getCommand("suggestions").executor = Suggestions()
         getCommand("broadcast").executor = Broadcast()
         getCommand("clear").executor = Clear()
         getCommand("check").executor = Check()
@@ -56,6 +62,7 @@ class Flash : JavaPlugin() {
         getCommand("tphere").executor = TpHere()
         getCommand("flyspeed").executor = FlySpeed()
         getCommand("walkspeed").executor = WalkSpeed()
+        getCommand("speed").executor = Speed()
         getCommand("gamemode").executor = GameMode()
         getCommand("gmsp").executor = ShGameMode()
         getCommand("gma").executor = ShGameMode()
@@ -86,10 +93,13 @@ class Flash : JavaPlugin() {
         // todo Suggestion file saving
     }
 
+    @Suppress("unused")
     companion object {
-        lateinit var sql: Connection
+        lateinit var playerdata: Connection
+        lateinit var suggestionsdb: Connection
         lateinit var instance : Flash
         lateinit var vaultChat : Chat
+        val async = Executors.newFixedThreadPool(5)
         var scEnabled = mutableListOf<Player>()
         var noPermission = "You don't have permission to do that.".error()
         var notPlayer = "You must be a player to do this.".error()
@@ -109,6 +119,19 @@ class Flash : JavaPlugin() {
             senders.forEach {
                 it.sendMessage("&d[S] &5${sender.name}: &d$action".color())
             }
+        }
+
+        fun parse(args: Array<out String>) : ParsedArgsSilent {
+            val a = mutableListOf(*args)
+            var found = false
+            a.toList().forEachIndexed { index, s ->
+                if (s.matches(Regex("-s(?:ilent)?"))) {
+                    a.removeAt(index)
+                    found = true
+                    return@forEachIndexed
+                }
+            }
+            return ParsedArgsSilent(a.toList() as ArrayList<String>, found)
         }
 
         fun playersInWorlds(server: String): MutableList<Player> {

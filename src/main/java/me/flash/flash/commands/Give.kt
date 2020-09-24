@@ -3,6 +3,7 @@ package me.flash.flash.commands
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.color
 import me.flash.flash.Flash.Companion.error
+import me.flash.flash.Flash.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.command.Command
@@ -21,7 +22,7 @@ class Give : CommandExecutor {
                 return true
             }
             args.size < 2 -> {
-                sender.sendMessage("&cUsage: /give [player] [item] <count>")
+                sender.sendMessage("&cUsage: /give [player] [item] <count>".prefix())
             }
             else -> {
                 val player = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(Flash.targetOffline).run { return true }

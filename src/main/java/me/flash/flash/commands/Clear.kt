@@ -35,7 +35,7 @@ class Clear : CommandExecutor {
                     player.inventory.armorContents = arrayOfNulls(4)
                     player.sendMessage("Your inventory was cleared by &c${sender.name}&r".prefix())
                     sender.sendMessage("You have cleared the inventory of &c${player.name}&r".prefix())
-                    Flash.staffMessage(sender, "cleared the inventory of &c${player.name}")
+                    Flash.staffMessage(sender, "cleared the inventory of &l${player.name}")
                 }
             }
         }

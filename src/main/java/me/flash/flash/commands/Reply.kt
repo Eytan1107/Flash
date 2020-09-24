@@ -15,11 +15,13 @@ class Reply : CommandExecutor {
             if (it is ConsoleCommandSender) sender.sendMessage("You cannot reply to the console".error()).run { return true }
             else if (it !is Player) sender.sendMessage("Pretty interesting that you got a message from an animal, can't reply to it though :)".error()).run { return true }
             else it
-        } ?: sender.sendMessage("You have no one to reply to.".error()).run { return true }
-        val senderPrefix = if (sender is Player) Flash.vaultChat.getPlayerPrefix(sender) else "&4".color()
+        } ?: sender.sendMessage("You have no one to reply to. :(".error()).run { return true }
+        val senderPrefix = if (sender is Player) Flash.vaultChat.getPlayerPrefix(sender) else "".color()
         val playerPrefix = Flash.vaultChat.getPlayerPrefix(player)
-        sender.sendMessage("&7(&aTo $playerPrefix${player.name}&7)&a ".color() + args.toMutableList().joinToString (" "))
-        player.sendMessage("&7(&aFrom &4$senderPrefix${sender.name}&7)&a ".color() + args.toMutableList().joinToString (" "))
+        val suffix = Flash.vaultChat.getPlayerSuffix(player)
+        val sendersuffix = if (sender is Player) Flash.vaultChat.getPlayerSuffix(sender) else ""
+        if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("&7(&aTo $playerPrefix${player.name}&7)&2 ".color() + args.toMutableList().joinToString (" ")) else sender.sendMessage("&bTo $playerPrefix${player.name}&8:$suffix ".color() + args.toMutableList().joinToString (" "))
+        if (!player.hasPermission("flash.msg.nice")) player.sendMessage("&7(&aFrom $senderPrefix${sender.name}&7)&2 ".color() + args.toMutableList().joinToString (" ")) else player.sendMessage("&bFrom $senderPrefix${sender.name}&8:$sendersuffix ".color() + args.toMutableList().joinToString (" "))
         return true
     }
 }

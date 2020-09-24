@@ -3,24 +3,20 @@ package me.flash.flash.listeners
 
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.color
-import me.flash.flash.Flash.Companion.sql
+import me.flash.flash.Flash.Companion.playerdata
 import org.bukkit.Bukkit
-import org.bukkit.Material
-import org.bukkit.Statistic
-import org.bukkit.conversations.PlayerNamePrompt
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-import org.bukkit.event.block.Action
 import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.player.*
 import org.bukkit.event.server.ServerListPingEvent
-import org.bukkit.plugin.java.JavaPlugin
 
 class EventsListener : Listener {
     @EventHandler
     fun leave(event: PlayerQuitEvent) {
+        val time =  System.currentTimeMillis()
         event.player.world.players.forEach { players ->
             val name = event.player.name
             name.replace(
@@ -54,7 +50,7 @@ class EventsListener : Listener {
 
     @EventHandler
     fun join(event: PlayerJoinEvent) {
-        sql.prepareStatement("insert into data(uuid) values (?)").apply {
+        playerdata.prepareStatement("insert into data(uuid) values (?)").apply {
             setString(1, event.player.uniqueId.toString())
             executeUpdate()
         }
@@ -93,7 +89,7 @@ class EventsListener : Listener {
 
     @EventHandler
     fun motd(event: ServerListPingEvent) {
-        event.motd = "         \u00A76\u00A7lFlash's Server \u00A7c◀ 1.8 - 1.16 ▶\u00A7r\n                  \u00A7a\u00A7lKitPvP ◊ SkyBlock"
+        event.motd = Flash.instance.config.getString("motd")
     }
 
     @EventHandler
@@ -107,11 +103,11 @@ class EventsListener : Listener {
     @EventHandler
     fun onPlayerDeath(event: PlayerDeathEvent) { // nope
         if (event.entity.killer !is Player) return
-        sql.prepareStatement("update data set deaths=deaths+1 where uuid=?").apply {
+        playerdata.prepareStatement("update data set deaths=deaths+1 where uuid=?").apply {
             setString(1, event.entity.uniqueId.toString())
             executeUpdate()
         }
-        sql.prepareStatement("update data set kills=kills+1 where uuid=?").apply {
+        playerdata.prepareStatement("update data set kills=kills+1 where uuid=?").apply {
             setString(1, event.entity.killer.uniqueId.toString())
             executeUpdate()
         }

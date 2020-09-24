@@ -20,8 +20,8 @@ class TpHere : CommandExecutor{
         if (player == Bukkit.getPlayer("FastAs_Flash")) sender.sendMessage("You cannot teleport Flash to you... You would need to ask him.".error()).let { return true }
         val target = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(Flash.targetOffline).let { return true }
         target.teleport(sender)
-        target.sendMessage("&c${sender.name}&r &6teleported you to them".prefix())
-        sender.sendMessage("Teleporting &c${target.name}&r &6to you...".prefix())
+        target.sendMessage("&c${sender.name} &6teleported you to them".prefix())
+        sender.sendMessage("Teleporting &c${target.name} &6to you...".prefix())
         Flash.staffMessage(sender, "teleported &l${target.name} &dto them.")
         return true
     }

@@ -29,9 +29,10 @@ class ClearAll : CommandExecutor {
             sender.world.players.forEach { player ->
                 player.inventory.clear()
                 player.inventory.armorContents = arrayOfNulls(4)
-                if (player != sender) player.sendMessage("Your inventory was cleared by &c${sender.name}&r".prefix())
+                if (player != sender) player.sendMessage("Your inventory was cleared by &l${sender.name}&r".prefix())
             }
-            sender.sendMessage("You have cleared the inventory of &c${sender.world.players.size} &6players.".prefix())
+            if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("You have cleared the inventory of &c${sender.world.players.size} &6players.".prefix()) else sender.sendMessage("You have cleared the inventory of &l${sender.world.players.size} &6players.")
+            sender.sendMessage("".prefix())
             Flash.staffMessage(sender, "Cleared every player's inventory")
             return true
         }
