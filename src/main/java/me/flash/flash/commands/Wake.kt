@@ -20,17 +20,17 @@ class Wake : CommandExecutor{
                 sender.sendMessage("wake <player> <message>".usage())
             }
             val player = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(Flash.targetOffline).run { return true }
-            player.sendTitle("&c".color() + sender.name, "&7Is requesting your attention".prefix())
+            player.sendTitle("&c".color() + sender.name, "&7Is requesting your attention".color())
             args.toMutableList().apply { removeAt(0) }.let {
                 player.sendMessage("&7---------------------".color())
-                player.sendMessage("&c&l" + sender.name + " is requesting your attention.".color())
-                player.sendMessage("&7Message: " + it.joinToString(" ").color())
+                player.sendMessage(("&c&l" + sender.name + " is requesting your attention.".color()))
+                player.sendMessage(("&7Message: " + it.joinToString(" ").color()))
                 player.sendMessage("&7---------------------".color())
             }
             Flash.async.execute{
-                for (i in 1..10) {
+                for (i in 1..5) {
                     player.playSound(player.location, Sound.NOTE_PIANO, 100f, 1f)
-                    Thread.sleep(100)
+                    Thread.sleep(200)
                 }
             }
         } else {
