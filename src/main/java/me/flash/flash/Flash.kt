@@ -1,9 +1,7 @@
 package me.flash.flash
 
-import com.avaje.ebeaninternal.server.lib.thread.ThreadPoolManager
 import me.flash.flash.commands.*
 import me.flash.flash.listeners.EventsListener
-import me.flash.flash.variables.ParsedArgsSilent
 import net.milkbowl.vault.chat.Chat
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
@@ -120,19 +118,6 @@ class Flash : JavaPlugin() {
             senders.forEach {
                 it.sendMessage("&d[S] &5${sender.name}: &d$action".color())
             }
-        }
-
-        fun parse(args: Array<out String>) : ParsedArgsSilent {
-            val a = mutableListOf(*args)
-            var found = false
-            a.toList().forEachIndexed { index, s ->
-                if (s.matches(Regex("-s(?:ilent)?"))) {
-                    a.removeAt(index)
-                    found = true
-                    return@forEachIndexed
-                }
-            }
-            return ParsedArgsSilent(a.toList() as ArrayList<String>, found)
         }
 
         fun playersInWorlds(server: String): MutableList<Player> {
