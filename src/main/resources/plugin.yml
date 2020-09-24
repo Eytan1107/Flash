@@ -8,6 +8,9 @@ commands:
     description: Feed a player
   hub:
     description: Go back to hub
+    aliases:
+      - lobby
+      - l
   loopkill:
     description: Loop Kill a player
   broadcast:
