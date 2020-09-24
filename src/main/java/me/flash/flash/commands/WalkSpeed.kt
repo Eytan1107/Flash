@@ -23,14 +23,14 @@ class WalkSpeed : CommandExecutor {
         if (args.size == 2) {
             val player = Bukkit.getPlayer(args.last()) ?: sender.sendMessage(Flash.targetOffline).run { return true }
             if (player !== sender) {
-                player.sendMessage("&l${sender.name} &6set your walk speed to &c$speed".prefix())
+                player.sendMessage("&c${sender.name} &6set your walk speed to &c$speed".prefix())
                 sender.sendMessage("Set walk speed for &c${player.name} &6to &c$speed".prefix())
                 Flash.staffMessage(sender, "Set &l$player&d's walk speed to &l$speed".color())
                 player.walkSpeed = speed.toFloat().plus(2) / 17
                 return true
             } else {
                 sender.walkSpeed = speed.toFloat().plus(2) / 17
-                sender.sendMessage("Set walk speed for &l${sender.name} &6to &l$speed".prefix())
+                sender.sendMessage("Set walk speed for &c${sender.name} &6to &c$speed".prefix())
                 Flash.staffMessage(sender, "Set their walk speed to &l$speed")
                 return true
             }
