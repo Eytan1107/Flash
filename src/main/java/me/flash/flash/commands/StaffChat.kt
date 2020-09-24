@@ -18,11 +18,11 @@ class StaffChat : CommandExecutor, Listener{
         if (!sender.hasPermission("flash.staffchat")) sender.sendMessage(Flash.noPermission).let { return true }
         if (args.isEmpty()) {
             if (Flash.scEnabled.contains(sender)) {
-                sender.sendMessage("You have &ldisabled&r &6staffchat.".prefix())
+                sender.sendMessage("You have &ldisabled &6staffchat.".prefix())
                 Flash.scEnabled.remove(sender)
             }
             else {
-                sender.sendMessage("You have &lenabled&r &6staffchat.".prefix())
+                sender.sendMessage("You have &lenabled &6staffchat.".prefix())
                 Flash.scEnabled.add(sender)
             }
         }

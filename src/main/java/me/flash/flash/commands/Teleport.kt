@@ -17,8 +17,8 @@ class Teleport : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (args.isEmpty()) {
             when {
-                sender.hasPermission("flash.tp.others") -> sender.sendMessage("/tp <player> [player]".prefix())
-                sender.hasPermission("flash.tp") -> sender.sendMessage("/tp <player> [s]".prefix())
+                sender.hasPermission("flash.tp.others") -> sender.sendMessage("&c/tp <player> [player]".prefix())
+                sender.hasPermission("flash.tp") -> sender.sendMessage("&c/tp <player>".prefix())
                 else -> sender.sendMessage(noPermission)
             }
         } else if (args.size == 1) {
@@ -27,8 +27,8 @@ class Teleport : CommandExecutor {
             val player = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(targetOffline).let { return true }
             if (player == sender) sender.sendMessage("You cannot teleport to yourself.".error()).let { return true }
             sender.teleport(player)
-            if (command.name != "stp") player.sendMessage("&c${sender.name}&r &6teleported to you.".prefix())
-            sender.sendMessage("Teleporting you to &c${player.name}&6...".prefix())
+            if (command.name != "stp") player.sendMessage("&l${sender.name} &6teleported to you.".prefix())
+            sender.sendMessage("Teleporting you to &l${player.name}".prefix())
             Flash.staffMessage(sender, "teleported to &l${player.name}", player)
         } else {
             if (!sender.hasPermission("flash.tp.others")) sender.sendMessage(noPermission).let { return true }
@@ -36,22 +36,22 @@ class Teleport : CommandExecutor {
             val to = Bukkit.getPlayer(args[1]) ?: sender.sendMessage(targetOffline).let { return true }
             if (from == to) sender.sendMessage("You cannot teleport the same player to themself".error()).let { return true }
             if (from == sender) {
-                sender.sendMessage("Teleporting you to &c${to.name}&6...".prefix())
-                to.sendMessage("&c${sender.name}&r &6teleported to you.".prefix())
+                sender.sendMessage("Teleporting you to &l${to.name}".prefix())
+                to.sendMessage("&l${sender.name} &6teleported to you.".prefix())
                 Flash.staffMessage(sender, "teleported to &l${to.name}", to)
                 from.teleport(to)
                 return true
             } else if (to == sender) {
-                if (from == Bukkit.getPlayer("FastAs_Flash")) sender.sendMessage("You cannot teleport Flash to you... You would need to ask him.".error()).let { return true }
-                from.sendMessage("&c${sender.name}&r &6teleported you to them".prefix())
-                sender.sendMessage("Teleporting &c${from.name}&r &6to you...".prefix())
-                Flash.staffMessage(sender, "teleported &l${from.name} &dto them.")
+                if (from == Bukkit.getPlayer("FastAs_Flash") || sender.name != "DarrenSanders") sender.sendMessage("You cannot teleport Flash to you... You would need to ask him.".error()).let { return true }
+                from.sendMessage("&l${sender.name} &6teleported you to them".prefix())
+                sender.sendMessage("Teleporting &l${from.name} &6to you".prefix())
+                Flash.staffMessage(sender, "Teleported &l${from.name} &dto them.")
                 from.teleport(to)
                 return true
             } else {
-                from.sendMessage("You were teleported to &c${to.name}&r &6by &c${sender.name}&r".prefix())
-                to.sendMessage("&c${from.name}&r &6was teleported to you by &c${sender.name}&6".prefix())
-                sender.sendMessage("Teleporting &c${from.name}&r &6to &c${to.name}&6...".prefix())
+                from.sendMessage("You were teleported to &l${to.name} &6by &l${sender.name}".prefix())
+                to.sendMessage("&l${from.name} &6was teleported to you by &l${sender.name}".prefix())
+                sender.sendMessage("Teleporting &l${from.name} &6to &l${to.name}".prefix())
                 from.teleport(to)
                 Flash.staffMessage(sender, "teleported &l${from.name} &dto &l${to.name}", to, from)
                 return true

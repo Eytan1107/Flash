@@ -1,6 +1,7 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
+import me.flash.flash.Flash.Companion.error
 import me.flash.flash.Flash.Companion.prefix
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -25,7 +26,7 @@ class Craft : CommandExecutor {
                 if (sender.hasPermission("flash.craft.all")) {
                     sender.openWorkbench(null, true)
                 } else {
-                    sender.sendMessage("&cYou must be in KitPvP or SkyBlock to do that.".prefix())
+                    sender.sendMessage("You must be in KitPvP or SkyBlock to do that.".error())
                 }
             }
         }

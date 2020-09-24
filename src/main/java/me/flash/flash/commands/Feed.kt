@@ -31,8 +31,8 @@ class Feed : CommandExecutor {
                     sender.sendMessage("You have been fed".prefix())
                 } else {
                     player.foodLevel = Int.MAX_VALUE
-                    player.sendMessage("You were fed by &c${sender.name}&r".prefix())
-                    sender.sendMessage("You have fed &c${player.name}&r".prefix())
+                    player.sendMessage("You were fed by &l${sender.name}&r".prefix())
+                    sender.sendMessage("You have fed &l${player.name}&r".prefix())
                 }
                 Flash.staffMessage(sender, "fed ${player.name}")
             } else {

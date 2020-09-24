@@ -15,12 +15,12 @@ class Kill : CommandExecutor{
             return true
         }
         if (args.isEmpty()) {
-            sender.sendMessage("Usage: /kill <player>".prefix())
+            sender.sendMessage("&cUsage: /kill <player>".prefix())
             return true
         }
         val player = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(targetOffline).let { return true }
         player.health = 0.0
-        sender.sendMessage("Killed ${player.name}")
+        sender.sendMessage("Killed &l${player.name}".prefix())
         Flash.staffMessage(sender, "Killed &l${player.name}")
         return true
     }
