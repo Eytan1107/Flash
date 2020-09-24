@@ -23,8 +23,8 @@ class Wake : CommandExecutor{
             player.sendTitle("&c".color() + sender.name, "&7Is requesting your attention".color())
             args.toMutableList().apply { removeAt(0) }.let {
                 player.sendMessage("&7---------------------".color())
-                player.sendMessage(("&c&l" + sender.name + " is requesting your attention.".color()))
-                player.sendMessage(("&7Message: " + it.joinToString(" ").color()))
+                player.sendMessage(("&c&l" + sender.name + " is requesting your attention.").color())
+                player.sendMessage(("&7Message: " + it.joinToString(" ")).color())
                 player.sendMessage("&7---------------------".color())
             }
             Flash.async.execute{
