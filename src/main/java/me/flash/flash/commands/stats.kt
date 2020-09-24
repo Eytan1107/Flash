@@ -9,11 +9,6 @@ import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
-import org.bukkit.event.EventHandler
-import java.sql.Connection
-import java.util.*
-import kotlin.NoSuchElementException
-import kotlin.math.log
 
 // soon to be check player
 class stats : CommandExecutor {
@@ -22,7 +17,7 @@ class stats : CommandExecutor {
             val player = Bukkit.getPlayer(sender.name) ?: sender.sendMessage(notPlayer).let { return true }
             val uuid = player.uniqueId.toString()
                 if (player.uniqueId.toString() == uuid) {
-                    val result = Flash.sql.createStatement().executeQuery("SELECT * FROM data WHERE uuid = '$uuid'")
+                    val result = Flash.playerdata.createStatement().executeQuery("SELECT * FROM data WHERE uuid = '$uuid'")
                     while (result.next()) {
                         player.sendMessage("&6Your stats are:".color())
                         player.sendMessage("&eKills: ".color() + result.getInt("kills"))
@@ -34,7 +29,7 @@ class stats : CommandExecutor {
             val uuid2 = player2.uniqueId.toString()
             if (player2.uniqueId.toString() == uuid2) {
                 if (!sender.hasPermission("flash.staff")) sender.sendMessage(noPermission).let { return true }
-                val result2 = Flash.sql.createStatement().executeQuery("SELECT * FROM data WHERE uuid = '$uuid2'")
+                val result2 = Flash.playerdata.createStatement().executeQuery("SELECT * FROM data WHERE uuid = '$uuid2'")
                 while (result2.next()) {
                     sender.sendMessage("&6The stats of: ${args.first()} are:".color())
                     sender.sendMessage("&eKills: ".color() + result2.getInt("kills"))

@@ -32,13 +32,14 @@ class StaffChat : CommandExecutor, Listener{
     @EventHandler(ignoreCancelled = true)
     fun chat(event: AsyncPlayerChatEvent) {
         if (!event.player.hasPermission("flash.staffchat")) return
+        val senderprefix = Flash.vaultChat.getPlayerPrefix(event.player)
         var message = event.message
         val ov = message.startsWith("# ")
         if (Flash.scEnabled.contains(event.player) || ov) {
             if (ov) message = message.replaceFirst("# ", "")
             event.isCancelled = true
             Bukkit.getOnlinePlayers().filter { player -> player.hasPermission("flash.staffchat") }.forEach {
-                it.sendMessage("&b[S] &3${event.player.name}: &b$message".color())
+                it.sendMessage("&b[S] ${senderprefix}${event.player.name}: &b$message".color())
             }
         }
     }
