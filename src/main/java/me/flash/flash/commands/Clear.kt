@@ -1,7 +1,6 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.noPermission
 import me.flash.flash.Flash.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
@@ -17,7 +16,7 @@ class Clear : CommandExecutor {
                 return true
             }
             if (!sender.hasPermission("flash.clear")) {
-                sender.sendMessage(noPermission)
+                sender.sendMessage(Flash.noPermission)
                 return true
             }
             sender.inventory.clear()
