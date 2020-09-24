@@ -151,5 +151,9 @@ commands:
       - respond
   speed:
     description: change speed
+  build:
+    description: turn build on or off
+    aliases:
+      - break
   wake:
     description: Wake up someone who fell asleep

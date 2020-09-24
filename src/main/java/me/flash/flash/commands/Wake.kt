@@ -27,7 +27,7 @@ class Wake : CommandExecutor{
                 player.sendMessage(("&7Message: " + it.joinToString(" ")).color())
                 player.sendMessage("&7---------------------".color())
             }
-            Flash.async.execute{
+            Bukkit.getScheduler().runTaskAsynchronously(Flash.instance) {
                 for (i in 1..5) {
                     player.playSound(player.location, Sound.NOTE_PLING, 100f, 1f)
                     Thread.sleep(200)

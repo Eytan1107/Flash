@@ -2,7 +2,6 @@ package me.flash.flash.commands
 
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.color
-import me.flash.flash.Flash.Companion.error
 import me.flash.flash.Flash.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
@@ -18,7 +17,7 @@ class Suggestions : CommandExecutor {
             return true
         }
         sender.sendMessage("Here is the suggestions list :".prefix())
-        Flash.async.execute{
+        Bukkit.getScheduler().runTaskAsynchronously(Flash.instance) {
             Flash.suggestionsdb.prepareStatement("select * from suggestion").executeQuery().let { result ->
                 var on = 0
                 while (result.next()) {

@@ -71,6 +71,7 @@ class Flash : JavaPlugin() {
         getCommand("kits").executor = Kits()
         getCommand("menu").executor = Menu()
         getCommand("vanish").executor = Vanish()
+        getCommand("build").executor = Build()
         getCommand("server").apply {
             executor = Server()
             tabCompleter = Server()
@@ -83,6 +84,7 @@ class Flash : JavaPlugin() {
         server.pluginManager.registerEvents(Back(), this)
         server.pluginManager.registerEvents(EventsListener(), this)
         server.pluginManager.registerEvents(StaffChat(), this)
+        server.pluginManager.registerEvents(Build(), this)
         server.pluginManager.registerEvents(Menu(), this)
         server.pluginManager.registerEvents(Compass(), this)
         //TODO suggestion file reading
@@ -98,7 +100,6 @@ class Flash : JavaPlugin() {
         lateinit var suggestionsdb: Connection
         lateinit var instance : Flash
         lateinit var vaultChat : Chat
-        val async = Executors.newFixedThreadPool(5)
         var scEnabled = mutableListOf<Player>()
         var noPermission = "You don't have permission to do that.".error()
         var notPlayer = "You must be a player to do this.".error()
