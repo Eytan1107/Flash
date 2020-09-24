@@ -26,6 +26,7 @@ class Wake : CommandExecutor{
                 player.sendMessage(("&c&l" + sender.name + " is requesting your attention.").color())
                 player.sendMessage(("&7Message: " + it.joinToString(" ")).color())
                 player.sendMessage("&7---------------------".color())
+                sender.sendMessage("Wake message sent to &c${player.name}".prefix())
             }
             Bukkit.getScheduler().runTaskAsynchronously(Flash.instance) {
                 for (i in 1..5) {

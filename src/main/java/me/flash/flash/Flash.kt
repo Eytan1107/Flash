@@ -12,7 +12,6 @@ import org.sqlite.JDBC
 import java.io.File
 import java.sql.Connection
 import java.sql.DriverManager
-import java.util.concurrent.Executors
 
 class Flash : JavaPlugin() {
     override fun onEnable() {
@@ -81,6 +80,7 @@ class Flash : JavaPlugin() {
         getCommand("stats").executor = stats()
         getCommand("msg").executor = Msg()
         getCommand("wake").executor = Wake()
+        getCommand("sethub").executor = SetHub()
         server.pluginManager.registerEvents(Back(), this)
         server.pluginManager.registerEvents(EventsListener(), this)
         server.pluginManager.registerEvents(StaffChat(), this)

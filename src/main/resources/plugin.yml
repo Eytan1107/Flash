@@ -157,3 +157,5 @@ commands:
       - break
   wake:
     description: Wake up someone who fell asleep
+  sethub:
+    description: Set a hub
