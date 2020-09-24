@@ -81,6 +81,7 @@ class Flash : JavaPlugin() {
         getCommand("help").executor = Help()
         getCommand("stats").executor = stats()
         getCommand("msg").executor = Msg()
+        getCommand("wake").executor = Wake()
         server.pluginManager.registerEvents(Back(), this)
         server.pluginManager.registerEvents(EventsListener(), this)
         server.pluginManager.registerEvents(StaffChat(), this)

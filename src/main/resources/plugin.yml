@@ -151,3 +151,5 @@ commands:
       - respond
   speed:
     description: change speed
+  wake:
+    description: Wake up someone who fell asleep
