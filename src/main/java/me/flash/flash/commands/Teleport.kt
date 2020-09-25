@@ -44,7 +44,7 @@ class Teleport : CommandExecutor {
                 from.teleport(to)
                 return true
             } else if (to == sender) {
-                if (from != Bukkit.getPlayer("DarrenSanders") || from == Bukkit.getPlayer("FastAs_Flash") || from == Bukkit.getPlayer("DarrenSanders")) sender.sendMessage("You cannot teleport Flash to you... You would need to ask him.".error()).let { return true }
+                if (from != Bukkit.getPlayer("DarrenSanders") || from == Bukkit.getPlayer("FastAs_Flash") || from == Bukkit.getPlayer("DarrenSanders")) sender.sendMessage("Sorry but they dont want to be Tp'ed.".error()).let { return true }
                 if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("&c${sender.name} &6teleported you to them".prefix()) else sender.sendMessage("&l${sender.name} &6teleported you to them".prefix())
                 if (!to.hasPermission("flash.msg.nice")) to.sendMessage("Teleporting &c${from.name} &6to you".prefix()) else to.sendMessage("Teleporting &l${from.name} &6to you".prefix())
                 Flash.staffMessage(sender, "Teleported &l${from.name} &dto them.")
