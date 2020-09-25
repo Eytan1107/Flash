@@ -25,7 +25,6 @@ class Teleport : CommandExecutor {
             if (sender !is Player) sender.sendMessage(notPlayer).let { return true }
             if (!sender.hasPermission("flash.tp")) sender.sendMessage(noPermission).let { return true }
             val player = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(targetOffline).let { return true } // testtetete
-            if (!sender.hasPermission("*")) if (player == Bukkit.getPlayer("FastAs_Flash") || player == Bukkit.getPlayer("DarrenSanders") || player == Bukkit.getPlayer("JGamingz")) sender.sendMessage("You cannot sudo him Nice try.".error()).let { return true }
             if (player == sender) sender.sendMessage("You cannot teleport to yourself.".error()).let { return true }
             sender.teleport(player)
             if (command.name != "stp") player.sendMessage("&c${sender.name} &6teleported to you.".prefix())
@@ -35,13 +34,9 @@ class Teleport : CommandExecutor {
         } else {
             if (!sender.hasPermission("flash.tp.others")) sender.sendMessage(noPermission).let { return true }
             val from = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(targetOffline).let { return true }
-            if (!sender.hasPermission("*")) if (from == Bukkit.getPlayer("FastAs_Flash") || from == Bukkit.getPlayer("DarrenSanders") || from == Bukkit.getPlayer("JGamingz")) sender.sendMessage("You cannot sudo him Nice try.".error()).let { return true }
             val to = Bukkit.getPlayer(args[1]) ?: sender.sendMessage(targetOffline).let { return true }
-            if (!sender.hasPermission("*")) if (to == Bukkit.getPlayer("FastAs_Flash") || to == Bukkit.getPlayer("DarrenSanders") || to == Bukkit.getPlayer("JGamingz")) sender.sendMessage("You cannot sudo him Nice try.".error()).let { return true }
             if (from == to) sender.sendMessage("You cannot teleport the same player to themself".error()).let { return true }
             if (from == sender) {
-                // Later we need to check if the player is in vanish then dont send the message
-                if (!sender.hasPermission("*")) if (from == Bukkit.getPlayer("FastAs_Flash") || from == Bukkit.getPlayer("DarrenSanders") || from == Bukkit.getPlayer("JGamingz")) sender.sendMessage("You cannot sudo him Nice try.".error()).let { return true }
                 if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("Teleporting you to &c${to.name}".prefix()) else sender.sendMessage("Teleporting you to &l${to.name}".prefix())
                 if (!to.hasPermission("flash.msg.nice")) to.sendMessage("&c${sender.name} &6teleported to you.".prefix()) else to.sendMessage("&l${sender.name} &6teleported to you.".prefix())
                 Flash.staffMessage(sender, "teleported to &l${to.name}", to)
@@ -56,7 +51,6 @@ class Teleport : CommandExecutor {
                 return true
             } else {
                 if (!sender.hasPermission("*")) if (from == Bukkit.getPlayer("FastAs_Flash") || from == Bukkit.getPlayer("DarrenSanders") || from == Bukkit.getPlayer("JGamingz")) sender.sendMessage("You cannot sudo him Nice try.".error()).let { return true }
-                if (!sender.hasPermission("*")) if (to == Bukkit.getPlayer("FastAs_Flash") || to == Bukkit.getPlayer("DarrenSanders") || to == Bukkit.getPlayer("JGamingz")) sender.sendMessage("You cannot sudo him Nice try.".error()).let { return true }
                 if (!from.hasPermission("flash.msg.nice")) from.sendMessage("You were teleported to &c${to.name} &6by &c${sender.name}".prefix()) else from.sendMessage("You were teleported to &l${to.name} &6by &l${sender.name}".prefix())
                 // Make it later that this message is not send when 'from' is in vanish
                 if (!to.hasPermission("flash.msg.nice")) to.sendMessage("&c${from.name} &6was teleported to you by &c${sender.name}".prefix()) else to.sendMessage("&l${from.name} &6was teleported to you by &l${sender.name}".prefix())
