@@ -16,14 +16,16 @@ class Suggestions : CommandExecutor {
             sender.sendMessage(Flash.notPlayer)
             return true
         }
-        sender.sendMessage("Here is the suggestions list :".prefix())
-        Bukkit.getScheduler().runTaskAsynchronously(Flash.instance) {
-            Flash.suggestionsdb.prepareStatement("select * from suggestion").executeQuery().let { result ->
-                var on = 0
-                while (result.next()) {
-                    var suggestion = result.getString("text")
-                    if (suggestion.length > 50) suggestion = suggestion.substring(0, 50) + "..."
-                    sender.sendMessage("&e${++on}. &9${Bukkit.getOfflinePlayer(UUID.fromString(result.getString("uuid"))).name} - &e${suggestion}".color())
+        if (args.isEmpty()) {
+            sender.sendMessage("Here is the suggestions list :".prefix())
+            Bukkit.getScheduler().runTaskAsynchronously(Flash.instance) {
+                Flash.suggestionsdb.prepareStatement("select * from suggestion").executeQuery().let { result ->
+                    var on = 0
+                    while (result.next()) {
+                        var suggestion = result.getString("text")
+                        if (suggestion.length > 50) suggestion = suggestion.substring(0, 50) + "..."
+                        sender.sendMessage("&e${++on}. &9${Bukkit.getOfflinePlayer(UUID.fromString(result.getString("uuid"))).name} - &e${suggestion}".color())
+                    }
                 }
             }
         }

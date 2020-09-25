@@ -22,7 +22,6 @@ class Clear : CommandExecutor {
             sender.inventory.clear()
             sender.inventory.armorContents = arrayOfNulls(4)
             sender.sendMessage("You have cleared your inventory!".prefix())
-            Flash.staffMessage(sender, "cleared their inventory")
         } else {
             if (!sender.hasPermission("flash.clear.others")) {
                 sender.sendMessage(Flash.noPermission)
