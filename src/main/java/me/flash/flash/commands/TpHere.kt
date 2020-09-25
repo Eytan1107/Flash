@@ -17,7 +17,7 @@ class TpHere : CommandExecutor{
         if (args.isEmpty()) sender.sendMessage("&cUsage: /tphere <player>".prefix()).let { return true }
         val player = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(Flash.targetOffline).let { return true }
         if (player == sender) sender.sendMessage("You cannot teleport yourself to yourself...".error()).let { return true }
-        if (sender != Bukkit.getPlayer("DarrenSanders") || sender != Bukkit.getPlayer("FastAs_Flash")) if (player == Bukkit.getPlayer("FastAs_Flash") || player == Bukkit.getPlayer("DarrenSanders")) sender.sendMessage("He doesn't want to be tped".error()).let { return true }
+        if (!sender.hasPermission("*")) if (sender == Bukkit.getPlayer("DarrenSanders") || sender == Bukkit.getPlayer("FastAs_Flash") || sender == Bukkit.getPlayer("JGamingz")) sender.sendMessage("You cannot tp this player to you.".error()).let { return true }
         val target = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(Flash.targetOffline).let { return true }
         target.teleport(sender)
         if (!target.hasPermission("flash.msg.nice")) target.sendMessage("&c${sender.name} &6teleported you to them".prefix()) else target.sendMessage("&l${sender.name} &6teleported you to them".prefix())
