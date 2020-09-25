@@ -48,10 +48,3 @@ compileTestKotlin {
         jvmTarget = "1.8"
     }
 }
-
-task copyJarToBin {
-    copy {
-        from 'build/libs/Flash-' + version + '.jar'
-        into "C:\\Users\\Skeagle\\Documents\\VRN Network\\Dev 1.8.8\\plugins"
-    }
-}
