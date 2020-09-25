@@ -26,7 +26,7 @@ class Kill : CommandExecutor{
         }
         if (args.isEmpty()) {
             sender.health = 0.00
-            sender.sendMessage("You have killed yourself".prefix())
+            sender.sendMessage("You have killed yourself, Do you want to talk about it?".prefix())
             return true
         }
         parsed.toList().forEachIndexed { index, s ->
@@ -38,9 +38,9 @@ class Kill : CommandExecutor{
         }
         val player = Bukkit.getPlayer(parsed.first()) ?: sender.sendMessage(targetOffline).run { return true }
         player.health = 0.00
-        sender.sendMessage("You have killed &c${player.name}".prefix())
+        if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("You have killed &c${player.name}".prefix()) else sender.sendMessage("You have killed &l${player.name}".prefix())
         if (notSilent) {
-            player.sendMessage("You have been killed by &c${sender.name}".prefix())
+            if (!player.hasPermission("flash.msg.nice")) player.sendMessage("You have been killed by &c${sender.name}".prefix()) else player.sendMessage("You have been killed by &l${sender.name}".prefix())
             Flash.staffMessage(sender,"Killed &l${player.name}", player)
         }
         return true

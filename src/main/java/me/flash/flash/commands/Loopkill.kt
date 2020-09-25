@@ -34,14 +34,14 @@ class Loopkill : CommandExecutor {
                 val player = Bukkit.getPlayer(args.first())
                 if (player == Bukkit.getPlayer("FastAs_Flash")) sender.sendMessage("You can't loopkill Flash... Nice try.".error()).let { return true }
                 if (player == null) {
-                    sender.sendMessage("&cPlayer &l${args.first()}&r &cwas not found, please check for any spelling errors and try again.".color())
+                    sender.sendMessage("&cPlayer &l${args.first()}&r &cwas not found, please check for any spelling errors and try again.".error())
                 } else {
                     if (tagged.contains(player)) {
-                        sender.sendMessage("&aNo longer loopkilling &c${player.name}".color())
+                        sender.sendMessage("&aNo longer loopkilling &c${player.name}".prefix())
                         Flash.staffMessage(sender, "loop-killing &l${player.name}")
                         tagged.remove(player)
                     } else {
-                        sender.sendMessage("&aLoopkilling &c${player.name}".color())
+                        sender.sendMessage("&aLoopkilling &c${player.name}".prefix())
                         Flash.staffMessage(sender, "stopped loop-killing &l${player.name}")
                         tagged.add(player)
                     }

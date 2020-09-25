@@ -5,6 +5,7 @@ import me.flash.flash.Flash.Companion.color
 import me.flash.flash.Flash.Companion.error
 import me.flash.flash.Flash.Companion.noPermission
 import me.flash.flash.Flash.Companion.playersInWorlds
+import me.flash.flash.Flash.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.command.Command
@@ -21,6 +22,7 @@ class GameMode : CommandExecutor {
             if (sender !is Player) sender.sendMessage("&cUsage : /gamemode [gamemode] [player]".color()).run { return true }
             if (!sender.hasPermission("flash.gamemode")) sender.sendMessage(Flash.noPermission).run { return true }
             else {
+                if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("".prefix()) else sender.sendMessage("".prefix())
                 val gameMode = parseGamemode(args.first()) ?: sender.sendMessage("That is not a valid gamemode!".error()).run { return true }
                 sender.gameMode = gameMode
                 Flash.staffMessage(sender, "Set their gamemode to &l${gameMode.name.toLowerCase()}&d.")
@@ -31,8 +33,8 @@ class GameMode : CommandExecutor {
             if (!sender.hasPermission("flash.gamemode.others")) sender.sendMessage(noPermission).run { return true }
             player.gameMode = gameMode
             Flash.staffMessage(sender, "Set &l${player.name}&d's gamemode to &l${gameMode.name.toLowerCase()}&d.", player)
-            player.sendMessage("Your gamemode was set to &c${gameMode.name.toLowerCase()} &6by &c${sender.name}&6.")
-            sender.sendMessage("You set &c${player.name}&6's gamemode to &c${gameMode.name.toLowerCase()}&6.")
+            if (!player.hasPermission("flash.msg.nice")) player.sendMessage("Your gamemode was set to &c${gameMode.name.toLowerCase()} &6by &c${sender.name}&6.".prefix()) else player.sendMessage("Your gamemode was set to &l${gameMode.name.toLowerCase()} &6by &l${sender.name}&6.".prefix())
+            if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("You set &c${player.name}'s&6 gamemode to &c${gameMode.name.toLowerCase()}&6.".prefix()) else sender.sendMessage("You set &l${player.name}'s&6 gamemode to &l${gameMode.name.toLowerCase()}&6.".prefix())
         }
         return true
     }

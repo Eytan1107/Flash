@@ -37,19 +37,19 @@ class Build : CommandExecutor, Listener {
                 }
                 if (toggled.contains(player.uniqueId)) {
                     toggled.remove(player.uniqueId)
-                    if (sender == player) sender.sendMessage("Build mode turned &lOFF".prefix())
+                    if (sender == player) if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("Build mode turned &cOFF".prefix()) else sender.sendMessage("Build mode turned &lOFF".prefix())
                     else {
                         if (!sender.hasPermission("flash.build.others")) sender.sendMessage(noPermission).let { return true }
-                        sender.sendMessage(("Build mode turned &lOFF &6for &l" + player.name).prefix())
-                        player.sendMessage(("Build mode turned &lOFF &6by &l" + sender.name).prefix()) // on join, if player has permissions 1 and 2 : turn off build (doesnt work in worlds island_normal_world and builds)
+                        if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage(("Build mode turned &cOFF &6for &c" + player.name).prefix()) else sender.sendMessage(("Build mode turned &lOFF &6for &l" + player.name).prefix())
+                        if (!player.hasPermission("flash.msg.nice")) player.sendMessage(("Build mode turned &cOFF &6by &c" + sender.name).prefix()) else player.sendMessage(("Build mode turned &lOFF &6by &l" + sender.name).prefix())  // on join, if player has permissions 1 and 2 : turn off build (doesnt work in worlds island_normal_world and builds)
                     }
                 } else {
                     toggled.add(player.uniqueId)
                     if (sender == player) sender.sendMessage("Build mode turned &lON".prefix())
                     else {
                         if (!sender.hasPermission("flash.build.others")) sender.sendMessage(noPermission).let { return true }
-                        sender.sendMessage(("Build mode turned &lON &6for &l" + player.name).prefix())
-                        player.sendMessage(("Build mode turned &lON &6by &l" + sender.name).prefix())
+                        if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage(("Build mode turned &aON &6for &a" + player.name).prefix()) else sender.sendMessage(("Build mode turned &lON &6for &l" + player.name).prefix())
+                        if (!player.hasPermission("flash.msg.nice")) player.sendMessage(("Build mode turned &aON &6by &a" + sender.name).prefix()) else player.sendMessage(("Build mode turned &lON &6by &l" + sender.name).prefix())
                     }
                 }
             }

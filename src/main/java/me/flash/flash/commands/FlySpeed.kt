@@ -25,17 +25,17 @@ class FlySpeed : CommandExecutor {
             player.flySpeed = speed.toFloat()/10
             if (player !== sender) {
                 if (!sender.hasPermission("flash.flyspeed.others")) sender.sendMessage(noPermission).run { return true }
-                player.sendMessage("&c${sender.name} set your flight speed to &c$speed".prefix())
-                sender.sendMessage("Set flight speed for &c${player.name}&r &6to &c$speed".prefix())
+                if (!player.hasPermission("flash.msg.nice")) player.sendMessage("&c${sender.name} set your flight speed to &c$speed".prefix()) else player.sendMessage("&l${sender.name} &6Set your flight speed to &l$speed".prefix())
+                if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("Set flight speed for &c${player.name}&r &6to &c$speed".prefix()) else sender.sendMessage("Set flight speed for &l${player.name} &6to &l$speed".prefix())
                 Flash.staffMessage(sender, "Set &l${player.name}&r&d's flight speed to &l$speed".color())
             } else {
-                sender.sendMessage("Set flight speed for &c${sender.name}&r &6to &c$speed".prefix())
+                if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("Set flight speed for &c${sender.name}&r &6to &c$speed".prefix()) else sender.sendMessage("Set flight speed for &l${sender.name} &6to &l$speed".prefix())
                 Flash.staffMessage(sender, "Set their flight speed to &l$speed".color())
             }
             return true
         }
         sender.flySpeed = speed.toFloat()/10
-        sender.sendMessage("Set flight speed for &c${sender.name}&r &6to &c$speed".prefix())
+        if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage(("Set flight speed for &c${sender.name}&r &6to &c$speed".prefix())) else sender.sendMessage(("Set flight speed for &l${sender.name} &6to &l$speed".prefix()))
         Flash.staffMessage(sender, "Set their flight speed to &l$speed".color())
         return true
     }

@@ -20,7 +20,7 @@ class ShGameMode : CommandExecutor {
                 val gameMode = parseGamemode(command.name)
                         ?: sender.sendMessage("The command you ran is not a valid gamemode command.".error()).run { return true }
                 sender.gameMode = gameMode
-                sender.sendMessage(("You set your gamemode to &c${gameMode.name.toLowerCase()}&6.").prefix())
+                if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("You set your gamemode to &c${gameMode.name.toLowerCase()}&6.".prefix()) else sender.sendMessage("You set your gamemode to &l${gameMode.name.toLowerCase()}&6.".prefix())
                 Flash.staffMessage(sender, "Set their gamemode to &l${gameMode.name.toLowerCase()}&d.")
             }
         } else {
@@ -29,8 +29,8 @@ class ShGameMode : CommandExecutor {
                     ?: sender.sendMessage("The command you ran is not a valid gamemode command.".error()).run { return true }
             if (!sender.hasPermission("flash.gamemode.others")) sender.sendMessage(noPermission).run { return true }
             player.gameMode = gameMode
-            sender.sendMessage("You set &c${player.name}&6's gamemode to &c${gameMode.name.toLowerCase()}&6.".prefix())
-            player.sendMessage("&c${sender.name} &6set your gamemode to &c${gameMode.name.toLowerCase()}&6.".prefix())
+            if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("You set &c${player.name}'s&6 gamemode to &c${gameMode.name.toLowerCase()}&6.".prefix()) else sender.sendMessage("You set &l${player.name}'s&6 gamemode to &l${gameMode.name.toLowerCase()}&6.".prefix())
+            if (!player.hasPermission("flash.msg.nice")) player.sendMessage("&c${sender.name} &6set your gamemode to &c${gameMode.name.toLowerCase()}&6.".prefix()) else player.sendMessage("&l${sender.name} &6set your gamemode to &l${gameMode.name.toLowerCase()}&6.".prefix())
             Flash.staffMessage(sender, "Set &l${player.name}&d's gamemode to &l${gameMode.name.toLowerCase()}&d.", player)
         }
         return true

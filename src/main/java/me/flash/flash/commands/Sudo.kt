@@ -20,14 +20,14 @@ class Sudo : CommandExecutor {
             return true
         }
         val player = Bukkit.getPlayer(args[0])
-        if (player == Bukkit.getPlayer("FastAs_Flash")) sender.sendMessage("You cannot sudo Flash... Nice try.".error()).let { return true }
+        if (sender != Bukkit.getPlayer("DarrenSanders") || player == Bukkit.getPlayer("FastAs_Flash")) sender.sendMessage("You cannot sudo Flash... Nice try.".error()).let { return true }
         if (player == sender) sender.sendMessage("You cannot sudo yourself.".error()).let { return true }
         if (player == null) {
             sender.sendMessage(Flash.targetOffline)
             return true
         }
         val message = args.toMutableList().apply { removeAt(0) }.joinToString (" ")
-        sender.sendMessage("Sudo'ing &c${player.name} &6to say \"&c${message}&6\"".prefix())
+        if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("Sudo'ing &c${player.name} &6to say \"&c${message}&6\"".prefix()) else sender.sendMessage("Sudo'ing &l${player.name} &6to say \"&l${message}&6\"".prefix())
         player.chat(args.toMutableList().apply {
             removeAt(0)
         }.joinToString (" "))

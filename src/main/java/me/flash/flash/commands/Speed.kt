@@ -24,8 +24,8 @@ class Speed : CommandExecutor {
         if (args.size == 2) {
             val player = Bukkit.getPlayer(args.last()) ?: sender.sendMessage(Flash.targetOffline).run { return true }
             if (player !== sender) {
-                player.sendMessage("&l${sender.name} &6set your speed to &c$speed".prefix())
-                sender.sendMessage("Set speed for &c${player.name} &6to &c$speed".prefix())
+                if (!player.hasPermission("flash.msg.nice")) player.sendMessage("&c${sender.name} &6set your speed to &c$speed".prefix()) else player.sendMessage("&l${sender.name} &6set your speed to &l$speed".prefix())
+                if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("Set speed for &c${player.name} &6to &c$speed".prefix()) else sender.sendMessage("Set speed for &l${player.name} &6to &l$speed".prefix())
                 Flash.staffMessage(sender, "Set &l$player&d's speed to &l$speed".color())
                 player.walkSpeed = speed.toFloat().plus(1) / 11
                 sender.flySpeed = speed.toFloat() / 10
@@ -33,14 +33,14 @@ class Speed : CommandExecutor {
             } else {
                 sender.walkSpeed = speed.toFloat().plus(1) / 11
                 sender.flySpeed = speed.toFloat() / 10
-                sender.sendMessage("Set speed for &c${sender.name} &6to &c$speed".prefix())
+                if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("Set speed for &c${sender.name} &6to &c$speed".prefix()) else sender.sendMessage("Set speed for &l${sender.name} &6to &l$speed".prefix())
                 Flash.staffMessage(sender, "Set their speed to &l$speed")
                 return true
             }
         } else {
             sender.walkSpeed = speed.toFloat().plus(1) / 11
             sender.flySpeed = speed.toFloat() / 10
-            sender.sendMessage("Set speed for &c${sender.name} &6to &c$speed".prefix())
+            if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("Set speed for &c${sender.name} &6to &c$speed".prefix()) else sender.sendMessage("Set speed for &l${sender.name} &6to &l$speed".prefix())
             Flash.staffMessage(sender, "Set speed to &l$speed")
             return true
         }
