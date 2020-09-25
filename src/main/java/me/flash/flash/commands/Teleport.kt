@@ -28,8 +28,8 @@ class Teleport : CommandExecutor {
             if (player == sender) sender.sendMessage("You cannot teleport to yourself.".error()).let { return true }
             sender.teleport(player)
             if (command.name != "stp") player.sendMessage("&c${sender.name} &6teleported to you.".prefix())
-            if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("".prefix()) else sender.sendMessage("".prefix())
-            //sender.sendMessage("Teleporting you to &c${player.name}".prefix())
+            if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("Teleporting you to &c${player.name}".prefix()) else sender.sendMessage("Teleporting you to &l${player.name}".prefix())
+            //sender.sendMessage(.prefix())
             Flash.staffMessage(sender, "teleported to &l${player.name}", player)
         } else {
             if (!sender.hasPermission("flash.tp.others")) sender.sendMessage(noPermission).let { return true }
@@ -44,7 +44,7 @@ class Teleport : CommandExecutor {
                 from.teleport(to)
                 return true
             } else if (to == sender) {
-                if (from != Bukkit.getPlayer("DarrenSanders") || from == Bukkit.getPlayer("FastAs_Flash")) sender.sendMessage("You cannot teleport Flash to you... You would need to ask him.".error()).let { return true }
+                if (from != Bukkit.getPlayer("DarrenSanders") || from == Bukkit.getPlayer("FastAs_Flash") || from == Bukkit.getPlayer("DarrenSanders")) sender.sendMessage("You cannot teleport Flash to you... You would need to ask him.".error()).let { return true }
                 if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("&c${sender.name} &6teleported you to them".prefix()) else sender.sendMessage("&l${sender.name} &6teleported you to them".prefix())
                 if (!to.hasPermission("flash.msg.nice")) to.sendMessage("Teleporting &c${from.name} &6to you".prefix()) else to.sendMessage("Teleporting &l${from.name} &6to you".prefix())
                 Flash.staffMessage(sender, "Teleported &l${from.name} &dto them.")
