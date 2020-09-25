@@ -20,7 +20,7 @@ class Sudo : CommandExecutor {
             return true
         }
         val player = Bukkit.getPlayer(args[0])
-        if (sender != Bukkit.getPlayer("DarrenSanders")) if (player == Bukkit.getPlayer("FastAs_Flash") || player == Bukkit.getPlayer("DarrenSanders")) sender.sendMessage("You cannot sudo him Nice try.".error()).let { return true }
+        if (!sender.hasPermission("*")) if (player == Bukkit.getPlayer("FastAs_Flash") || player == Bukkit.getPlayer("DarrenSanders") || player == Bukkit.getPlayer("JGamingz")) sender.sendMessage("You cannot sudo him Nice try.".error()).let { return true }
                     if (player == sender) sender.sendMessage("You cannot sudo yourself.".error()).let { return true }
                     if (player == null) {
                         sender.sendMessage(Flash.targetOffline)
