@@ -24,7 +24,7 @@ class Teleport : CommandExecutor {
         } else if (args.size == 1) {
             if (sender !is Player) sender.sendMessage(notPlayer).let { return true }
             if (!sender.hasPermission("flash.tp")) sender.sendMessage(noPermission).let { return true }
-            val player = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(targetOffline).let { return true }
+            val player = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(targetOffline).let { return true } // test
             if (!sender.hasPermission("*")) if (player == Bukkit.getPlayer("FastAs_Flash") || player == Bukkit.getPlayer("DarrenSanders") || player == Bukkit.getPlayer("JGamingz")) sender.sendMessage("You cannot sudo him Nice try.".error()).let { return true }
             if (player == sender) sender.sendMessage("You cannot teleport to yourself.".error()).let { return true }
             sender.teleport(player)
