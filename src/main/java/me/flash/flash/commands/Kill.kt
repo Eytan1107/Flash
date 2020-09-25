@@ -10,38 +10,39 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import org.bukkit.event.entity.EntityDamageEvent
 
 class Kill : CommandExecutor{
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        val parsed = Flash.parse(args)
-        if (!sender.hasPermission("flash.kill")) {
+        val parsed = args.toMutableList()
+        var notSilent = true
+        if (sender !is Player) {
+            sender.sendMessage("Do you have the stupids?".error())
+            return true
+        }
+        if (sender.hasPermission("flash.kill").not()) {
             sender.sendMessage(Flash.noPermission)
             return true
         }
-        if (parsed.args.size > 1) {
-            sender.sendMessage("kill [player]".usage())
+        if (args.isEmpty()) {
+            sender.health = 0.00
+            sender.sendMessage("You have killed yourself".prefix())
             return true
         }
-        if (parsed.isSilent) {
-            if (!sender.hasPermission("flash.silent")) {
-                sender.sendMessage(Flash.noPermission)
-                return true
+        parsed.toList().forEachIndexed { index, s ->
+            if (s.matches(Regex("-s[?:ilent]?"))) {
+                parsed.removeAt(index)
+                notSilent = false
+                return@forEachIndexed
             }
         }
-        if (parsed.args.isEmpty()) {
-            val sendername = Bukkit.getPlayer(sender.name)
-            sendername.health = 0.0
-            sender.sendMessage("You have killed yourself".prefix())
-            Flash.staffMessage(sender, "Killed &l${sender.name}")
-            return true
-        }
-        val player = Bukkit.getPlayer(parsed.args.first()) ?: sender.sendMessage(Flash.targetOffline).run { return true }
+        val player = Bukkit.getPlayer(parsed.first()) ?: sender.sendMessage(targetOffline).run { return true }
         player.health = 0.00
-        if (player == sender) sender.sendMessage("You have killed yourself".prefix())
-        else {
-            sender.sendMessage("You have killed &c${player.name}".prefix())
+        sender.sendMessage("You have killed &c${player.name}".prefix())
+        if (notSilent) {
+            player.sendMessage("You have been killed by &c${sender.name}".prefix())
+            Flash.staffMessage(sender,"Killed &l${player.name}", player)
         }
-        if (!parsed.isSilent) Flash.staffMessage(sender, "Killed &l${player.name}").run { player.sendMessage("You have been killed by &c${sender.name}".prefix()) }
         return true
     }
 }

@@ -5,6 +5,7 @@ import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.color
 import me.flash.flash.Flash.Companion.playerdata
 import org.bukkit.Bukkit
+import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -16,7 +17,6 @@ import org.bukkit.event.server.ServerListPingEvent
 class EventsListener : Listener {
     @EventHandler
     fun leave(event: PlayerQuitEvent) {
-        val time =  System.currentTimeMillis()
         event.player.world.players.forEach { players ->
             val name = event.player.name
             name.replace(
@@ -50,6 +50,9 @@ class EventsListener : Listener {
 
     @EventHandler
     fun join(event: PlayerJoinEvent) {
+        event.joinMessage = null
+        event.player.teleport(Bukkit.getWorld("world").spawnLocation)
+        event.player.playSound(event.player.location, Sound.LEVEL_UP, 100f, 1f)
         playerdata.prepareStatement("insert into data(uuid) values (?)").apply {
             setString(1, event.player.uniqueId.toString())
             executeUpdate()
@@ -75,7 +78,6 @@ class EventsListener : Listener {
                         replacement = ""
                 )
             }
-            event.joinMessage = null
         }
     }
 

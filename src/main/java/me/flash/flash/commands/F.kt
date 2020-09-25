@@ -13,7 +13,7 @@ class F : CommandExecutor {
             return true
         }
         if (args.isEmpty()){
-            Bukkit.getOnlinePlayers().filter { p->Vanish.vanishedPlayers.contains(p) }.forEach { player->
+            Bukkit.getOnlinePlayers().filter { p->!Vanish.vanishedPlayers.contains(p) }.forEach { player->
                 player.chat("F")
                 Flash.staffMessage(sender, "Ran the F command")
             }

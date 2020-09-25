@@ -1,9 +1,7 @@
 package me.flash.flash
 
-import com.avaje.ebeaninternal.server.lib.thread.ThreadPoolManager
 import me.flash.flash.commands.*
 import me.flash.flash.listeners.EventsListener
-import me.flash.flash.variables.ParsedArgsSilent
 import net.milkbowl.vault.chat.Chat
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
@@ -14,7 +12,6 @@ import org.sqlite.JDBC
 import java.io.File
 import java.sql.Connection
 import java.sql.DriverManager
-import java.util.concurrent.Executors
 
 class Flash : JavaPlugin() {
     override fun onEnable() {
@@ -73,6 +70,7 @@ class Flash : JavaPlugin() {
         getCommand("kits").executor = Kits()
         getCommand("menu").executor = Menu()
         getCommand("vanish").executor = Vanish()
+        getCommand("build").executor = Build()
         getCommand("server").apply {
             executor = Server()
             tabCompleter = Server()
@@ -81,9 +79,12 @@ class Flash : JavaPlugin() {
         getCommand("help").executor = Help()
         getCommand("stats").executor = stats()
         getCommand("msg").executor = Msg()
+        getCommand("wake").executor = Wake()
+        getCommand("sethub").executor = SetHub()
         server.pluginManager.registerEvents(Back(), this)
         server.pluginManager.registerEvents(EventsListener(), this)
         server.pluginManager.registerEvents(StaffChat(), this)
+        server.pluginManager.registerEvents(Build(), this)
         server.pluginManager.registerEvents(Menu(), this)
         server.pluginManager.registerEvents(Compass(), this)
         //TODO suggestion file reading
@@ -99,7 +100,6 @@ class Flash : JavaPlugin() {
         lateinit var suggestionsdb: Connection
         lateinit var instance : Flash
         lateinit var vaultChat : Chat
-        val async = Executors.newFixedThreadPool(5)
         var scEnabled = mutableListOf<Player>()
         var noPermission = "You don't have permission to do that.".error()
         var notPlayer = "You must be a player to do this.".error()
@@ -119,19 +119,6 @@ class Flash : JavaPlugin() {
             senders.forEach {
                 it.sendMessage("&d[S] &5${sender.name}: &d$action".color())
             }
-        }
-
-        fun parse(args: Array<out String>) : ParsedArgsSilent {
-            val a = mutableListOf(*args)
-            var found = false
-            a.toList().forEachIndexed { index, s ->
-                if (s.matches(Regex("-s(?:ilent)?"))) {
-                    a.removeAt(index)
-                    found = true
-                    return@forEachIndexed
-                }
-            }
-            return ParsedArgsSilent(a.toList() as ArrayList<String>, found)
         }
 
         fun playersInWorlds(server: String): MutableList<Player> {

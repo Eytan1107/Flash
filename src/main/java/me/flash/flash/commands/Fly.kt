@@ -17,11 +17,11 @@ class Fly : CommandExecutor{
                 val player = Bukkit.getPlayer(sender.name) ?: sender.sendMessage(targetOffline).let { return true }
                 if (player.allowFlight) {
                     player.allowFlight = false
-                    sender.sendMessage("You turned &loff &6flight".prefix())
+                    if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("You turned &coff &6flight".prefix()) else sender.sendMessage("You turned &loff &6flight")
                     Flash.staffMessage(sender, "Disabled flight for &l${player.name}")
                 } else {
                     player.allowFlight = true
-                    sender.sendMessage("You turned &con&r &6flight".prefix())
+                    if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("You turned &con &6flight".prefix()) else sender.sendMessage("You turned &lon &6flight")
                     Flash.staffMessage(sender, "Enabled flight for &l${player.name}")
                 }
 
@@ -42,8 +42,8 @@ class Fly : CommandExecutor{
                 } else {
                     player.allowFlight = true
                     if (player !== sender) {
-                        if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("You turned &con &6flight".prefix()) else sender.sendMessage("You turned &lon &6flight")
-                        if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("&c${sender.name} &6Turned &con &6your flight".prefix()) else sender.sendMessage("&l${sender.name} &6Turned &lon &6your flight")
+                        if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("You turned flight &con for &c${player.name}".prefix()) else sender.sendMessage("You turned &lon &6flight")
+                        if (!player.hasPermission("flash.msg.nice")) player.sendMessage("&c${sender.name} &6Turned &con &6your flight".prefix()) else player.sendMessage("&l${sender.name} &6Turned &lon &6your flight")
                     } else {
                         if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("You turned &con &6flight".prefix()) else sender.sendMessage("You turned &lon &6flight")
                     }
