@@ -103,7 +103,8 @@ class Flash : JavaPlugin() {
         var scEnabled = mutableListOf<Player>()
         var noPermission = "You don't have permission to do that.".error()
         var notPlayer = "You must be a player to do this.".error()
-        var targetOffline = "The target player was not found, please check for any typos and try again.".error()
+        var targetOffline = "The target player was not found.".error()
+        var TooManyArgs = "Too many arguments".error()
 
         fun String.prefix(): String = ("[&6Flash's Server&r] &6$this").color()
         fun String.color(): String = ChatColor.translateAlternateColorCodes('&', this)
