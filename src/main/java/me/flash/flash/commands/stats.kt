@@ -26,7 +26,7 @@ class stats : CommandExecutor {
                     }
                 }
         } else if (args.first().isNotEmpty()) {
-            if (args.first().toString() == "resetStats") {
+            if (args.first().toString() == "resetstats") {
                 if (args[2].isEmpty()) sender.sendMessage("Usage: /stats resetstats <name>".error()).let { return true }
                 val player = Bukkit.getPlayer(args[2]) ?: sender.sendMessage(targetOffline).let { return true }
                 if (sender.hasPermission("flash.stats.reset")) {
