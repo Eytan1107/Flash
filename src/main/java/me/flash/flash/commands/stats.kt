@@ -25,18 +25,31 @@ class stats : CommandExecutor {
                     }
                 }
         } else if (args.first().isNotEmpty()) {
-            val player2 = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(targetOffline).let { return true }
-            val uuid2 = player2.uniqueId.toString()
-            if (player2.uniqueId.toString() == uuid2) {
-                if (!sender.hasPermission("flash.staff")) sender.sendMessage(noPermission).let { return true }
-                val result2 = Flash.playerdata.createStatement().executeQuery("SELECT * FROM data WHERE uuid = '$uuid2'")
-                while (result2.next()) {
-                    sender.sendMessage("&6The stats of: ${args.first()} are:".color())
-                    sender.sendMessage("&eKills: ".color() + result2.getInt("kills"))
-                    sender.sendMessage("&eDeaths: ".color() + result2.getInt("deaths"))
+            if (args.first().toString() == "resetStats") {
+                val player = Bukkit.getPlayer(args[2]) ?: sender.sendMessage(targetOffline).let { return true }
+                if (sender.hasPermission("flash.stats.reset")) {
+                    Flash.playerdata.prepareStatement("update data set kills=0 where uuid=?").apply {
+                        setString(1, player.uniqueId.toString())
+                        executeUpdate()
+                    }
+                    Flash.playerdata.prepareStatement("update data set deaths=0 where uuid=?").apply {
+                        setString(1, player.uniqueId.toString())
+                        executeUpdate()
+                    }
+                }
+            } else {
+                val player2 = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(targetOffline).let { return true }
+                val uuid2 = player2.uniqueId.toString()
+                if (player2.uniqueId.toString() == uuid2) {
+                    if (!sender.hasPermission("flash.staff")) sender.sendMessage(noPermission).let { return true }
+                    val result2 = Flash.playerdata.createStatement().executeQuery("SELECT * FROM data WHERE uuid = '$uuid2'")
+                    while (result2.next()) {
+                        sender.sendMessage("&6The stats of: ${args.first()} are:".color())
+                        sender.sendMessage("&eKills: ".color() + result2.getInt("kills"))
+                        sender.sendMessage("&eDeaths: ".color() + result2.getInt("deaths"))
+                    }
                 }
             }
-
         }
         return true
     }
