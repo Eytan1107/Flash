@@ -4,6 +4,7 @@ package me.flash.flash.listeners
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.color
 import me.flash.flash.Flash.Companion.playerdata
+import me.flash.flash.Flash.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.Sound
 import org.bukkit.entity.Player
@@ -112,6 +113,11 @@ class EventsListener : Listener {
         playerdata.prepareStatement("update data set kills=kills+1 where uuid=?").apply {
             setString(1, event.entity.killer.uniqueId.toString())
             executeUpdate()
+        }
+        event.entity.player.world.players.forEach { players ->
+            players.sendMessage("&c${event.entity.player} &6has died".prefix())
+            if (!players.hasPermission("flash.msg.nice")) players.sendMessage("&c${event.entity.player} has died".prefix()) else players.sendMessage("&l${event.entity.player} &6has died".prefix())
+            event.deathMessage = null
         }
         //event.entity.killer.uniqueId.let { uuid ->
         //        if (!Flash.sql.createStatement().executeQuery("SELECT uuid FROM main.data").equals("$uuid")) {
