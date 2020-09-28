@@ -26,7 +26,22 @@ class Menu : CommandExecutor, Listener {
         val player = (event.whoClicked as Player) // Creates a value of the player that clicked in the inventory
         if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("hub").contains(player.world.name)) { // Gets a list of all the players in the world
             if (tagged.contains(event.inventory)) { // Checks if the user has the inventory open
-                event.isCancelled = true // Disables the option to move the items
+                if (event.getInventory().getTitle().equals("&6Server Selector")) {
+                    event.isCancelled = true // Disables the option to move the items
+                }
+                else {
+                    if (player.hasPermission("flash.gamemode.in.hub")) {
+                        event.isCancelled = false
+                        if (event.getCurrentItem() != null && event.getCurrentItem().type == Material.COMPASS) {
+                            event.isCancelled = true
+                            return
+                        }
+                    }
+                    else {
+                        event.isCancelled = true
+                        return
+                    }
+                }
             }
         }
     }
@@ -36,7 +51,7 @@ class Menu : CommandExecutor, Listener {
     }
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender !is Player) sender.sendMessage("Noob").run { return true } // Returns true if the sender isn't a player, like console
-        val inventory = Bukkit.createInventory(null, 27, "Server selector".color()) // Creates the inventory
+        val inventory = Bukkit.createInventory(null, 27, "&6Server Selector".color()) // Creates the inventory
         val empty = ItemStack(Material.STAINED_GLASS_PANE, 1, 14).apply { // The default inventory item
             itemMeta = itemMeta.apply {
                 displayName = "&8[&6Flash's server&8]&r".color()

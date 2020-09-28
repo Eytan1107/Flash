@@ -6,6 +6,7 @@ import me.flash.flash.Flash.Companion.color
 import me.flash.flash.Flash.Companion.playerdata
 import me.flash.flash.Flash.Companion.prefix
 import org.bukkit.Bukkit
+import org.bukkit.GameMode
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -47,6 +48,10 @@ class EventsListener : Listener {
         event.player.world.players.forEach { players ->
             players.sendMessage("&6[&3+&6] ${event.player.name}".color())
         }
+        if (event.player.world.name == "builds" && event.player.hasPermission("flash.gamemode") && event.player.hasPermission("worldguard.region.bypass.*")) event.player.gameMode = GameMode.CREATIVE
+        if (event.player.world.name == "world" && event.player.hasPermission("flash.gamemode.in.hub")) event.player.gameMode = GameMode.CREATIVE else event.player.gameMode = GameMode.SURVIVAL
+        if (event.player.world.name == "kitpvp") event.player.gameMode = GameMode.SURVIVAL
+        if (event.player.world.name == "island_normal_world" || event.player.world.name == "skyblock_spawn" || event.player.world.name == "event" || event.player.world.name == "tntrun") event.player.gameMode = GameMode.SURVIVAL else event.player.gameMode = GameMode.SURVIVAL
     }
 
     @EventHandler
