@@ -168,3 +168,5 @@ commands:
       - openinv
       - inventory
       - inv
+  players:
+    description: gets all online players
