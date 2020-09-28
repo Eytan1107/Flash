@@ -7,6 +7,7 @@ import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import org.bukkit.event.player.PlayerChangedWorldEvent
 import org.bukkit.plugin.java.JavaPlugin
 import org.sqlite.JDBC
 import java.io.File

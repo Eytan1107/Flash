@@ -31,7 +31,7 @@ class Build : CommandExecutor, Listener {
                         sender.sendMessage("You can't enable / disable build in this server".error())
                         true
                     } else {
-                        sender.sendMessage("You can't enable / disable this player's build in their server".error())
+                        sender.sendMessage("You can't enable / disable this player's build in the server they are in".error())
                         true
                     }
                 }
@@ -45,7 +45,7 @@ class Build : CommandExecutor, Listener {
                     }
                 } else {
                     toggled.add(player.uniqueId)
-                    if (sender == player) sender.sendMessage("Build mode turned &lON".prefix())
+                    if (sender == player) if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("Build mode turned &aON".prefix()) else sender.sendMessage("Build mode turned &lON".prefix())
                     else {
                         if (!sender.hasPermission("flash.build.others")) sender.sendMessage(noPermission).let { return true }
                         if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage(("Build mode turned &aON &6for &a" + player.name).prefix()) else sender.sendMessage(("Build mode turned &lON &6for &l" + player.name).prefix())

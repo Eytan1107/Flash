@@ -16,7 +16,7 @@ class Server : CommandExecutor, Listener, TabCompleter {
     
         override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (args.isEmpty()) {
-            sender.sendMessage("&c/server <ServerName> [Player]".prefix())
+            if (sender.hasPermission("flash.staff")) sender.sendMessage("&c/server <Server Name> [Player]".prefix()) else sender.sendMessage("&c/server <Server Name>".prefix())
             sender.sendMessage("&cServers: kitpvp, skyblock, hub, event, builds".prefix())
             return true
         }

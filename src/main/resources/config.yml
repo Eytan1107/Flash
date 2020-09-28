@@ -3,8 +3,9 @@ kitpvpworld:
   - "kitpvp"
 hub: 
   - "world"
-skyblock:
+skyblock1:
   - "skyblock_spawn"
+skyblock2:
   - "island_normal_world"
 tntrun: 
   - "tntrun"

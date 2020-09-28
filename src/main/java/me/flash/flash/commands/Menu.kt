@@ -9,15 +9,17 @@ import org.bukkit.Material
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
+import org.bukkit.entity.Item
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
+import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.java.JavaPlugin
-
+import javax.swing.plaf.basic.BasicComboBoxUI
 
 
 class Menu : CommandExecutor, Listener {
@@ -32,7 +34,7 @@ class Menu : CommandExecutor, Listener {
                 else {
                     if (player.hasPermission("flash.gamemode.in.hub")) {
                         event.isCancelled = false
-                        if (event.getCurrentItem() != null && event.getCurrentItem().type == Material.COMPASS) {
+                        if (event.currentItem.type == Material.COMPASS && event.currentItem.itemMeta?.displayName ?: false == "&6Flash's Server Selector".color()) {
                             event.isCancelled = true
                             return
                         }
@@ -45,6 +47,15 @@ class Menu : CommandExecutor, Listener {
             }
         }
     }
+    @EventHandler // doesn't work + add if player is in world "world" + if the compass's name is &6Flash's Server Selector
+    fun onDrop(event: PlayerDropItemEvent) { // doesn't work + add if player is in world "world" + if the compass's name is &6Flash's Server Selector
+        val item = event.itemDrop // doesn't work + add if player is in world "world" + if the compass's name is &6Flash's Server Selector
+        val player = event.player // doesn't work + add if player is in world "world" + if the compass's name is &6Flash's Server Selector
+        if (item.equals("Material.COMPASS")) { // doesn't work + add if player is in world "world" + if the compass's name is &6Flash's Server Selector
+            player.sendMessage("You can't drop this item") // doesn't work + add if player is in world "world" + if the compass's name is &6Flash's Server Selector
+            event.isCancelled = true // doesn't work + add if player is in world "world" + if the compass's name is &6Flash's Server Selector
+        } // doesn't work + add if player is in world "world" + if the compass's name is &6Flash's Server Selector
+    } // doesn't work + add if player is in world "world" + if the compass's name is &6Flash's Server Selector
     @EventHandler
     fun close(event: InventoryCloseEvent) {
         if (tagged.contains(event.inventory)) tagged.remove(event.inventory) // Unlocks the inventory only if the players had it lock and closes his inventory

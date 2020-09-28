@@ -7,6 +7,7 @@ import me.flash.flash.Flash.Companion.playerdata
 import me.flash.flash.Flash.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
+import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -15,6 +16,7 @@ import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.player.*
 import org.bukkit.event.server.ServerListPingEvent
+import org.bukkit.inventory.ItemStack
 
 class EventsListener : Listener {
     @EventHandler
@@ -48,17 +50,39 @@ class EventsListener : Listener {
         event.player.world.players.forEach { players ->
             players.sendMessage("&6[&3+&6] ${event.player.name}".color())
         }
-        if (event.player.world.name == "builds" && event.player.hasPermission("flash.gamemode") && event.player.hasPermission("worldguard.region.bypass.*")) event.player.gameMode = GameMode.CREATIVE
-        if (event.player.world.name == "world" && event.player.hasPermission("flash.gamemode.in.hub")) event.player.gameMode = GameMode.CREATIVE else event.player.gameMode = GameMode.SURVIVAL
-        if (event.player.world.name == "kitpvp") event.player.gameMode = GameMode.SURVIVAL
-        if (event.player.world.name == "island_normal_world" || event.player.world.name == "skyblock_spawn" || event.player.world.name == "event" || event.player.world.name == "tntrun") event.player.gameMode = GameMode.SURVIVAL else event.player.gameMode = GameMode.SURVIVAL
+        if (Flash.instance.config.getStringList("builds").contains(event.player.world.name) && event.player.hasPermission("flash.gamemode") && event.player.hasPermission("worldguard.region.bypass.*")) event.player.gameMode = GameMode.CREATIVE
+        if (Flash.instance.config.getStringList("hub").contains(event.player.world.name) && event.player.hasPermission("flash.gamemode.in.hub")) event.player.gameMode = GameMode.CREATIVE else event.player.gameMode = GameMode.SURVIVAL
+        if (Flash.instance.config.getStringList("kitpvp").contains(event.player.world.name)) event.player.gameMode = GameMode.SURVIVAL
+        if (Flash.instance.config.getStringList("skyblock2").contains(event.player.world.name) || Flash.instance.config.getStringList("skyblock1").contains(event.player.world.name) || Flash.instance.config.getStringList("event").contains(event.player.world.name) || Flash.instance.config.getStringList("tntrun").contains(event.player.world.name)) event.player.gameMode = GameMode.SURVIVAL else event.player.gameMode = GameMode.SURVIVAL
+        if (Flash.instance.config.getStringList("hub").contains(event.player.world.name)) {
+            event.player.inventory.setItem(4, ItemStack(Material.COMPASS).apply {
+                itemMeta = itemMeta.apply {
+                    displayName = "&6Flash's Server Selector".color()
+                    lore = listOf("&7Click me to open the selector".color())
+                }
+            })
+        }
     }
 
+    @Suppress("DEPRECATION")
     @EventHandler
     fun join(event: PlayerJoinEvent) {
+        if (event.player.hasPlayedBefore()) {
+            event.player.sendTitle("&6Welcome Back!".color(), "&e${event.player.name}".color())
+            event.player.playSound(event.player.location, Sound.NOTE_PLING, 100f, 1f)
+        }
+        else {
+            event.player.sendTitle("Welcome!", "&e${event.player.name}".color())
+            event.player.playSound(event.player.location, Sound.LEVEL_UP, 100f, 1f)
+        }
+        event.player.inventory.setItem(4, ItemStack(Material.COMPASS).apply {
+            itemMeta = itemMeta.apply {
+                displayName = "&6Flash Server Selector".color()
+                lore = listOf("&7Click me to open the selector".color())
+            }
+        })
         event.joinMessage = null
         event.player.teleport(Bukkit.getWorld("world").spawnLocation)
-        event.player.playSound(event.player.location, Sound.LEVEL_UP, 100f, 1f)
         playerdata.prepareStatement("insert into data(uuid) values (?)").apply {
             setString(1, event.player.uniqueId.toString())
             executeUpdate()

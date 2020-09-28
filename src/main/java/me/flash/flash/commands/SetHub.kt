@@ -15,7 +15,7 @@ class SetHub : CommandExecutor {
         if (sender.world.name != "world") sender.sendMessage("You can only do this command in the Hub.".error()).run { return true }
         with(sender.location) {
             sender.world.setSpawnLocation(x.toInt(), y.toInt(), z.toInt())
-            sender.sendMessage("Hub set at : &c".prefix() + x.toInt() + ", " + y.toInt() + ", " + z.toInt())
+            sender.sendMessage("Hub set at : &c".prefix() + x + ", " + y + ", " + z)
         }
 
         return true
