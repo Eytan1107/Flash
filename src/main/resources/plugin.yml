@@ -162,3 +162,9 @@ commands:
     description: Wake up someone who fell asleep
   sethub:
     description: Set a hub
+  invsee:
+    description: Opens a players inventory
+    aliases:
+      - openinv
+      - inventory
+      - inv
