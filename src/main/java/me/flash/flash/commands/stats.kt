@@ -2,6 +2,7 @@ package me.flash.flash.commands
 
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.color
+import me.flash.flash.Flash.Companion.error
 import me.flash.flash.Flash.Companion.noPermission
 import me.flash.flash.Flash.Companion.notPlayer
 import me.flash.flash.Flash.Companion.targetOffline
@@ -26,6 +27,7 @@ class stats : CommandExecutor {
                 }
         } else if (args.first().isNotEmpty()) {
             if (args.first().toString() == "resetStats") {
+                if (args[2].isEmpty()) sender.sendMessage("Usage: /stats resetstats <name>".error()).let { return true }
                 val player = Bukkit.getPlayer(args[2]) ?: sender.sendMessage(targetOffline).let { return true }
                 if (sender.hasPermission("flash.stats.reset")) {
                     Flash.playerdata.prepareStatement("update data set kills=0 where uuid=?").apply {
