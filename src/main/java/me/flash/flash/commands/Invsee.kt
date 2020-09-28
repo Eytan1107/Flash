@@ -13,6 +13,7 @@ class Invsee : CommandExecutor {
         } else if (args.isNotEmpty()) {
             val player = Bukkit.getPlayer(args[1])
             val sn = Bukkit.getPlayer(sender.name)
+            if (player == sn) sender.sendMessage("Are you stupid? Press \"E\"")
             if (!sender.hasPermission("*")) if (player == Bukkit.getPlayer("FastAs_Flash") || player == Bukkit.getPlayer("DarrenSanders") || player == Bukkit.getPlayer("JGamingz")) sender.sendMessage("You cannot sudo this player").run { return true }
             sn.openInventory(player.inventory)
         }
