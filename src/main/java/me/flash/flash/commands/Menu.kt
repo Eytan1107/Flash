@@ -47,15 +47,15 @@ class Menu : CommandExecutor, Listener {
             }
         }
     }
-    @EventHandler // doesn't work + add if player is in world "world" + if the compass's name is &6Flash's Server Selector
-    fun onDrop(event: PlayerDropItemEvent) { // doesn't work + add if player is in world "world" + if the compass's name is &6Flash's Server Selector
-        val item = event.itemDrop // doesn't work + add if player is in world "world" + if the compass's name is &6Flash's Server Selector
-        val player = event.player // doesn't work + add if player is in world "world" + if the compass's name is &6Flash's Server Selector
-        if (item.equals("Material.COMPASS")) { // doesn't work + add if player is in world "world" + if the compass's name is &6Flash's Server Selector
-            player.sendMessage("You can't drop this item") // doesn't work + add if player is in world "world" + if the compass's name is &6Flash's Server Selector
-            event.isCancelled = true // doesn't work + add if player is in world "world" + if the compass's name is &6Flash's Server Selector
-        } // doesn't work + add if player is in world "world" + if the compass's name is &6Flash's Server Selector
-    } // doesn't work + add if player is in world "world" + if the compass's name is &6Flash's Server Selector
+    // @EventHandler // doesn't work + add if player is in world "world" + if the compass's name is &6Flash's Server Selector
+    //fun onDrop(event: PlayerDropItemEvent) {
+        //val item = event.itemDrop
+        //val player = event.player
+        //if (item.equals("Material.COMPASS")) {
+            //player.sendMessage("You can't drop this item")
+            //event.isCancelled = true
+        //}
+   // }
     @EventHandler
     fun close(event: InventoryCloseEvent) {
         if (tagged.contains(event.inventory)) tagged.remove(event.inventory) // Unlocks the inventory only if the players had it lock and closes his inventory
