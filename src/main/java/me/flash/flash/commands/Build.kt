@@ -71,7 +71,7 @@ class Build : CommandExecutor, Listener {
                 wasteOfMemory.add(event.player.uniqueId)
                 Bukkit.getScheduler().runTaskLater(Flash.instance, {
                     wasteOfMemory.remove(event.player.uniqueId)
-                }, 10L)
+                }, 30L)
             }
         }
     }

@@ -17,7 +17,7 @@ class Discord : CommandExecutor {
         if (sender is Player) {
             sender.spigot().sendMessage(TextComponent("Click here to join our Discord server !").apply {
                 color = ChatColor.DARK_AQUA
-                clickEvent = ClickEvent(ClickEvent.Action.OPEN_URL, "http://adfoc.us/46924976102034")
+                clickEvent = ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.gg/3RHYQNd")
             })
         } else {
             sender.sendMessage(Flash.notPlayer)

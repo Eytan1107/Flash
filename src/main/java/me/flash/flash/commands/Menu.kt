@@ -41,11 +41,11 @@ class Menu : CommandExecutor, Listener {
                     }
                     else {
                         event.isCancelled = true
-                        return
                     }
                 }
             }
         }
+        else return
     }
     // @EventHandler // doesn't work + add if player is in world "world" + if the compass's name is &6Flash's Server Selector
     //fun onDrop(event: PlayerDropItemEvent) {

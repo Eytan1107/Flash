@@ -18,19 +18,6 @@ import java.util.concurrent.TimeoutException
 
 class Compass : Listener {
     @EventHandler
-    fun world(event: PlayerChangedWorldEvent) {
-        if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("world").contains(event.player.world.name)) {
-            event.player.inventory.armorContents = emptyArray()
-            event.player.inventory.setItem(4, ItemStack(Material.COMPASS).apply {
-                itemMeta = itemMeta.apply {
-                    displayName = "&6Flash's Server Selector".color()
-                    lore = listOf("&7Click me to open the selector".color())
-                }
-            })
-        }
-    }
-
-    @EventHandler
     fun interact(event: PlayerInteractEvent) {
         if ((event.action.name.toLowerCase().contains("right")) && Flash.instance.config.getStringList("hub").contains(event.player.world.name)) {
             if (event.player?.itemInHand?.type == Material.COMPASS && event.player?.itemInHand?.itemMeta?.displayName ?: false == "&6Flash's Server Selector".color()) {
