@@ -1,8 +1,9 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.color
-import me.flash.flash.Flash.Companion.prefix
+import me.flash.flash.FlashUtil
+import me.flash.flash.FlashUtil.Companion.color
+import me.flash.flash.FlashUtil.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -14,16 +15,16 @@ import org.bukkit.event.player.AsyncPlayerChatEvent
 
 class StaffChat : CommandExecutor, Listener{
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if(sender !is Player) sender.sendMessage(Flash.notPlayer).let { return true }
-        if (!sender.hasPermission("flash.staffchat")) sender.sendMessage(Flash.noPermission).let { return true }
+        if(sender !is Player) sender.sendMessage(FlashUtil.notPlayer).let { return true }
+        if (!sender.hasPermission("flash.staffchat")) sender.sendMessage(FlashUtil.noPermission).let { return true }
         if (args.isEmpty()) {
-            if (Flash.scEnabled.contains(sender)) {
+            if (FlashUtil.scEnabled.contains(sender)) {
                 sender.sendMessage("You have &ldisabled &6staffchat.".prefix())
-                Flash.scEnabled.remove(sender)
+                FlashUtil.scEnabled.remove(sender)
             }
             else {
                 sender.sendMessage("You have &lenabled &6staffchat.".prefix())
-                Flash.scEnabled.add(sender)
+                FlashUtil.scEnabled.add(sender)
             }
         }
         return true
@@ -35,7 +36,7 @@ class StaffChat : CommandExecutor, Listener{
         val senderprefix = Flash.vaultChat.getPlayerPrefix(event.player)
         var message = event.message
         val ov = message.startsWith("# ")
-        if (Flash.scEnabled.contains(event.player) || ov) {
+        if (FlashUtil.scEnabled.contains(event.player) || ov) {
             if (ov) message = message.replaceFirst("# ", "")
             event.isCancelled = true
             Bukkit.getOnlinePlayers().filter { player -> player.hasPermission("flash.staffchat") }.forEach {

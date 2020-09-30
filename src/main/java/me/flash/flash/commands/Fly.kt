@@ -1,9 +1,9 @@
 package me.flash.flash.commands
 
-import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.noPermission
-import me.flash.flash.Flash.Companion.prefix
-import me.flash.flash.Flash.Companion.targetOffline
+import me.flash.flash.FlashUtil
+import me.flash.flash.FlashUtil.Companion.noPermission
+import me.flash.flash.FlashUtil.Companion.prefix
+import me.flash.flash.FlashUtil.Companion.targetOffline
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -18,11 +18,11 @@ class Fly : CommandExecutor{
                 if (player.allowFlight) {
                     player.allowFlight = false
                     if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("You turned &coff &6flight".prefix()) else sender.sendMessage("You turned &loff &6flight")
-                    Flash.staffMessage(sender, "Disabled flight for &l${player.name}")
+                    FlashUtil.staffMessage(sender, "Disabled flight for &l${player.name}")
                 } else {
                     player.allowFlight = true
                     if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("You turned &con &6flight".prefix()) else sender.sendMessage("You turned &lon &6flight")
-                    Flash.staffMessage(sender, "Enabled flight for &l${player.name}")
+                    FlashUtil.staffMessage(sender, "Enabled flight for &l${player.name}")
                 }
 
             } else sender.sendMessage(noPermission).let { return true }
@@ -38,7 +38,7 @@ class Fly : CommandExecutor{
                     } else {
                         if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("You turned &coff &6flight".prefix()) else sender.sendMessage("You turned &loff &6flight")
                     }
-                    Flash.staffMessage(sender, "Disabled flight for &l${player.name}")
+                    FlashUtil.staffMessage(sender, "Disabled flight for &l${player.name}")
                 } else {
                     player.allowFlight = true
                     if (player !== sender) {
@@ -47,7 +47,7 @@ class Fly : CommandExecutor{
                     } else {
                         if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("You turned &con &6flight".prefix()) else sender.sendMessage("You turned &lon &6flight")
                     }
-                    Flash.staffMessage(sender, "enabled flight for &l${player.name}")
+                    FlashUtil.staffMessage(sender, "enabled flight for &l${player.name}")
                 }
 
             } else sender.sendMessage(noPermission).let { return true }

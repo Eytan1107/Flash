@@ -1,8 +1,9 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.error
-import me.flash.flash.Flash.Companion.prefix
+import me.flash.flash.FlashUtil
+import me.flash.flash.FlashUtil.Companion.error
+import me.flash.flash.FlashUtil.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -12,11 +13,11 @@ import org.bukkit.entity.Player
 class TpAll : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (!sender.hasPermission("flash.tpall")) {
-            sender.sendMessage(Flash.noPermission)
+            sender.sendMessage(FlashUtil.noPermission)
             return true
         }
         if (sender !is Player) {
-            sender.sendMessage(Flash.notPlayer)
+            sender.sendMessage(FlashUtil.notPlayer)
             return true
         }
         if (args.isEmpty()) {
@@ -28,13 +29,13 @@ class TpAll : CommandExecutor {
                     player.teleport(sender)
                 }
                 if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("Teleporting &c${players.size} &6players to you...".prefix()) else sender.sendMessage("Teleporting &l${players.size} &6players to you...".prefix())
-                Flash.staffMessage(sender, "teleported all players in their world (&c${players.size} &dplayers) to them.")
+                FlashUtil.staffMessage(sender, "teleported all players in their world (&c${players.size} &dplayers) to them.")
             }
         } else if (args.first() == "all") {
             val onlinePlayers = Bukkit.getOnlinePlayers()
             onlinePlayers.forEach { it.teleport(sender) }
             if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("Teleporting &c${onlinePlayers.size} &6players to you...".prefix()) else sender.sendMessage("Teleporting &l${onlinePlayers.size} &6players to you...".prefix())
-            Flash.staffMessage(sender, "teleported all players (&l${onlinePlayers.size} &dplayers) to them.")
+            FlashUtil.staffMessage(sender, "teleported all players (&l${onlinePlayers.size} &dplayers) to them.")
         } else {
             sender.sendMessage("Unrecognized argument. (${args.first()})".error())
         }

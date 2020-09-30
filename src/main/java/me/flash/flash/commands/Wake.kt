@@ -1,11 +1,11 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.color
-import me.flash.flash.Flash.Companion.prefix
-import me.flash.flash.Flash.Companion.usage
+import me.flash.flash.FlashUtil
+import me.flash.flash.FlashUtil.Companion.color
+import me.flash.flash.FlashUtil.Companion.prefix
+import me.flash.flash.FlashUtil.Companion.usage
 import org.bukkit.Bukkit
-import org.bukkit.ChatColor
 import org.bukkit.Sound
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -19,7 +19,7 @@ class Wake : CommandExecutor{
             if (args.isEmpty()) {
                 sender.sendMessage("wake <player> <message>".usage())
             }
-            val player = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(Flash.targetOffline).run { return true }
+            val player = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(FlashUtil.targetOffline).run { return true }
             player.sendTitle("&c".color() + sender.name, "&7Is requesting your attention".color())
             args.toMutableList().apply { removeAt(0) }.let {
                 player.sendMessage("&7---------------------".color())
@@ -35,7 +35,7 @@ class Wake : CommandExecutor{
                 }
             }
         } else {
-            sender.sendMessage(Flash.notPlayer)
+            sender.sendMessage(FlashUtil.notPlayer)
         }
         return true
     }

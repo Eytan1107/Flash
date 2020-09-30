@@ -27,6 +27,8 @@ class Flash : JavaPlugin() {
         //language=SQLite
         suggestionsdb.prepareStatement("create table if not exists suggestion(uuid varchar(48), text varchar(256));").executeUpdate()
         suggestionsdb.autoCommit = true
+
+        //can we actually make a proper hook so I dont have to comment this section out every time I want to test the plugin? - Skeagle
         try {
             vaultChat = server.servicesManager.getRegistration(Chat::class.java).provider
         } catch (e: Exception) {
@@ -34,6 +36,7 @@ class Flash : JavaPlugin() {
             server.pluginManager.disablePlugin(this)
             return
         }
+        
         getCommand("feed").executor = Feed()
         getCommand("hub").executor = Hub()
         getCommand("suggest").executor = Suggest()
@@ -98,40 +101,10 @@ class Flash : JavaPlugin() {
         // todo Suggestion file saving
     }
 
-    @Suppress("unused")
     companion object {
         lateinit var playerdata: Connection
         lateinit var suggestionsdb: Connection
-        lateinit var instance : Flash
-        lateinit var vaultChat : Chat
-        var scEnabled = mutableListOf<Player>()
-        var noPermission = "You don't have permission to do that.".error()
-        var notPlayer = "You must be a player to do this.".error()
-        var targetOffline = "The target player was not found.".error()
-        var TooManyArgs = "Too many arguments".error()
-
-        fun String.prefix(): String = ("[&6Flash's Server&r] &6$this").color()
-        fun String.color(): String = ChatColor.translateAlternateColorCodes('&', this)
-        fun String.error(): String = ("[&6Flash's Server&r] &cError: $this").color()
-        fun String.usage(): String = ("[&6Flash's Server&r] &cUsage: /$this").color()
-
-        fun staffMessage(sender: CommandSender, action: String, vararg ignored: Player) {
-            val senders = mutableListOf<CommandSender>()
-            senders.addAll(Bukkit.getOnlinePlayers().filter { p -> p.hasPermission("flash.staff") })
-            senders.add(Bukkit.getConsoleSender())
-            senders.remove(sender)
-            senders.removeAll(ignored)
-            senders.forEach {
-                it.sendMessage("&d[S] &5${sender.name}: &d$action".color())
-            }
-        }
-
-        fun playersInWorlds(server: String): MutableList<Player> {
-            val players = mutableListOf<Player>()
-            for (s in instance.config.getStringList(server)) {
-                players.addAll((Bukkit.getWorld(s) ?: continue).players)
-            }
-            return players
-        }
+        lateinit var instance: Flash
+        lateinit var vaultChat: Chat
     }
 }

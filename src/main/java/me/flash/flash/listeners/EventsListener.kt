@@ -2,9 +2,9 @@ package me.flash.flash.listeners
 
 
 import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.color
 import me.flash.flash.Flash.Companion.playerdata
-import me.flash.flash.Flash.Companion.prefix
+import me.flash.flash.FlashUtil.Companion.color
+import me.flash.flash.FlashUtil.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Material

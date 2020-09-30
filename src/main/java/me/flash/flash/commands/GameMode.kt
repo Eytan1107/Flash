@@ -1,11 +1,10 @@
 package me.flash.flash.commands
 
-import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.color
-import me.flash.flash.Flash.Companion.error
-import me.flash.flash.Flash.Companion.noPermission
-import me.flash.flash.Flash.Companion.playersInWorlds
-import me.flash.flash.Flash.Companion.prefix
+import me.flash.flash.FlashUtil
+import me.flash.flash.FlashUtil.Companion.color
+import me.flash.flash.FlashUtil.Companion.error
+import me.flash.flash.FlashUtil.Companion.noPermission
+import me.flash.flash.FlashUtil.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.command.Command
@@ -20,19 +19,19 @@ class GameMode : CommandExecutor {
             else sender.sendMessage("&cUsage : /gamemode [gamemode] <player>").run { return true }
         } else if (args.size == 1) {
             if (sender !is Player) sender.sendMessage("&cUsage : /gamemode [gamemode] [player]".color()).run { return true }
-            if (!sender.hasPermission("flash.gamemode")) sender.sendMessage(Flash.noPermission).run { return true }
+            if (!sender.hasPermission("flash.gamemode")) sender.sendMessage(FlashUtil.noPermission).run { return true }
             else {
                 if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("".prefix()) else sender.sendMessage("".prefix())
                 val gameMode = parseGamemode(args.first()) ?: sender.sendMessage("That is not a valid gamemode!".error()).run { return true }
                 sender.gameMode = gameMode
-                Flash.staffMessage(sender, "Set their gamemode to &l${gameMode.name.toLowerCase()}&d.")
+                FlashUtil.staffMessage(sender, "Set their gamemode to &l${gameMode.name.toLowerCase()}&d.")
             }
         } else {
             val gameMode = parseGamemode(args.first()) ?: sender.sendMessage("That is not a valid gamemode!".error()).run { return true }
-            val player = Bukkit.getPlayer(args[1]) ?: sender.sendMessage(Flash.targetOffline).run { return true }
+            val player = Bukkit.getPlayer(args[1]) ?: sender.sendMessage(FlashUtil.targetOffline).run { return true }
             if (!sender.hasPermission("flash.gamemode.others")) sender.sendMessage(noPermission).run { return true }
             player.gameMode = gameMode
-            Flash.staffMessage(sender, "Set &l${player.name}&d's gamemode to &l${gameMode.name.toLowerCase()}&d.", player)
+            FlashUtil.staffMessage(sender, "Set &l${player.name}&d's gamemode to &l${gameMode.name.toLowerCase()}&d.", player)
             if (!player.hasPermission("flash.msg.nice")) player.sendMessage("Your gamemode was set to &c${gameMode.name.toLowerCase()} &6by &c${sender.name}&6.".prefix()) else player.sendMessage("Your gamemode was set to &l${gameMode.name.toLowerCase()} &6by &l${sender.name}&6.".prefix())
             if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("You set &c${player.name}'s&6 gamemode to &c${gameMode.name.toLowerCase()}&6.".prefix()) else sender.sendMessage("You set &l${player.name}'s&6 gamemode to &l${gameMode.name.toLowerCase()}&6.".prefix())
         }

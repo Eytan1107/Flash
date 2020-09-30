@@ -1,9 +1,11 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.error
-import me.flash.flash.Flash.Companion.prefix
-import me.flash.flash.Flash.Companion.targetOffline
+import me.flash.flash.FlashUtil
+import me.flash.flash.FlashUtil.Companion.error
+import me.flash.flash.FlashUtil.Companion.getConfig
+import me.flash.flash.FlashUtil.Companion.prefix
+import me.flash.flash.FlashUtil.Companion.targetOffline
 import org.apache.commons.lang.time.DurationFormatUtils
 import org.bukkit.Bukkit
 import org.bukkit.Material
@@ -18,9 +20,12 @@ import java.time.Duration
 import java.time.Instant
 
 class Kit : CommandExecutor {
+
+    //this is actually painful to look at, why not use a config... - Skeagle
+
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        val playerer = if (sender is Player) sender else sender.sendMessage(Flash.notPlayer).run { return true }
-        if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("kitpvpworld").contains(playerer.world.name)) {
+        val playerer = if (sender is Player) sender else sender.sendMessage(FlashUtil.notPlayer).run { return true }
+        if (getConfig().getStringList("kitpvpworld").contains(playerer.world.name)) {
             if (args.size > 2) sender.sendMessage("Too many arguments".error()).run { return true }
             if (args.size == 1) {
                 when (args.first()) {

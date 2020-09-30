@@ -1,6 +1,6 @@
 package me.flash.flash.commands
 
-import me.flash.flash.Flash.Companion.noPermission
+import me.flash.flash.FlashUtil.Companion.noPermission
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor

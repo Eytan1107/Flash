@@ -1,16 +1,15 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.color
-import me.flash.flash.Flash.Companion.error
-import me.flash.flash.Flash.Companion.noPermission
-import me.flash.flash.Flash.Companion.prefix
+import me.flash.flash.FlashUtil
+import me.flash.flash.FlashUtil.Companion.error
+import me.flash.flash.FlashUtil.Companion.noPermission
+import me.flash.flash.FlashUtil.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
-import org.bukkit.plugin.java.JavaPlugin
 
 class Loopkill : CommandExecutor {
     companion object {
@@ -23,7 +22,7 @@ class Loopkill : CommandExecutor {
     }
 
     fun start() {
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Flash::class.java), runnable, 20L, 20L)
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(Flash.instance, runnable, 20L, 20L)
     }
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
@@ -38,11 +37,11 @@ class Loopkill : CommandExecutor {
                 } else {
                     if (tagged.contains(player)) {
                         sender.sendMessage("&aNo longer loopkilling &c${player.name}".prefix())
-                        Flash.staffMessage(sender, "loop-killing &l${player.name}")
+                        FlashUtil.staffMessage(sender, "loop-killing &l${player.name}")
                         tagged.remove(player)
                     } else {
                         sender.sendMessage("&aLoopkilling &c${player.name}".prefix())
-                        Flash.staffMessage(sender, "stopped loop-killing &l${player.name}")
+                        FlashUtil.staffMessage(sender, "stopped loop-killing &l${player.name}")
                         tagged.add(player)
                     }
                 }

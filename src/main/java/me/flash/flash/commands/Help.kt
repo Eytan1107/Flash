@@ -1,12 +1,15 @@
 package me.flash.flash.commands
 
-import me.flash.flash.Flash.Companion.color
+import me.flash.flash.FlashUtil.Companion.color
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 
 class Help : CommandExecutor {
+
+    //needs a rework. badly.
+
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         val player = Bukkit.getPlayer(sender.name)
         if (args.contains("player")) { // Workaround so thar staff can see the normal commands as well

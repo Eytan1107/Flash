@@ -1,9 +1,8 @@
 package me.flash.flash.commands
 
-
-import me.flash.flash.Flash.Companion.error
-import me.flash.flash.Flash.Companion.noPermission
-import me.flash.flash.Flash.Companion.prefix
+import me.flash.flash.FlashUtil.Companion.error
+import me.flash.flash.FlashUtil.Companion.noPermission
+import me.flash.flash.FlashUtil.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -118,15 +117,15 @@ class Server : CommandExecutor, Listener, TabCompleter {
     override fun onTabComplete(sender: CommandSender, command: Command, alias: String, args: Array<out String>): MutableList<String> {
         //if (args.size == 1) mutableListOf("hub", "kitpvp", "skyblock", "builds", "tntrun", "event")
         val possible = mutableListOf("hub", "kitpvp", "skyblock", "builds", "tntrun", "event")
-        if (args.size == 1) {
+        return if (args.size == 1) {
             val toCollection = possible.filter { i -> i.startsWith(args.first())}
-            return toCollection.toMutableList()
+            toCollection.toMutableList()
         } else {
             val array = mutableListOf<String>()
             Bukkit.getOnlinePlayers().forEach {
                 array.add(it.name)
             }
-            return array
+            array
         }
     }
 }

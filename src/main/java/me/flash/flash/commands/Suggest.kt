@@ -1,10 +1,9 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.error
-import me.flash.flash.Flash.Companion.notPlayer
-import me.flash.flash.Flash.Companion.prefix
-import me.flash.flash.variables.Suggestion
+import me.flash.flash.FlashUtil.Companion.error
+import me.flash.flash.FlashUtil.Companion.notPlayer
+import me.flash.flash.FlashUtil.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -12,9 +11,12 @@ import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
 class Suggest : CommandExecutor {
+    /*
     companion object {
         var suggestions = emptyList<Suggestion>().toMutableList()
-    }
+    }*/
+
+    //unused...?
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender !is Player) {

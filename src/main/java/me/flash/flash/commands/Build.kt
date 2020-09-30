@@ -1,10 +1,10 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.error
-import me.flash.flash.Flash.Companion.noPermission
-import me.flash.flash.Flash.Companion.prefix
-import me.flash.flash.Flash.Companion.targetOffline
+import me.flash.flash.FlashUtil.Companion.error
+import me.flash.flash.FlashUtil.Companion.noPermission
+import me.flash.flash.FlashUtil.Companion.prefix
+import me.flash.flash.FlashUtil.Companion.targetOffline
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.command.Command
@@ -14,7 +14,6 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEvent
-import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import java.util.*
 

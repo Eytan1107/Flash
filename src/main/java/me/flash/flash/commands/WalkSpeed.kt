@@ -1,12 +1,11 @@
 package me.flash.flash.commands
 
-
-import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.color
-import me.flash.flash.Flash.Companion.error
-import me.flash.flash.Flash.Companion.noPermission
-import me.flash.flash.Flash.Companion.notPlayer
-import me.flash.flash.Flash.Companion.prefix
+import me.flash.flash.FlashUtil
+import me.flash.flash.FlashUtil.Companion.color
+import me.flash.flash.FlashUtil.Companion.error
+import me.flash.flash.FlashUtil.Companion.noPermission
+import me.flash.flash.FlashUtil.Companion.notPlayer
+import me.flash.flash.FlashUtil.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -21,23 +20,23 @@ class WalkSpeed : CommandExecutor {
         val speed = args.firstOrNull()?.toIntOrNull() ?: sender.sendMessage("&cUsage: /walkspeed <speed> [player]".prefix()).run { return true }
         if (!IntRange(1, 15).contains(speed)) sender.sendMessage("Please specify a whole number 1 and 15.".error()).run { return true }
         if (args.size == 2) {
-            val player = Bukkit.getPlayer(args.last()) ?: sender.sendMessage(Flash.targetOffline).run { return true }
+            val player = Bukkit.getPlayer(args.last()) ?: sender.sendMessage(FlashUtil.targetOffline).run { return true }
             if (player !== sender) {
                 player.sendMessage("&c${sender.name} &6set your walk speed to &c$speed".prefix())
                 sender.sendMessage("Set walk speed for &c${player.name} &6to &c$speed".prefix())
-                Flash.staffMessage(sender, "Set &l$player&d's walk speed to &l$speed".color())
+                FlashUtil.staffMessage(sender, "Set &l$player&d's walk speed to &l$speed".color())
                 player.walkSpeed = speed.toFloat().plus(2) / 17
                 return true
             } else {
                 sender.walkSpeed = speed.toFloat().plus(2) / 17
                 sender.sendMessage("Set walk speed for &c${sender.name} &6to &c$speed".prefix())
-                Flash.staffMessage(sender, "Set their walk speed to &l$speed")
+                FlashUtil.staffMessage(sender, "Set their walk speed to &l$speed")
                 return true
             }
         } else {
             sender.walkSpeed = speed.toFloat().plus(2) / 17
             sender.sendMessage("Set walk speed for &c${sender.name} &6to &c$speed".prefix())
-            Flash.staffMessage(sender, "Set their walk speed to &l$speed")
+            FlashUtil.staffMessage(sender, "Set their walk speed to &l$speed")
             return true
         }
     }

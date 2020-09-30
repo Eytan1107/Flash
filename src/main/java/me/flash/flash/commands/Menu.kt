@@ -1,25 +1,23 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.color
-import me.flash.flash.Flash.Companion.error
-import me.flash.flash.Flash.Companion.prefix
+import me.flash.flash.FlashUtil
+import me.flash.flash.FlashUtil.Companion.color
+import me.flash.flash.FlashUtil.Companion.error
+import me.flash.flash.FlashUtil.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
-import org.bukkit.entity.Item
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
-import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.java.JavaPlugin
-import javax.swing.plaf.basic.BasicComboBoxUI
 
 
 class Menu : CommandExecutor, Listener {
@@ -28,7 +26,7 @@ class Menu : CommandExecutor, Listener {
         val player = (event.whoClicked as Player) // Creates a value of the player that clicked in the inventory
         if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("hub").contains(player.world.name)) { // Gets a list of all the players in the world
             if (tagged.contains(event.inventory)) { // Checks if the user has the inventory open
-                if (event.getInventory().getTitle().equals("&6Server Selector")) {
+                if (event.inventory.title == "&6Server Selector") {
                     event.isCancelled = true // Disables the option to move the items
                 }
                 else {
@@ -75,14 +73,14 @@ class Menu : CommandExecutor, Listener {
         val skyblock = ItemStack(Material.GRASS, 1).apply { // Creates the skyblock inventory item
             itemMeta = itemMeta.apply {
                 displayName = "&a&lSkyBlock".color()
-                lore = listOf("&7Click to teleport to SkyBlock".color(), "&7Players online: ${Flash.playersInWorlds("skyblock").size}".color())
+                lore = listOf("&7Click to teleport to SkyBlock".color(), "&7Players online: ${FlashUtil.playersInWorlds("skyblock").size}".color())
             }
             inventory.setItem(0, this) // Sets the item to the right slot
         }
         val tntrun = ItemStack(Material.TNT, 1).apply { // Creates the TntRun inventory item
             itemMeta = itemMeta.apply {
                 displayName = "&4&lTnT Run".color()
-                lore = listOf("&7Click to teleport to &4&lTnT Run".color(), "&7Players online: ".color() + Flash.playersInWorlds("tntrun").size)
+                lore = listOf("&7Click to teleport to &4&lTnT Run".color(), "&7Players online: ".color() + FlashUtil.playersInWorlds("tntrun").size)
             }
             inventory.setItem(8, this) // Sets the item to the right slot
         }
@@ -96,21 +94,21 @@ class Menu : CommandExecutor, Listener {
         val kitpvp = ItemStack(Material.DIAMOND_CHESTPLATE, 1).apply { // Creates the kitpvp inventory item
             itemMeta = itemMeta.apply {
                 displayName = "&6&lKitPvP".color()
-                lore = listOf("&7Click to teleport to &9&lKitpvp".color(), "&7Players online: ".color() + Flash.playersInWorlds("kitpvp").size)
+                lore = listOf("&7Click to teleport to &9&lKitpvp".color(), "&7Players online: ".color() + FlashUtil.playersInWorlds("kitpvp").size)
             }
             inventory.setItem(13, this) // Sets the item to the right slot
         }
         val builds = ItemStack(Material.BRICK, 1).apply { // Creates the builds inventory item
             itemMeta = itemMeta.apply {
                 displayName = "&b&lBuilds".color()
-                lore = listOf("&7Click to teleport to builds".color(), "&7Players online: ".color() + Flash.playersInWorlds("builds").size)
+                lore = listOf("&7Click to teleport to builds".color(), "&7Players online: ".color() + FlashUtil.playersInWorlds("builds").size)
             }
             inventory.setItem(22, this) // Sets the item to the right slot
         }
         val event = ItemStack(Material.REDSTONE, 1).apply { // Creates the event inventory item
             itemMeta = itemMeta.apply {
                 displayName = "&a&lEvent".color()
-                lore = listOf("&7Click to teleport to &a&lEvent".color(), "&7Players online: ".color() + Flash.playersInWorlds("event").size)
+                lore = listOf("&7Click to teleport to &a&lEvent".color(), "&7Players online: ".color() + FlashUtil.playersInWorlds("event").size)
             }
             inventory.setItem(26, this) // Sets the item to the right slot
         }
@@ -129,7 +127,7 @@ class Menu : CommandExecutor, Listener {
             if (event.currentItem.isSimilar(ItemStack(Material.GRASS).apply { // Checks if the players clicks ONLY on the Grass block
                         itemMeta = itemMeta.apply {
                             displayName = "&a&lSkyBlock".color()
-                            lore = listOf("&7Click to teleport to SkyBlock".color(), "&7Players online: ${Flash.playersInWorlds("skyblock").size}".color())
+                            lore = listOf("&7Click to teleport to SkyBlock".color(), "&7Players online: ${FlashUtil.playersInWorlds("skyblock").size}".color())
                         }
                     })) {
                 player.sendMessage("Sending you to SkyBlock".prefix()) // ChatMessage
@@ -139,7 +137,7 @@ class Menu : CommandExecutor, Listener {
             } else if (event.currentItem.isSimilar(ItemStack(Material.TNT).apply { // Checks if the players clicks ONLY on the Tnt block
                         itemMeta = itemMeta.apply {
                             displayName = "&4&lTnT Run".color()
-                            lore = listOf("&7Click to teleport to &4&lTnT Run".color(), "&7Players online: ".color() + Flash.playersInWorlds("tntrun").size)
+                            lore = listOf("&7Click to teleport to &4&lTnT Run".color(), "&7Players online: ".color() + FlashUtil.playersInWorlds("tntrun").size)
                         }
                     })) {
                 player.sendMessage("Sending you to TnTRun".prefix()) // ChatMessage
@@ -149,7 +147,7 @@ class Menu : CommandExecutor, Listener {
             } else if (event.currentItem.isSimilar(ItemStack(Material.DIAMOND_CHESTPLATE).apply { // Checks if the players clicks ONLY on the Diamond_Sword
                         itemMeta = itemMeta.apply {
                             displayName = "&6&lKitPvP".color()
-                            lore = listOf("&7Click to teleport to &9&lKitpvp".color(), "&7Players online: ".color() + Flash.playersInWorlds("kitpvp").size)
+                            lore = listOf("&7Click to teleport to &9&lKitpvp".color(), "&7Players online: ".color() + FlashUtil.playersInWorlds("kitpvp").size)
                         }
                     })) {
                 player.sendMessage("Sending you to KitPvP".prefix()) // ChatMessage
@@ -169,7 +167,7 @@ class Menu : CommandExecutor, Listener {
             } else if (event.currentItem.isSimilar(ItemStack(Material.BRICK).apply { // Checks if the players clicks ONLY on the Brick Block
                         itemMeta = itemMeta.apply {
                             displayName = "&b&lBuilds".color()
-                            lore = listOf("&7Click to teleport to builds".color(), "&7Players online: ".color() + Flash.playersInWorlds("builds").size)
+                            lore = listOf("&7Click to teleport to builds".color(), "&7Players online: ".color() + FlashUtil.playersInWorlds("builds").size)
                         }
                     })) {
                 if (player.hasPermission("flash.staff")) { // Checks if the user has the Flash.staff perm
@@ -177,11 +175,11 @@ class Menu : CommandExecutor, Listener {
                     player.teleport(Bukkit.getWorld("builds").spawnLocation) // Teleports the player to Builds
                     tagged.remove(event.inventory) // Unlocks the inventory
                     return true
-                } else player.sendMessage(Flash.noPermission).run { return true } // Stops if the user doesn't have the right Permissions
+                } else player.sendMessage(FlashUtil.noPermission).run { return true } // Stops if the user doesn't have the right Permissions
             } else if (event.currentItem.isSimilar(ItemStack(Material.REDSTONE).apply { // Checks if the players clicks ONLY on the Redstone Dust
                         itemMeta = itemMeta.apply {
                             displayName = "&a&lEvent".color()
-                            lore = listOf("&7Click to teleport to &a&lEvent".color(), "&7Players online: ".color() + Flash.playersInWorlds("event").size)
+                            lore = listOf("&7Click to teleport to &a&lEvent".color(), "&7Players online: ".color() + FlashUtil.playersInWorlds("event").size)
                         }
                     })) {
                 player.sendMessage("Sending you to Event".prefix()) // ChatMessage

@@ -1,7 +1,7 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.color
+import me.flash.flash.FlashUtil.Companion.color
 import org.bukkit.Material
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -11,10 +11,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerChangedWorldEvent
 import org.bukkit.event.player.PlayerInteractEvent
-import org.bukkit.event.player.PlayerJoinEvent
-import org.bukkit.inventory.ItemStack
-import org.bukkit.plugin.java.JavaPlugin
-import java.util.concurrent.TimeoutException
+
 
 class Compass : Listener {
     @EventHandler

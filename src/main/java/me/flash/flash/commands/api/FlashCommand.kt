@@ -1,6 +1,6 @@
 package me.flash.flash.commands.api
 
-import me.flash.flash.Flash
+import me.flash.flash.FlashUtil
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandMap
@@ -65,7 +65,7 @@ abstract class FlashCommand : Command {
 
     protected fun checkPlayer() {
         if (this.sender !is Player)
-            throw FlashException(Flash.notPlayer)
+            throw FlashException(FlashUtil.notPlayer)
     }
 
     final override fun setDescription(desc: String): Command {

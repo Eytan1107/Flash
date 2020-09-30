@@ -1,8 +1,8 @@
 package me.flash.flash.commands
 
-import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.color
-import me.flash.flash.Flash.Companion.prefix
+import me.flash.flash.FlashUtil.Companion.color
+import me.flash.flash.FlashUtil.Companion.noPermission
+import me.flash.flash.FlashUtil.Companion.prefix
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -10,7 +10,7 @@ import org.bukkit.command.CommandSender
 class Colorlist : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (!sender.hasPermission("flash.colorslist")) {
-            sender.sendMessage(Flash.noPermission)
+            sender.sendMessage(noPermission)
             return true
         }
         sender.sendMessage("Here is a list of all the colors available in minecraft:".prefix())

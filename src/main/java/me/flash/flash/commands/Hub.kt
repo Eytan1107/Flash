@@ -1,9 +1,9 @@
 package me.flash.flash.commands
 
-import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.error
-import me.flash.flash.Flash.Companion.noPermission
-import me.flash.flash.Flash.Companion.prefix
+import me.flash.flash.FlashUtil
+import me.flash.flash.FlashUtil.Companion.error
+import me.flash.flash.FlashUtil.Companion.noPermission
+import me.flash.flash.FlashUtil.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -25,7 +25,7 @@ class Hub : CommandExecutor {
         }
         else {
             if (!sender.hasPermission("flash.hub.others")) sender.sendMessage(noPermission).run { return true }
-            val player = if (args.first() == sender.name) sender as Player else Bukkit.getPlayer(args.first()) ?: sender.sendMessage(Flash.targetOffline).run { return true }
+            val player = if (args.first() == sender.name) sender as Player else Bukkit.getPlayer(args.first()) ?: sender.sendMessage(FlashUtil.targetOffline).run { return true }
             if (sender == player) {
                 if (player.world.name == "world") sender.sendMessage("You are already in Hub, do &e/spawn &cto return to spawn !".error()).run { return true }
                 sender.sendMessage("Teleporting you to Hub...".prefix())

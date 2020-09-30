@@ -1,10 +1,11 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
-import me.flash.flash.Flash.Companion.color
-import me.flash.flash.Flash.Companion.error
-import me.flash.flash.Flash.Companion.prefix
-import me.flash.flash.Flash.Companion.usage
+import me.flash.flash.FlashUtil
+import me.flash.flash.FlashUtil.Companion.color
+import me.flash.flash.FlashUtil.Companion.error
+import me.flash.flash.FlashUtil.Companion.prefix
+import me.flash.flash.FlashUtil.Companion.usage
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -15,7 +16,7 @@ import java.util.*
 class Suggestions : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender !is Player) {
-            sender.sendMessage(Flash.notPlayer)
+            sender.sendMessage(FlashUtil.notPlayer)
             return true
         }
         if (args.isEmpty()) {
