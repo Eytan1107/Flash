@@ -1,8 +1,8 @@
 name: Flash
 version: @version@
 main: me.flash.flash.Flash
-depend:
-  - Vault
+#depend:
+#  - Vault
 commands:
   feed:
     description: Feed a player
@@ -13,9 +13,6 @@ commands:
       - l
   loopkill:
     description: Loop Kill a player
-  broadcast:
-    description: Broadcast
-    aliases: bc
   clear:
     description: Clear
     aliases:

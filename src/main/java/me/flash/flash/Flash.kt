@@ -37,7 +37,7 @@ class Flash : JavaPlugin() {
         getCommand("hub").executor = Hub()
         getCommand("suggest").executor = Suggest()
         getCommand("suggestions").executor = Suggestions()
-        getCommand("broadcast").executor = Broadcast()
+        Broadcast().register()
         getCommand("clear").executor = Clear()
         getCommand("check").executor = Check()
         getCommand("Reply").executor = Reply()

@@ -3,23 +3,26 @@ package me.flash.flash.commands
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.error
 import me.flash.flash.Flash.Companion.prefix
+import me.flash.flash.commands.api.FlashCommand
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 
-class Broadcast : CommandExecutor {
-    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if (!sender.hasPermission("flash.broadcast")) {
-            sender.sendMessage(Flash.noPermission)
-            return true
+class Broadcast : FlashCommand("broadcast|bc") {
+
+    init {
+        usage = "/broadcast <text>"
+        description = "Broadcast a message to players on the server."
+    }
+
+    override fun run() {
+        checkPlayer()
+        if (args.isEmpty()) {
+            sender.sendMessage(usage.error())
+            return
         }
-        if (args.isEmpty()){
-            sender.sendMessage("/broadcast <text>".error())
-        } else {
-            Bukkit.broadcastMessage(("&c&l" + args.joinToString(" ")).prefix())
-            Flash.staffMessage(sender, "Broadcasted")
-        }
-        return true
+        Bukkit.broadcastMessage(("&c&l" + args.joinToString(" ")).prefix())
+        Flash.staffMessage(sender, "Broadcasted")
     }
 }
