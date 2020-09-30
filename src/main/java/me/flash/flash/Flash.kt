@@ -7,7 +7,6 @@ import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
-import org.bukkit.event.player.PlayerChangedWorldEvent
 import org.bukkit.plugin.java.JavaPlugin
 import org.sqlite.JDBC
 import java.io.File
@@ -22,8 +21,10 @@ class Flash : JavaPlugin() {
         playerdata = DriverManager.getConnection("jdbc:sqlite:" + File(dataFolder, "playerdata.db").absolutePath)
         suggestionsdb = DriverManager.getConnection("jdbc:sqlite:" + File(dataFolder, "suggestions.db").absolutePath)
         instance = this
+        //language=SQLite
         playerdata.prepareStatement("create table if not exists data(uuid varchar(48), kills int default(0), deaths int default(0), time int default(0), primary key(uuid));").executeUpdate()
         playerdata.autoCommit = true
+        //language=SQLite
         suggestionsdb.prepareStatement("create table if not exists suggestion(uuid varchar(48), text varchar(256));").executeUpdate()
         suggestionsdb.autoCommit = true
         try {
