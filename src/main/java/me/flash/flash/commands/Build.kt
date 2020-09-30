@@ -2,14 +2,11 @@ package me.flash.flash.commands
 
 import me.flash.flash.Flash
 import me.flash.flash.FlashUtil.Companion.error
-import me.flash.flash.FlashUtil.Companion.noPermission
 import me.flash.flash.FlashUtil.Companion.prefix
 import me.flash.flash.FlashUtil.Companion.targetOffline
 import me.flash.flash.commands.api.FlashCommand
 import org.bukkit.Bukkit
 import org.bukkit.Material
-import org.bukkit.command.Command
-import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -63,6 +60,7 @@ class Build : FlashCommand("build|break"), Listener {
     @EventHandler
     fun interact(event: PlayerInteractEvent) {
         if (!listOf("island_normal_world", "builds").contains(event.player.world.name)) {
+            if (event.clickedBlock == null) return
             if (event.clickedBlock.type != Material.AIR && !toggled.contains(event.player.uniqueId) && event.player.hasPermission("flash.build") && event.player.hasPermission("worldguard.region.bypass.*")) {
                 event.isCancelled = true
                 if (!wasteOfMemory.contains(event.player.uniqueId)) if(event.player.hasPermission("flash.staff") && event.player.hasPermission("worldguard.region.bypass.*")) event.player.sendMessage("You must do &e/build &cto enable build/break".error()) else event.player.sendMessage("You must ask a high staff member to enable build/break".error())
