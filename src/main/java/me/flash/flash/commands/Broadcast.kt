@@ -9,7 +9,7 @@ import org.bukkit.Bukkit
 class Broadcast : FlashCommand("broadcast|bc") {
 
     init {
-        usage = "/broadcast <text>"
+        usage = "<text>"
         description = "Broadcast a message to players on the server."
     }
 

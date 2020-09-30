@@ -36,7 +36,7 @@ class Flash : JavaPlugin() {
             server.pluginManager.disablePlugin(this)
             return
         }
-        
+
         getCommand("feed").executor = Feed()
         getCommand("hub").executor = Hub()
         getCommand("suggest").executor = Suggest()
@@ -57,7 +57,7 @@ class Flash : JavaPlugin() {
         getCommand("tphere").executor = TpHere()
         getCommand("silenttphere").executor = TpHere()
         getCommand("kill").executor = Kill()
-        getCommand("back").executor = Back()
+        Back().register()
         getCommand("sudo").executor = Sudo()
         getCommand("fly").executor = Fly()
         getCommand("staffchat").executor = StaffChat()
@@ -75,7 +75,7 @@ class Flash : JavaPlugin() {
         getCommand("kits").executor = Kits()
         getCommand("menu").executor = Menu()
         getCommand("vanish").executor = Vanish()
-        getCommand("build").executor = Build()
+        Build().register()
         getCommand("server").apply {
             executor = Server()
             tabCompleter = Server()

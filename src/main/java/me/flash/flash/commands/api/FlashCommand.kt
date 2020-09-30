@@ -48,11 +48,9 @@ abstract class FlashCommand : Command {
         this.args = args.toMutableList()
         try {
             this.run()
-        } catch (ex: IllegalArgumentException) {
-            sender.sendMessage(ex.message)
         }
         catch (ex: FlashException) {
-            sender.sendMessage(ex.message)
+            sender.sendMessage(ex.getMsg())
         }
         catch (t: Throwable) {
             sender.sendMessage(t.message)
@@ -63,9 +61,28 @@ abstract class FlashCommand : Command {
 
     abstract fun run()
 
+    //DO NOT use in an if statement
     protected fun checkPlayer() {
-        if (this.sender !is Player)
+        if (isPlayer())
             throw FlashException(FlashUtil.notPlayer)
+    }
+
+    protected fun isPlayer() : Boolean {
+        return this.sender !is Player
+    }
+
+    //DO NOT use in an if statement
+    protected fun checkPerm(perm: String) {
+        if (!hasPerm(perm))
+            throw FlashException(FlashUtil.noPermission)
+    }
+
+    protected fun hasPerm(perm: String) : Boolean {
+        return this.sender.hasPermission(perm)
+    }
+
+    protected fun getPlayer() : Player {
+        return if (isPlayer()) (this.sender as Player) else throw FlashException("sender cannot be null")
     }
 
     final override fun setDescription(desc: String): Command {
@@ -75,7 +92,7 @@ abstract class FlashCommand : Command {
     }
 
     final override fun setUsage(use: String): Command {
-        this.use = use
+        this.use = "/$cmd $use"
         super.setUsage(use)
         return this
     }

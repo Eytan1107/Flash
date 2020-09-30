@@ -61,8 +61,6 @@ commands:
     description: Suggest better things for the best minecraft server that exists.
   suggestions:
     description: Read suggestions
-  back:
-    description: Go back
   sudo:
     description: Make another player say something
   fly:
@@ -151,10 +149,6 @@ commands:
       - respond
   speed:
     description: change speed
-  build:
-    description: turn build on or off
-    aliases:
-      - break
   wake:
     description: Wake up someone who fell asleep
   sethub:
