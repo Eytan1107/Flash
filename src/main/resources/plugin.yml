@@ -19,8 +19,6 @@ commands:
       - ci
       - clearinventory
       - cl
-  check:
-    descrpition: Check
   craft:
     description: Craft
   bcf:
