@@ -31,7 +31,6 @@ class Rank : CommandExecutor, Listener {
     private var inventory2 = Bukkit.createInventory(null, 18, "&6Rank Selector")
     private var inventory = Bukkit.createInventory(null, 45, "&6Rank Selector".color()) // Creates the inventory
     override fun onCommand(sender: CommandSender?, command: Command?, label: String?, args: Array<out String>?): Boolean {
-
         val player = (sender as Player) // Creates the player value
         val empty = ItemStack(Material.STAINED_GLASS_PANE, 1, 14).apply {
             itemMeta = itemMeta.apply {
@@ -51,7 +50,6 @@ class Rank : CommandExecutor, Listener {
             }
             inventory.setItem(40, this)
         }
-        val ranks = mutableListOf<String>("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
         // LOT OF VALUES FUCK OFF
         val owner = ItemStack(Material.NOTE_BLOCK).apply {
             itemMeta = itemMeta.apply {
@@ -200,18 +198,15 @@ class Rank : CommandExecutor, Listener {
 
     @EventHandler
     fun cancelTheMovement(event: InventoryClickEvent) {
-        val player = (event.whoClicked as Player) // Creates a value of the player that clicked in the inventory
-        if (tagged.contains(event.inventory)) {
-            if (event.inventory.title == "&6Rank Selector") {
+        val player = (event.whoClicked as Player)
+        if (tagged.contains(event.inventory)) { // Creates a value of the player that clicked in the inventory
                 event.isCancelled = true // Disables the option to move the items
             }
         }
-    }
 
     @EventHandler
     fun closeInventory(event: InventoryCloseEvent) {
         if (tagged.contains(event.inventory)) tagged.remove(event.inventory) // Unlocks the inventory only if the players had it lock and closes his inventory
-        inventory.clear()
     }
 
     companion object {
@@ -219,33 +214,12 @@ class Rank : CommandExecutor, Listener {
     }
 
     @EventHandler // All the different ranks
-    fun rankSelect(event: InventoryClickEvent) {
-        tagged.add(event.inventory)
-        val player = (event.whoClicked as Player)
-        when (event.currentItem.itemMeta.displayName) {
-            "&4&lOwner" -> player.openInventory(inventory2)
-            "&5&lDeveloper" -> player.openInventory(inventory2)
-            "&c&lAdmin" -> player.openInventory(inventory2)
-            "&d&lManager" -> player.openInventory(inventory2)
-            "&c&lLead-Moderator" -> player.openInventory(inventory2)
-            "&cModerator" -> player.openInventory(inventory2)
-            "&2T-&cModerator" -> player.openInventory(inventory2)
-            "&a&lLead-Builder" -> player.openInventory(inventory2)
-            "&a&lBuilder" -> player.openInventory(inventory2)
-            "&2T-&aBuilder" -> player.openInventory(inventory2)
-            "&2Helper" -> player.openInventory(inventory2)
-            "&3Tester" -> player.openInventory(inventory2)
-            "&dFriend" -> player.openInventory(inventory2)
-            "&6You&fTube" -> player.openInventory(inventory2)
-            "&5Twitch" -> player.openInventory(inventory2)
-            "&6&lFlash" -> player.openInventory(inventory2)
-            "&b&lSavitar" -> player.openInventory(inventory2)
-            "&eReverseFlash" -> player.openInventory(inventory2)
-            "&6Kid&eFlash" -> player.openInventory(inventory2)
-            "&1Zoom" -> player.openInventory(inventory2)
-            "&bGod&fSpeed" -> player.openInventory(inventory2)
-            "&7Member" -> player.openInventory(inventory2)
+    fun rankSelect(event: InventoryClickEvent): Boolean {
+        if (event.inventory.toString() == "&6Rank Selector") {
+            tagged.add(event.inventory)
         }
+        return true
     }
 }
+
 
