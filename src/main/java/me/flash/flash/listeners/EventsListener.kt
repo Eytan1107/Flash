@@ -144,7 +144,7 @@ class EventsListener : Listener {
             executeUpdate()
         }
         event.entity.player.world.players.forEach { players ->
-            players.sendMessage("&c${event.entity.player.name} &6has died".prefix())
+            //players.sendMessage("&c${event.entity.player.name} &6has died".prefix())
             if (!players.hasPermission("flash.msg.nice")) players.sendMessage("&c${event.entity.player.name} has died".prefix()) else players.sendMessage("&l${event.entity.player.name} &6has died".prefix())
             event.deathMessage = null
         }
