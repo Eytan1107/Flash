@@ -27,7 +27,7 @@ class Menu : CommandExecutor, Listener {
     @EventHandler
     fun onInventoryClick(event: InventoryClickEvent) {
         val player = (event.whoClicked as Player) // Creates a value of the player that clicked in the inventory
-        if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("hub").contains(player.world.name)) { // Gets a list of all the players in the world
+        if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("hub").contains(player.world.name) || JavaPlugin.getPlugin(Flash::class.java).config.getStringList("kitpvpworld").contains(player.world.name)) { // Gets a list of all the players in the world
             if (tagged.contains(event.inventory)) { // Checks if the user has the inventory open
                 if (event.inventory.title == "&6Server Selector") {
                     event.isCancelled = true // Disables the option to move the items

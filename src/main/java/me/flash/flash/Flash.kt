@@ -88,12 +88,14 @@ class Flash : JavaPlugin() {
         getCommand("sethub").executor = SetHub()
         getCommand("invsee").executor = Invsee()
         getCommand("players").executor = Players()
+        getCommand("rank").executor = Rank()
         server.pluginManager.registerEvents(Back(), this)
         server.pluginManager.registerEvents(EventsListener(), this)
         server.pluginManager.registerEvents(StaffChat(), this)
         server.pluginManager.registerEvents(Build(), this)
         server.pluginManager.registerEvents(Menu(), this)
         server.pluginManager.registerEvents(Compass(), this)
+        server.pluginManager.registerEvents(Rank(), this)
         //TODO suggestion file reading
     }
 
