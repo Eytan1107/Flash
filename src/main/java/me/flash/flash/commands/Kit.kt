@@ -16,6 +16,7 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.java.JavaPlugin
+import java.sql.BatchUpdateException
 import java.time.Duration
 import java.time.Instant
 
@@ -27,20 +28,22 @@ class Kit : CommandExecutor {
         val playerer = if (sender is Player) sender else sender.sendMessage(FlashUtil.notPlayer).run { return true }
         if (getConfig().getStringList("kitpvpworld").contains(playerer.world.name)) {
             if (args.size > 2) sender.sendMessage("Too many arguments".error()).run { return true }
-                val player = if (Bukkit.getPlayer(args[1]) == sender) sender else Bukkit.getPlayer(args[1]) ?: sender.sendMessage(targetOffline).run { return true }
+            if (args.size == 2) {
+                val player = Bukkit.getPlayer(args[2])
+            } else if (args.size == 1) {
+                val player = Bukkit.getPlayer(sender.name)
                 when (args.first()) {
                     "pvp" -> {
                         if (player == sender) {
                             sender.sendMessage("Kit PvP received !".prefix())
-                        }
-                        else {
+                        } else {
                             sender.sendMessage("Kit PvP given to ${player.name} !".prefix())
                             player.sendMessage("Kit PvP given by ${sender.name} !".prefix())
                         }
                         player.inventory.setItem(1, ItemStack(Material.STONE_SWORD).apply {
                             addEnchantment(Enchantment.DAMAGE_ALL, 1)
                             addEnchantment(Enchantment.DURABILITY, 1)
-                        } )
+                        })
                         player.inventory.setItem(2, ItemStack(Material.GOLDEN_APPLE, 5))
                         player.inventory.helmet = ItemStack(Material.CHAINMAIL_HELMET).apply {
                             addEnchantment(Enchantment.DURABILITY, 1)
@@ -58,8 +61,7 @@ class Kit : CommandExecutor {
                     "fast" -> {
                         if (player == sender) {
                             sender.sendMessage("Kit Fast received !".prefix())
-                        }
-                        else {
+                        } else {
                             sender.sendMessage("Kit Fast given to ${player.name} !".prefix())
                             player.sendMessage("Kit Fast given by ${sender.name} !".prefix())
                         }
@@ -84,8 +86,7 @@ class Kit : CommandExecutor {
                     "speedster" -> {
                         if (player == sender) {
                             sender.sendMessage("Kit Speedster received !".prefix())
-                        }
-                        else {
+                        } else {
                             sender.sendMessage("Kit Speedster given to ${player.name} !".prefix())
                             player.sendMessage("Kit Speedster given by ${sender.name} !".prefix())
                         }
@@ -116,8 +117,7 @@ class Kit : CommandExecutor {
                     "godspeed" -> {
                         if (player == sender) {
                             sender.sendMessage("Kit GodSpeed received !".prefix())
-                        }
-                        else {
+                        } else {
                             sender.sendMessage("Kit GodSpeed given to ${player.name} !".prefix())
                             player.sendMessage("Kit GodSpeed given by ${sender.name} !".prefix())
                         }
@@ -148,8 +148,7 @@ class Kit : CommandExecutor {
                     "speedforce" -> {
                         if (player == sender) {
                             sender.sendMessage("Kit SpeedForce received !".prefix())
-                        }
-                        else {
+                        } else {
                             sender.sendMessage("Kit SpeedForce given to ${player.name} !".prefix())
                             player.sendMessage("Kit SpeedForce given by ${sender.name} !".prefix())
                         }
@@ -177,11 +176,16 @@ class Kit : CommandExecutor {
                             addEnchantment(Enchantment.DURABILITY, 3)
                         })
                     }
+                    "menu" -> {
+                        // add the kit menu
+
+                    }
 
                 }
+            } else {
+                playerer.sendMessage("You need to be in KitPvP".error())
             }
-        else {
-            playerer.sendMessage("You need to be in KitPvP".error())
+            return true
         }
         return true
     }

@@ -125,12 +125,12 @@ class EventsListener : Listener {
     }
 
     @EventHandler
-    fun onInventoryClick(event: InventoryClickEvent) {
-        val player = event.whoClicked
-        if (Flash.instance.config.getStringList("hub").contains(player.world.name)) {
-            if (event.viewers.contains(player)) event.isCancelled = true
+       fun onInventoryClick(event: InventoryClickEvent) {
+            val player = event.whoClicked
+            if (Flash.instance.config.getStringList("hub").contains(player.world.name) || Flash.instance.config.getStringList("kitpvpworld").contains(player.world.name)) {
+               if (event.viewers.contains(player)) event.isCancelled = true
+           }
         }
-    }
 
     @EventHandler
     fun onPlayerDeath(event: PlayerDeathEvent) { // nope
