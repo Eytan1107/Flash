@@ -1,9 +1,9 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash.Companion.vaultChat
-import me.flash.flash.FlashUtil
-import me.flash.flash.FlashUtil.Companion.color
-import me.flash.flash.FlashUtil.Companion.error
+import me.flash.flash.utils.FlashUtil
+import me.flash.flash.utils.FlashUtil.Companion.color
+import me.flash.flash.utils.FlashUtil.Companion.error
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor

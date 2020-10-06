@@ -1,7 +1,7 @@
 package me.flash.flash.listeners
 
 import me.flash.flash.Flash
-import me.flash.flash.FlashUtil.Companion.color
+import me.flash.flash.utils.FlashUtil.Companion.color
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener

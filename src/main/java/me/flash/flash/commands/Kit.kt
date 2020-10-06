@@ -1,12 +1,11 @@
 package me.flash.flash.commands
 
-import me.flash.flash.Flash
-import me.flash.flash.FlashUtil
-import me.flash.flash.FlashUtil.Companion.error
-import me.flash.flash.FlashUtil.Companion.getConfig
-import me.flash.flash.FlashUtil.Companion.prefix
-import me.flash.flash.FlashUtil.Companion.targetOffline
-import me.flash.flash.FlashUtil.Companion.usage
+import me.flash.flash.utils.FlashUtil
+import me.flash.flash.utils.FlashUtil.Companion.error
+import me.flash.flash.utils.FlashUtil.Companion.getConfig
+import me.flash.flash.utils.FlashUtil.Companion.prefix
+import me.flash.flash.utils.FlashUtil.Companion.targetOffline
+import me.flash.flash.utils.FlashUtil.Companion.usage
 import org.apache.commons.lang.time.DurationFormatUtils
 import org.bukkit.Bukkit
 import org.bukkit.Material
@@ -16,10 +15,7 @@ import org.bukkit.command.CommandSender
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
-import org.bukkit.plugin.java.JavaPlugin
-import java.sql.BatchUpdateException
 import java.time.Duration
-import java.time.Instant
 
 class Kit : CommandExecutor {
 

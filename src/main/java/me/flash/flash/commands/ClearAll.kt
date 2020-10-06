@@ -1,9 +1,9 @@
 package me.flash.flash.commands
 
-import me.flash.flash.FlashUtil
-import me.flash.flash.FlashUtil.Companion.color
-import me.flash.flash.FlashUtil.Companion.getConfig
-import me.flash.flash.FlashUtil.Companion.prefix
+import me.flash.flash.utils.FlashUtil
+import me.flash.flash.utils.FlashUtil.Companion.color
+import me.flash.flash.utils.FlashUtil.Companion.getConfig
+import me.flash.flash.utils.FlashUtil.Companion.prefix
 import me.flash.flash.commands.api.FlashCommand
 import net.md_5.bungee.api.ChatColor
 import net.md_5.bungee.api.chat.ClickEvent

@@ -1,6 +1,6 @@
 package me.flash.flash.commands
 
-import me.flash.flash.FlashUtil.Companion.color
+import me.flash.flash.utils.FlashUtil.Companion.color
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor

@@ -1,11 +1,11 @@
 package me.flash.flash.commands
 
 import me.flash.flash.Flash
-import me.flash.flash.FlashUtil.Companion.color
-import me.flash.flash.FlashUtil.Companion.error
-import me.flash.flash.FlashUtil.Companion.noPermission
-import me.flash.flash.FlashUtil.Companion.notPlayer
-import me.flash.flash.FlashUtil.Companion.targetOffline
+import me.flash.flash.utils.FlashUtil.Companion.color
+import me.flash.flash.utils.FlashUtil.Companion.error
+import me.flash.flash.utils.FlashUtil.Companion.noPermission
+import me.flash.flash.utils.FlashUtil.Companion.notPlayer
+import me.flash.flash.utils.FlashUtil.Companion.targetOffline
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor

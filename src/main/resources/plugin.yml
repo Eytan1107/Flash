@@ -50,9 +50,6 @@ commands:
   staffchat:
     description: Toggle staffchat
     aliases: sc
-  flyspeed:
-    description: Set your flight speed 1 - 10
-    aliases: fs
   walkspeed:
     description: Set your flight speed 1 - 10
     aliases: ws

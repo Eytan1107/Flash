@@ -1,7 +1,7 @@
 package me.flash.flash.commands
 
-import me.flash.flash.FlashUtil.Companion.error
-import me.flash.flash.FlashUtil.Companion.prefix
+import me.flash.flash.utils.FlashUtil.Companion.error
+import me.flash.flash.utils.FlashUtil.Companion.prefix
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender

@@ -1,6 +1,6 @@
 package me.flash.flash.commands
 
-import me.flash.flash.FlashUtil
+import me.flash.flash.utils.FlashUtil
 import me.flash.flash.commands.api.FlashCommand
 import org.bukkit.Bukkit
 
