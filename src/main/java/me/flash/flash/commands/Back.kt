@@ -1,6 +1,5 @@
 package me.flash.flash.commands
 
-import me.flash.flash.FlashUtil
 import me.flash.flash.FlashUtil.Companion.error
 import me.flash.flash.FlashUtil.Companion.prefix
 import me.flash.flash.commands.api.FlashCommand
@@ -33,7 +32,7 @@ class Back : FlashCommand("back"), Listener {
             player.sendMessage("You do not have a last known location".error())
         }
     }
-
+//doesn't work, it says: sender cannot be null
 
 
     @EventHandler(ignoreCancelled = true)

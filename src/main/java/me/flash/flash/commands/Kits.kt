@@ -14,7 +14,7 @@ class Kits : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         val player = if (sender is Player) sender else sender.sendMessage(FlashUtil.notPlayer).run { return true }
         if (getConfig().getStringList("kitpvpworld").contains(player.world.name)) {
-            if (args.isNotEmpty()) sender.sendMessage("Flash told me to not let you use arguments, sorry.".error()).run { return true }
+            if (args.isNotEmpty()) sender.sendMessage("Too many arguments".error()).run { return true }
             sender.sendMessage("&2&nKits&r".color())
             sender.sendMessage("")
             sender.sendMessage("&aPvP &7- &8/kit pvp &7(Every 10 seconds)".color())

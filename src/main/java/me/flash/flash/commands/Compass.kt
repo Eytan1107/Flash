@@ -19,6 +19,13 @@ class Compass : Listener {
         if ((event.action.name.toLowerCase().contains("right")) && Flash.instance.config.getStringList("hub").contains(event.player.world.name)) {
             if (event.player?.itemInHand?.type == Material.COMPASS && event.player?.itemInHand?.itemMeta?.displayName ?: false == "&6Flash's Server Selector".color()) {
                 event.player.chat("/menu")
+                return
+            }
+        }
+        if ((event.action.name.toLowerCase().contains("right")) && Flash.instance.config.getStringList("kitpvpworld").contains(event.player.world.name)) {
+            if (event.player?.itemInHand?.type == Material.NETHER_STAR && event.player?.itemInHand?.itemMeta?.displayName ?: false == "&6Kit Menu".color()) {
+                event.player.chat("/menu")
+                return
             }
         }
     }

@@ -40,6 +40,42 @@ class EventsListener : Listener {
                 regex = Regex("Member"),
                 replacement = ""
         )
+        if (event.player.world.name == "builds") {
+            if (event.player.hasPermission("flash.gamemode") && event.player.hasPermission("worldguard.region.bypass.*")) {
+                event.player.gameMode = GameMode.CREATIVE
+            } else event.player.gameMode = GameMode.SURVIVAL
+            //player.inventory.clear()
+            //player.inventory.armorContents = arrayOfNulls(4) // we need to make a per world inventory + health + hunger bar
+        }
+        else if (event.player.world.name == "world") {
+            if (event.player.hasPermission("flash.gamemode.in.hub")) {
+                event.player.gameMode = GameMode.CREATIVE
+            } else event.player.gameMode = GameMode.SURVIVAL
+            //player.inventory.clear()
+            //player.inventory.armorContents = arrayOfNulls(4) // we need to make a per world inventory + health + hunger bar
+            event.player.inventory.setItem(4, ItemStack(Material.COMPASS).apply {
+                itemMeta = itemMeta.apply {
+                    displayName = "&6Flash's Server Selector".color()
+                    lore = listOf("&7Click me to open the selector".color())
+                }
+            })
+        }
+        else if (event.player.world.name == "kitpvp") {
+            event.player.gameMode = GameMode.SURVIVAL
+            //player.inventory.clear()
+            //player.inventory.armorContents = arrayOfNulls(4) // we need to make a per world inventory + health + hunger bar
+            event.player.inventory.setItem(8, ItemStack(Material.NETHER_STAR).apply {
+                itemMeta = itemMeta.apply {
+                    displayName = "&6Kit Menu".color()
+                    lore = listOf("&7Click me to open the kits menu".color())
+                }
+            })
+        }
+        else {
+            //player.inventory.clear()
+            //player.inventory.armorContents = arrayOfNulls(4) // we need to make a per world inventory + health + hunger bar
+            event.player.gameMode = GameMode.SURVIVAL
+        }
         event.from.players.forEach { players ->
             player.sendMessage("&6[&3-&6] $name".color())
             if (players.hasPermission("Flash.fly")) {
@@ -49,18 +85,6 @@ class EventsListener : Listener {
         }
         event.player.world.players.forEach { players ->
             players.sendMessage("&6[&3+&6] ${event.player.name}".color())
-        }
-        if (event.player.world.name == "builds" && event.player.hasPermission("flash.gamemode") && event.player.hasPermission("worldguard.region.bypass.*")) event.player.gameMode = GameMode.CREATIVE
-        if (event.player.world.name == "world" && event.player.hasPermission("flash.gamemode.in.hub")) event.player.gameMode = GameMode.CREATIVE else event.player.gameMode = GameMode.SURVIVAL
-        if (event.player.world.name == "kitpvp") event.player.gameMode = GameMode.SURVIVAL
-        if (event.player.world.name == "island_normal_world" || event.player.world.name == "skyblock_spawn" || event.player.world.name == "event" || event.player.world.name == "tntrun") event.player.gameMode = GameMode.SURVIVAL else event.player.gameMode = GameMode.SURVIVAL
-        if (event.player.world.name == "world") {
-            event.player.inventory.setItem(4, ItemStack(Material.COMPASS).apply {
-                itemMeta = itemMeta.apply {
-                    displayName = "&6Flash's Server Selector".color()
-                    lore = listOf("&7Click me to open the selector".color())
-                }
-            })
         }
     }
 
@@ -121,16 +145,17 @@ class EventsListener : Listener {
 
     @EventHandler
     fun motd(event: ServerListPingEvent) {
-        event.motd = Flash.instance.config.getString("motd")
+        var motd = Flash.instance.config.getString("motd").removeSurrounding("[", "]")
+        event.motd = motd
     }
 
     @EventHandler
-       fun onInventoryClick(event: InventoryClickEvent) {
-            val player = event.whoClicked
-            if (Flash.instance.config.getStringList("hub").contains(player.world.name) || Flash.instance.config.getStringList("kitpvpworld").contains(player.world.name)) {
-               if (event.viewers.contains(player)) event.isCancelled = true
-           }
+    fun onInventoryClick(event: InventoryClickEvent) {
+        val player = event.whoClicked
+        if (Flash.instance.config.getStringList("hub").contains(player.world.name)) {
+            if (event.viewers.contains(player)) event.isCancelled = true
         }
+    }
 
     @EventHandler
     fun onPlayerDeath(event: PlayerDeathEvent) { // nope
