@@ -26,43 +26,6 @@ import org.bukkit.plugin.java.JavaPlugin
 @Suppress("UNUSED_VARIABLE", "RedundantVisibilityModifier", "LocalVariableName")
 class Menu : CommandExecutor, Listener {
     @EventHandler
-    fun onInventoryClick(event: InventoryClickEvent) {
-        val player = (event.whoClicked as Player) // Creates a value of the player that clicked in the inventory
-        if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("hub").contains(player.world.name)) { // Gets a list of all the players in the world
-            if (tagged.contains(event.inventory)) { // Checks if the user has the inventory open
-                if (event.inventory.title == "&6Server Selector") {
-                    event.isCancelled = true // Disables the option to move the items
-                } else {
-                    if (player.hasPermission("flash.gamemode.in.hub")) {
-                        event.isCancelled = false
-                        return
-                    } else {
-                        event.isCancelled = true
-                    }
-                }
-            }
-        } else if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("kitpvpworld").contains(player.world.name)) {
-            if (tagged.contains(event.inventory)) { // Checks if the user has the inventory open
-                if (event.inventory.title == "&6Kit Menu") {
-                    event.isCancelled = true // Disables the option to move the items
-                } else {
-                    event.isCancelled = false
-                    return
-                }
-            }
-        }
-    }
-
-    // @EventHandler // doesn't work + add if player is in world "world" + if the compass's name is &6Flash's Server Selector
-    //fun onDrop(event: PlayerDropItemEvent) {
-    //val item = event.itemDrop
-    //val player = event.player
-    //if (item.equals("Material.COMPASS")) {
-    //player.sendMessage("You can't drop this item")
-    //event.isCancelled = true
-    //}
-    // }
-    @EventHandler
     fun close(event: InventoryCloseEvent) {
         if (tagged.contains(event.inventory)) tagged.remove(event.inventory) // Unlocks the inventory only if the players had it lock and closes his inventory
     }
@@ -356,20 +319,6 @@ class Menu : CommandExecutor, Listener {
         }
         tagged.add(event.inventory) // Adds the player that does /menu to the inventory list.
         return true
-    }
-
-    @EventHandler
-    public fun onPlayerDropItem(event: PlayerDropItemEvent) {
-        if (Flash.instance.config.getStringList("hub").contains(event.player.world.name)) {
-            if (event.player.itemInHand.type == Material.COMPASS && event.player?.itemInHand?.itemMeta?.displayName ?: false == "&6Flash's Server Selector".color()) {
-                event.isCancelled = true
-            }
-        }
-        if (Flash.instance.config.getStringList("kitpvpworld").contains(event.player.world.name)) {
-            if (event.player.itemInHand.type == Material.NETHER_STAR && event.player?.itemInHand?.itemMeta?.displayName ?: false == "&6Kit Menu".color()) {
-                event.isCancelled = true
-            }
-        }
     }
 }
 

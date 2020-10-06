@@ -5,6 +5,7 @@ import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.playerdata
 import me.flash.flash.FlashUtil.Companion.color
 import me.flash.flash.FlashUtil.Companion.prefix
+import me.flash.flash.commands.Menu
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Material
@@ -17,6 +18,7 @@ import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.player.*
 import org.bukkit.event.server.ServerListPingEvent
 import org.bukkit.inventory.ItemStack
+import org.bukkit.plugin.java.JavaPlugin
 
 class EventsListener : Listener {
     @EventHandler
@@ -62,8 +64,8 @@ class EventsListener : Listener {
         }
         else if (event.player.world.name == "kitpvp") {
             event.player.gameMode = GameMode.SURVIVAL
-            //player.inventory.clear()
-            //player.inventory.armorContents = arrayOfNulls(4) // we need to make a per world inventory + health + hunger bar
+            player.inventory.clear()
+            player.inventory.armorContents = arrayOfNulls(4) // we need to make a per world inventory + health + hunger bar
             event.player.inventory.setItem(8, ItemStack(Material.NETHER_STAR).apply {
                 itemMeta = itemMeta.apply {
                     displayName = "&6Kit Menu".color()
@@ -152,8 +154,32 @@ class EventsListener : Listener {
     @EventHandler
     fun onInventoryClick(event: InventoryClickEvent) {
         val player = event.whoClicked
-        if (Flash.instance.config.getStringList("hub").contains(player.world.name)) {
-            if (event.viewers.contains(player)) event.isCancelled = true
+        if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("hub").contains(player.world.name)) { // Gets a list of all the players in the world
+            if (Menu.tagged.contains(event.inventory)) { // Checks if the user has the inventory open
+                if (event.inventory.title == "&6Server Selector") {
+                    event.isCancelled = true // Disables the option to move the items
+                } else {
+                    if (player.hasPermission("flash.gamemode.in.hub")) {
+                        event.isCancelled = false
+                        return
+                    } else {
+                        event.isCancelled = true
+                    }
+                }
+            }
+            else {
+                event.isCancelled = false
+            }
+        } else if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("kitpvpworld").contains(player.world.name)) {
+            if (Menu.tagged.contains(event.inventory)) { // Checks if the user has the inventory open
+                if (event.inventory.title == "&6Kit Menu" && event.clickedInventory.title == "&6Kit Menu") {
+                    //event.isCancelled = true // Disables the option to move the items
+                }
+                else {
+                    event.isCancelled = false
+                    return
+                }
+            }
         }
     }
 

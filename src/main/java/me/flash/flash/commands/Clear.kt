@@ -64,5 +64,12 @@ class Clear : FlashCommand("clear|ci|clearinventory|cl") {
                     lore = listOf("&7Click me to open the selector".color())
                 }
             })
+        else if (getConfig().getStringList("kitpvpworld").contains(p.world.name))
+            p.inventory.setItem(8, ItemStack(Material.NETHER_STAR).apply {
+                itemMeta = itemMeta.apply {
+                    displayName = "&6Kit Menu".color()
+                    lore = listOf("&7Click me to open the kits menu".color())
+                }
+            })
     }
 }
