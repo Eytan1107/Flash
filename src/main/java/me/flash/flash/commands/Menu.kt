@@ -258,93 +258,99 @@ class Menu : CommandExecutor, Listener {
                 event.isCancelled = true
             }
         } else if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("kitpvpworld").contains(player.world.name)) {
-            if (event.currentItem.isSimilar(ItemStack(Material.CHAINMAIL_CHESTPLATE).apply {
-                        itemMeta = itemMeta.apply {
-                            displayName = "&7Kit PvP".color()
-                            lore = listOf("&5Click to get the PvP kit".color())
-                        }
-                    })) {
-                event.view.close()
-                tagged.remove(event.inventory)
-                val playerB = Bukkit.getPlayer(event.whoClicked.name)
-                playerB.chat("/kit pvp")
-                return true
-            } else if (event.currentItem.isSimilar(ItemStack(Material.GOLD_CHESTPLATE).apply {
-                        itemMeta = itemMeta.apply {
-                            displayName = "&1Kit Fast".color()
-                            lore = listOf("&5Click to get the Fast kit".color())
-                        }
-                    })) {
-                if (player.hasPermission("flash.fast")) {
+            when {
+                event.currentItem.isSimilar(ItemStack(Material.CHAINMAIL_CHESTPLATE).apply {
+                    itemMeta = itemMeta.apply {
+                        displayName = "&7Kit PvP".color()
+                        lore = listOf("&5Click to get the PvP kit".color())
+                    }
+                }) -> {
                     event.view.close()
                     tagged.remove(event.inventory)
                     val playerB = Bukkit.getPlayer(event.whoClicked.name)
-                    playerB.chat("/kit fast")
+                    playerB.chat("/kit pvp")
                     return true
-                } else {
-                    player.sendMessage(noPermission)
                 }
-                // set the action
-                return true
-            } else if (event.currentItem.isSimilar(ItemStack(Material.IRON_CHESTPLATE).apply {
-                        itemMeta = itemMeta.apply {
-                            displayName = "&eKit Speedster".color()
-                            lore = listOf("&5Click to get the Speedster kit".color())
-                        }
-                    })) {
-                if (player.hasPermission("flash.speedster")) {
-                    event.view.close()
-                    tagged.remove(event.inventory)
-                    val playerB = Bukkit.getPlayer(event.whoClicked.name)
-                    playerB.chat("/kit speedster")
+                event.currentItem.isSimilar(ItemStack(Material.GOLD_CHESTPLATE).apply {
+                    itemMeta = itemMeta.apply {
+                        displayName = "&1Kit Fast".color()
+                        lore = listOf("&5Click to get the Fast kit".color())
+                    }
+                }) -> {
+                    if (player.hasPermission("flash.fast")) {
+                        event.view.close()
+                        tagged.remove(event.inventory)
+                        val playerB = Bukkit.getPlayer(event.whoClicked.name)
+                        playerB.chat("/kit fast")
+                        return true
+                    } else {
+                        player.sendMessage(noPermission)
+                    }
+                    // set the action
                     return true
-                } else {
-                    player.sendMessage(noPermission)
                 }
-                // set the action
-                return true
-            } else if (event.currentItem.isSimilar(ItemStack(Material.DIAMOND_CHESTPLATE).apply {
-                        itemMeta = itemMeta.apply {
-                            displayName = "&b&lKit GodSpeed".color()
-                            lore = listOf("&5Click to get the GodSpeed kit".color())
-                        }
-                    })) {
-                if (player.hasPermission("flash.godspeed")) {
-                    event.view.close()
-                    tagged.remove(event.inventory)
-                    val playerB = Bukkit.getPlayer(event.whoClicked.name)
-                    playerB.chat("/kit godspeed")
+                event.currentItem.isSimilar(ItemStack(Material.IRON_CHESTPLATE).apply {
+                    itemMeta = itemMeta.apply {
+                        displayName = "&eKit Speedster".color()
+                        lore = listOf("&5Click to get the Speedster kit".color())
+                    }
+                }) -> {
+                    if (player.hasPermission("flash.speedster")) {
+                        event.view.close()
+                        tagged.remove(event.inventory)
+                        val playerB = Bukkit.getPlayer(event.whoClicked.name)
+                        playerB.chat("/kit speedster")
+                        return true
+                    } else {
+                        player.sendMessage(noPermission)
+                    }
+                    // set the action
                     return true
-                } else {
-                    player.sendMessage(noPermission)
                 }
-                // set the action
-                return true
-            } else if (event.currentItem.isSimilar(ItemStack(Material.DIAMOND_CHESTPLATE).apply {
-                        itemMeta = itemMeta.apply {
-                            displayName = "&6&lKit SpeedForce".color()
-                            lore = listOf("&5Click to get the SpeedForce kit".color())
-                            addEnchant(DURABILITY, 3, true)
-                        }
-                    })) {
-                if (player.hasPermission("flash.speedforce")) {
-                    event.view.close()
-                    tagged.remove(event.inventory)
-                    val playerB = Bukkit.getPlayer(event.whoClicked.name)
-                    playerB.chat("/kit speedforce")
+                event.currentItem.isSimilar(ItemStack(Material.DIAMOND_CHESTPLATE).apply {
+                    itemMeta = itemMeta.apply {
+                        displayName = "&b&lKit GodSpeed".color()
+                        lore = listOf("&5Click to get the GodSpeed kit".color())
+                    }
+                }) -> {
+                    if (player.hasPermission("flash.godspeed")) {
+                        event.view.close()
+                        tagged.remove(event.inventory)
+                        val playerB = Bukkit.getPlayer(event.whoClicked.name)
+                        playerB.chat("/kit godspeed")
+                        return true
+                    } else {
+                        player.sendMessage(noPermission)
+                    }
+                    // set the action
                     return true
-                } else {
-                    player.sendMessage(noPermission)
                 }
-                // set the action
-                return true
-            }
-            else if (event.currentItem.isSimilar(ItemStack(Material.STAINED_GLASS_PANE, 1, 14).apply { // The default inventory item
-                        itemMeta = itemMeta.apply {
-                            displayName = "&8[&6Flash's server&8]&r".color()
-                        }
-                    })) {
-                event.isCancelled = true
+                event.currentItem.isSimilar(ItemStack(Material.DIAMOND_CHESTPLATE).apply {
+                    itemMeta = itemMeta.apply {
+                        displayName = "&6&lKit SpeedForce".color()
+                        lore = listOf("&5Click to get the SpeedForce kit".color())
+                        addEnchant(DURABILITY, 3, true)
+                    }
+                }) -> {
+                    if (player.hasPermission("flash.speedforce")) {
+                        //event.view.close()
+                        tagged.remove(event.inventory)
+                        val playerB = Bukkit.getPlayer(event.whoClicked.name)
+                        playerB.chat("/kit speedforce")
+                        return true
+                    } else {
+                        player.sendMessage(noPermission)
+                    }
+                    // set the action
+                    return true
+                }
+                event.currentItem.isSimilar(ItemStack(Material.STAINED_GLASS_PANE, 1, 14).apply { // The default inventory item
+                    itemMeta = itemMeta.apply {
+                        displayName = "&8[&6Flash's server&8]&r".color()
+                    }
+                }) -> {
+                    event.isCancelled = true
+                }
             }
             return true
         }
