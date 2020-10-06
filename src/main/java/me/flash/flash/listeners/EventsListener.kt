@@ -172,8 +172,8 @@ class EventsListener : Listener {
             }
         } else if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("kitpvpworld").contains(player.world.name)) {
             if (Menu.tagged.contains(event.inventory)) { // Checks if the user has the inventory open
-                if (event.inventory.title == "&6Kit Menu" && event.clickedInventory.title == "&6Kit Menu") {
-                    //event.isCancelled = true // Disables the option to move the items
+                if (event.inventory.title == "&6Kit Menu") {
+                    event.isCancelled = true // Disables the option to move the items
                 }
                 else {
                     event.isCancelled = false
