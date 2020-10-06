@@ -22,7 +22,7 @@ class Back : FlashCommand("back"), Listener {
     override fun run() {
         checkPlayer()
         checkPerm("flash.back")
-        val player = getPlayer()
+        val player = getPlayer();
         table[player].apply {
             if (this != null) {
                 player.teleport(this)

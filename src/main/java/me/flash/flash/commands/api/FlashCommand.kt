@@ -63,12 +63,12 @@ abstract class FlashCommand : Command {
 
     //DO NOT use in an if statement
     protected fun checkPlayer() {
-        if (isPlayer())
+        if (!isPlayer())
             throw FlashException(FlashUtil.notPlayer)
     }
 
     protected fun isPlayer() : Boolean {
-        return this.sender !is Player
+        return sender is Player
     }
 
     //DO NOT use in an if statement
@@ -78,11 +78,11 @@ abstract class FlashCommand : Command {
     }
 
     protected fun hasPerm(perm: String) : Boolean {
-        return this.sender.hasPermission(perm)
+        return sender.hasPermission(perm)
     }
 
     protected fun getPlayer() : Player {
-        return if (isPlayer()) (this.sender as Player) else throw FlashException("sender cannot be null")
+        return if (isPlayer()) (sender as Player) else throw FlashException("sender cannot be null")
     }
 
     final override fun setDescription(desc: String): Command {
