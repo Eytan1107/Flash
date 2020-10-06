@@ -1,6 +1,9 @@
 package me.flash.flash.commands.api
 
 import me.flash.flash.FlashUtil
+import me.flash.flash.FlashUtil.Companion.color
+import me.flash.flash.FlashUtil.Companion.error
+import me.flash.flash.FlashUtil.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandMap
@@ -26,6 +29,7 @@ abstract class FlashCommand : Command {
     lateinit var sender: CommandSender
     var args = mutableListOf<String>()
     private var logAction: String? = null
+    private var minArgs = 0
 
     constructor (cmd: String): this(parseCmd(cmd), parseAliases(cmd))
 
@@ -47,6 +51,7 @@ abstract class FlashCommand : Command {
         this.cmd = cmd
         this.args = args.toMutableList()
         try {
+            if (args.size < minArgs) throw FlashException("/$cmd $usage".error())
             this.run()
         }
         catch (ex: FlashException) {
@@ -82,7 +87,7 @@ abstract class FlashCommand : Command {
     }
 
     protected fun getPlayer() : Player {
-        return if (isPlayer()) (sender as Player) else throw FlashException("sender cannot be null")
+        return if (isPlayer()) (sender as Player) else throw FlashException("sender cannot be cast to player, make sure you are checking for the console")
     }
 
     final override fun setDescription(desc: String): Command {
@@ -95,6 +100,31 @@ abstract class FlashCommand : Command {
         this.use = "/$cmd $use"
         super.setUsage(use)
         return this
+    }
+
+    protected fun getTarget(index: Int): Player {
+        if (args.size < index) throw FlashException("Index cannot be greater than args size")
+        return Bukkit.getPlayer(args[index]) ?: throw FlashException(FlashUtil.targetOffline)
+    }
+
+    protected fun setMinArgs(minArgs: Int) {
+        this.minArgs = minArgs
+    }
+
+    protected fun msg(s: String) {
+        FlashUtil.say((if (isPlayer()) getPlayer() else sender), s.color())
+    }
+
+    protected fun msg(cs: CommandSender, s: String) {
+        FlashUtil.say(cs, s.color())
+    }
+
+    protected fun <T> ternary(condition: Boolean, v1: T, v2: T) : T {
+        return (if (condition) v1 else v2)
+    }
+
+    protected fun nice() : String {
+        return ternary(!hasPerm("flash.msg.nice"), "&c", "&l")
     }
 
     fun register() {

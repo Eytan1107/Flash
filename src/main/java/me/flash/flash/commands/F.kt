@@ -1,28 +1,28 @@
 package me.flash.flash.commands
 
 import me.flash.flash.FlashUtil
+import me.flash.flash.commands.api.FlashCommand
 import org.bukkit.Bukkit
-import org.bukkit.command.Command
-import org.bukkit.command.CommandExecutor
-import org.bukkit.command.CommandSender
 
-class F : CommandExecutor {
-    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if (!sender.hasPermission("flash.f")) {
-            sender.sendMessage(FlashUtil.noPermission)
-            return true
-        }
-        if (args.isEmpty()){
-            Bukkit.getOnlinePlayers().filter { p->!Vanish.vanishedPlayers.contains(p) }.forEach { player->
+class F : FlashCommand("broadcastf|sudof|bcf") {
+
+    init {
+        description = "F"
+    }
+
+    override fun run() {
+        checkPlayer()
+        checkPerm("flash.f")
+        if (args.isEmpty()) {
+            Bukkit.getOnlinePlayers().filter { p -> !Vanish.vanishedPlayers.contains(p) }.forEach { player ->
                 player.chat("F")
                 FlashUtil.staffMessage(sender, "Ran the F command")
             }
-        } else {
-            Bukkit.getOnlinePlayers().forEach { player->
-                player.chat(args.joinToString(" "))
-                FlashUtil.staffMessage(sender, "Ran the sudo command on all players")
-            }
+            return
         }
-        return true
+        Bukkit.getOnlinePlayers().forEach { player ->
+            player.chat(args.joinToString(" "))
+            FlashUtil.staffMessage(sender, "Ran the sudo command on all players")
+        }
     }
 }

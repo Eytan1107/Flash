@@ -1,19 +1,23 @@
 package me.flash.flash.commands
 
-import me.flash.flash.FlashUtil.Companion.noPermission
-import org.bukkit.Bukkit
-import org.bukkit.command.Command
-import org.bukkit.command.CommandExecutor
-import org.bukkit.command.CommandSender
+import me.flash.flash.commands.api.FlashCommand
 
-class Enderchest : CommandExecutor {
-    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        val player = Bukkit.getPlayer(sender.name)
-        if (player.hasPermission("flash.enderchest")) {
-            player.openInventory(player.enderChest)
-        } else sender.sendMessage(noPermission)
+class Enderchest : FlashCommand("enderchest|ec") {
 
-    return true
+    init {
+        usage = "[player]"
+        description = "Open a player's enderchest"
+    }
+
+    override fun run() {
+        checkPlayer()
+        if (args.isEmpty()) {
+            checkPerm("flash.enderchest")
+            getPlayer().openInventory(getPlayer().enderChest)
+            return
+        }
+        checkPerm("flash.enderchest.others")
+        getPlayer().openInventory(getTarget(0).enderChest)
     }
 }
 

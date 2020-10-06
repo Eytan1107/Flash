@@ -15,26 +15,23 @@ class Check : FlashCommand("check") {
     init {
         usage = "<player>"
         description = "Shows information about a player."
+        setMinArgs(1)
     }
 
     override fun run() {
         checkPerm("flash.check")
-        if (args.isEmpty()) {
-            sender.sendMessage("Please specify a player.".error())
-            return
+        val player = Bukkit.getPlayer(args.first()) ?: sender.sendMessage(FlashUtil.targetOffline).run { return }
+        val name: String = when (player.world.name) {
+            "world" -> "Hub"
+            "kitpvp" -> "KitPvP"
+            "island_normal_world" -> "SkyBlock"
+            "skyblock_spawn" -> "SkyBlock"
+            "event" -> "Event"
+            "tntrun" -> "TnTRun"
+            else -> player.world.name
         }
-        val player = Bukkit.getPlayer(args.first())?: sender.sendMessage(FlashUtil.targetOffline).run { return }
-            val name: String = when (player.world.name) {
-                "world" -> "Hub"
-                "kitpvp" -> "KitPvP"
-                "island_normal_world" -> "SkyBlock"
-                "skyblock_spawn" -> "SkyBlock"
-                "event" -> "Event"
-                "tntrun" -> "TnTRun"
-                else -> player.world.name
-            }
-            if (!hasPerm("flash.msg.nice")) sender.sendMessage("${player.name} is in &c$name".prefix()) else sender.sendMessage("${player.name} is in &l$name")
-            sender.sendMessage("${player.name} has &c${player.health} &6health".prefix())
+        msg("${player.name} is in ${nice()}$name".prefix())
+        msg("${player.name} has ${nice()}${player.health} &6health".prefix())
     }
 
 

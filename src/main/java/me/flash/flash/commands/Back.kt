@@ -22,17 +22,16 @@ class Back : FlashCommand("back"), Listener {
     override fun run() {
         checkPlayer()
         checkPerm("flash.back")
-        val player = getPlayer();
+        val player = getPlayer()
         table[player].apply {
             if (this != null) {
                 player.teleport(this)
-                player.sendMessage("You were teleported to your last known location".prefix())
+                msg("You were teleported to your last known location".prefix())
                 return
             }
-            player.sendMessage("You do not have a last known location".error())
+            msg("You do not have a last known location".error())
         }
     }
-//doesn't work, it says: sender cannot be null
 
 
     @EventHandler(ignoreCancelled = true)

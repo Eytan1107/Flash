@@ -1,12 +1,9 @@
 package me.flash.flash
 
 import me.flash.flash.commands.*
+import me.flash.flash.listeners.Compass
 import me.flash.flash.listeners.EventsListener
 import net.milkbowl.vault.chat.Chat
-import org.bukkit.Bukkit
-import org.bukkit.ChatColor
-import org.bukkit.command.CommandSender
-import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
 import org.sqlite.JDBC
 import java.io.File
@@ -37,21 +34,21 @@ class Flash : JavaPlugin() {
             return
         }
 
-        getCommand("feed").executor = Feed()
+        Feed().register()
         getCommand("hub").executor = Hub()
         getCommand("suggest").executor = Suggest()
         getCommand("suggestions").executor = Suggestions()
         Broadcast().register()
-        getCommand("clear").executor = Clear()
+        Clear().register()
         Check().register()
         getCommand("Reply").executor = Reply()
-        getCommand("colorlist").executor = Colorlist()
-        getCommand("craft").executor = Craft()
-        getCommand("discord").executor = Discord()
-        getCommand("bcf").executor = F()
+        Colorlist().register()
+        Craft().register()
+        Discord().register()
+        F().register()
         getCommand("tpall").executor = TpAll()
         getCommand("loopkill").executor = Loopkill().apply { this.start() }
-        getCommand("clearall").executor = ClearAll()
+        ClearAll().register()
         getCommand("teleport").executor = Teleport()
         getCommand("silentteleport").executor = Teleport()
         getCommand("tphere").executor = TpHere()
@@ -59,7 +56,7 @@ class Flash : JavaPlugin() {
         getCommand("kill").executor = Kill()
         Back().register()
         getCommand("sudo").executor = Sudo()
-        getCommand("fly").executor = Fly()
+        Fly().register()
         getCommand("staffchat").executor = StaffChat()
         getCommand("tphere").executor = TpHere()
         getCommand("flyspeed").executor = FlySpeed()
@@ -80,7 +77,7 @@ class Flash : JavaPlugin() {
             executor = Server()
             tabCompleter = Server()
         }.executor = Server()
-        getCommand("enderchest").executor = Enderchest()
+        Enderchest().register()
         getCommand("help").executor = Help()
         getCommand("stats").executor = stats()
         getCommand("msg").executor = Msg()

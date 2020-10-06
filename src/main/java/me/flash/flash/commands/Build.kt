@@ -22,34 +22,31 @@ class Build : FlashCommand("build|break"), Listener {
 
     override fun run() {
         checkPlayer()
-        if (args.isNotEmpty()) Bukkit.getPlayer(args.first()) ?: sender.sendMessage(targetOffline).let { return }
         checkPerm("flash.staff")
         checkPerm("worldguard.region.bypass.*")
-        val player = if (args.isEmpty()) sender as Player else Bukkit.getPlayer(args.first())
-                ?: sender.sendMessage(targetOffline).run { return }
-        if (listOf("island_normal_world", "builds").contains(player.world.name)) {
+        val player = if (args.isEmpty()) getPlayer() else getTarget(0)
+        if (listOf("island_normal_world", "builds").contains(player.world.name))
             return if (player == sender)
-                sender.sendMessage("You can't enable / disable build in this server".error())
+                msg("You can't enable / disable build in this server".error())
             else
-                sender.sendMessage("You can't enable / disable this player's build in the server they are in".error())
-        }
-        if (toggled.contains(player.uniqueId)) {
+                msg("You can't enable / disable this player's build in the server they are in".error())
+
+        if (toggled.contains(player.uniqueId))
             toggled.remove(player.uniqueId)
-            if (sender == player) if (!hasPerm("flash.msg.nice")) sender.sendMessage("Build mode turned &cOFF".prefix()) else sender.sendMessage("Build mode turned &lOFF".prefix())
-            else {
-                checkPerm("flash.build.others")
-                if (!hasPerm("flash.msg.nice")) sender.sendMessage(("Build mode turned &cOFF &6for &c" + player.name).prefix()) else sender.sendMessage(("Build mode turned &lOFF &6for &l" + player.name).prefix())
-                if (!player.hasPermission("flash.msg.nice")) player.sendMessage(("Build mode turned &cOFF &6by &c" + sender.name).prefix()) else player.sendMessage(("Build mode turned &lOFF &6by &l" + sender.name).prefix())  // on join, if player has permissions 1 and 2 : turn off build (doesnt work in worlds island_normal_world and builds)
-            }
-        } else {
+        else
             toggled.add(player.uniqueId)
-            if (sender == player) if (!hasPerm("flash.msg.nice")) sender.sendMessage("Build mode turned &aON".prefix()) else sender.sendMessage("Build mode turned &lON".prefix())
-            else {
-                checkPerm("flash.build.others")
-                if (!hasPerm("flash.msg.nice")) sender.sendMessage(("Build mode turned &aON &6for &a" + player.name).prefix()) else sender.sendMessage(("Build mode turned &lON &6for &l" + player.name).prefix())
-                if (!player.hasPermission("flash.msg.nice")) player.sendMessage(("Build mode turned &aON &6by &a" + sender.name).prefix()) else player.sendMessage(("Build mode turned &lON &6by &l" + sender.name).prefix())
-            }
+
+        if (sender == player) {
+            msg(("Build mode turned " + state(player)).prefix())
+            return;
         }
+        checkPerm("flash.build.others")
+        msg("Build mode turned ${state(player)} &6for ${nice()}${player.name}".prefix())
+        msg(player, "Build mode turned ${state(player)} &6by ${nice()}${sender.name}".prefix()) // on join, if player has permissions 1 and 2 : turn off build (doesnt work in worlds island_normal_world and builds)
+    }
+
+    private fun state(p: Player) : String {
+        return nice() + ternary(toggled.contains(p.uniqueId), "ON", "OFF")
     }
 
     @EventHandler

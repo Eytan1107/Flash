@@ -45,5 +45,9 @@ class FlashUtil {
         fun getConfig(): FileConfiguration {
             return Flash.instance.config
         }
+
+        fun say(cs: CommandSender, s: String) {
+            cs.sendMessage(s.color())
+        }
     }
 }

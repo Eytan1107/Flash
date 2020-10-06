@@ -4,8 +4,6 @@ main: me.flash.flash.Flash
 #depend:
 #  - Vault
 commands:
-  feed:
-    description: Feed a player
   hub:
     description: Go back to hub
     aliases:
@@ -13,28 +11,8 @@ commands:
       - l
   loopkill:
     description: Loop Kill a player
-  clear:
-    description: Clear
-    aliases:
-      - ci
-      - clearinventory
-      - cl
-  craft:
-    description: Craft
-  bcf:
-    description: F
-    aliases:
-      - broadcastf
-      - sudof
-  discord:
-    description: See the discord
   tpall:
     description: Teleport all players in your server to you
-  clearall:
-    description: Clear the inventory of everyone in your world.
-    aliases:
-      - ciall
-      - clearinventoryall
   teleport:
     description: Teleport players
     aliases:
@@ -51,18 +29,12 @@ commands:
     description: Kill a player
     aliases:
       - slay
-  colorlist:
-    description: See all the colors of the rainbow
-    aliases:
-      - cll
   suggest:
     description: Suggest better things for the best minecraft server that exists.
   suggestions:
     description: Read suggestions
   sudo:
     description: Make another player say something
-  fly:
-    description: fly
   silenttphere:
       description: ~BB
       aliases:
@@ -125,10 +97,6 @@ commands:
     description: vanish
     aliases:
       - v
-  enderchest:
-    description: enderchest
-    aliases:
-      - ec
   help:
     description: help
   stats:
