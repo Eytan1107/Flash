@@ -50,7 +50,7 @@ abstract class FlashCommand : Command {
         this.cmd = cmd
         this.args = args.toMutableList()
         try {
-            if (args.size < minArgs) throw FlashException("/$cmd $usage".error())
+            if (args.size < minArgs) throw FlashException("Usage: /$cmd $usage".error())
             this.run()
         }
         catch (ex: FlashException) {

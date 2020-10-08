@@ -1,5 +1,6 @@
 package me.flash.flash.commands
 
+import me.flash.flash.commands.api.FlashCommand
 import me.flash.flash.utils.FlashUtil
 import me.flash.flash.utils.FlashUtil.Companion.color
 import me.flash.flash.utils.FlashUtil.Companion.error
@@ -12,30 +13,33 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
-class GameMode : CommandExecutor {
-    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if (args.isEmpty()) {
-            if (sender !is Player) sender.sendMessage("&cUsage : /gamemode [gamemode] [player]".color()).run { return true }
-            else sender.sendMessage("&cUsage : /gamemode [gamemode] <player>").run { return true }
-        } else if (args.size == 1) {
-            if (sender !is Player) sender.sendMessage("&cUsage : /gamemode [gamemode] [player]".color()).run { return true }
-            if (!sender.hasPermission("flash.gamemode")) sender.sendMessage(FlashUtil.noPermission).run { return true }
-            else {
-                if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("".prefix()) else sender.sendMessage("".prefix())
-                val gameMode = parseGamemode(args.first()) ?: sender.sendMessage("That is not a valid gamemode!".error()).run { return true }
-                sender.gameMode = gameMode
-                FlashUtil.staffMessage(sender, "Set their gamemode to &l${gameMode.name.toLowerCase()}&d.")
-            }
-        } else {
-            val gameMode = parseGamemode(args.first()) ?: sender.sendMessage("That is not a valid gamemode!".error()).run { return true }
-            val player = Bukkit.getPlayer(args[1]) ?: sender.sendMessage(FlashUtil.targetOffline).run { return true }
-            if (!sender.hasPermission("flash.gamemode.others")) sender.sendMessage(noPermission).run { return true }
-            player.gameMode = gameMode
-            FlashUtil.staffMessage(sender, "Set &l${player.name}&d's gamemode to &l${gameMode.name.toLowerCase()}&d.", player)
-            if (!player.hasPermission("flash.msg.nice")) player.sendMessage("Your gamemode was set to &c${gameMode.name.toLowerCase()} &6by &c${sender.name}&6.".prefix()) else player.sendMessage("Your gamemode was set to &l${gameMode.name.toLowerCase()} &6by &l${sender.name}&6.".prefix())
-            if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("You set &c${player.name}'s&6 gamemode to &c${gameMode.name.toLowerCase()}&6.".prefix()) else sender.sendMessage("You set &l${player.name}'s&6 gamemode to &l${gameMode.name.toLowerCase()}&6.".prefix())
+class GameMode : FlashCommand("gamemode|gm|gmode") {
+
+    init {
+        usage = "<gamemode> [player]"
+        description = "Change a player's gamemode"
+        setMinArgs(1)
+    }
+
+    override fun run() {
+        if (args.size == 1) {
+            checkPlayer()
+            checkPerm(("flash.gamemode"))
+            val gameMode = parseGamemode(args.first())
+                    ?: msg("That is not a valid gamemode!".error()).run { return }
+            getPlayer().gameMode = gameMode
+           msg("Your gamemode was set to ${nice()}${gameMode.name.toLowerCase()}&6.".prefix())
+            FlashUtil.staffMessage(sender, "Set their gamemode to &l${gameMode.name.toLowerCase()}&d.")
+            return
         }
-        return true
+        checkPerm("flash.gamemode.others")
+        val gameMode = parseGamemode(args.first())
+                ?: msg("That is not a valid gamemode!".error()).run { return }
+        val player = getTarget(1)
+        player.gameMode = gameMode
+        FlashUtil.staffMessage(sender, "Set &l${player.name}&d's gamemode to &l${gameMode.name.toLowerCase()}&d.", player)
+        msg(player, "Your gamemode was set to ${nice()}${gameMode.name.toLowerCase()} &6by ${nice()}${sender.name}&6.".prefix())
+        msg("You set ${nice()}${player.name}'s&6 gamemode to ${nice()}${gameMode.name.toLowerCase()}&6.".prefix())
     }
 
     private fun parseGamemode(arg: String) : GameMode? {

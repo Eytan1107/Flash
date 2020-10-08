@@ -4,11 +4,6 @@ main: me.flash.flash.Flash
 #depend:
 #  - Vault
 commands:
-  hub:
-    description: Go back to hub
-    aliases:
-      - lobby
-      - l
   loopkill:
     description: Loop Kill a player
   tpall:
@@ -53,11 +48,6 @@ commands:
   walkspeed:
     description: Set your flight speed 1 - 10
     aliases: ws
-  gamemode:
-    description: Set your gamemode
-    aliases:
-      - gmode
-      - gm
   gmsp:
     description: Change your gamemode to spectator mode
     aliases:
@@ -78,8 +68,6 @@ commands:
     aliases:
       - gm2
       - gmadventure
-  give:
-    description: Give items to players.
   kits:
     description: Show kits
   kit:
@@ -116,12 +104,6 @@ commands:
     description: Wake up someone who fell asleep
   sethub:
     description: Set a hub
-  invsee:
-    description: Opens a players inventory
-    aliases:
-      - openinv
-      - inventory
-      - inv
   players:
     description: gets all online players
   rank:
