@@ -207,7 +207,7 @@ class Rank : CommandExecutor, Listener {
     companion object {
         val tagged = mutableListOf<Inventory>() // Creates the list of players that have the inventory opened
     }
-
+// The player should be tagged when the inventory opens, I think it's triggering when you either click or open ANY inventory, including your own
     @EventHandler
     fun rankSelect(event: InventoryClickEvent): Boolean {
         if (event.inventory.toString() == "&6Rank Selector") {
@@ -417,9 +417,10 @@ class Rank : CommandExecutor, Listener {
                 event.isCancelled = true
             } else {
                 sendFinalCommand(rank, event.whoClicked.name) // TARGET needs to be the first args And use that to bring over data
+                event.isCancelled = false
             }
+            tagged.add(event.inventory)
         }
-        tagged.add(event.inventory)
         return true
     }
     private fun sendFinalCommand(selectedRank: String, user: String) {

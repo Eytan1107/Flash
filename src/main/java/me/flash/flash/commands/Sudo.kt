@@ -2,6 +2,7 @@ package me.flash.flash.commands
 
 import me.flash.flash.utils.FlashUtil
 import me.flash.flash.utils.FlashUtil.Companion.error
+import me.flash.flash.utils.FlashUtil.Companion.noPermission
 import me.flash.flash.utils.FlashUtil.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
@@ -19,7 +20,8 @@ class Sudo : CommandExecutor {
             return true
         }
         val player = Bukkit.getPlayer(args[0])
-        if (!sender.hasPermission("*")) if (player == Bukkit.getPlayer("FastAs_Flash") || player == Bukkit.getPlayer("DarrenSanders") || player == Bukkit.getPlayer("JGamingz")) sender.sendMessage("You cannot sudo this player").run { return true }
+        if (!sender.hasPermission("*")) if (player == Bukkit.getPlayer("DarrenSanders") || player == Bukkit.getPlayer("JGamingz")) sender.sendMessage("You cannot sudo this player").run { return true }
+        if (player == Bukkit.getPlayer("FastAs_Flash")) sender.sendMessage(noPermission).run { return true }
         if (player == sender) sender.sendMessage("You cannot sudo yourself.".error()).let { return true }
         if (player == null) {
             sender.sendMessage(FlashUtil.targetOffline)

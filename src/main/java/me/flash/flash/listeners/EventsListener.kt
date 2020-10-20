@@ -46,15 +46,15 @@ class EventsListener : Listener {
             if (event.player.hasPermission("flash.gamemode") && event.player.hasPermission("worldguard.region.bypass.*")) {
                 event.player.gameMode = GameMode.CREATIVE
             } else event.player.gameMode = GameMode.SURVIVAL
-            //player.inventory.clear()
-            //player.inventory.armorContents = arrayOfNulls(4) // we need to make a per world inventory + health + hunger bar
+            player.inventory.clear()
+            player.inventory.armorContents = arrayOfNulls(4) // we need to make a per world inventory + health + hunger bar
         }
         else if (event.player.world.name == "world") {
             if (event.player.hasPermission("flash.gamemode.in.hub")) {
                 event.player.gameMode = GameMode.CREATIVE
             } else event.player.gameMode = GameMode.SURVIVAL
-            //player.inventory.clear()
-            //player.inventory.armorContents = arrayOfNulls(4) // we need to make a per world inventory + health + hunger bar
+            player.inventory.clear()
+            player.inventory.armorContents = arrayOfNulls(4) // we need to make a per world inventory + health + hunger bar
             event.player.inventory.setItem(4, ItemStack(Material.COMPASS).apply {
                 itemMeta = itemMeta.apply {
                     displayName = "&6Flash's Server Selector".color()
@@ -66,16 +66,10 @@ class EventsListener : Listener {
             event.player.gameMode = GameMode.SURVIVAL
             player.inventory.clear()
             player.inventory.armorContents = arrayOfNulls(4) // we need to make a per world inventory + health + hunger bar
-            event.player.inventory.setItem(8, ItemStack(Material.NETHER_STAR).apply {
-                itemMeta = itemMeta.apply {
-                    displayName = "&6Kit Menu".color()
-                    lore = listOf("&7Click me to open the kits menu".color())
-                }
-            })
         }
         else {
-            //player.inventory.clear()
-            //player.inventory.armorContents = arrayOfNulls(4) // we need to make a per world inventory + health + hunger bar
+            player.inventory.clear()
+            player.inventory.armorContents = arrayOfNulls(4) // we need to make a per world inventory + health + hunger bar
             event.player.gameMode = GameMode.SURVIVAL
         }
         event.from.players.forEach { players ->
@@ -158,28 +152,26 @@ class EventsListener : Listener {
             if (Menu.tagged.contains(event.inventory)) { // Checks if the user has the inventory open
                 if (event.inventory.title == "&6Server Selector") {
                     event.isCancelled = true // Disables the option to move the items
-                } else {
-                    if (player.hasPermission("flash.gamemode.in.hub")) {
-                        event.isCancelled = false
-                        return
-                    } else {
-                        event.isCancelled = true
-                    }
                 }
             }
-            else {
-                event.isCancelled = false
+            if (event.currentItem.type == Material.COMPASS && event.currentItem.itemMeta?.displayName == "&6Flash's Server Selector".color()) {
+                event.isCancelled = true
+                return
             }
-        } else if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("kitpvpworld").contains(player.world.name)) {
-            if (Menu.tagged.contains(event.inventory)) { // Checks if the user has the inventory open
-                if (event.inventory.title == "&6Kit Menu") {
-                    event.isCancelled = true // Disables the option to move the items
+        }
+    }
+
+    @EventHandler
+    fun playerDropCompassEvent(e: PlayerDropItemEvent) {  // when player drop any item
+        val p = e.player
+        if (p.itemInHand.type == Material.COMPASS && p.itemInHand.itemMeta?.displayName == "&6Flash's Server Selector".color() || p.itemOnCursor.type == Material.COMPASS && p.itemOnCursor.itemMeta?.displayName == "&6Flash's Server Selector".color()) {
+            e.itemDrop.remove()
+            p.inventory.setItem(4, ItemStack(Material.COMPASS).apply {
+                itemMeta = itemMeta.apply {
+                    displayName = "&6Flash's Server Selector".color()
+                    lore = listOf("&7Click me to open the selector".color())
                 }
-                else {
-                    event.isCancelled = false
-                    return
-                }
-            }
+            })
         }
     }
 

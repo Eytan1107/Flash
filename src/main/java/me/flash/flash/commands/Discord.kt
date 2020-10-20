@@ -9,8 +9,9 @@ class Discord : FlashCommand("discord|dc") {
 
     override fun run() {
         checkPlayer()
-        getPlayer().spigot().sendMessage(TextComponent("Click here to join our Discord server !").apply {
+        getPlayer().spigot().sendMessage(TextComponent("Click on this message to join The Flash Discord server !").apply {
             color = ChatColor.DARK_AQUA
+            isBold = true
             clickEvent = ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.gg/3RHYQNd")
         })
 

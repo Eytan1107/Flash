@@ -15,7 +15,9 @@ class Broadcast : FlashCommand("broadcast|bc") {
 
     override fun run() {
         checkPlayer()
+        Bukkit.broadcastMessage(("&c&l⬇").prefix())
         Bukkit.broadcastMessage(("&c&l" + args.joinToString(" ")).prefix())
+        Bukkit.broadcastMessage(("&c&l⬆").prefix())
         FlashUtil.staffMessage(sender, "Broadcasted")
     }
 }

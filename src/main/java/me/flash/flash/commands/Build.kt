@@ -11,6 +11,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.event.player.PlayerQuitEvent
+import org.bukkit.inventory.ItemStack
 import java.util.*
 
 class Build : FlashCommand("build|break"), Listener {
@@ -23,6 +24,7 @@ class Build : FlashCommand("build|break"), Listener {
         checkPlayer()
         checkPerm("flash.staff")
         checkPerm("worldguard.region.bypass.*")
+        if (args.size > 1) sender.sendMessage("Too many arguments.".error())
         val player = if (args.isEmpty()) getPlayer() else getTarget(0)
         if (listOf("island_normal_world", "builds").contains(player.world.name))
             return if (player == sender)
@@ -56,14 +58,15 @@ class Build : FlashCommand("build|break"), Listener {
     @EventHandler
     fun interact(event: PlayerInteractEvent) {
         if (!listOf("island_normal_world", "builds").contains(event.player.world.name)) {
-            if (event.clickedBlock == null) return
-            if (event.clickedBlock.type != Material.AIR && !toggled.contains(event.player.uniqueId) && event.player.hasPermission("flash.build") && event.player.hasPermission("worldguard.region.bypass.*")) {
-                event.isCancelled = true
-                if (!wasteOfMemory.contains(event.player.uniqueId)) if(event.player.hasPermission("flash.staff") && event.player.hasPermission("worldguard.region.bypass.*")) event.player.sendMessage("You must do &e/build &cto enable build/break".error()) else event.player.sendMessage("You must ask a high staff member to enable build/break".error())
-                wasteOfMemory.add(event.player.uniqueId)
-                Bukkit.getScheduler().runTaskLater(Flash.instance, {
-                    wasteOfMemory.remove(event.player.uniqueId)
-                }, 30L)
+            if (event.clickedBlock !== null) {
+                if (event.clickedBlock.type != Material.AIR && !toggled.contains(event.player.uniqueId) && event.player.hasPermission("flash.build") && event.player.hasPermission("worldguard.region.bypass.*")) {
+                    event.isCancelled = true
+                    if (!wasteOfMemory.contains(event.player.uniqueId)) if (event.player.hasPermission("flash.staff") && event.player.hasPermission("worldguard.region.bypass.*")) event.player.sendMessage("You must do &e/build &cto enable build/break".error()) else event.player.sendMessage("You must ask an admin to enable your build/break".error())
+                    wasteOfMemory.add(event.player.uniqueId)
+                    Bukkit.getScheduler().runTaskLater(Flash.instance, {
+                        wasteOfMemory.remove(event.player.uniqueId)
+                    }, 30L)
+                }
             }
         }
     }

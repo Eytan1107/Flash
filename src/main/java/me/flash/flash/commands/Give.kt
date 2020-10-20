@@ -39,6 +39,13 @@ class Give : FlashCommand("give") {
                 val count = args.getOrElse(2) { "1" }.toIntOrNull() ?: 1
 
                 player.inventory.addItem(ItemStack(material, count))
+                if (player == sender) {
+                    if (!player.hasPermission("flash.msg.nice")) player.sendMessage("You have been given &c$count &6of &c${material.name.toLowerCase().replace("_", " ")}".prefix()) else player.sendMessage("You have been given &l$count &6of &l${material.name.toLowerCase().replace("_", " ")}".prefix())
+                }
+                else {
+                    if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("You have given &c$count &6of &c${material.name.toLowerCase().replace("_", " ")} &6to &c${player.name}".prefix()) else sender.sendMessage("You have given &l$count &6of &l${material.name.toLowerCase().replace("_", " ")} &6to &l${player.name}".prefix())
+                    if (!player.hasPermission("flash.msg.nice")) player.sendMessage("You have been given &c$count &6of &c${material.name.toLowerCase().replace("_", " ")} &6by &c${sender.name}".prefix()) else player.sendMessage("You have been given &l$count &6of &l${material.name.toLowerCase().replace("_", " ")} &6by &l${sender.name}".prefix())
+                }
                 FlashUtil.staffMessage(sender, "Gave &l$count &dof &l${material.name.toLowerCase().replace("_", " ")} &dto &l${player.name}")
             }
         }

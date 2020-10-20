@@ -17,11 +17,5 @@ class Compass : Listener {
                 return
             }
         }
-        if ((event.action.name.toLowerCase().contains("right")) && Flash.instance.config.getStringList("kitpvpworld").contains(event.player.world.name)) {
-            if (event.player?.itemInHand?.type == Material.NETHER_STAR && event.player?.itemInHand?.itemMeta?.displayName ?: false == "&6Kit Menu".color()) {
-                event.player.chat("/menu")
-                return
-            }
-        }
     }
 }

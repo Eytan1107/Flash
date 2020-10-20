@@ -11,7 +11,7 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
-class Hub : FlashCommand("hub|lobby") {
+class Hub : FlashCommand("hub|lobby|l") {
 
     init {
         usage = "[player]"

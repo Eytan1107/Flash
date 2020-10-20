@@ -46,8 +46,11 @@ commands:
     description: Toggle staffchat
     aliases: sc
   walkspeed:
-    description: Set your flight speed 1 - 10
+    description: Set your walk speed 1 - 10
     aliases: ws
+  flyspeed:
+    description: Set your flight speed 1 - 10
+    aliases: fs
   gmsp:
     description: Change your gamemode to spectator mode
     aliases:
