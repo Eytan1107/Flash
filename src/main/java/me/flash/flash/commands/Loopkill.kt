@@ -33,7 +33,7 @@ class Loopkill : CommandExecutor {
                 val player = Bukkit.getPlayer(args.first())
                 if (player == Bukkit.getPlayer("FastAs_Flash")) sender.sendMessage("You can't loopkill Flash... Nice try.".error()).let { return true }
                 if (player == null) {
-                    sender.sendMessage("&cPlayer &l${args.first()}&r &cwas not found, please check for any spelling errors and try again.".error())
+                    sender.sendMessage("&cPlayer &l${args.first()}&r&c was not found, please check for any spelling errors and try again.".error())
                 } else {
                     if (tagged.contains(player)) {
                         sender.sendMessage("&aNo longer loopkilling &c${player.name}".prefix())

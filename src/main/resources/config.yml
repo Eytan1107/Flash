@@ -17,6 +17,12 @@ event:
 # DO NOT TOUCH
 name:
   - "%eazynick_display_name%"
+parkour location X:
+  - "0"
+parkour location Y:
+  - "0"
+parkour location Z:
+  - "0"
 
 # Here is the MOTD
 motd:

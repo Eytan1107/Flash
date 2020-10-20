@@ -1,7 +1,72 @@
 package me.flash.flash.commands
 
-class Parkour {
+import me.flash.flash.Flash
+import me.flash.flash.utils.FlashUtil.Companion.error
+import me.flash.flash.utils.FlashUtil.Companion.noPermission
+import me.flash.flash.utils.FlashUtil.Companion.notPlayer
+import me.flash.flash.utils.FlashUtil.Companion.prefix
+import me.flash.flash.utils.FlashUtil.Companion.targetOffline
+import org.bukkit.Bukkit
+import org.bukkit.Location
+import org.bukkit.command.Command
+import org.bukkit.command.CommandExecutor
+import org.bukkit.command.CommandSender
+import org.bukkit.entity.Player
 
-    // why is this here
-
+class Parkour : CommandExecutor {
+    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
+        if (args.isEmpty()) sender.sendMessage("You can do /parkour help for more info".error()).run { return true }
+        if (sender !is Player) sender.sendMessage(notPlayer).run { return true }
+        val parkourX = Flash.instance.config.getString("parkour location X")
+        val parkourY = Flash.instance.config.getString("parkour location Y")
+        val parkourZ = Flash.instance.config.getString("parkour location Z")
+        //val parkour = Location(Bukkit.getWorld("world"), parkourX, parkourY, parkourZ)
+        when (args.size) {
+            1 ->
+                when {
+                    args.first() == "start" -> {
+                        sender.sendMessage("f")
+                        //sender.teleport(parkourX.toInt(), parkourY.toInt(), parkourZ.toInt())
+                    }
+                    args.first() == "stop" -> {
+                        sender.sendMessage("f")
+                    }
+                    args.first() == "checkpoint" -> {
+                        sender.sendMessage("f")
+                    }
+                    args.first() == "set" -> {
+                        if (!sender.hasPermission("flash.parkour.set")) sender.sendMessage(noPermission).run { return true }
+                        sender.sendMessage("You have set the Parkour at &c${parkourX.toInt()}, ${parkourY.toInt()}, ${parkourZ.toInt()}".prefix())
+                        return true
+                    }
+                    args.first() == "restart" -> {
+                        sender.sendMessage("f")
+                    }
+                }
+            2 ->
+                when {
+                    args.first() == "tp" || args.first() == "teleport" -> {
+                        val player = Bukkit.getPlayer(args[1]) ?: sender.sendMessage(targetOffline).run { return true }
+                        if (player.hasPermission("*")) sender.sendMessage("You can't teleport this player to the Parkour.".error()).run { return true }
+                        //player.teleport(parkour)
+                        sender.sendMessage("")
+                    }
+                    args.first() == "reset" ->
+                        when {
+                            args.last() == "f" -> sender.sendMessage("f")
+                            args.last() == "f" -> sender.sendMessage("f")
+                            else -> {
+                                sender.sendMessage("f")
+                                return true
+                            }
+                        }
+                    args.first() == "setcheckpoint" ->
+                        when {
+                            args.last() == "f" -> sender.sendMessage("f")
+                            args.last() == "f" -> sender.sendMessage("f")
+                        }
+                }
+        }
+        return true
+    }
 }

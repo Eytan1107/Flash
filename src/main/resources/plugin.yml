@@ -111,3 +111,5 @@ commands:
     description: gets all online players
   rank:
     description: test
+  parkour:
+    description: parkour

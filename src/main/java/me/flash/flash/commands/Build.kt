@@ -11,7 +11,6 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.event.player.PlayerQuitEvent
-import org.bukkit.inventory.ItemStack
 import java.util.*
 
 class Build : FlashCommand("build|break"), Listener {
@@ -39,11 +38,11 @@ class Build : FlashCommand("build|break"), Listener {
 
         if (sender == player) {
             msg(("Build mode turned " + state(player)).prefix())
-            return;
+            return
         }
         checkPerm("flash.build.others")
         msg("Build mode turned ${state(player)} &6for ${nice()}${player.name}".prefix())
-        msg(player, "Build mode turned ${state(player)} &6by ${nice()}${sender.name}".prefix()) // on join, if player has permissions 1 and 2 : turn off build (doesnt work in worlds island_normal_world and builds)
+        msg(player, "Build mode turned ${state(player)} &6by ${nice()}${sender.name}".prefix())
     }
 
     private fun state(p: Player) : String {
@@ -59,7 +58,7 @@ class Build : FlashCommand("build|break"), Listener {
     fun interact(event: PlayerInteractEvent) {
         if (!listOf("island_normal_world", "builds").contains(event.player.world.name)) {
             if (event.clickedBlock !== null) {
-                if (event.clickedBlock.type != Material.AIR && !toggled.contains(event.player.uniqueId) && event.player.hasPermission("flash.build") && event.player.hasPermission("worldguard.region.bypass.*")) {
+                if (event.clickedBlock.type != Material.AIR && toggled.contains(event.player.uniqueId) && event.player.hasPermission("flash.staff") && event.player.hasPermission("worldguard.region.bypass.*")) {
                     event.isCancelled = true
                     if (!wasteOfMemory.contains(event.player.uniqueId)) if (event.player.hasPermission("flash.staff") && event.player.hasPermission("worldguard.region.bypass.*")) event.player.sendMessage("You must do &e/build &cto enable build/break".error()) else event.player.sendMessage("You must ask an admin to enable your build/break".error())
                     wasteOfMemory.add(event.player.uniqueId)

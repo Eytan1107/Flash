@@ -5,7 +5,6 @@ import me.flash.flash.utils.FlashUtil.Companion.color
 import me.flash.flash.utils.FlashUtil.Companion.getConfig
 import me.flash.flash.utils.FlashUtil.Companion.prefix
 import me.flash.flash.commands.api.FlashCommand
-import me.flash.flash.utils.FlashUtil.Companion.error
 import me.flash.flash.utils.FlashUtil.Companion.usage
 import net.md_5.bungee.api.ChatColor
 import net.md_5.bungee.api.chat.ClickEvent

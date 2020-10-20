@@ -1,15 +1,9 @@
 package me.flash.flash.commands
 
 import me.flash.flash.commands.api.FlashCommand
-import me.flash.flash.utils.FlashUtil
 import me.flash.flash.utils.FlashUtil.Companion.error
-import me.flash.flash.utils.FlashUtil.Companion.noPermission
 import me.flash.flash.utils.FlashUtil.Companion.prefix
 import org.bukkit.Bukkit
-import org.bukkit.command.Command
-import org.bukkit.command.CommandExecutor
-import org.bukkit.command.CommandSender
-import org.bukkit.entity.Player
 
 class Hub : FlashCommand("hub|lobby|l") {
 

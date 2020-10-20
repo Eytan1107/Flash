@@ -4,10 +4,6 @@ import me.flash.flash.commands.*
 import me.flash.flash.listeners.Compass
 import me.flash.flash.listeners.EventsListener
 import net.milkbowl.vault.chat.Chat
-import org.bukkit.Bukkit
-import org.bukkit.event.EventHandler
-import org.bukkit.event.Listener
-import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.plugin.java.JavaPlugin
 import org.sqlite.JDBC
 import java.io.File
@@ -90,6 +86,7 @@ class Flash : JavaPlugin() {
         Invsee().register()
         getCommand("players").executor = Players()
         getCommand("rank").executor = Rank()
+        getCommand("parkour").executor = Parkour()
         server.pluginManager.registerEvents(Back(), this)
         server.pluginManager.registerEvents(EventsListener(), this)
         server.pluginManager.registerEvents(StaffChat(), this)

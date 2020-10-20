@@ -20,7 +20,7 @@ class Help : CommandExecutor {
             player.sendMessage("&a/flashcoins &3to check your Flash Coins (you can also do &a/fc&3)".color()) // ChatMessage
             player.sendMessage("&a/menu &3to open the Server Selector".color()) // ChatMessage
             if (player.hasPermission("flash.fly.hub")) player.sendMessage("&a/fly &3to fly in the hub !".color()) // ChatMessage
-            player.sendMessage("&a/discord &efor the discord link".color()) // ChatMessage
+            player.sendMessage("&a/discord&e for the discord link".color()) // ChatMessage
             player.sendMessage("&6&m                                                  ".color()) // ChatMessage
         }
         if (!player.hasPermission("flash.staff")) { // Checks if the player is a non
@@ -34,7 +34,7 @@ class Help : CommandExecutor {
                         player.sendMessage("&a/flashcoins &3to check your Flash Coins (you can also do &a/fc&3)".color()) // ChatMessage
                         player.sendMessage("&a/menu &3to open the Server Selector".color()) // ChatMessage
                         if (player.hasPermission("flash.fly.hub")) player.sendMessage("&a/fly &3to fly in the hub !".color()) // ChatMessage
-                        player.sendMessage("&a/discord &efor the discord link".color()) // ChatMessage
+                        player.sendMessage("&a/discord&e for the discord link".color()) // ChatMessage
                         player.sendMessage("&6&m                  &6&l Page 1 &m                  ".color()) // ChatMessage
                     }
                 } else if (player.world == Bukkit.getWorld("kitpvp")) { // Checks if the player is in kitpvp
@@ -44,7 +44,7 @@ class Help : CommandExecutor {
                     player.sendMessage("&a/kit&e to fast select a kit".color()) // ChatMessage
                     player.sendMessage("&a/msg <player> <text> &3to send a private message to someone".color()) // ChatMessage
                     player.sendMessage("&a/flashcoins &3to check your Flash Coins (you can also do &a/fc&3)".color()) // ChatMessage
-                    player.sendMessage("&a/discord &efor the discord link".color()) // ChatMessage
+                    player.sendMessage("&a/discord&e for the discord link".color()) // ChatMessage
                     player.sendMessage("&a/kitmenu&e open the kitmenu")
                     player.sendMessage("&6&m                  &6&l Page 1 &m                  ".color()) // ChatMessage
                     return true
@@ -55,12 +55,12 @@ class Help : CommandExecutor {
                     player.sendMessage("&a/is help&e to see all the island commands".color()) // ChatMessage
                     player.sendMessage("&a/msg <player> <text> &3to send a private message to someone".color()) // ChatMessage
                     player.sendMessage("&a/flashcoins &3to check your Flash Coins (you can also do &a/fc&3)".color()) // ChatMessage
-                    player.sendMessage("&a/discord &efor the discord link".color()) // ChatMessage
+                    player.sendMessage("&a/discord&e for the discord link".color()) // ChatMessage
                     player.sendMessage("&6&m                  &6&l Page 1 &m                  ".color()) // ChatMessage
                 }
 
             }else if (player.hasPermission("flash.staff")) {
-                if (args.isEmpty() or args.contains("1")) {
+                if (args.isEmpty() || args.contains("1")) {
                     player.sendMessage("&c&m               &4&l Staff Help Menu &m          ".color()) // ChatMessage
                     if (player.hasPermission("flash.back")) player.sendMessage("&c&l/back".color()) // ChatMessage
                     if (player.hasPermission("flash.broadcast")) player.sendMessage("&c&l/bc".color()) // ChatMessage

@@ -1,12 +1,7 @@
 package me.flash.flash.commands
 
 import me.flash.flash.commands.api.FlashCommand
-import me.flash.flash.utils.FlashUtil.Companion.error
 import me.flash.flash.utils.FlashUtil.Companion.usage
-import org.bukkit.Bukkit
-import org.bukkit.command.Command
-import org.bukkit.command.CommandExecutor
-import org.bukkit.command.CommandSender
 
 class Invsee : FlashCommand("invsee|inventorysee") {
 

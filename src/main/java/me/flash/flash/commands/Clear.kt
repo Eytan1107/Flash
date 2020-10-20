@@ -22,13 +22,13 @@ class Clear : FlashCommand("clear|ci|clearinventory|cl") {
             checkPlayer()
             checkPerm("flash.clear")
             val player = getPlayer()
-            clearinv(player)
+            clearInv(player)
             return
         }
 
         val player = getTarget(0)
         if (player == sender) {
-            clearinv(player)
+            clearInv(player)
             return
         }
         checkPerm("flash.clear.others")
@@ -46,7 +46,7 @@ class Clear : FlashCommand("clear|ci|clearinventory|cl") {
             })
     }
 
-    fun clearinv(p: Player) {
+    private fun clearInv(p: Player) {
         p.inventory.clear()
         p.inventory.armorContents = arrayOfNulls(4)
         msg(p, "You have cleared your inventory!".prefix())

@@ -19,7 +19,6 @@ import java.time.Duration
 
 class Kit : CommandExecutor {
 
-    //this is actually painful to look at, why not use a config... - Skeagle
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         val playerer = if (sender is Player) sender else sender.sendMessage(FlashUtil.notPlayer).run { return true }

@@ -5,7 +5,6 @@ import me.flash.flash.utils.FlashUtil.Companion.error
 import me.flash.flash.utils.FlashUtil.Companion.noPermission
 import me.flash.flash.utils.FlashUtil.Companion.prefix
 import org.bukkit.Bukkit
-import org.bukkit.World
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -25,7 +24,6 @@ class Players : CommandExecutor {
         } else {
             val pworld = args.first()
             val players = getPlayersForWorld(pworld)
-            if (players == null) sender.sendMessage("f").run { return true }
             if (players.isEmpty()) sender.sendMessage("There is no one online".error()).run { return true }
             sender.sendMessage("Online players are :\n ".prefix() + players.joinToString("&f, &a".color(), "&f[&a".color(), "&f] &a".color()) { it.name })
         }
