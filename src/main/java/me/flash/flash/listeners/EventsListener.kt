@@ -4,6 +4,7 @@ package me.flash.flash.listeners
 import me.flash.flash.Flash
 import me.flash.flash.Flash.Companion.playerdata
 import me.flash.flash.commands.Menu
+import me.flash.flash.commands.Players
 import me.flash.flash.utils.FlashUtil.Companion.color
 import me.flash.flash.utils.FlashUtil.Companion.prefix
 import org.bukkit.Bukkit
@@ -34,6 +35,13 @@ class EventsListener : Listener {
         event.quitMessage = null // Take away the default (player) left the game
     }
 
+    private fun isVanished(player: Player): Boolean {
+        for (meta in player.getMetadata("vanished")) {
+            if (meta.asBoolean()) return true
+        }
+        return false
+    }
+
     @EventHandler
     fun world(event: PlayerChangedWorldEvent) {
         val player = Bukkit.getPlayer(event.player.name)
@@ -42,45 +50,51 @@ class EventsListener : Listener {
                 regex = Regex("Member"),
                 replacement = ""
         )
-        if (event.player.world.name == "builds") {
-            if (event.player.hasPermission("flash.gamemode") && event.player.hasPermission("worldguard.region.bypass.*")) {
-                event.player.gameMode = GameMode.CREATIVE
-            } else event.player.gameMode = GameMode.SURVIVAL
-            player.inventory.clear()
-            player.inventory.armorContents = arrayOfNulls(4) // we need to make a per world inventory + health + hunger bar
-        }
-        else if (event.player.world.name == "world") {
-            if (event.player.hasPermission("flash.gamemode.in.hub")) {
-                event.player.gameMode = GameMode.CREATIVE
-            } else event.player.gameMode = GameMode.SURVIVAL
-            player.inventory.clear()
-            player.inventory.armorContents = arrayOfNulls(4) // we need to make a per world inventory + health + hunger bar
-            event.player.inventory.setItem(4, ItemStack(Material.COMPASS).apply {
-                itemMeta = itemMeta.apply {
-                    displayName = "&6Flash's Server Selector".color()
-                    lore = listOf("&7Click me to open the selector".color())
-                }
-            })
-        }
-        else if (event.player.world.name == "kitpvp") {
-            event.player.gameMode = GameMode.SURVIVAL
-            player.inventory.clear()
-            player.inventory.armorContents = arrayOfNulls(4) // we need to make a per world inventory + health + hunger bar
-        }
-        else {
-            player.inventory.clear()
-            player.inventory.armorContents = arrayOfNulls(4) // we need to make a per world inventory + health + hunger bar
-            event.player.gameMode = GameMode.SURVIVAL
+        when (event.player.world.name) {
+            "builds" -> {
+                if (event.player.hasPermission("flash.gamemode") && event.player.hasPermission("worldguard.region.bypass.*")) {
+                    event.player.gameMode = GameMode.CREATIVE
+                } else event.player.gameMode = GameMode.SURVIVAL
+                player.inventory.clear()
+                player.inventory.armorContents = arrayOfNulls(4) // we need to make a per world inventory + health + hunger bar
+            }
+            "world" -> {
+                if (event.player.hasPermission("flash.gamemode.in.hub")) {
+                    event.player.gameMode = GameMode.CREATIVE
+                } else event.player.gameMode = GameMode.SURVIVAL
+                player.inventory.clear()
+                player.inventory.armorContents = arrayOfNulls(4) // we need to make a per world inventory + health + hunger bar
+                event.player.inventory.setItem(4, ItemStack(Material.COMPASS).apply {
+                    itemMeta = itemMeta.apply {
+                        displayName = "&6Flash's Server Selector".color()
+                        lore = listOf("&7Click me to open the selector".color())
+                    }
+                })
+            }
+            "kitpvp" -> {
+                event.player.gameMode = GameMode.SURVIVAL
+                player.inventory.clear()
+                player.inventory.armorContents = arrayOfNulls(4) // we need to make a per world inventory + health + hunger bar
+            }
+            else -> {
+                player.inventory.clear()
+                player.inventory.armorContents = arrayOfNulls(4) // we need to make a per world inventory + health + hunger bar
+                event.player.gameMode = GameMode.SURVIVAL
+            }
         }
         event.from.players.forEach { players ->
-            player.sendMessage("&6[&3-&6] $name".color())
+            if (!isVanished(event.player)) {
+                players.sendMessage("&6[&3-&6] ${event.player.name}".color())
+            }
             if (players.hasPermission("Flash.fly")) {
                 players.allowFlight = true
                 players.isFlying = true
             }
         }
         event.player.world.players.forEach { players ->
-            players.sendMessage("&6[&3+&6] ${event.player.name}".color())
+            if (!isVanished(event.player)) {
+                players.sendMessage("&6[&3+&6] ${event.player.name}".color())
+            }
         }
     }
 
@@ -141,7 +155,7 @@ class EventsListener : Listener {
 
     @EventHandler
     fun motd(event: ServerListPingEvent) {
-        var motd = Flash.instance.config.getString("motd").removeSurrounding("[", "]")
+        val motd = Flash.instance.config.getString("motd").removeSurrounding("[", "]")
         event.motd = motd
     }
 

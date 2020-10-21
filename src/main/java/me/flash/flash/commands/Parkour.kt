@@ -17,16 +17,16 @@ class Parkour : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (args.isEmpty()) sender.sendMessage("You can do /parkour help for more info".error()).run { return true }
         if (sender !is Player) sender.sendMessage(notPlayer).run { return true }
-        val parkourX = Flash.instance.config.getString("parkour location X")
-        val parkourY = Flash.instance.config.getString("parkour location Y")
-        val parkourZ = Flash.instance.config.getString("parkour location Z")
-        //val parkour = Location(Bukkit.getWorld("world"), parkourX, parkourY, parkourZ)
+        val parkourX = Flash.instance.config.getString("parkour.location.x").removeSurrounding("[", "]")
+        val parkourY = Flash.instance.config.getString("parkour.location.y").removeSurrounding("[", "]")
+        val parkourZ = Flash.instance.config.getString("parkour.location.z").removeSurrounding("[", "]")
+        val parkour = Location(Bukkit.getWorld("world"), parkourX.toDouble(), parkourY.toDouble(), parkourZ.toDouble())
         when (args.size) {
             1 ->
                 when {
                     args.first() == "start" -> {
                         sender.sendMessage("f")
-                        //sender.teleport(parkourX.toInt(), parkourY.toInt(), parkourZ.toInt())
+                        sender.teleport(parkour)
                     }
                     args.first() == "stop" -> {
                         sender.sendMessage("f")
@@ -36,6 +36,10 @@ class Parkour : CommandExecutor {
                     }
                     args.first() == "set" -> {
                         if (!sender.hasPermission("flash.parkour.set")) sender.sendMessage(noPermission).run { return true }
+                        Flash.instance.config.set("parkour.location.x", sender.location.x)
+                        Flash.instance.config.set("parkour.location.y", sender.location.y)
+                        Flash.instance.config.set("parkour.location.z", sender.location.z)
+                        Flash.instance.saveConfig()
                         sender.sendMessage("You have set the Parkour at &c${parkourX.toInt()}, ${parkourY.toInt()}, ${parkourZ.toInt()}".prefix())
                         return true
                     }
@@ -48,7 +52,7 @@ class Parkour : CommandExecutor {
                     args.first() == "tp" || args.first() == "teleport" -> {
                         val player = Bukkit.getPlayer(args[1]) ?: sender.sendMessage(targetOffline).run { return true }
                         if (player.hasPermission("*")) sender.sendMessage("You can't teleport this player to the Parkour.".error()).run { return true }
-                        //player.teleport(parkour)
+                        player.teleport(parkour)
                         sender.sendMessage("")
                     }
                     args.first() == "reset" ->

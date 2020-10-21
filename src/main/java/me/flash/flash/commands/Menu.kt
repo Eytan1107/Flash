@@ -197,21 +197,32 @@ class Menu : CommandExecutor, Listener {
                             lore = listOf("&7Click to teleport to &b&lBuilds".color(), "&7Players online: &e".color() + FlashUtil.playersInWorlds("builds").size)
                         }
                     })) {
-                if (player.hasPermission("flash.staff")) { // Checks if the user has the Flash.staff perm
+                if (player.hasPermission("flash.access.builds")) { // Checks if the user has the Flash.staff perm
                     player.sendMessage("Sending you to Builds".prefix()) // ChatMessage
                     player.teleport(Bukkit.getWorld("builds").spawnLocation) // Teleports the player to Builds
                     tagged.remove(event.inventory) // Unlocks the inventory
                     return true
-                } else player.sendMessage(noPermission).run { return true } // Stops if the user doesn't have the right Permissions
+                } else {
+                    player.closeInventory()
+                    player.sendMessage(noPermission)
+                    return true
+                } // Stops if the user doesn't have the right Permissions
             } else if (event.currentItem.isSimilar(ItemStack(Material.REDSTONE).apply { // Checks if the players clicks ONLY on the Redstone Dust
                         itemMeta = itemMeta.apply {
                             displayName = "&a&lEvent".color()
                             lore = listOf("&7Click to teleport to &a&lEvent".color(), "&7Players online: &e".color() + FlashUtil.playersInWorlds("event").size)
                         }
                     })) {
-                player.sendMessage("Sending you to Event".prefix()) // ChatMessage
-                player.teleport(Bukkit.getWorld("event").spawnLocation) // Teleports the player to Event
-                tagged.remove(event.inventory) // Unlocks the inventory
+                if (player.hasPermission("flash.access.builds")) { // Checks if the user has the Flash.staff perm
+                    player.sendMessage("Sending you to Event".prefix()) // ChatMessage
+                    player.teleport(Bukkit.getWorld("event").spawnLocation) // Teleports the player to Event
+                    tagged.remove(event.inventory) // Unlocks the inventory
+                }
+                else {
+                    player.closeInventory()
+                    player.sendMessage(noPermission)
+                    return true
+                } // Stops if the user doesn't have the right Permissions
             } else if (event.currentItem.isSimilar(ItemStack(Material.STAINED_GLASS_PANE, 1, 14).apply { // The default inventory item
                         itemMeta = itemMeta.apply {
                             displayName = "&8[&6Flash's server&8]&r".color()

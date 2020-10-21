@@ -1,9 +1,11 @@
 name: Flash
 version: @version@
 main: me.flash.flash.Flash
-#depend:
-#  - Vault
 commands:
+  killall:
+    description: kill all players
+    aliases:
+      - slayall
   loopkill:
     description: Loop Kill a player
   tpall:

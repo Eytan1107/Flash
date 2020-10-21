@@ -13,8 +13,8 @@ class SetHub : CommandExecutor {
         if (args.isNotEmpty()) sender.sendMessage("Too many arguments".error())
         if (sender.world.name != "world") sender.sendMessage("You can only do this command in the Hub.".error()).run { return true }
         with(sender.location) {
-            sender.world.setSpawnLocation(x.toInt(), y.toInt(), z.toInt())
-            sender.sendMessage("Hub set at : &c".prefix() + x + ", " + y + ", " + z)
+            sender.location.world.setSpawnLocation(blockX, blockY, blockZ)
+            sender.sendMessage("Hub set at : &c".prefix() + x.toInt() + ", " + y.toInt() + ", " + z.toInt())
         }
 
         return true

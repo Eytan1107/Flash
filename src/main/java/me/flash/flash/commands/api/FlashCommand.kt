@@ -29,6 +29,7 @@ abstract class FlashCommand : Command {
     var args = mutableListOf<String>()
     private var logAction: String? = null
     private var minArgs = 0
+    private var maxArgs = 7
 
     constructor (cmd: String): this(parseCmd(cmd), parseAliases(cmd))
 
@@ -139,7 +140,7 @@ abstract class FlashCommand : Command {
     companion object {
         private fun parseAliases(cmd: String) : List<String> {
             val aliases: Array<String> = cmd.split("|").toTypedArray()
-            return (if (aliases.isNotEmpty()) listOf(*aliases.copyOfRange(1, aliases.size)) else ArrayList());
+            return (if (aliases.isNotEmpty()) listOf(*aliases.copyOfRange(1, aliases.size)) else ArrayList())
         }
 
         private fun parseCmd(cmd: String) : String {

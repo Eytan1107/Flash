@@ -1,7 +1,6 @@
 package me.flash.flash.commands
 
 import me.flash.flash.utils.FlashUtil
-import me.flash.flash.utils.FlashUtil.Companion.prefix
 import me.flash.flash.commands.api.FlashCommand
 import me.flash.flash.utils.FlashUtil.Companion.color
 import org.bukkit.Bukkit
@@ -15,9 +14,9 @@ class Broadcast : FlashCommand("broadcast|bc") {
     }
 
     override fun run() {
-        Bukkit.broadcastMessage(("&c&l ").prefix())
-        Bukkit.broadcastMessage(("&c&l" + args.joinToString(" ")).prefix())
-        Bukkit.broadcastMessage(("&c&l ").prefix())
+        Bukkit.broadcastMessage(("&c&l ").color())
+        Bukkit.broadcastMessage(("[&6Flash's Server&f] &c&l".color() + args.joinToString(" ")))
+        Bukkit.broadcastMessage(("&c&l ").color())
         FlashUtil.staffMessage(sender, "Broadcasted")
     }
 }

@@ -3,6 +3,7 @@ package me.flash.flash.commands
 import me.flash.flash.Flash
 import me.flash.flash.utils.FlashUtil
 import me.flash.flash.utils.FlashUtil.Companion.color
+import me.flash.flash.utils.FlashUtil.Companion.noPermission
 import me.flash.flash.utils.FlashUtil.Companion.prefix
 import me.flash.flash.utils.FlashUtil.Companion.usage
 import org.bukkit.Bukkit
@@ -16,6 +17,7 @@ class Wake : CommandExecutor{
     @Suppress("DEPRECATION")
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender is Player) {
+            if (!sender.hasPermission("flash.wake")) sender.sendMessage(noPermission).run { return true }
             if (args.isEmpty()) {
                 sender.sendMessage("wake <player> <message>".usage())
             }

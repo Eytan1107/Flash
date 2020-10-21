@@ -17,6 +17,7 @@ class Build : FlashCommand("build|break"), Listener {
 
     init {
         description = "Toggle build on or off."
+        aliases = listOf("break")
     }
 
     override fun run() {

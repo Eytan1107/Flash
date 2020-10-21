@@ -38,6 +38,7 @@ class Flash : JavaPlugin() {
         Hub().register()
         getCommand("suggest").executor = Suggest()
         getCommand("suggestions").executor = Suggestions()
+        KillAll().register()
         Broadcast().register()
         Clear().register()
         Check().register()
