@@ -78,7 +78,7 @@ class Flash : JavaPlugin() {
             executor = Server()
             tabCompleter = Server()
         }.executor = Server()
-        Enderchest().register()
+        getCommand("enderchest").executor = Enderchest()
         getCommand("help").executor = Help()
         getCommand("stats").executor = stats()
         getCommand("msg").executor = Msg()

@@ -12,6 +12,7 @@ class Craft : FlashCommand("craft") {
     override fun run() {
         checkPlayer()
         checkPerm("flash.craft")
+        if (args.isNotEmpty()) sender.sendMessage("Too many arguments".error()).run { return }
         when (getPlayer().world.name) {
             "kitpvp", "island_normal_world", "skyblock_spawn" -> getPlayer().openWorkbench(null, true)
             else -> if (hasPerm("flash.craft.all")) getPlayer().openWorkbench(null, true) else msg("You must be in KitPvP or SkyBlock to do that.".error())

@@ -20,7 +20,6 @@ class Fly : FlashCommand("fly") {
             val player = getPlayer()
             player.allowFlight = !player.allowFlight
             msg("You turned ${state(player)} &6flight".prefix())
-            FlashUtil.staffMessage(sender, ternary(player.allowFlight, "Enabled", "Disabled") + " flight for &l${player.name}")
             return
         }
         checkPerm("flash.fly.others")
@@ -29,10 +28,10 @@ class Fly : FlashCommand("fly") {
         if (player !== sender) {
             msg("You turned ${state(player)} &6flight for ${nice()}${player.name}".prefix())
             msg(player, "${nice()}${sender.name} &6turned ${state(player)} &6your flight".prefix())
+            FlashUtil.staffMessage(sender, ternary(player.allowFlight, "Enabled", "Disabled") + " flight for &l${player.name}")
         }
         else
             msg("You turned ${state(player)} &6flight".prefix())
-        FlashUtil.staffMessage(sender, ternary(player.allowFlight, "Enabled", "Disabled") + " flight for &l${player.name}")
     }
 
     private fun state(p: Player) : String {
