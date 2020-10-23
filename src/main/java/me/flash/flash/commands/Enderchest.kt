@@ -23,110 +23,105 @@ import java.io.IOException
 
 class Enderchest : CommandExecutor, JavaPlugin(), Listener {
 
-    var echestname: String? = null
-    override fun onEnable() {
-        Bukkit.getPluginManager().registerEvents(this, this)
-        saveDefaultConfig()
-        for (all in Bukkit.getOnlinePlayers()) {
-            makeFile(all)
-        }
-    }
+    //var echestname: String? = null
+    //override fun onEnable() {
+        //Bukkit.getPluginManager().registerEvents(this, this)
+        //saveDefaultConfig()
+        //for (all in Bukkit.getOnlinePlayers()) {
+        //    makeFile(all)
+        //}
+    //}
 
-    override fun onDisable() {
-        val folder = File("$dataFolder/spieler").listFiles()
-        for (file in folder) {
-            val config = YamlConfiguration
-                    .loadConfiguration(file)
-            try {
-                config.save(file)
-            } catch (e: IOException) {
-            }
-        }
-    }
+    //override fun onDisable() {
+        //val folder = File("$dataFolder/spieler").listFiles()
+        //for (file in folder) {
+            //val config = YamlConfiguration .loadConfiguration(file)
+            //try {
+                //config.save(file)
+            //} catch (e: IOException) {
+            //}
+       // }
+    //}
 
-    var inv: Inventory? = null
-    private fun makeFile(p: Player) {
-        val file = File("$dataFolder/spieler", p.name + ".yml")
-        if (!file.exists()) {
-            val config: FileConfiguration = YamlConfiguration
-                    .loadConfiguration(file)
-            config["Items.0"] = ItemStack(Material.AIR)
-            try {
-                config.save(file)
-            } catch (e: IOException) {
-            }
-        }
-    }
+    //var inv: Inventory? = null
+    //private fun makeFile(p: Player) {
+        //val file = File("$dataFolder/spieler", p.name + ".yml")
+        //if (!file.exists()) {
+            //val config: FileConfiguration = YamlConfiguration .loadConfiguration(file)
+            //config["Items.0"] = ItemStack(Material.AIR)
+            //try {
+            //    config.save(file)
+           //} catch (e: IOException) {
+            //}
+        //}
+    //}
 
-    private fun openEnderchest(p: Player, slots: Int) {
-        val file = File("$dataFolder/spieler", p.name + ".yml")
-        val config: FileConfiguration = YamlConfiguration.loadConfiguration(file)
-        val inv = Bukkit.createInventory(null, slots * 9, echestname!!.replace("<Spieler>", p.name))
-        for (key in config.getConfigurationSection("Items")
-                .getKeys(false)) {
-            try {
-                inv.setItem(key.toInt(),
-                        config.getItemStack("Items.$key"))
-            } catch (e: Exception) {
-            }
-        }
-        p.openInventory(inv)
-        p.playSound(p.location, Sound.CHEST_OPEN, 1f, 1f)
-    }
+    //private fun openEnderchest(p: Player, slots: Int) {
+        //val file = File("$dataFolder/spieler", p.name + ".yml")
+        //val config: FileConfiguration = YamlConfiguration.loadConfiguration(file)
+        //val inv = Bukkit.createInventory(null, slots * 9, echestname!!.replace("<Spieler>", p.name))
+        //for (key in config.getConfigurationSection("Items") .getKeys(false)) {
+            //try {
+                //inv.setItem(key.toInt(),
+                        //config.getItemStack("Items.$key"))
+            //} catch (e: Exception) {
+            //}
+        //}
+        //p.openInventory(inv)
+        //p.playSound(p.location, Sound.CHEST_OPEN, 1f, 1f)
+    //}
 
-    @EventHandler
-    fun onInvClose(e: InventoryCloseEvent) {
-        val p = e.player as Player
-        if (e.inventory.title == echestname?.replace("<Spieler>", p.name)) {
-            p.playSound(p.location, Sound.CHEST_CLOSE, 1f, 1f)
-            val file = File("$dataFolder/spieler", p.name
-                    + ".yml")
-            val config: FileConfiguration = YamlConfiguration
-                    .loadConfiguration(file)
-            for (i in 0 until e.inventory.size) {
-                if (e.inventory.getItem(i) == null) {
-                    config["Items.$i"] = null
-                } else {
-                    config["Items.$i"] = e.inventory.getItem(i)
-                }
-            }
-            try {
-                config.save(file)
-            } catch (e1: Exception) {
-            }
-        }
-    }
+    //@EventHandler
+    //fun onInvClose(e: InventoryCloseEvent) {
+        //val p = e.player as Player
+        //if (e.inventory.title == echestname?.replace("<Spieler>", p.name)) {
+            //p.playSound(p.location, Sound.CHEST_CLOSE, 1f, 1f)
+            //val file = File("$dataFolder/spieler", p.name + ".yml")
+            //val config: FileConfiguration = YamlConfiguration .loadConfiguration(file)
+            //for (i in 0 until e.inventory.size) {
+                //if (e.inventory.getItem(i) == null) {
+                    //config["Items.$i"] = null
+                //} else {
+                    //config["Items.$i"] = e.inventory.getItem(i)
+               // }
+           // }
+            //try {
+               // config.save(file)
+           // } catch (e1: Exception) {
+          //  }
+        //}
+   // }
 
-    @EventHandler
-    fun onJoin(e: PlayerJoinEvent) {
-        val p = e.player
-        makeFile(p)
-    }
+    //@EventHandler
+   // fun onJoin(e: PlayerJoinEvent) {
+       // val p = e.player
+    //    makeFile(p)
+   // }
 
-    @EventHandler
-    fun onEnderchestClick(e: PlayerInteractEvent) {
-        val p = e.player
-        if (e.action == Action.RIGHT_CLICK_BLOCK && !e.isCancelled
-                && e.clickedBlock.type == Material.ENDER_CHEST) {
-            if (p.itemInHand.type == Material.AIR) {
-                p.isSneaking = false
-            }
-            if (p.itemInHand.type.isBlock && p.isSneaking) {
-                return
-            }
-            for (i in 6 downTo 2) {
-                if (p.hasPermission("Enderchest.slots.$i") || p.isOp) {
-                    openEnderchest(p, i)
-                    e.isCancelled = true
-                    break
-                }
-            }
-        }
-    }
+    //@EventHandler
+    //fun onEnderchestClick(e: PlayerInteractEvent) {
+      //  val p = e.player
+     //  if (e.action == Action.RIGHT_CLICK_BLOCK && !e.isCancelled
+      //          && e.clickedBlock.type == Material.ENDER_CHEST) {
+      //      if (p.itemInHand.type == Material.AIR) {
+      //          p.isSneaking = false
+      //      }
+      //      if (p.itemInHand.type.isBlock && p.isSneaking) {
+        //        return
+        //    }
+         //   for (i in 6 downTo 2) {
+         //       if (p.hasPermission("Enderchest.slots.$i") || p.isOp) {
+         //           openEnderchest(p, i)
+         //           e.isCancelled = true
+         //           break
+          //      }
+          //  }
+      //  }
+   // }
 
-    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        return true
-    }
+   // override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
+     //   return true
+  //  }
 }
 
 
