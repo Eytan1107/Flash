@@ -1,9 +1,11 @@
 package me.flash.flash.commands
 
+import me.flash.flash.Flash
 import me.flash.flash.commands.api.FlashCommand
 import me.flash.flash.utils.FlashUtil.Companion.error
 import me.flash.flash.utils.FlashUtil.Companion.prefix
 import org.bukkit.Bukkit
+import org.bukkit.Location
 
 class Hub : FlashCommand("hub|lobby|l") {
 
@@ -13,10 +15,14 @@ class Hub : FlashCommand("hub|lobby|l") {
     }
 
     override fun run() {
+        val hubX = Flash.instance.config.getString("hub.location.x").removeSurrounding("[", "]")
+        val hubY = Flash.instance.config.getString("hub.location.y").removeSurrounding("[", "]")
+        val hubZ = Flash.instance.config.getString("hub.location.z").removeSurrounding("[", "]")
+        val hub = Location(Bukkit.getWorld("world"), hubX.toDouble(), hubY.toDouble(), hubZ.toDouble())
         if (args.isEmpty()) {
             checkPlayer()
             if (getPlayer().world.name != "world") {
-                getPlayer().teleport(Bukkit.getWorld("world").spawnLocation)
+                getPlayer().teleport(hub)
                 msg("Teleporting to you to Hub...".prefix())
             } else
                 msg("You are already in Hub, do &e/spawn &cto return to spawn!".error())
@@ -32,6 +38,6 @@ class Hub : FlashCommand("hub|lobby|l") {
             msg("Teleporting &c${player.name} &6to Hub...".prefix())
             msg(player, "&c${player.name} &6teleported you to Hub !".prefix())
         }
-        player.teleport(Bukkit.getWorld("world").spawnLocation)
+        player.teleport(hub)
     }
 }

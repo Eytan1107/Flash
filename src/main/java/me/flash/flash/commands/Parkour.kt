@@ -36,11 +36,11 @@ class Parkour : CommandExecutor {
                     }
                     args.first() == "set" -> {
                         if (!sender.hasPermission("flash.parkour.set")) sender.sendMessage(noPermission).run { return true }
-                        Flash.instance.config.set("parkour.location.x", sender.location.x)
-                        Flash.instance.config.set("parkour.location.y", sender.location.y)
-                        Flash.instance.config.set("parkour.location.z", sender.location.z)
+                        Flash.instance.config.set("parkour.location.x", sender.location.x.toInt().toDouble())
+                        Flash.instance.config.set("parkour.location.y", sender.location.y.toInt().toDouble())
+                        Flash.instance.config.set("parkour.location.z", sender.location.z.toInt().toDouble())
                         Flash.instance.saveConfig()
-                        sender.sendMessage("You have set the Parkour at &c${parkourX.toInt()}, ${parkourY.toInt()}, ${parkourZ.toInt()}".prefix())
+                        sender.sendMessage("You have set the Parkour at &c$parkourX, $parkourY, $parkourZ".prefix())
                         return true
                     }
                     args.first() == "restart" -> {
@@ -51,9 +51,13 @@ class Parkour : CommandExecutor {
                 when {
                     args.first() == "tp" || args.first() == "teleport" -> {
                         val player = Bukkit.getPlayer(args[1]) ?: sender.sendMessage(targetOffline).run { return true }
-                        if (player.hasPermission("*")) sender.sendMessage("You can't teleport this player to the Parkour.".error()).run { return true }
+                        if (player == sender) sender.sendMessage("You have teleported &c${player.name} &6to the Parkour !".prefix())
+                        else {
+                            if (player.hasPermission("*")) sender.sendMessage("You can't teleport this player to the Parkour.".error()).run { return true }
+                            sender.sendMessage("You have teleported &c${player.name} &6to the Parkour !".prefix())
+                            player.sendMessage("&c${sender.name} &6teleported you to the Parkour !".prefix())
+                        }
                         player.teleport(parkour)
-                        sender.sendMessage("")
                     }
                     args.first() == "reset" ->
                         when {

@@ -6,11 +6,6 @@ commands:
     description: kill all players
     aliases:
       - slayall
-  enderchest:
-    description: opens an enderchest
-    aliases:
-      - ec
-      - echest
   loopkill:
     description: Loop Kill a player
   tpall:
