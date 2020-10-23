@@ -23,7 +23,7 @@ class Hub : FlashCommand("hub|lobby|l") {
             checkPlayer()
             if (getPlayer().world.name != "world") {
                 getPlayer().teleport(hub)
-                msg("Teleporting to you to Hub...".prefix())
+                msg("Teleporting to you to &cHub&6...".prefix())
             } else
                 msg("You are already in Hub, do &e/spawn &cto return to spawn!".error())
             return
@@ -32,11 +32,11 @@ class Hub : FlashCommand("hub|lobby|l") {
         val player = getTarget(0)
         if (getPlayer() == player) {
             if (player.world.name == "world") msg("You are already in Hub, do &e/spawn &cto return to spawn!".error()).run { return }
-            msg("Teleporting you to Hub...".prefix())
+            msg("Teleporting you to &cHub&6...".prefix())
         } else {
             if (player.world.name == "world") msg("This player is already in Hub, do &e/spawn <player> &cto teleport them back to spawn!".error()).run { return }
-            msg("Teleporting &c${player.name} &6to Hub...".prefix())
-            msg(player, "&c${player.name} &6teleported you to Hub !".prefix())
+            msg("Teleporting &c${player.name} &6to &cHub&6...".prefix())
+            msg(player, "&c${player.name} &6teleported you to &cHub !".prefix())
         }
         player.teleport(hub)
     }

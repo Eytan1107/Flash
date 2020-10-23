@@ -1,9 +1,11 @@
 package me.flash.flash.commands
 
+import me.flash.flash.Flash
 import me.flash.flash.utils.FlashUtil.Companion.error
 import me.flash.flash.utils.FlashUtil.Companion.noPermission
 import me.flash.flash.utils.FlashUtil.Companion.prefix
 import org.bukkit.Bukkit
+import org.bukkit.Location
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -22,13 +24,17 @@ class Server : CommandExecutor, Listener, TabCompleter {
         if (args.size > 2) sender.sendMessage("Too many arguments".error()).run { return true }
         val player = Bukkit.getPlayer(sender.name)
         val target = Bukkit.getPlayer(args.last())
+        val hubX = Flash.instance.config.getString("hub.location.x").removeSurrounding("[", "]")
+        val hubY = Flash.instance.config.getString("hub.location.y").removeSurrounding("[", "]")
+        val hubZ = Flash.instance.config.getString("hub.location.z").removeSurrounding("[", "]")
+        val hub = Location(Bukkit.getWorld("world"), hubX.toDouble(), hubY.toDouble(), hubZ.toDouble())
         val w = Bukkit.getWorld(args.first()) ?: if (sender.hasPermission("multiverse.access.*")) sender.sendMessage("&cServers: KitPvP, Skyblock, Hub, Event, Builds".prefix()).run { return true } else sender.sendMessage("&cServers: KitPvP, Skyblock, Hub, Event".prefix()).run { return true }
         if (args.size == 1 || args.size == 2 && player == target) {
             when {
                 args.first() == "hub" || args.first() == "lobby" -> {
                     if (player.world.name == "world") sender.sendMessage("You are already in Hub, do &e/spawn &cto return to spawn".error()).run { return true }
                     sender.sendMessage("Teleporting you to &cHub".prefix())
-                    player.teleport(Bukkit.getWorld("world").spawnLocation)
+                    player.teleport(hub)
                     //player.teleport(Bukkit.getServer("hub").spawnLocation)
                     return true
                 }
@@ -92,7 +98,7 @@ class Server : CommandExecutor, Listener, TabCompleter {
                  args[0] == "hub" || args[0] == "lobby" -> {
                      if (target.world.name == "world") sender.sendMessage("This player is already in Hub, do &e/spawn <player> &cto teleport them back to spawn !".error()).run { return true }
                      sender.sendMessage("You Teleported &c${target.name} &6to &lHub".prefix())
-                     target.teleport(Bukkit.getWorld("world").spawnLocation)
+                     target.teleport(hub)
                      target.sendMessage("You have been teleported to &cHub &6by &c${sender.name}".prefix())
                      //player.teleport(Bukkit.getServer("hub").spawnLocation)
                      return true
