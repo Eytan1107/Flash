@@ -3,7 +3,6 @@ package me.flash.flash.listeners
 import me.flash.flash.Flash
 import me.flash.flash.utils.FlashUtil
 import me.flash.flash.utils.FlashUtil.Companion.color
-import me.flash.flash.utils.FlashUtil.Companion.error
 import me.flash.flash.utils.FlashUtil.Companion.prefix
 import org.bukkit.Bukkit
 import org.bukkit.Material
@@ -62,8 +61,12 @@ class Compass : Listener {
                 player.sendMessage("Sending you to Event".prefix())
                 player.teleport(Bukkit.getWorld("event").spawnLocation)
             }
-            event.currentItem.type == Material.STAINED_GLASS_PANE && event.currentItem.itemMeta.displayName == "&6Server Selector".color() -> {
+            event.currentItem.type == Material.STAINED_GLASS_PANE && event.currentItem.durability == 14.toShort() && event.currentItem.itemMeta.displayName == "&6Server Selector".color() -> {
+                event.whoClicked.sendMessage("F")
                 event.isCancelled = true
+            }
+            event.currentItem.type == Material.GOLD_BOOTS && event.currentItem.itemMeta.displayName == "&6Server Selector".color() -> {
+
             }
         }
     }
@@ -85,7 +88,7 @@ class Compass : Listener {
             ItemStack(Material.GRASS, 1).apply { // Creates the skyblock inventory item
                 itemMeta = itemMeta.apply {
                     displayName = "&a&lSkyBlock".color()
-                    lore = listOf("&7Click to teleport to &a&lSkyBlock".color(), "&7Players online: &e".color() + (FlashUtil.playersInWorlds("skyblock1")+FlashUtil.playersInWorlds("skyblock2")).size)
+                    lore = listOf("&7Click to teleport to &a&lSkyBlock".color(), "&7Players online: &e".color() + (FlashUtil.playersInWorlds("skyblock1") + FlashUtil.playersInWorlds("skyblock2")).size)
                 }
                 inventory.setItem(0, this) // Sets the item to the right slot
             }

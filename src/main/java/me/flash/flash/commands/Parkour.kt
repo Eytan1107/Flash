@@ -24,10 +24,6 @@ class Parkour : CommandExecutor {
         when (args.size) {
             1 ->
                 when {
-                    args.first() == "start" -> {
-                        sender.sendMessage("f")
-                        sender.teleport(parkour)
-                    }
                     args.first() == "stop" -> {
                         sender.sendMessage("f")
                     }
@@ -46,12 +42,17 @@ class Parkour : CommandExecutor {
                     args.first() == "restart" -> {
                         sender.sendMessage("f")
                     }
+                    args.first() == "tp" || args.first() == "teleport" || args.first() == "start" -> {
+                        sender.sendMessage("Teleporting you to the Parkour !".prefix())
+                        sender.teleport(parkour)
+                    }
                 }
             2 ->
                 when {
-                    args.first() == "tp" || args.first() == "teleport" -> {
+                    args.first() == "tp" || args.first() == "teleport" || args.first() == "start"-> {
+                        if (!sender.hasPermission("flash.parkour.tp.others")) sender.sendMessage(noPermission).run { return true }
                         val player = Bukkit.getPlayer(args[1]) ?: sender.sendMessage(targetOffline).run { return true }
-                        if (player == sender) sender.sendMessage("You have teleported &c${player.name} &6to the Parkour !".prefix())
+                        if (player == sender) sender.sendMessage("Teleporting you to the Parkour !".prefix())
                         else {
                             if (player.hasPermission("*")) sender.sendMessage("You can't teleport this player to the Parkour.".error()).run { return true }
                             sender.sendMessage("You have teleported &c${player.name} &6to the Parkour !".prefix())
