@@ -12,22 +12,11 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
-import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.java.JavaPlugin
 
 class KitsMenu : Listener {
-    @EventHandler
-    fun interact(event: PlayerInteractEvent) {
-        if (event.player?.itemInHand?.type == Material.COMPASS && event.player?.itemInHand?.itemMeta?.displayName ?: false == "&6Flash's Server Selector".color()) { // less events?
-            if ((event.action.name.toLowerCase().contains("right")) && Flash.instance.config.getStringList("worlds.hub").contains(event.player.world.name)) {
-                event.player.chat("/menu")
-                return
-            }
-        }
-
-    }
 
     @EventHandler
     fun click(event: InventoryClickEvent) {
@@ -35,24 +24,35 @@ class KitsMenu : Listener {
         if (!JavaPlugin.getPlugin(Flash::class.java).config.getStringList("worlds.kitpvpworld").contains(player.world.name) && tagged.contains(event.clickedInventory)) {
             return
         }
-        event.view.close()
         tagged.remove(event.inventory)
-        event.isCancelled = true
         when {
             event.currentItem.type == Material.CHAINMAIL_CHESTPLATE && event.currentItem.itemMeta.displayName == "&7Kit PvP".color() -> {
+                event.isCancelled = true
                 player.chat("/kit pvp")
+                player.closeInventory()
             }
             event.currentItem.type == Material.GOLD_CHESTPLATE && event.currentItem.itemMeta.displayName == "&1Kit Fast".color() -> {
+                event.isCancelled = true
                 if (player.hasPermission("flash.fast")) player.chat("/kit pvp") else player.sendMessage(noPermission)
+                player.closeInventory()
             }
             event.currentItem.type == Material.IRON_CHESTPLATE && event.currentItem.itemMeta.displayName == "&eKit Speedster".color() -> {
+                event.isCancelled = true
                 if (player.hasPermission("flash.speedster")) player.chat("/kit speedster") else player.sendMessage(noPermission)
+                player.closeInventory()
             }
             event.currentItem.type == Material.DIAMOND_CHESTPLATE && event.currentItem.itemMeta.displayName == "&b&lKit GodSpeed".color() -> {
+                event.isCancelled = true
                 if (player.hasPermission("flash.godspeed")) player.chat("/kit godspeed") else player.sendMessage(noPermission)
+                player.closeInventory()
             }
             event.currentItem.type == Material.DIAMOND_CHESTPLATE && event.currentItem.itemMeta.displayName == "&6&lKit SpeedForce".color() -> {
+                event.isCancelled = true
                 if (player.hasPermission("flash.speedforce")) player.chat("/kit speedforce") else player.sendMessage(noPermission)
+                player.closeInventory()
+            }
+            event.currentItem.type == Material.STAINED_GLASS_PANE && event.currentItem.durability == 14.toShort() && event.currentItem.itemMeta.displayName == "&f[&6Flash's server&f]&r".color() -> {
+                event.isCancelled = true
             }
         }
     }
@@ -70,7 +70,7 @@ class KitsMenu : Listener {
             tagged.add(inventory)
             val empty = ItemStack(Material.STAINED_GLASS_PANE, 1, 14).apply { // The default inventory item
                 itemMeta = itemMeta.apply {
-                    displayName = "&8[&6Flash's server&8]&r".color()
+                    displayName = "&f[&6Flash's server&f]&r".color()
                 }
             }
             for (i in 0..26) {

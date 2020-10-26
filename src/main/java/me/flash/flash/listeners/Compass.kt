@@ -28,6 +28,9 @@ class Compass : Listener {
         }
     }
 
+    //@EventHandler
+    //fun test(event: Inv)
+
     @EventHandler
     fun close(event: InventoryCloseEvent) {
         tagged.remove(event.inventory)
@@ -42,31 +45,36 @@ class Compass : Listener {
 
         when {
             event.currentItem.type == Material.GRASS && event.currentItem.itemMeta.displayName == "&a&lSkyBlock".color() -> {
+                event.isCancelled = true
                 player.sendMessage("Sending you to SkyBlock".prefix())
                 player.teleport(Bukkit.getWorld("skyblock_spawn").spawnLocation)
             }
             event.currentItem.type == Material.TNT && event.currentItem.itemMeta.displayName == "&4&lTnTRun".color() -> {
+                event.isCancelled = true
                 player.sendMessage("Sending you to TnTRun".prefix())
                 player.teleport(Bukkit.getWorld("tntrun").spawnLocation)
             }
             event.currentItem.type == Material.DIAMOND_CHESTPLATE && event.currentItem.itemMeta.displayName == "&6&lKitPvP".color() -> {
+                event.isCancelled = true
                 player.sendMessage("Sending you to KitPvP".prefix())
                 player.teleport(Bukkit.getWorld("kitpvp").spawnLocation)
             }
             event.currentItem.type == Material.BRICK && event.currentItem.itemMeta.displayName == "&b&lBuilds".color() -> {
+                event.isCancelled = true
                 player.sendMessage("Sending you to Builds".prefix())
                 player.teleport(Bukkit.getWorld("builds").spawnLocation)
             }
             event.currentItem.type == Material.REDSTONE && event.currentItem.itemMeta.displayName == "&a&lEvent".color() -> {
+                event.isCancelled = true
                 player.sendMessage("Sending you to Event".prefix())
                 player.teleport(Bukkit.getWorld("event").spawnLocation)
             }
-            event.currentItem.type == Material.STAINED_GLASS_PANE && event.currentItem.durability == 14.toShort() && event.currentItem.itemMeta.displayName == "&6Server Selector".color() -> {
-                event.whoClicked.sendMessage("F")
+            event.currentItem.type == Material.STAINED_GLASS_PANE && event.currentItem.durability == 14.toShort() && event.currentItem.itemMeta.displayName == "&f[&6Flash's server&f]&r".color() -> {
                 event.isCancelled = true
             }
-            event.currentItem.type == Material.GOLD_BOOTS && event.currentItem.itemMeta.displayName == "&6Server Selector".color() -> {
-
+            event.currentItem.type == Material.GOLD_BOOTS && event.currentItem.itemMeta.displayName == "&6&lParkour".color() -> {
+                event.isCancelled = true
+                Bukkit.dispatchCommand(player, "startparkour")
             }
         }
     }
@@ -79,7 +87,7 @@ class Compass : Listener {
             tagged.add(inventory) // Enables interaction for the inventory
             val empty = ItemStack(Material.STAINED_GLASS_PANE, 1, 14).apply { // The default inventory item
                 itemMeta = itemMeta.apply {
-                    displayName = "&8[&6Flash's server&8]&r".color()
+                    displayName = "&f[&6Flash's server&f]&r".color()
                 }
             }
             for (i in 0..26) {
