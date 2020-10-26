@@ -5,6 +5,7 @@ import me.flash.flash.utils.FlashUtil.Companion.color
 import me.flash.flash.utils.FlashUtil.Companion.getConfig
 import me.flash.flash.utils.FlashUtil.Companion.prefix
 import me.flash.flash.commands.api.FlashCommand
+import me.flash.flash.utils.FlashUtil.Companion.error
 import me.flash.flash.utils.FlashUtil.Companion.usage
 import net.md_5.bungee.api.ChatColor
 import net.md_5.bungee.api.chat.ClickEvent
@@ -21,6 +22,7 @@ class ClearAll : FlashCommand("clearall|clearinventoryall|ciall") {
     override fun run() {
         checkPerm("flash.clearall")
         checkPlayer()
+        if (getPlayer().world.name == "island_normal_world"|| getPlayer().world.name == "skyblock_spawn") getPlayer().sendMessage("You can't clear inventories in Skyblock !".error()).run { return }
         if (args.size == 1 && args[0] == "confirm") {
             msg("You have cleared the inventory of ${nice()}${getPlayer().world.players.size} &6players.".prefix())
             FlashUtil.staffMessage(sender, "Cleared every player's inventory")

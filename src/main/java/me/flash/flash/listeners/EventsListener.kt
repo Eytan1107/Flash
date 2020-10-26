@@ -160,22 +160,6 @@ class EventsListener : Listener {
     }
 
     @EventHandler
-    fun onInventoryClick(event: InventoryClickEvent) {
-        val player = event.whoClicked
-        if (JavaPlugin.getPlugin(Flash::class.java).config.getStringList("hub").contains(player.world.name)) { // Gets a list of all the players in the world
-            if (Menu.tagged.contains(event.inventory)) { // Checks if the user has the inventory open
-                if (event.inventory.title == "&6Server Selector") {
-                    event.isCancelled = true // Disables the option to move the items
-                }
-            }
-            if (event.currentItem.type == Material.COMPASS && event.currentItem.itemMeta?.displayName == "&6Flash's Server Selector".color()) {
-                event.isCancelled = true
-                return
-            }
-        }
-    }
-
-    @EventHandler
     fun playerDropCompassEvent(e: PlayerDropItemEvent) {  // when player drop any item
         val p = e.player
         if (p.itemInHand.type == Material.COMPASS && p.itemInHand.itemMeta?.displayName == "&6Flash's Server Selector".color() || p.itemOnCursor.type == Material.COMPASS && p.itemOnCursor.itemMeta?.displayName == "&6Flash's Server Selector".color()) {

@@ -15,15 +15,15 @@ class SetHub : CommandExecutor {
         if (sender !is Player) sender.sendMessage("Huh? Where you wanna set the hub ? In the files ?".error()).run { return true }
         if (args.isNotEmpty()) sender.sendMessage("Too many arguments".error())
         if (sender.world.name != "world") sender.sendMessage("You can only do this command in the Hub.".error()).run { return true }
-        val hubX = Flash.instance.config.getString("hub.location.x").removeSurrounding("[", "]")
-        val hubY = Flash.instance.config.getString("hub.location.y").removeSurrounding("[", "]")
-        val hubZ = Flash.instance.config.getString("hub.location.z").removeSurrounding("[", "]")
-        Flash.instance.config.set("hub.location.x", sender.location.x.toInt().toDouble())
-        Flash.instance.config.set("hub.location.y", sender.location.y.toInt().toDouble())
-        Flash.instance.config.set("hub.location.z", sender.location.z.toInt().toDouble())
+        Flash.instance.config.set("hub.location.x", sender.location.x)
+        Flash.instance.config.set("hub.location.y", sender.location.y)
+        Flash.instance.config.set("hub.location.z", sender.location.z)
         Flash.instance.saveConfig()
-        Bukkit.dispatchCommand(sender, "mv setspawn" + args.joinToString(" "))
-        sender.sendMessage("You have set the Parkour at &c$hubX, $hubY, $hubZ".prefix())
+        val hubX = Flash.instance.config.getDouble("hub.location.x")
+        val hubY = Flash.instance.config.getDouble("hub.location.y")
+        val hubZ = Flash.instance.config.getDouble("hub.location.z")
+        Bukkit.dispatchCommand(sender, "mv setspawn")
+        sender.sendMessage("You have set the Parkour at &c${"%.2f".format(hubX)}, ${hubY.toInt()}, ${"%.2f".format(hubZ)}".prefix())
         return true
     }
 }

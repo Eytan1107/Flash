@@ -12,9 +12,11 @@ import org.bukkit.entity.Player
 class Reply : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>): Boolean {
         val player = Msg.lastMessaged[sender]?.let {
-            if (it is ConsoleCommandSender) sender.sendMessage("You cannot reply to the console".error()).run { return true }
-            else if (it !is Player) sender.sendMessage("Pretty interesting that you got a message from an animal, can't reply to it though :)".error()).run { return true }
-            else it
+            when (it) {
+                is ConsoleCommandSender -> sender.sendMessage("You cannot reply to the console".error()).run { return true }
+                !is Player -> sender.sendMessage("Pretty interesting that you got a message from an animal, can't reply to it though :)".error()).run { return true }
+                else -> it
+            }
         } ?: sender.sendMessage("You have no one to reply to. :(".error()).run { return true }
         val senderPrefix = if (sender is Player) Flash.vaultChat.getPlayerPrefix(sender) else "".color()
         val playerPrefix = Flash.vaultChat.getPlayerPrefix(player)

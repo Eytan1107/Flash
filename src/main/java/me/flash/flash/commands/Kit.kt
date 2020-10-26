@@ -16,13 +16,14 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import java.time.Duration
+import java.time.Instant
 
 class Kit : CommandExecutor {
 
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         val playerer = if (sender is Player) sender else sender.sendMessage(FlashUtil.notPlayer).run { return true }
-        if (getConfig().getStringList("kitpvpworld").contains(playerer.world.name)) {
+        if (getConfig().getStringList("worlds.kitpvpworld").contains(playerer.world.name)) {
             if (args.size > 2) sender.sendMessage("Too many arguments".error()).run { return true }
             if (args.size == 2) {
                 if (sender.hasPermission("flash.kit.others")) {
@@ -323,5 +324,11 @@ class Kit : CommandExecutor {
     private fun Duration.words() : String {
         return DurationFormatUtils.formatDurationWords(this.toMillis(), true, true)
     }
-
+    companion object {
+        val pvpCooldown = mutableMapOf<Player, Instant>()
+        val fastCooldown = mutableMapOf<Player, Instant>()
+        val speedsterCooldown = mutableMapOf<Player, Instant>()
+        val godSpeedCooldown = mutableMapOf<Player, Instant>()
+        val speedForce = mutableMapOf<Player, Instant>()
+    }
 }

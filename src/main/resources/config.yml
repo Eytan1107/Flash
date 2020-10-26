@@ -1,26 +1,24 @@
 # Here are all the worlds
-kitpvpworld:
+worlds:
+  kitpvpworld:
   - "kitpvp"
-hub: 
+  hub:
   - "world"
-skyblock1:
+  skyblock1:
   - "skyblock_spawn"
-skyblock2:
+  skyblock2:
   - "island_normal_world"
-tntrun: 
+  tntrun:
   - "tntrun"
-builds: 
-   - "builds"
-event: 
-   - "event"
+  builds:
+  - "builds"
+  event:
+  - "event"
 
-# DO NOT TOUCH
-name:
-  - "%eazynick_display_name%"
 parkour.location:
-  x: "0"
-  y: "0"
-  z: "0"
+  x: "11.533351864025532"
+  y: "63.0"
+  z: "1.5598487869965605"
 hub.location:
   x: "0"
   y: "0"
@@ -30,3 +28,6 @@ hub.location:
 motd:
   - "         \u00A76\u00A7lFlash's Server \u00A7c◀ 1.8 - 1.16 ▶\u00A7r\n                  \u00A7a\u00A7lKitPvP ◊ SkyBlock"
 
+# DO NOT TOUCH
+name:
+  - "%eazynick_display_name%"

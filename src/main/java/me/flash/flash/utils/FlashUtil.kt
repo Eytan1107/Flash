@@ -36,7 +36,7 @@ class FlashUtil {
 
         fun playersInWorlds(server: String): MutableList<Player> {
             val players = mutableListOf<Player>()
-            for (s in Flash.instance.config.getStringList(server)) {
+            for (s in Flash.instance.config.getStringList("worlds.$server")) {
                 players.addAll((Bukkit.getWorld(s) ?: continue).players)
             }
             return players

@@ -3,6 +3,7 @@ package me.flash.flash
 import me.flash.flash.commands.*
 import me.flash.flash.listeners.Compass
 import me.flash.flash.listeners.EventsListener
+import me.flash.flash.listeners.KitsMenu
 import net.milkbowl.vault.chat.Chat
 import org.bukkit.plugin.java.JavaPlugin
 import org.sqlite.JDBC
@@ -94,11 +95,7 @@ class Flash : JavaPlugin() {
         server.pluginManager.registerEvents(Menu(), this)
         server.pluginManager.registerEvents(Compass(), this)
         server.pluginManager.registerEvents(Rank(), this)
-        //TODO suggestion file reading
-    }
-
-    override fun onDisable() {
-        // todo Suggestion file saving
+        server.pluginManager.registerEvents(KitsMenu(), this)
     }
 
     companion object {
