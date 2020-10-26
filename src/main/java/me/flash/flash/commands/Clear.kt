@@ -37,7 +37,7 @@ class Clear : FlashCommand("clear|ci|clearinventory|cl") {
         msg(player, "Your inventory was cleared by ${nice()}${sender.name}".prefix())
         msg(player, "You have cleared the inventory of ${nice()}${player.name}".prefix())
         FlashUtil.staffMessage(sender, "cleared the inventory of &l${player.name}")
-        if (getConfig().getStringList("hub").contains(player.world.name))
+        if (getConfig().getStringList("worlds.hub").contains(player.world.name))
             player.inventory.setItem(4, ItemStack(Material.COMPASS).apply {
                 itemMeta = itemMeta.apply {
                     displayName = "&6Flash's Server Selector".color()
@@ -50,7 +50,7 @@ class Clear : FlashCommand("clear|ci|clearinventory|cl") {
         p.inventory.clear()
         p.inventory.armorContents = arrayOfNulls(4)
         msg(p, "You have cleared your inventory!".prefix())
-        if (getConfig().getStringList("hub").contains(p.world.name))
+        if (getConfig().getStringList("worlds.hub").contains(p.world.name))
             p.inventory.setItem(4, ItemStack(Material.COMPASS).apply {
                 itemMeta = itemMeta.apply {
                     displayName = "&6Flash's Server Selector".color()

@@ -11,6 +11,8 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
+import org.bukkit.event.inventory.InventoryMoveItemEvent
+import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
@@ -27,9 +29,6 @@ class Compass : Listener {
             }
         }
     }
-
-    //@EventHandler
-    //fun test(event: Inv)
 
     @EventHandler
     fun close(event: InventoryCloseEvent) {
@@ -137,6 +136,27 @@ class Compass : Listener {
             }
             player.openInventory(inventory) // Opens the inventory if the player is in the world Hub
             return true
+        }
+    }
+
+    @EventHandler
+    fun playerDropCompassEvent(e: PlayerDropItemEvent) {  // when player drop any item
+        val p = e.player
+        if (p.itemInHand.type == Material.COMPASS && p.itemInHand.itemMeta?.displayName == "&6Flash's Server Selector".color() || p.itemOnCursor.type == Material.COMPASS && p.itemOnCursor.itemMeta?.displayName == "&6Flash's Server Selector".color()) {
+            e.itemDrop.remove()
+            p.inventory.setItem(4, ItemStack(Material.COMPASS).apply {
+                itemMeta = itemMeta.apply {
+                    displayName = "&6Flash's Server Selector".color()
+                    lore = listOf("&7Click me to open the selector".color())
+                }
+            })
+        }
+    }
+
+    @EventHandler
+    fun onInventoryClick(event: InventoryClickEvent) {
+        if (event.whoClicked.world.name == "world" && event.currentItem.type == Material.COMPASS && event.currentItem.itemMeta.displayName == "&6Flash's Server Selector".color()) {
+            event.isCancelled = true
         }
     }
 }

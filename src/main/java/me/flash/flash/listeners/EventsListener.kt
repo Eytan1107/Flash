@@ -160,20 +160,6 @@ class EventsListener : Listener {
     }
 
     @EventHandler
-    fun playerDropCompassEvent(e: PlayerDropItemEvent) {  // when player drop any item
-        val p = e.player
-        if (p.itemInHand.type == Material.COMPASS && p.itemInHand.itemMeta?.displayName == "&6Flash's Server Selector".color() || p.itemOnCursor.type == Material.COMPASS && p.itemOnCursor.itemMeta?.displayName == "&6Flash's Server Selector".color()) {
-            e.itemDrop.remove()
-            p.inventory.setItem(4, ItemStack(Material.COMPASS).apply {
-                itemMeta = itemMeta.apply {
-                    displayName = "&6Flash's Server Selector".color()
-                    lore = listOf("&7Click me to open the selector".color())
-                }
-            })
-        }
-    }
-
-    @EventHandler
     fun onPlayerDeath(event: PlayerDeathEvent) { // nope
         if (event.entity.killer !is Player) return
         playerdata.prepareStatement("update data set deaths=deaths+1 where uuid=?").apply {
