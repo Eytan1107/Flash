@@ -10,6 +10,7 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.inventory.Inventory
@@ -26,7 +27,7 @@ class KitsMenu : Listener {
         }
         tagged.remove(event.inventory)
         when {
-            event.currentItem.type == Material.CHAINMAIL_CHESTPLATE && event.currentItem.itemMeta.displayName == "&7Kit PvP".color() -> {
+            event.currentItem.type == Material.CHAINMAIL_CHESTPLATE && event.currentItem.itemMeta.displayName == "&7Kit PvP".color() && event.currentItem != null -> {
                 event.isCancelled = true
                 player.chat("/kit pvp")
                 player.closeInventory()

@@ -14,6 +14,7 @@ class Broadcast : FlashCommand("broadcast|bc") {
     }
 
     override fun run() {
+        checkPerm("flash.broadcast")
         Bukkit.broadcastMessage(("&c&l ").color())
         Bukkit.broadcastMessage(("[&6Flash's Server&f] &c&l".color() + args.joinToString(" ")).color())
         Bukkit.broadcastMessage(("&c&l ").color())

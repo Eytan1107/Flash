@@ -25,7 +25,7 @@ class Speed : CommandExecutor {
             if (player !== sender) {
                 if (!player.hasPermission("flash.msg.nice")) player.sendMessage("&c${sender.name} &6set your speed to &c$speed".prefix()) else player.sendMessage("&l${sender.name} &6set your speed to &l$speed".prefix())
                 if (!sender.hasPermission("flash.msg.nice")) sender.sendMessage("Set speed for &c${player.name} &6to &c$speed".prefix()) else sender.sendMessage("Set speed for &l${player.name} &6to &l$speed".prefix())
-                FlashUtil.staffMessage(sender, "Set &l$player&d's speed to &l$speed".color())
+                FlashUtil.staffMessage(sender, "Set &l${player.name}&d's speed to &l$speed".color())
                 player.walkSpeed = speed.toFloat().plus(1) / 11
                 sender.flySpeed = speed.toFloat() / 10
                 return true

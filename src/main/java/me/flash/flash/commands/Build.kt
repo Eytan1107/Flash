@@ -47,7 +47,7 @@ class Build : FlashCommand("build|break"), Listener {
     }
 
     private fun state(p: Player) : String {
-        return nice() + ternary(toggled.contains(p.uniqueId), "ON", "OFF")
+        return nice() + ternary(toggled.contains(p.uniqueId), "OFF", "ON")
     }
 
     @EventHandler

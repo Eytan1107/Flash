@@ -24,7 +24,7 @@ class TpAll : CommandExecutor {
             if (players.size < 2) {
                 sender.sendMessage("&cThere are no other players in your world to teleport to you.".error())
             } else {
-                players.forEach { player->
+                players.filter { player -> player != sender }.forEach { player->
                     player.teleport(sender)
                 }
                 if (players.size > 2) {

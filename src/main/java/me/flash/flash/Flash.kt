@@ -73,7 +73,6 @@ class Flash : JavaPlugin() {
         getCommand("kit").executor = Kit()
         getCommand("kits").executor = Kits()
         getCommand("menu").executor = Menu()
-        getCommand("vanish").executor = Vanish()
         Build().register()
         getCommand("server").apply {
             executor = Server()

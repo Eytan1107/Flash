@@ -13,7 +13,7 @@ import java.time.Instant
 class Kits : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         val player = if (sender is Player) sender else sender.sendMessage(FlashUtil.notPlayer).run { return true }
-        if (getConfig().getStringList("kitpvpworld").contains(player.world.name)) {
+        if (getConfig().getStringList("worlds.kitpvpworld").contains(player.world.name)) {
             if (args.isNotEmpty()) sender.sendMessage("Too many arguments".error()).run { return true }
             sender.sendMessage("&2&nKits&r".color())
             sender.sendMessage("")

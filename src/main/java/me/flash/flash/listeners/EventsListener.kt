@@ -11,9 +11,11 @@ import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.Sound
+import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.player.*
@@ -161,7 +163,6 @@ class EventsListener : Listener {
 
     @EventHandler
     fun onPlayerDeath(event: PlayerDeathEvent) { // nope
-        if (event.entity.killer !is Player) return
         playerdata.prepareStatement("update data set deaths=deaths+1 where uuid=?").apply {
             setString(1, event.entity.uniqueId.toString())
             executeUpdate()
@@ -171,9 +172,16 @@ class EventsListener : Listener {
             executeUpdate()
         }
         event.entity.player.world.players.forEach { players ->
-            //players.sendMessage("&c${event.entity.player.name} &6has died".prefix())
-            if (!players.hasPermission("flash.msg.nice")) players.sendMessage("&c${event.entity.player.name} has died".prefix()) else players.sendMessage("&l${event.entity.player.name} &6has died".prefix())
+            if (event.entity.killer != null) {
+                if (!players.hasPermission("flash.msg.nice")) players.sendMessage("&c${event.entity.player.name} &6was killed by &c${event.entity.killer.name}".prefix()) else players.sendMessage("&l${event.entity.player.name} &6was killed by &l${event.entity.killer.name}".prefix())
+            }
+            else {
+                if (!players.hasPermission("flash.msg.nice")) players.sendMessage("&c${event.entity.player.name} &6has died".prefix()) else players.sendMessage("&l${event.entity.player.name} &6has died".prefix())
+            }
             event.deathMessage = null
+            if (players.world.name == "kitpvp") {
+                event.entity.killer.health = (event.entity.killer.health + 3.00)
+            }
         }
         //event.entity.killer.uniqueId.let { uuid ->
         //        if (!Flash.sql.createStatement().executeQuery("SELECT uuid FROM main.data").equals("$uuid")) {

@@ -11,11 +11,18 @@ class F : FlashCommand("broadcastf|sudof|bcf") {
         description = "F"
     }
 
+    private fun isVanished(player: Player): Boolean {
+        for (meta in player.getMetadata("vanished")) {
+            if (meta.asBoolean()) return true
+        }
+        return false
+    }
+
     override fun run() {
         checkPlayer()
         if (args.isEmpty()) {
             checkPerm("flash.f")
-            (sender as Player).world.players.filter { p -> !Vanish.vanishedPlayers.contains(p) && !p.hasPermission("*") }.forEach { player ->
+            (sender as Player).world.players.filter { p -> !isVanished(sender as Player) || !p.hasPermission("*") || p != sender}.forEach { player ->
                 player.chat("F")
                 FlashUtil.staffMessage(sender, "Ran the F command")
             }
