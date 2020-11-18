@@ -27,7 +27,7 @@ class Help : CommandExecutor {
                 if (player.world == Bukkit.getWorld("world")) { // Runs if there is only 1 argument
                     if (args.isEmpty() or args.contains("1")) { // Checks if the player is a non
                         player.sendMessage("&6&m                   &6&l Help Menu &m              ".color()) // ChatMessage
-                        player.sendMessage("&a/hub &eto to to the hub") // ChatMessage
+                        player.sendMessage("&a/hub &eto to to the hub".color()) // ChatMessage
                         player.sendMessage("&a/spawn &3to return to spawn".color()) // ChatMessage
                         player.sendMessage("&a/server <server> &3to change server (for example: &a/server kitpvp&3)".color()) // ChatMessage
                         player.sendMessage("&a/msg <player> <text> &3to send a private message to someone".color()) // ChatMessage
@@ -39,18 +39,18 @@ class Help : CommandExecutor {
                     }
                 } else if (player.world == Bukkit.getWorld("kitpvp")) { // Checks if the player is in kitpvp
                     player.sendMessage("&6&m                   &6&l Help Menu &m              ".color()) // ChatMessage
-                    player.sendMessage("&a/hub &eto to to the hub") // ChatMessage
+                    player.sendMessage("&a/hub &eto to to the hub".color()) // ChatMessage
                     player.sendMessage("&a/spawn &3to return to spawn".color()) // ChatMessage
                     player.sendMessage("&a/kit&e to fast select a kit".color()) // ChatMessage
                     player.sendMessage("&a/msg <player> <text> &3to send a private message to someone".color()) // ChatMessage
                     player.sendMessage("&a/flashcoins &3to check your Flash Coins (you can also do &a/fc&3)".color()) // ChatMessage
                     player.sendMessage("&a/discord&e for the discord link".color()) // ChatMessage
-                    player.sendMessage("&a/kitmenu&e open the kitmenu")
+                    player.sendMessage("&a/kitmenu&e open the kitmenu".color())
                     player.sendMessage("&6&m                  &6&l Page 1 &m                  ".color()) // ChatMessage
                     return true
                 } else if (player.world == Bukkit.getWorld("skyblock")) {
                     player.sendMessage("&6&m                   &6&l Help Menu &m              ".color()) // ChatMessage
-                    player.sendMessage("&a/hub &eto to to the hub") // ChatMessage
+                    player.sendMessage("&a/hub &eto to to the hub".color()) // ChatMessage
                     player.sendMessage("&a/spawn &3to return to spawn".color()) // ChatMessage
                     player.sendMessage("&a/is help&e to see all the island commands".color()) // ChatMessage
                     player.sendMessage("&a/msg <player> <text> &3to send a private message to someone".color()) // ChatMessage

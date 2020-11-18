@@ -27,6 +27,7 @@ class Check : FlashCommand("check") {
         }
         msg("${player.name} is in ${nice()}$name".prefix())
         msg("${player.name} has ${nice()}${player.health} &6health".prefix())
+        msg("${player.name} is in gamemode ${nice()}${player.gameMode}".prefix())
     }
 
 

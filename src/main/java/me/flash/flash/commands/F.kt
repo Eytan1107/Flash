@@ -22,7 +22,17 @@ class F : FlashCommand("broadcastf|sudof|bcf") {
         checkPlayer()
         if (args.isEmpty()) {
             checkPerm("flash.f")
-            (sender as Player).world.players.filter { p -> !isVanished(sender as Player) || !p.hasPermission("*") || p != sender}.forEach { player ->
+            if ((sender as Player).world.name == "island_normal_world" || (sender as Player).world.name == "skyblock_spawn") {
+                Bukkit.getWorld("skyblock_spawn").players.filter { p -> !p.hasPermission("flash.f.no") && !isVanished(p) && p != sender}.forEach { player ->
+                    player.chat("F")
+                }
+                Bukkit.getWorld("island_normal_world").players.filter { p -> !p.hasPermission("flash.f.no") && !isVanished(p) && p != sender}.forEach { player ->
+                    player.chat("F")
+                }
+                FlashUtil.staffMessage(sender, "Ran the F command")
+                return
+            }
+            (sender as Player).world.players.filter { p -> !p.hasPermission("flash.f.no") && !isVanished(p) && p != sender}.forEach { player ->
                 player.chat("F")
                 FlashUtil.staffMessage(sender, "Ran the F command")
             }
@@ -30,7 +40,17 @@ class F : FlashCommand("broadcastf|sudof|bcf") {
         }
         else {
             checkPerm("flash.sudo")
-            (sender as Player).world.players.filter { player -> !player.hasPermission("*") }.forEach { player ->
+            if ((sender as Player).world.name == "island_normal_world" || (sender as Player).world.name == "skyblock_spawn") {
+                Bukkit.getWorld("skyblock_spawn").players.filter { p -> !p.hasPermission("flash.f.no") && !isVanished(p) && p != sender}.forEach { player ->
+                    player.chat(args.joinToString(" "))
+                }
+                Bukkit.getWorld("island_normal_world").players.filter { p -> !p.hasPermission("flash.f.no") && !isVanished(p) && p != sender}.forEach { player ->
+                    player.chat(args.joinToString(" "))
+                }
+                FlashUtil.staffMessage(sender, "Ran the F command")
+                return
+            }
+            (sender as Player).world.players.filter { player -> !player.hasPermission("flash.f.no") && !isVanished(player) && player != sender}.forEach { player ->
                 player.chat(args.joinToString(" "))
             }
             FlashUtil.staffMessage(sender, "Ran the sudo command on all players")

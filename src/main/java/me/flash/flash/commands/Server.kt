@@ -28,7 +28,6 @@ class Server : CommandExecutor, Listener, TabCompleter {
         val hubY = Flash.instance.config.getString("hub.location.y").removeSurrounding("[", "]")
         val hubZ = Flash.instance.config.getString("hub.location.z").removeSurrounding("[", "]")
         val hub = Location(Bukkit.getWorld("world"), hubX.toDouble(), hubY.toDouble(), hubZ.toDouble())
-        val w = Bukkit.getWorld(args.first()) ?: if (sender.hasPermission("multiverse.access.*")) sender.sendMessage("&cServers: KitPvP, Skyblock, Hub, Event, Builds".prefix()).run { return true } else sender.sendMessage("&cServers: KitPvP, Skyblock, Hub, Event".prefix()).run { return true }
         if (args.size == 1 || args.size == 2 && player == target) {
             when {
                 args.first() == "hub" || args.first() == "lobby" -> {
@@ -45,7 +44,7 @@ class Server : CommandExecutor, Listener, TabCompleter {
                     //player.teleport(Bukkit.getServer("kitpvp").spawnLocation)
                     return true
                 }
-                args.first() == "skyblock" -> {
+                args.first() == "skyblock" || args.first() == "sb" -> {
                     if (player.world.name == "island_normal_world" || player.world.name == "skyblock_spawn") sender.sendMessage("You are already on this server, do &e/spawn &cto go back to spawn".error()).run { return true }
                     sender.sendMessage("Teleporting you to &cSkyBlock".prefix())
                     player.teleport(Bukkit.getWorld("skyblock_spawn").spawnLocation)
@@ -85,6 +84,7 @@ class Server : CommandExecutor, Listener, TabCompleter {
                 }
                 else -> {
                     if (player.hasPermission("multiverse.access.*")) {
+                        val w = Bukkit.getWorld(args.first()) ?: if (sender.hasPermission("multiverse.access.*")) sender.sendMessage("&cServers: KitPvP, Skyblock, Hub, Event, Builds".prefix()).run { return true } else sender.sendMessage("&cServers: KitPvP, Skyblock, Hub, Event".prefix()).run { return true }
                         if (player.world.name == w.name) sender.sendMessage("You are already on this server, do &e/spawn &cto go back to spawn".error()).run { return true }
                         player.teleport(w.spawnLocation)
                         sender.sendMessage("Teleporting you to &c".prefix() + w.name)
@@ -155,6 +155,7 @@ class Server : CommandExecutor, Listener, TabCompleter {
                  }
                  else -> {
                      if (player.hasPermission("multiverse.access.*")) {
+                         val w = Bukkit.getWorld(args.first()) ?: if (sender.hasPermission("multiverse.access.*")) sender.sendMessage("&cServers: KitPvP, Skyblock, Hub, Event, Builds".prefix()).run { return true } else sender.sendMessage("&cServers: KitPvP, Skyblock, Hub, Event".prefix()).run { return true }
                          if (target.world.name == w.name) sender.sendMessage("You are already on this server, do &e/spawn &cto go back to spawn".error()).run { return true }
                          target.teleport(w.spawnLocation)
                          sender.sendMessage("Teleporting &c${target.name} &6to &c".prefix() + w.name)
